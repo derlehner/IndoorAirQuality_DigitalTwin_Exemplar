@@ -36,7 +36,7 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 
 
-![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\0001.jpg "Workflow")
+![Workflow](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/01.jpg)
 
 
 
@@ -44,7 +44,7 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 1. Create a new resource IoT Hub by typing in the search bar,we require resource group for managing all the azure resources, if it not created then create new resource group and add IoT Hub to the resource group. Choose your Azure subscription, resource group, region and assign IoT Hub name
 
-![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\02.jpg "iothub")
+![IoTHub](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/02.jpg)
 
 
 
@@ -52,13 +52,13 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
    
 
-![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\03.jpg "iotdevice")
+![IoTDevice](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/03.jpg)
 
 
 
 3. Create a separate consumer group for IoT Hub to send data from IoT Hub to other cloud resources. Go to IoT Hub → Built-in endpoints → Events and create consumer group under Events section
 
-   ![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\04.jpg "iotconsumergroup")
+   ![IoTconsumergroup](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/04.jpg)
 
 
 
@@ -139,7 +139,7 @@ The client app is connected with IoT device using the device connection string,r
 
 Go to IoT Hub ---> click on specific IoT device to which you need to send data ---> detailed view of IoT device with properties such as device id, primary and secondary key etc
 
-![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\05.jpg "iotconnstring")
+![IoTconnectionstring](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/05.jpg)
 
 copy paste the connection string into the python script.
 
@@ -173,7 +173,7 @@ Telemetry properties :
 
    **Output of the Client App**
 
-   ![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\09.jpg "output")
+   ![outputClientApp](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/09.jpg)
 
 
 
@@ -183,7 +183,7 @@ Telemetry properties :
 
 To verify if the telemetry data is sent to Azure IoT Device , there are metrics charts in IoT hub that shows the incoming device to cloud messages, messages used per day etc
 
-![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\07.jpg "outputIoTOverview")
+![outputIoTOverview](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/07.jpg)
 
 
 
@@ -217,7 +217,7 @@ Two cloud shells are present you can use either of them to test
 
    We can see that telemetry data sent from client app is received in the Azure IoT digital twin model
 
-   ![Alt text](C:\Users\ramya\OneDrive\Documents\Desktop\images\08.jpg "outputAzureCLI")
+   ![outputAzureCLI](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/08.jpg)
 
 
 
