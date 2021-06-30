@@ -707,3 +707,5 @@ Keep in mind that the local server instance is time-limited to 2 hours and you w
 update the endpoint in Azure evertime the server is restarted.
 
 
+### 2.8 Physical Model
+This is to show sample [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/physical_model) it should land to physical model readme.
