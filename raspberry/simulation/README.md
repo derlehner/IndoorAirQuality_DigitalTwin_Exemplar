@@ -9,12 +9,15 @@ This project briefly describes about creation of IoT Hub, digital twin and commu
 **Prerequisites**
 
 Azure account subscription
+[DL] We can set a link here to the readme file where the creation of the azure account is described
 
 **Resources**
 
 1. IoT Hub
 
 2. Azure Digital Twin
+
+[DL] We can also set links to the tools here.
 
 **IoT Hub Setup:**
 
@@ -65,6 +68,8 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 **Client App for Mock-up data generation**
 
 Prepare the client application to send mock-up telemetry data to the created IoT device
+[DL] we have to put the code for this client app into this github folder, and then reference the files from here
+[DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service
 
 1. Required libraries:
 
