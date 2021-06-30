@@ -36,7 +36,7 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 
 
-![Workflow](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulation/images/01.jpg)
+![Workflow](./images/01.jpg)
 
 
 
