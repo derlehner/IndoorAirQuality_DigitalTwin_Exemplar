@@ -2,9 +2,9 @@
 
 
 
-1 Documentation of the Physical Modelling
+## 1 Documentation of the Physical Modelling
 
-1.0.1 Translating the Geometrical Data into a Computational Model
+### 1.0.1 Translating the Geometrical Data into a Computational Model
 
 Computational modelling is a very good time and money sparing tool which is a method for non-
 
@@ -18,7 +18,7 @@ wouldn’t be possible in real life.
 
 
 
-1.1 Existing Air Quality Physical Models of Rooms
+### 1.1 Existing Air Quality Physical Models of Rooms
 
 2
 
@@ -26,7 +26,7 @@ wouldn’t be possible in real life.
 
 
 
-1.2 Applications of the Digital Room Model
+## 1.2 Applications of the Digital Room Model
 
 There are many biomechatronic applications where the virtual model would be very useful. One
 
