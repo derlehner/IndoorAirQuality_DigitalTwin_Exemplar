@@ -69,7 +69,8 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 Prepare the client application to send mock-up telemetry data to the created IoT device
 [DL] we have to put the code for this client app into this github folder, and then reference the files from here
-[DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service
+[DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
+[DL] What about the script that creates Digital Twins in Azure (this is also a prerequisite for sending data).
 
 1. Required libraries:
 
