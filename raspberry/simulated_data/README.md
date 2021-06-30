@@ -236,7 +236,7 @@ This project aims to create Azure Digital Twin Model and send Telemetry data fro
 
 **Workflow**
 
-![DT-TSI](.\images\TD-TSI-Diagram.jpg)
+![DT-TSI](.\images\TD-TSI-Diagram.JPG)
 
 ### **Why Azure Digital Twin ?**
 
@@ -455,7 +455,7 @@ Now let's look into each of them in detail
 
    a) Go to Azure Digital Twin and copy the host name ,this is to be added as base_url string
 
-   ![DigitalTwin](.\images\AzureDT.png)
+   ![DigitalTwin](.\images\AzureDT.PNG)
 
    
 
@@ -467,7 +467,7 @@ Now let's look into each of them in detail
 
    a) Open Microsoft Azure Command Prompt in windows and enter command below logging into your Azure account
 
-   ![AzureCLIWindows](.\images\AzureCLIWindows.png)
+   ![AzureCLIWindows](.\images\AzureCLIWindows.PNG)
 
    b) Generate Access Token using the command(resource id differs for each account)
 
@@ -477,7 +477,7 @@ Now let's look into each of them in detail
    az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
    ```
 
-   ![auth_Token](.\images\auth_Token.png)
+   ![auth_Token](.\images\auth_Token.PNG)
 
    Update the auth_token in digital_twin_api.py file
 
@@ -624,7 +624,7 @@ Navigate to the folder and run the python file
 
 **Go to project folder**→**Digital Twin→Cloud**
 
-![TD_API](.\images\TD-API.png)
+![TD_API](.\images\TD-API.PNG)
 
 
 
@@ -640,7 +640,7 @@ Azure function supports Event Hub Trigger and is executed automatically when eve
 
 Search for event hub and create new Event Hub namespace with name and resource group. Event Hub namespace will receive events from your Azure Digital Twins instance
 
-![eventHubCreate](.\images\eventHubCreate.png)
+![eventHubCreate](.\images\eventHubCreate.PNG)
 
 You'll be using this event hubs namespace to hold the two event hubs:
 
@@ -652,11 +652,11 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Create new Event Hub  inside Event Hub namespace by clicking add button
 
-   ![image-20210630181906663](.\images\eventHubAdd.png)
+   ![image-20210630181906663](.\images\eventHubAdd.PNG)
 
    
 
-   ![EventHub](.\images\EventHub.png)
+   ![EventHub](.\images\EventHub.PNG)
 
    This event hub will receive twin change events from Azure Digital Twins. To set up the twins hub, you'll complete the following steps in this section:
 
@@ -672,7 +672,7 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Go to the created event hub inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below
 
-   ![twinHubAuthorization](.\images\twinHubAuth.png)
+   ![twinHubAuthorization](.\images\twinHubAuth.PNG)
 
    **b) Create twins hub endpoint**
 
@@ -690,7 +690,7 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    **Authorization rule**- choose already created twin hub authorization rule
 
-   ![DTEndpoint](.\images\DTEndpoint.png)
+   ![DTEndpoint](.\images\DTEndpoint.PNG)
 
    **c) Create twins hub event route**
 
@@ -702,13 +702,13 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    choose already created endpoint name
 
-   ![DTEventRouteName](.\images\DTEventRouteName.png)
+   ![DTEventRouteName](.\images\DTEventRouteName.PNG)
 
    **d) Get twins hub connection string**
 
    Go to the event hub namespace and click on the created twins hub below , choose shared access policies and click on created twins hub authorization rule , you can see the detailed view , copy the primary connection string as highlighted in the below image
 
-   ![EventHubConnectionString](.\images\eventHubConnStr.png)
+   ![EventHubConnectionString](.\images\eventHubConnStr.PNG)
 
    **2. Create time series hub**
 
