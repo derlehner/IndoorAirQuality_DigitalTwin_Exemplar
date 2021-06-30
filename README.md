@@ -6,7 +6,7 @@ Using Microsoft Azure Cloud Service
 
 #### Last update:
 
-#### June 23, 2021
+#### June 30, 2021
 
 
 ## Contents
