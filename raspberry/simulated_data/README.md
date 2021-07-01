@@ -455,7 +455,7 @@ Now let's look into each of them in detail
 
    a) Go to Azure Digital Twin and copy the host name ,this is to be added as base_url string
 
-   ![DigitalTwin](./images/AzureDT.png)
+   ![DigitalTwin](./images/AzureDT.PNG)
 
    
 
