@@ -236,7 +236,7 @@ This project aims to create Azure Digital Twin Model and send Telemetry data fro
 
 **Workflow**
 
-![DT-TSI](.\images\DT-TSI-Diagram.JPG)
+![DT-TSI](./images/TD-TSI-Diagram.jpg)
 
 ### **Why Azure Digital Twin ?**
 
