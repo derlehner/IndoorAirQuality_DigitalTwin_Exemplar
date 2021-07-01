@@ -455,7 +455,7 @@ Now let's look into each of them in detail
 
    a) Go to Azure Digital Twin and copy the host name ,this is to be added as base_url string
 
-   ![DigitalTwin](.\images\AzureDT.PNG)
+   ![DigitalTwin](./images/AzureDT.png)
 
    
 
@@ -467,7 +467,7 @@ Now let's look into each of them in detail
 
    a) Open Microsoft Azure Command Prompt in windows and enter command below logging into your Azure account
 
-   ![AzureCLIWindows](.\images\AzureCLIWindows.PNG)
+   ![AzureCLIWindows](./images/AzureCLIWindows.PNG)
 
    b) Generate Access Token using the command(resource id differs for each account)
 
