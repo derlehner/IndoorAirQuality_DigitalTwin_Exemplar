@@ -477,7 +477,7 @@ Now let's look into each of them in detail
    az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
    ```
 
-   ![auth_Token](.\images\auth_Token.PNG)
+   ![auth_Token](./images/auth_Token.PNG)
 
    Update the auth_token in digital_twin_api.py file
 
@@ -624,7 +624,7 @@ Navigate to the folder and run the python file
 
 **Go to project folder**→**Digital Twin→Cloud**
 
-![TD_API](.\images\TD-API.PNG)
+![TD_API](./images/TD-API.PNG)
 
 
 
@@ -640,7 +640,7 @@ Azure function supports Event Hub Trigger and is executed automatically when eve
 
 Search for event hub and create new Event Hub namespace with name and resource group. Event Hub namespace will receive events from your Azure Digital Twins instance
 
-![eventHubCreate](.\images\eventHubCreate.PNG)
+![eventHubCreate](./images/eventHubCreate.PNG)
 
 You'll be using this event hubs namespace to hold the two event hubs:
 
@@ -652,11 +652,11 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Create new Event Hub  inside Event Hub namespace by clicking add button
 
-   ![image-20210630181906663](.\images\eventHubAdd.PNG)
+   ![image-20210630181906663](./images/eventHubAdd.PNG)
 
    
 
-   ![EventHub](.\images\EventHub.PNG)
+   ![EventHub](./images/EventHub.PNG)
 
    This event hub will receive twin change events from Azure Digital Twins. To set up the twins hub, you'll complete the following steps in this section:
 
@@ -672,7 +672,7 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Go to the created event hub inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below
 
-   ![twinHubAuthorization](.\images\twinHubAuth.PNG)
+   ![twinHubAuthorization](./images/twinHubAuth.PNG)
 
    **b) Create twins hub endpoint**
 
@@ -690,7 +690,7 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    **Authorization rule**- choose already created twin hub authorization rule
 
-   ![DTEndpoint](.\images\DTEndpoint.PNG)
+   ![DTEndpoint](./images/DTEndpoint.PNG)
 
    **c) Create twins hub event route**
 
@@ -698,17 +698,17 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Create a route in Azure Digital Twins to send twin update events to your endpoint from above. The filter in this route will only allow twin update messages to be passed to your endpoint. Specify a name for the twins hub event route.
 
-   ![DTEventRoute](.\images\DTEventRoute.png)
+   ![DTEventRoute](./images/DTEventRoute.png)
 
    choose already created endpoint name
 
-   ![DTEventRouteName](.\images\DTEventRouteName.PNG)
+   ![DTEventRouteName](./images/DTEventRouteName.png)
 
    **d) Get twins hub connection string**
 
    Go to the event hub namespace and click on the created twins hub below , choose shared access policies and click on created twins hub authorization rule , you can see the detailed view , copy the primary connection string as highlighted in the below image
 
-   ![EventHubConnectionString](.\images\eventHubConnStr.PNG)
+   ![EventHubConnectionString](./images/eventHubConnStr.png)
 
    **2. Create time series hub**
 
@@ -718,13 +718,13 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    Go to the created time series hub  inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below 
 
-   ![tsi-auth-rule](.\images\tsi-auth-rule.png)
+   ![tsi-auth-rule](./images/tsi-auth-rule.png)
 
    **b) Get time series connection string**
 
    Go to the event hub namespace and click on the created time series hub below , choose shared access policies and click on created time series hub authorization rule , you can see the detailed view , copy the primary connection string as highlighted in the below image
 
-   ![tsi-conn-str](.\images\tsi-conn-str.png)
+   ![tsi-conn-str](./images/tsi-conn-str.png)
 
 make a note of both the twin and time series hub connection string to use them in tha Azure function below.
 
@@ -734,11 +734,11 @@ make a note of both the twin and time series hub connection string to use them i
 
    a) Create a new C# project and choose Azure Function as Project template
 
-![Azure_Fn](.\images\azureFn.png)
+![Azure_Fn](./images/azureFn.png)
 
 ​	  b) Choose the Event Hub trigger that runs whenever event is fired in Azure Digital Twin
 
-![eventHubTrigger](.\images\eventHubTrigger.png)
+![eventHubTrigger](./images/eventHubTrigger.PNG)
 
 
 
@@ -750,7 +750,7 @@ copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project 
 
 Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
 
-![eventHubandTriggerConnStr](.\images\eventHubandTriggerName.png)
+![eventHubandTriggerConnStr](./images/eventHubandTriggerName.png)
 
 
 
@@ -792,13 +792,13 @@ Set up the connection string for EventHubAppSetting-Twins and EventHubAppSetting
 
 Right click on the C# project and choose publish  ,give the name for publishing and make a note for later use in this project, choose the resource group for Azure resources and finish , after successful publish, you see the image as shown below
 
-![azureFnPublish](.\images\AzureFnPublish.png)
+![azureFnPublish](./images/AzureFnPublish.png)
 
 **Verify the Azure function publish**
 
 search for the function name in Azure that we set while publishing the function app from C#.If its successfully publish you will see the function app in the Azure 
 
-![verifyAzureFnPublish](.\images\verifyPublish.png)
+![verifyAzureFnPublish](./images/verifyPublish.png)
 
 **Set up security access for the function app**
 
@@ -810,7 +810,7 @@ Assign an access role for the function app so that it can access your Azure Digi
 
 2.On the function app page, in the menu on the left, select **Identity** to work with a managed identity for the function. On the **System assigned** page, verify that the **Status** is set to **On**. If it's not, set it now and then **Save** the change.
 
-![FnAppSecurity](.\images\fnAppSecurity.png)
+![FnAppSecurity](./images/fnAppSecurity.png)
 
  **Configure App Settings for the two Event Hubs**
 
@@ -834,11 +834,11 @@ Create two  environment variable one for twin and other for time series hub
 
 **Value**: Use the time series hub **primaryConnectionString** value that you saved earlier when creating the shared access policies for time series hub.
 
-![FnAppSettings](.\images\appSettingCreate.png)
+![FnAppSettings](./images/appSettingCreate.png)
 
 After adding the application settings for twin and time series hub, the result would be as shown below
 
-![AppSettingsTwinTSI](.\images\AppSettingTwinTSI.png)
+![AppSettingsTwinTSI](./images/AppSettingTwinTSI.png)
 
 **Azure Function Trigger**
 
@@ -847,7 +847,7 @@ The Azure function execution happens automatically,  when the Digital Twin recei
 Debug the C# project and now you can see the output as shown below:
 Carbondioxide value is read and logged , this mock-up data has been received from azure (By executing python process.py which sends telemetry data to azure)
 
-<img src=".\images\AzureFnOutput.png" alt="AzureFnOutput" style="zoom:120%;" />
+<img src="./images/AzureFnOutput.png" alt="AzureFnOutput" style="zoom:120%;" />
 
 
 
