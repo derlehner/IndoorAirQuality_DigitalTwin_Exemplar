@@ -168,8 +168,6 @@ Telemetry properties :
 
 3. CarbonDioxideValue
 
-   
-
    **Run the Client App**
 
    Using windows command line navigate to the python file and run python script with command
@@ -177,7 +175,7 @@ Telemetry properties :
    ```python
    python {filename.py}
    ```
-
+   
    **Output of the Client App**
 
    ![outputClientApp](./images/09.jpg)
@@ -277,7 +275,7 @@ Twin type models can be written in any text editor. The DTDL language follows JS
 
 ### **1. Creation of Models for Azure Digital Twin** 
 
-**Go to project folder**→**Digital Twin→Cloud**→**interface_models**
+Navigate to project and then Digital Twin directory [interface_models](./cdlmint-airqualityusecase/Digital Twin/interface_models/)
 
 We have the sample model interface with attributes component, telemetry and relationship between them
 
@@ -370,7 +368,7 @@ Room.json
 
 ### **2. Creation of Digital Twin Models** 
 
-**Go to project folder**→**Digital Twin→Cloud**→**twin_models**
+Navigate to project and then Digital Twin directory [twin_models](./cdlmint-airqualityusecase/Digital Twin/twin_models/)
 
 we have the sample code for creating a Digital Twin and relationship for the model 
 
@@ -418,7 +416,7 @@ Room101.json
 
 ### **3.Generate Mock-up Telemetry Data**
 
-**Go to project folder**→**Digital Twin→Cloud**→**telemetry_data**
+Navigate to project and then Digital Twin directory [telemetry_data](./cdlmint-airqualityusecase/Digital Twin/telemetry_data/)
 
 we have the sample telemetry data that is to be sent to Azure Digital Twin in testdata.json file .The telemetry data contains attributes dtid, component and content with properties like carbonDioxideValue and timestamp value that needs to be updated in Azure Digital Twin
 
@@ -437,6 +435,8 @@ we have the sample telemetry data that is to be sent to Azure Digital Twin in te
 
 **Go to project folder**→**Digital Twin→Cloud**
 
+Navigate to project and then Digital Twin directory [Digital Twin](./cdlmint-airqualityusecase/Digital Twin/)
+
 The folder contains the files for performing CRUD operations on Digital Twin with Telemetry Data
 
 **Files used :**
@@ -450,6 +450,8 @@ The folder contains the files for performing CRUD operations on Digital Twin wit
 Now let's look into each of them in detail
 
 1. **digital_twin_api.py**
+
+   [digital_twin_api.py](./cdlmint-airqualityusecase/Digital Twin/digital_twin_api.py)
 
    Replace base_url and auth_token for accessing Azure Digital Twin resource 
 
@@ -482,6 +484,8 @@ Now let's look into each of them in detail
    Update the auth_token in digital_twin_api.py file
 
 2. **test.py**
+
+   [test.py](./cdlmint-airqualityusecase/Digital Twin/test.py)
 
 The python script has functions for performing following operations:
 
@@ -608,6 +612,8 @@ def cleanup():
 
 3.**process.py**
 
+[process.py](./cdlmint-airqualityusecase/Digital Twin/process.py)
+
 This function imports the test.py file and calls the function send_telemetry_data for sending telemetry data to Digital Twin
 
 ```python
@@ -622,11 +628,9 @@ test.send_telemetry_data()
 
 Navigate to the folder and run the python file 
 
-**Go to project folder**→**Digital Twin→Cloud**
+[Digital_Twin](./cdlmint-airqualityusecase/Digital Twin/)
 
 ![TD_API](./images/TD-API.PNG)
-
-
 
 ### **6. Azure Function to Send Telemetry Data to TSI  **
 
@@ -726,7 +730,7 @@ You'll be using this event hubs namespace to hold the two event hubs:
 
    ![tsi-conn-str](./images/tsi-conn-str.png)
 
-make a note of both the twin and time series hub connection string to use them in tha Azure function below.
+make a note of both the twin and time series hub connection string to use them in the Azure function below.
 
 **Create Azure Function C#**
 
@@ -742,11 +746,11 @@ make a note of both the twin and time series hub connection string to use them i
 
 
 
-**Go to project folder→code→AirQualityDataProcessing→AirQualityDataProcessing→ProcessDTTelemetryUpdateTSI.cs**
+Navigate to the project folder and directory AirQualityDataProcessing
 
-copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
+[ProcessDTTelemetryUpdateTSI.cs](./cdlmint-airqualityusecase/AirQualityDataProcessing/AirQualityDataProcessing/ProcessDTTelemetryUpdateTSI.cs)
 
-**ProcessDTTelemetryUpdateTSI.cs**
+Copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
 
 Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
 

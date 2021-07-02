@@ -1,0 +1,16 @@
+{
+	"@type": "Interface",
+	"displayName": "AirQualityController",
+	"comment": "This is a comment",
+	"@id": "dtmi:org:example:AirQualityController;2",
+	"contents":[
+			{
+			"@type": ["Component"],
+			"name": "CO2Sensor",
+			"displayName": "CO2Sensor",
+			"@id": "dtmi:org:example:a;2",
+			"schema": "dtmi:org:example:cotwoSensor;2"
+			}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}
