@@ -14,7 +14,7 @@ wouldn’t be possible in real life.
 
 1
 
-
+![model_picture](./images/models_picture.JPG)
 
 
 
