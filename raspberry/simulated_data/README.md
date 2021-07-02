@@ -798,7 +798,7 @@ Right click on the C# project and choose publish  ,give the name for publishing 
 
 search for the function name in Azure that we set while publishing the function app from C#.If its successfully publish you will see the function app in the Azure 
 
-![verifyAzureFnPublish](./images/verifyPublish.png)
+![verifyAzureFnPublish](./images/verifyPublish.PNG)
 
 **Set up security access for the function app**
 
@@ -834,11 +834,11 @@ Create two  environment variable one for twin and other for time series hub
 
 **Value**: Use the time series hub **primaryConnectionString** value that you saved earlier when creating the shared access policies for time series hub.
 
-![FnAppSettings](./images/appSettingCreate.png)
+![FnAppSettings](./images/appSettingCreate.PNG)
 
 After adding the application settings for twin and time series hub, the result would be as shown below
 
-![AppSettingsTwinTSI](./images/AppSettingTwinTSI.png)
+![AppSettingsTwinTSI](./images/AppSettingTwinTSI.PNG)
 
 **Azure Function Trigger**
 
@@ -847,7 +847,7 @@ The Azure function execution happens automatically,  when the Digital Twin recei
 Debug the C# project and now you can see the output as shown below:
 Carbondioxide value is read and logged , this mock-up data has been received from azure (By executing python process.py which sends telemetry data to azure)
 
-<img src="./images/AzureFnOutput.png" alt="AzureFnOutput" style="zoom:120%;" />
+<img src="./images/AzureFnOutput.PNG" alt="AzureFnOutput" style="zoom:120%;" />
 
 
 
