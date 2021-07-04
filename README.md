@@ -340,6 +340,29 @@ update the endpoint in Azure evertime the server is restarted.
 This is to show sample [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/physical_model) it should land to physical model readme.
 
 ### 2.9 Machine Learing
+Due to vast range of applications of Machine learning,
+its not exceptional to data driven engineering. As were are
+working with real time data’s (time-series) based data’s the
+utilization of machine learning would occupy big part in
+predicting the future forecast.
+
+Time series is a collection of data basted on some period of
+time where each data points hold their respective data value
+and its attributes. In addition the method of analysing, comput-
+ing and predicting these kind of data is know as Time-Series
+analysis. Entire time series predicting and analysing works
+on with patterns and its seasonal sequences of behaviour.
+These mathematical patters sometimes either visible directly
+or need to be computed further with data’s with its attributes
+if needed eg. Regression. This time series can me denoted by
+chronological order over some period of years, months, weeks
+or even in hours and minutes. most of the time these time based
+data are used to be Univariate (doesn’t depend on internal
+factors), But could be depend on external factors. For example
+if we take temperature forecast as example for period of 1
+day its not dependant on time (which is internal attribute) but
+its depends on external factors such as environment, weather,
+location and so on... 
 For the details [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/machine_learning)
 
 ### 2.10 Visualisation
