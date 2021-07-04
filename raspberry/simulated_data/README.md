@@ -748,7 +748,7 @@ make a note of both the twin and time series hub connection string to use them i
 
 Navigate to the project folder and directory AirQualityDataProcessing
 
-[ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulated_data/cdlmint-airqualityusecase/AirQualityDataProcessing/AirQualityDataProcessing/ProcessDTTelemetryUpdateTSI.cs)
+[ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/AirQualityDataProcessing/AirQualityDataProcessing/ProcessDTTelemetryUpdatetoTSI.cs)
 Copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
 
 Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
