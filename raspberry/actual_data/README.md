@@ -1,856 +1,368 @@
 # Send Data from IoT Hub to Azure Digital Twin 
 
+### 1.3 Installing Ubuntu On Raspberry
 
+This procedure is needed when you bought new Raspberry/need to flash old raspberry to install
+new Ubuntu.
+Required Things:
+
+<img align="right" src="pictures/piimager.png" width= 400/>
+
+1. Brand new Raspberry / Raspberry that need to be flashed new
+2. Download thePi Imagerfile and install it from [Here](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi##1-overview)
+3. If your in Linux InstallPi Imagerby following the command
+    sudo snap i n s t a l l r p i−i m a g e r
 
-**Introduction**
+4. choose the OS asRaspberry pi OS 32 bitprobably it will be in first option
+5. insert the sd card and click write
+6. After its been installed you can insert this sd card into raspberry and you have freshly
+    installed linux on you device.
+
+#### 1.3.1 Raspberry Pi Setup
 
-This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure and predict COVID-19 risk with mock up sensor data. In this project, we will set up IoT hub and Azure Digital Twin and send telemetry data from IoT device to Digital Twin
+For the setup of the Raspberry Pi an introduction is given on the [Raspberry Pi homepage](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up).
+In the following section a short overview is given.
+First of all an operation system needs to be downloaded and an image needs to be installed
+on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi
 
-**Prerequisites**
 
-Azure account subscription
-[DL] We can set a link here to the readme file where the creation of the azure account is described
+OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an
+Imager program available to fasten the [installation step here](https://www.raspberrypi.org/software/). The instructions of the program
+need to be followed and afterward the SD-Card is ready to use.
+The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and
+HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login
+data is:
 
-**Resources**
+- user: pi
+- password: raspberry
+A few setting needs to be done initially, therefore enter the command
 
-1. IoT Hub
+sudo raspi-config
 
-2. Azure Digital Twin
+into the console. The following settings had been changed:
 
-[DL] We can also set links to the tools here.
+- System Options - Password: the password has been changed tocdl, the username remains
+    the same
+- System Options - Hostname: the hostname has been changed torpi-cdl(this name will
+    be needed later to get the IP of the Raspberry Pi without a monitor)
+- Interfacing Options - SSH: enable remote command line access to the Raspberry Pi via
+    SSH
+- Interfacing Options - I2C: enable I2C interface and loading the I2C kernel module auto-
+    matically (will be needed for some of the used sensors)
+Afterward the Raspberry Pi needs to be restarted and logged in with the new password.
+To be sure that the OS and its programs are up-to-date the following commands need to be
+executed:
 
-**IoT Hub Setup:**
+sudo apt-get update
+sudo apt-get upgrade
 
-what is IoT Hub?
+#### 1.3.2 Remote access via SSH
 
-**IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in the cloud, that acts as a central message **hub** for bi-directional communication between an **IoT** application and the devices it manages
+It is planned that the AirQuality module will be running continuously in a predefined position
+(e.g.: in the stairway below the TV), therefor it needs to be accessible remotely without any
+monitor and input device connected. To solve this requirement, the Raspberry Pi can be
+accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection
+1.3.1. The IP address of the Raspberry Pi can be set as static, to ensure the connection to
+it. It is also possible to get the IP address with apingcommand on the hostname of the
+Raspberry Pi from another computer. For Linux it is easy as entering the following command.
 
-1. Create a new resource, IoT Hub by typing in the search bar,create new resource group for managing all the azure resources.
+ping rpi-cdl
 
-Create IoT Hub by specifying subscription, resource group, region and assign IoT hub name
+For Windows it is needed to add the parameter -4 to the ping command, so that the resolved
+IP address is in the IPv4 format.
 
-**Azure Digital Twin**
+ping -4 rpi-cdl
 
-what is Azure Digital Twin?
+With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
+putty. Figure 1.3 shows a screenshot of the applicationputtywith the local IP address of the
+Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved
+and used for later access. If the Raspberry Pi was connected over another LAN-connection,
+the IP address needs to be updated.
 
-Azure Digital Twin is an Internet of Things (IoT) platform that enables users to create digital representation of real-world things and monitor the asset, component or process in real-time
+<img align="center" src="pictures/puttyScreenshot_marked.png" width= 400/>
 
-   **Workflow**
 
+Figure 1.3: Applicationputtywith example settings for the SSH connection to the Raspberry
+Pi.
 
+### 1.4 Hardware Setup
 
-![Workflow](./images/01.jpg)
+In this section the setup of the Hardware is further described. Figure 1.4 shows a picture of
+the setup of the AirQuality Hardware. The current setup is done on a breadboard, for further
+usage it is recommended to solder the components to a board. The AirQuality Sensor-Module
+includes the following components:
 
+- LED (currently only one LED is connected, but this can be extended)
+- Buzzer (the connection can be used for an Active Buzzer or an Passive Buzzer)
+- Temperature and Humidity sensor DHT
+- CO2 sensor CCS811 (MOS sensor)
+- CO2 sensor SCD30 (NDIR sensor; not connected yet)
 
+Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
+It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
+transistor has 3 pins and is connected between the GPIO and the component, which should
+be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it
+needs to be connected to the ground too. An example can of such a circuit is shown in figure
+??in subsection 1.4.1 LED. The transistor prevents that the component is using too much
+current from the GPIO and instead is using the voltage suppy pin to power the component.
+The complete circuit diagram of the current state of the AirQuality Raspberry Pi Module is
+shown in figure 1.5. Table 1.1 lists all the components connected to the AirQuality Raspberry
+Pi and their connected pin and GPIO references.
+
+#### 1.4.1 LED
+
+The LEDs will be used to give a visual response to the user about the CO2 amount in the air
+and therefor about the air quality. It should be used as an indicator to open the windows and
+insert fresh air into the room. At the moment only one LED is connected to the board and
+is used as an indicator, that a set of telemetry is sent to the hub. The LED used was already
+part of the CDL equipment and i was not sure if it was part of the Arduino Sensor Pack, which
+
+<img align="center" src="pictures/fotoHWAll.jpg" width= 400/>
 
-**IoT Hub Setup**
-
-1. Create a new resource IoT Hub by typing in the search bar,we require resource group for managing all the azure resources, if it not created then create new resource group and add IoT Hub to the resource group. Choose your Azure subscription, resource group, region and assign IoT Hub name
-
-![IoTHub](./images/02.jpg)
-
-
-
-2. Create IoT device in IoT Hub, provide device id name , for instance we have assigned device id as twinModel, After successful creation, list of IoT devices appears as shown below
-
-   
-
-![IoTDevice](./images/03.jpg)
-
-
-
-3. Create a separate consumer group for IoT Hub to send data from IoT Hub to other cloud resources. Go to IoT Hub → Built-in endpoints → Events and create consumer group under Events section
-
-   ![IoTconsumergroup](./images/04.jpg)
-
-
-
-**Client App for Mock-up data generation**
-
-Prepare the client application to send mock-up telemetry data to the created IoT device
-[DL] we have to put the code for this client app into this github folder, and then reference the files from here
-[DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
-[DL] What about the script that creates Digital Twins in Azure (this is also a prerequisite for sending data).
-
-1. Required libraries:
-
-   1.a) azure.iot.device
-
-   The client app could be developed using any of the languages Python, C#, Java, JavaScript Go. We are using Python to create the client app and the script is as follows.
-
-   ```python
-   import random
-   import time
-   from azure.iot.device import IoTHubDeviceClient, Message
-   # The device connection string to authenticate the device with your IoT hub.
-   # Using the Azure CLI:
-   # az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
-   CONNECTION_STRING = "HostName=Ramya-IoTHub.azure-devices.net;DeviceId=twinModel;SharedAccessKey=KzmFZY2yj889Yc3t64wX8WFcEJMwOrxhVWnlKk7ezB4="
-   
-   # Define the JSON message to send to IoT Hub.
-   TEMPERATURE = 20.0
-   HUMIDITY = 60
-   CARBONDIOXIDE=1000
-   TSID="5d9d9cb1-f5cd-43a5-af86-83bb1ef9dc2d"
-   MSG_TXT = '{{"Temperature": {Temperature},"Humidity": {Humidity},"CarbonDioxideValue":{CarbonDioxideValue},"tsId":{tsId}}}'
-   
-   def iothub_client_init():
-       # Create an IoT Hub client
-       client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
-       return client
-   
-   def iothub_client_telemetry_sample_run():
-   
-       try:
-           client = iothub_client_init()
-           print ( "IoT Hub device sending periodic messages, press Ctrl-C to exit" )
-   
-           while True:
-               # Build the message with simulated telemetry values.
-               Temperature = TEMPERATURE + (random.random() * 15)
-               Humidity = HUMIDITY + (random.random() * 20)
-               CarbonDioxideValue=CARBONDIOXIDE+(random.random()*2)
-               tsId=TSID
-               msg_txt_formatted = MSG_TXT.format(Temperature=Temperature, Humidity=Humidity,CarbonDioxideValue=CarbonDioxideValue,tsId=tsId)
-               message = Message(msg_txt_formatted)
-   
-               # Add a custom application property to the message.
-               # An IoT hub can filter on these properties without access to the message body.
-               if Temperature > 30:
-                 message.custom_properties["temperatureAlert"] = "true"
-               else:
-                 message.custom_properties["temperatureAlert"] = "false"
-   
-               # Send the message.
-               print( "Sending message: {}".format(message) )
-               client.send_message(message)
-               print ( "Message successfully sent" )
-               time.sleep(1)
-   
-       except KeyboardInterrupt:
-           print ( "IoTHubClient sample stopped" )
-   
-   if __name__ == '__main__':
-       print ( "IoT Hub Quickstart #1 - Simulated device" )
-       print ( "Press Ctrl-C to exit" )
-       iothub_client_telemetry_sample_run()
-   
-   ```
-
-   
-
-The client app is connected with IoT device using the device connection string,replace the connection string property with your own  IoT device primary connection string of the to which the telemetry data is to be sent.
-
-**Get the IoT device connection string**
-
-Go to IoT Hub ---> click on specific IoT device to which you need to send data ---> detailed view of IoT device with properties such as device id, primary and secondary key etc
-
-![IoTconnectionstring](./images/05.jpg)
-
-copy paste the connection string into the python script.
-
-python function description:
-
-1. iothub_client_init()
-
-Initializes the Azure IoT Hub 
-
-2. iothub_client_telemetry_sample_run()
-
-if client is initialized then set up  telemetry data properties with random values
-
-Telemetry properties :
-
-1. Temperature
-
-2. Humidity
-
-3. CarbonDioxideValue
-
-   
-
-   **Run the Client App**
-
-   Using windows command line navigate to the python file and run python script with command
-
-   ```python
-   python {filename.py}
-   ```
-
-   **Output of the Client App**
-
-   ![outputClientApp](./images/09.jpg)
-
-
-
-**Testing the Client App:**
-
-**Method-1:** IoT Hub Overview
-
-To verify if the telemetry data is sent to Azure IoT Device , there are metrics charts in IoT hub that shows the incoming device to cloud messages, messages used per day etc
-
-![outputIoTOverview](./images/07.jpg)
-
-
-
-**Method-2:** Azure CLI
-
-Open the cloud shell from Azure portal and you need to create storage account when using it for first time.
-
-Two cloud shells are present you can use either of them to test
-
-1. PowerShell -command line for **windows** and 
-
-2. Bash- command line for **Linux** operating system
-
-   Install extensions in Azure CLI before using IoT commands
-
-   **Required Extensions:**
-
-   1. azure iot extension
-
-   ```python
-   az extension add --name azure-cli-iot-ext
-   ```
-
-   **Monitor the events of IoT Hub device**
-
-   ```python
-   az iot hub monitor-events --hub-name {iot hub name} --device-id {digital twin name} --consumer-group {consumer group name of iot hub events}
-   ```
-
-   Replace the IoT Hub name, digital twin name and consumer group name accordingly.
-
-   We can see that telemetry data sent from client app is received in the Azure IoT digital twin model
-
-   ![outputAzureCLI](./images/08.jpg)
-<<<<<<< HEAD:raspberry/simulation/README.md
-
-
-
-## **Create Azure Digital Twin Model and Send Telemetry data from Azure Digital Twin to Time Series Instance **
-
-### **Introduction**
-
-This project aims to create Azure Digital Twin Model and send Telemetry data from model to the Time Series Instance.
-
-**Workflow**
-
-![DT-TSI](.\images\TD-TSI-Diagram.jpg)
-
-### **Why Azure Digital Twin ?**
-
-The main advantage of using Azure Digital Twin is that we can define our own model and twin graph based on our needs. We can create Digital Twin with these models. Azure Digital Twins models are represented in the JSON-LD-based **Digital Twin Definition Language (DTDL)**.
-
-### **Models**
-
-Models have names (such as *Room* or *TemperatureSensor*), and contain elements such as properties, telemetry/events, and commands that describe what this type of entity in your environment can do
-
-### **Digital Twin Definition Language (DTDL) for models**
-
-Models for Azure Digital Twins are defined using the Digital Twins Definition Language (DTDL).
-
-You can view the full language specs for DTDL in GitHub: [Digital Twins Definition Language (DTDL) - Version 2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md)
-
-### **Model Overview-Elements of a Model**
-
-A DTDL model interface may contain the following fields:
-
-- **Property** - Properties are data fields that represent the state of an entity. Properties have backing storage and can be read at any time.
-- **Telemetry** - Telemetry fields represent measurements or events, and are often used to describe device sensor readings.  Telemetry is not stored on a digital twin, it is a series of time-bound data events that need to be handled as they occur.
-- **Relationship** - Relationships let you represent how a digital twin can be involved with other digital twins. Relationships can represent different semantic meanings, such as *contains* ("Building contains floor"). Relationships can have the properties of their own and allow the solution to provide a graph of interrelated entities. 
-- **Component** - Components allow you to build your model interface as an assembly of other interfaces. An example of a component is a *frontCamera* interface (and another component interface *backCamera*) that are used in defining a model for a *phone*. You must first define an interface for *frontCamera* as though it were its own model, and then you can reference it when defining *Phone*.
-
-### **Model Code**
-
-Twin type models can be written in any text editor. The DTDL language follows JSON syntax ,so store models with the extension .json
-
-**Model Fields**
-
-| Field       | Description                                                  |
-| ----------- | ------------------------------------------------------------ |
-| @id         | An identifier for the model. Must be in the format `dtmi:<domain>:<unique-model-identifier>;<model-version-number>`. |
-| @type       | Identifies the kind of information being described. For an interface, the type is *Interface*. |
-| @context    | Sets the [context](https://niem.github.io/json/reference/json-ld/context/) for the JSON document. Models should use `dtmi:dtdl:context;2`. |
-| displayName | [optional] Allows you to give the model a friendly name if desired. |
-| contents    | All remaining interface data is placed here, as an array of attribute definitions. Each attribute must provide a `@type` (**property**, **telemetry**, **command**, **relationship**, or **component**) to identify the sort of interface information it describes, and then a set of properties that define the actual attribute (for example, `name` and `schema` to define a **property**). |
-
-### **1. Creation of Models for Azure Digital Twin** 
-
-**Go to project folder**→**Digital Twin→Cloud**→**interface_models**
-
-We have the sample model interface with attributes component, telemetry and relationship between them
-
-AirQualityController.json
-
-```json
-{
-	"@type": "Interface",
-	"displayName": "AirQualityController",
-	"comment": "This is a comment",
-	"@id": "dtmi:org:example:AirQualityController;2",
-	"contents":[
-			{
-			"@type": ["Component"],
-			"name": "CO2Sensor",
-			"displayName": "CO2Sensor",
-			"@id": "dtmi:org:example:a;2",
-			"schema": "dtmi:org:example:cotwoSensor;2"
-			}
-	],
-	"@context": "dtmi:dtdl:context;2"
-}
 
 ```
+component pin GPIO
+LED Pin 11 GPIO 17
+Buzzer Pin 13 GPIO 27
+DHT11 Pin 15 GPIO 22
+CCS811 SDA Pin 3 GPIO 2 (SDA)
+CCS811 SCL Pin 5 GPIO 3 (SCL)
+```
+Table 1.1: List of components connected to the AirQuality Raspberry Pi with related pin and
+GPIO references.
 
-AirQualitySensor.json
-
-```json
-{
-	"@type": "Interface",
-	"displayName": "AirQualitySensor",
-	"@id": "dtmi:org:example:cotwoSensor;2",
-	"contents":[
-			{
-			"@type": [
-				"Telemetry"
-			],
-			"schema": "double",
-			"displayName": "carbonDioxideValue",
-			"@id": "dtmi:org:example:cotwoSensor:cotwoValue;2",
-			"name": "carbonDioxideValue"
-			},
-			{
-			"@type": [
-				"Property"
-			],
-			"schema": "string",
-			"displayName": "type",
-			"@id": "dtmi:org:example:cotwoSensor:type;2",
-			"name": "type"
-			}
-	],
-	"@context": "dtmi:dtdl:context;2"
-}
+would include some specification for the components. The specification for the LED of the
+Arduino Pack listed the LEDs as follow:
 
 ```
+Color V (max) mA (peak)
+red 2.0 (2.5) 50 (100)
+yellow 2.0 (2.5) 50 (100)
+green 3.6 (4.0) 20 (50)
+```
+```
+Table 1.2: Specification values for LED of Andurino Sensor Set
+```
+The values for the calculation needs to be in between the two values listed in the table 1.
+The LED connection is done indirect over a transistor, so that the GPIO of the Raspberry
+Pi is not stressed out. See image /reffigure:circuitLED for the circuit diagram. The circuit
+consists of an LED, two resistors and a transistor. One resistor is set between the GPIO and
+the transistor, the other one is set between the power source and the LED, which is connected
+to the transistor. Depending on the transistor and LED in use, the resistors need to be sized
+accordingly.
+More information on how to access the LED in Python can be found in subsection 1.6.1.
 
-Room.json
+<img align="center" src="pictures/circuitAll_marked.png" width= 400/>
 
-```json
-{
-	"@type": "Interface",
-	"displayName": "Room",
-	"@id": "dtmi:com:example:Room;2",
-	"contents":[
-			{
-			"@type": ["Relationship"],
-			"displayName": "airQualityControllers",
-			"@id": "dtmi:org:example:whatever;2",
-			"target": "dtmi:org:example:AirQualityController;2",
-			"minMultiplicity": 0,
-			"writable": true,
-			"properties": [
-				{
-				"@type": [
-					"Property"
-				],
-				"schema": "boolean",
-				"displayName": "room",
-				"name": "room"
-				}
-			],
-			"name": "airQualityControllers"
-			}
-	],
-	"@context": "dtmi:dtdl:context;2"
-}
+Figure 1.5: Circuit diagram of current AirQuality Raspberry Pi Setup. The supply and ground
+connection are marked: blue - ground, yellow - 3.3 V supply, red - 5 V supply.
+
+<img align="center" src="pictures/circuitLED.png" width= 400/>
+
+
+#### 1.4.2 Buzzer
+
+The buzzer will be used to give an acoustical response to the user. It should be used as an
+indicator to open the windows and insert fresh air into the room. At the moment the buzzer
+is not used in code. Both active and passive Buzzer need a 5 V power supply. The connection
+of the GPIO is also done via transistor, but only one resistor is needed between the GPIO and
+the transistor, because the buzzer itself does not need an additional one. There are two types
+of buzzers, active and passive. In the Arduino Sensor Pack is one of each available. There is
+no difference in connecting them, but there is a difference in accessing them via code. At the
+moment, the passive buzzer is connected.
+For more information on how to access a buzzer (active and passive), see subsection 1.6.2.
+
+#### 1.4.3 Temperature and Humidity sensor DHT11
+
+The DHT11 sensor is used because this sensor was already available at the CDL and is part of
+the sensor set for Arduino. This sensor is connected via single wire. Because the sensor given
+is already on a module, there is no need for filtering capacitor and pull-up resistor on the data
+wire. Both are available on the module. The sensor is connected to a GPIO, the 3.3 V power
+supply and the ground. To access the sensor in code a Python package is available. (More in
+subsection 1.6.3 in section Software Setup). A datasheet is located at the repository for further
+information.
+
+#### 1.4.4 CO2 sensor CCS811
+
+This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
+wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
+the SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semicon-
+ductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide
+equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as
+an CO2 value and can only be used as a reference.
+To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
+There are datasheet and manual available at the homepage of [joy-it](https://joy-it.net/en/products/SEN-CCS811V1). The manual also includes
+an example of how to access the sensor in code. A short summery is available in subsection
+1.6.4 datasheet and manual are located at the repository for further information.
+
+#### 1.4.5 CO2 sensor SCD30
+
+This sensor is using the i2C protocol too. The wiring is the same as for the CCS811 sensor. It
+is based on the NDIR (non-dispersive infrared) principle and can provide a CO2 value and a
+temperature value. NDIR sensors are more accurate and durable than MOS sensors, but they
+are more expensive.
+At the moment this sensor is not connected to the AirQuality Sensor-Modul, but it is
+compatible with the Raspberry Pi and an extension with it should be easy. There are libraries
+for Python and C available to access the sensor via code. The datasheet can be located at the
+repository for further information.
+
+
+
+### 1.5 Required Libraries for the project
+
+Now, you need to install some packages with the integrated package installer of Pythonpip.
+You can do this by entering the following command, where<PackageName>represents the name
+of one of the packages listed in table 1.3.
+
+python3 -m pip install <PackageName>
 
 ```
-
-### **2. Creation of Digital Twin Models** 
-
-**Go to project folder**→**Digital Twin→Cloud**→**twin_models**
-
-we have the sample code for creating a Digital Twin and relationship for the model 
-
-Raspberry1.json
-
-```json
-{
-    "dtid": "Raspberry1",
-    "content": {
-        "$metadata": {
-            "$model": "dtmi:org:example:AirQualityController;2"
-        },
-        "CO2Sensor": {
-            "$metadata":{
-            },
-            "type": "testType"
-        }
-    }
-
-}
+Package for Link to section
+RPi.GPIO Raspberry Pi GPIO (LED & Buzzer) 1.6.1, 1.6.
+Adafruit-DHT temperature sensor DHT 1.6.
+adafruit-circuitpython-ccs811 CO2 sensor CCS811 1.6.
+azure-iot-device Azure IoT device functions 2.
 ```
+Table 1.3: Python packages needed for this project on the Raspberry Pi with links to the
+related sections.
 
-Room101.json
+### 1.6 Code
 
-```json
-{
-    "dtid": "Room101",
-    "content": {
-        "$metadata": {
-            "$model": "dtmi:com:example:Room;2"
-        }
-    },
-    "relationships":[
-        {
-            "id": "rel2",
-            "content":{
-                "$targetId": "Raspberry2",
-                "$relationshipName": "airQualityControllers"
-            }
-        }
-    ]
+In this section the code of the various components connected to the Raspberry Pi is descried
+with examples and links to resources.
 
-}
+#### 1.6.1 LED
+
+To access the GPIOs of the Raspberry Pi the packageRPi.GPIOis used. There are other
+packages available too, but this documentation will stay with this package. To simplify the later
+code it is possible to useimport RPi.GPIO as GPIOso you can access the functions behind by
+simply usingGPIO.as used later in this section and in the project. Code snipped used in this
+section are from/home/pi/py_code/gpio_test.pyon the Raspberry Pi and on the repository.
+First the GPIO mode needs to be set to access the pins by GPIO number:
+
+GPIO.setmode(GPIO.BCM)
+
+The other mode isGPIO.BOARDthat will set the pins to be accessed by the pin number. Second
+the GPIO needs to be set as output, because you want to send signals out to the LED.
+
+RED_LED_GPIO = 17
+GPIO.setup(RED_LED_GPIO, GPIO.OUT)
+
+The variable for the GPIO is used, because it will be needed more often.
+To enable the LED you will need to set the output to HIGH.
+
+GPIO.output(RED_LED_GPIO, GPIO.HIGH)
+
+To disable the LED you will have to set the output to LOW, by simply replace the HIGH with
+a LOW in the command above. If you want the LED to blink, you just need the output to
+toggle with a delay in between.
+
+for x in range(3):
+GPIO.output(RED_LED_GPIO, GPIO.HIGH)
+time.sleep(1)
+GPIO.output(RED_LED_GPIO, GPIO.LOW)
+time.sleep(1)
+
+
+#### 1.6.2 Buzzer
+
+To access the buzzer you will need the same steps as for the LED in subsection 1.6.1 to enable
+the GPIO and access it. If the active buzzer is connected, it will make a sound if you send a
+HIGH to the GPIO followed by a delay and then a LOW. Similar to the LED, but in this case
+the delay will set the note of the sound.
+
+GPIO.output(BUZZ_GPIO, GPIO.HIGH)
+time.sleep(3)
+GPIO.output(BUZZ_GPIO, GPIO.LOW)
+
+If you want a sound like a siren, you will need to put this into a loop.
+With the passive buzzer it is on the one side more complicated to get a sound out of it,
+but on the other side it is easier to control the note of the sound. You could even create an
+instrument with it. To initiate the passive buzzer use the following command in addition to
+setting the GPIO as output.
+
+p = GPIO.PWM(BUZZ_GPIO, 1)
+p.start(0)
+time.sleep(1)
+
+This sets the pin to PWM which allows you to send a continues stream. To generate a sound
+the output needs to be a sinus wave. The next code snipped demonstrate a possible address of
+the buzzer:
+
+p.start(50)
+for x in range (0,361):
+sinVal = math.sin(x * (math.pi / 180.0))
+toneVal = 2000 + sinVal * 500
+p.ChangeFrequency(toneVal)
+time.sleep(0.001)
+p.stop()
+time.sleep(1)
+
+The sound will change with the frequency used to send to the PWM output.
+
+#### 1.6.3 DHT11
+
+There are a lot of libraries available for the DHT11 temperature and humidity sensor. For this
+project we used the Python library [AdafruitDHT](https://github.com/adafruit/Adafruit_Python_DHT/). There is a problem with the detection of
+the Raspberry Pi, that need some fixes. The library is checking, which version of Raspberry
+Pi or Beaglebord is used. But the Version for Raspberry Pi 4 is not covered and needs to be
+added. You will get an error, that there is no Raspberry Pi or Beagleboard found. To fix this
+you need to go to the directory on the Raspberry Pi where the library is:
+
+/usr/local/lib/python3.7/dist-packages/Adafruit_DHT
+
+Here you need to open and change the fileplatformdetect.py. The script is reading the file
+/proc/cpuinfoand checks if the entry forHardwareis matching with one of the requested
+versions. At the end of the file you will find a functionpiversion. Inside this function you
+will find a search with a Regex and a if-elif-else construct afterwards. To fix the problem, you
+need to add anelifreferencing the Hardware version for the Raspberry Pi 4 like this:
+
+
+
+
 ```
-
-### **3.Generate Mock-up Telemetry Data**
-
-**Go to project folder**→**Digital Twin→Cloud**→**telemetry_data**
-
-we have the sample telemetry data that is to be sent to Azure Digital Twin in testdata.json file .The telemetry data contains attributes dtid, component and content with properties like carbonDioxideValue and timestamp value that needs to be updated in Azure Digital Twin
-
- ```json
-  {
-        "dtid": "Raspberry1",
-        "componentId": "CO2Sensor",
-        "content":{
-            "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
-        }
-    }
- ```
-
-### **4. Create and Update Azure Digital Twin with Telemetry Data  **
-
-**Go to project folder**→**Digital Twin→Cloud**
-
-The folder contains the files for performing CRUD operations on Digital Twin with Telemetry Data
-
-**Files used :**
-
-| FileName            | Functionalities                                              |
-| ------------------- | ------------------------------------------------------------ |
-| digital_twin_api.py | functions for performing CRUD operations on Digital Twin with Telemetry Data |
-| test.py             | call functions of digital_twin_api for creating interface and instances of Digital Twin |
-| process.py          | import test.py and calls function to send telemetry data to digital twin |
-
-Now let's look into each of them in detail
-
-1. **digital_twin_api.py**
-
-   Replace base_url and auth_token for accessing Azure Digital Twin resource 
-
-   a) Go to Azure Digital Twin and copy the host name ,this is to be added as base_url string
-
-   ![DigitalTwin](.\images\AzureDT.png)
-
-   
-
-   b) Generate auth_token from Azure CLI 
-
-   Prerequisites:
-
-   1.Install Azure CLI on windows 
-
-   a) Open Microsoft Azure Command Prompt in windows and enter command below logging into your Azure account
-
-   ![AzureCLIWindows](.\images\AzureCLIWindows.png)
-
-   b) Generate Access Token using the command(resource id differs for each account)
-
-   az account get-access-token --resource {resource id}
-
-   ```bash
-   az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
-   ```
-
-   ![auth_Token](.\images\auth_Token.png)
-
-   Update the auth_token in digital_twin_api.py file
-
-2. **test.py**
-
-The python script has functions for performing following operations:
-
-function calls for digital_twin_api.py file is done here and we pass arguments for each of them
-
-**Prerequisites:**
-
-import digital_twin_api 
-
-**Python libraries used** 
-
-1. json
-
-2. urllib3
-
-a) Creating structure of Telemetry Data and its properties 
-
- **create_schema()**
-
-Create Digital Twin interface with created models from folder(interface_models) , we load the created models and call the function **create_interface** in digital_twin_api.py from test.py
-
- b) Creating API instances of digital twin 
-
- **create_instances()**
-
-we load the created twin models from folder (twin_models) and call function **create_twin** for creating Digital Twin and **create_relationship** for creating relationships between twins
-
-c) Sending telemetry data 
-
- **send_telemetry_data()**
-
-we load the sample telemetry data from folder(telemetry_data) and pass as arguments the function **send_telemetry_for_component** in digital_twin_api
-
-d) Clean-up function for deleting the digital twin relationships 
-
-**cleanup()**
-
-You can decide which resources are needed and use it for future. Remove other resources when not in use by deleting the Digital twin , its relationship and interface 
-
-```python
-import digital_twin_api
-import tsi_api
-import urllib3
-import json
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-
-interface_file_names = ["Room", "AirQualitySensor", "AirQualityController"]
-twin_file_names = ["Raspberry1", "Raspberry2", "Raspberry3",
-                    "Room101", "Room102", "Lobby100"]
-delete_interface_ids = ["dtmi:com:example:Room;2", "dtmi:org:example:AirQualityController;2", "dtmi:org:example:cotwoSensor;2"]
-delete_relationship_ids = [("Lobby100", "rel1"), ("Room101", "rel2"), ("Room102", "rel3"), ("Room102", "rel4")]
-delete_dtids = ["Room101", "Room102", "Lobby100",
-                    "Raspberry1", "Raspberry2", "Raspberry3"]
-
-def create_schema():
-    for file_name in interface_file_names:
-        interface_to_create = None
-        with open("interface_models/" + file_name + ".json") as tc_file:
-            interface_to_create = json.load(tc_file)
-        digital_twin_api.create_interface(interface_to_create)
-        # create type in tsi
-        telemetries = {}
-        print("Interface " + interface_to_create["displayName"])
-        for content in interface_to_create["contents"]:
-            if(content["@type"][0] == "Telemetry"):
-                tsx = "$event." + content["displayName"]
-                if(content["schema"] == "double"):
-                    tsx += ".Double"
-                else:
-                    tsx += ".Long"
-                telemetries[content["displayName"]] = {
-                    "kind": "numeric",
-                    "value": {
-                        "tsx": tsx
-                    },
-                    "aggregation": {
-                        "tsx": "avg($value)"
-                    }
-                }
-
-        interface = {
-            "id": interface_to_create["@id"],
-            "name": interface_to_create["displayName"],
-            "variables": telemetries
-        }
-        tsi_api.create_interface(interface)
-
-def create_instances():
-    for file_name in twin_file_names:
-        twin_to_create = None
-        with open("twin_models/" + file_name + ".json") as tc_file:
-            twin_to_create = json.load(tc_file)
-        # create digital twin in azure
-        digital_twin_api.create_twin(twin_to_create["dtid"], twin_to_create["content"])
-        # create outgoing relationships in azure
-        if "relationships" in twin_to_create.keys():
-            for rel in twin_to_create["relationships"]:
-                digital_twin_api.create_relationship(twin_to_create["dtid"], rel["id"], rel["content"])
-
-def send_telemetry_data():
-    # send telemetry data
-    values = None
-    with open("telemetry_data/" + "testdata" + ".json") as tc_file:
-        values = json.load(tc_file)
-    for telemetry_value in values:
-        dtid = telemetry_value["dtid"]
-        component_name = telemetry_value["componentId"]
-        telemetry = telemetry_value["content"]
-        digital_twin_api.send_telemetry_for_component(dtid, component_name, telemetry)
-
-def cleanup():
-    # cleanup
-    for rel in delete_relationship_ids:
-        digital_twin_api.delete_relationship(rel[0], rel[1])
-    for dtid in delete_dtids:
-        digital_twin_api.delete_twin(dtid)
-    for interface_id in delete_interface_ids:
-        digital_twin_api.delete_interface(interface_id)
+elif match.group(1) == ’BCM2711’:
+# Pi 4b
+return 3
 ```
-
-
-
-3.**process.py**
-
-This function imports the test.py file and calls the function send_telemetry_data for sending telemetry data to Digital Twin
-
-```python
-import test
-import urllib3
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-test.send_telemetry_data()
-```
-
-### **5. Run the API**
-
-Navigate to the folder and run the python file 
-
-**Go to project folder**→**Digital Twin→Cloud**
-
-![TD_API](.\images\TD-API.png)
-
-
-
-### **6. Azure Function to Send Telemetry Data to TSI  **
-
-Azure functions is a serverless concept of cloud native design that allows a piece of code deployed and execute without any need of server infrastructure, web server, or any configurations. Azure functions can be written in multiple languages such as C#, Java, JavaScript, TypeScript, and Python
-
-We are using C# language as it has predefined project template for creating the Azure Function.
-
-Azure function supports Event Hub Trigger and is executed automatically when event is fired from Azure Digital Twin
-
-**Create new Event Hub namespace in Azure**
-
-Search for event hub and create new Event Hub namespace with name and resource group. Event Hub namespace will receive events from your Azure Digital Twins instance
-
-![eventHubCreate](.\images\eventHubCreate.png)
-
-You'll be using this event hubs namespace to hold the two event hubs:
-
-1. **Twins hub** - Event hub to receive twin change events
-
-2. **Time series hub** - Event hub to stream events to Time Series Insights
-
-   **1. Create Twins Hub**
-
-   Create new Event Hub  inside Event Hub namespace by clicking add button
-
-   ![image-20210630181906663](.\images\eventHubAdd.png)
-
-   
-
-   ![EventHub](.\images\EventHub.png)
-
-   This event hub will receive twin change events from Azure Digital Twins. To set up the twins hub, you'll complete the following steps in this section:
-
-   1. Create an authorization rule to control permissions to the hub
-
-   2. Create an endpoint in Azure Digital Twins that uses the authorization rule to access the hub
-
-   3. Create a route in Azure Digital Twins that sends twin updates event to the endpoint and connected twins hub
-
-   4. Get the twins hub connection string  
-
-   **a) Create twins hub authorization rule**
-
-   Go to the created event hub inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below
-
-   ![twinHubAuthorization](.\images\twinHubAuth.png)
-
-   **b) Create twins hub endpoint**
-
-   Create an Azure Digital Twins endpoint that links your event hub to your Azure Digital Twins instance. Specify a name for your twins hub endpoint.
-
-   Go to Digital Twin and choose Endpoints from side menu 
-
-   **Endpoint type**- choose Event Hub
-
-   **Subscription**- choose your azure subscription
-
-   **Event hub namespace** **and** **Event Hub**- choose already created event hub namespace and event hub name
-
-   **Authentication type**- key based
-
-   **Authorization rule**- choose already created twin hub authorization rule
-
-   ![DTEndpoint](.\images\DTEndpoint.png)
-
-   **c) Create twins hub event route**
-
-   Azure Digital Twins instances can emit twin update events whenever a twin's state is updated. In this section, you'll create an Azure Digital Twins **event route** that will direct these update events to the twins hub for further processing.
-
-   Create a route in Azure Digital Twins to send twin update events to your endpoint from above. The filter in this route will only allow twin update messages to be passed to your endpoint. Specify a name for the twins hub event route.
-
-   ![DTEventRoute](.\images\DTEventRoute.png)
-
-   choose already created endpoint name
-
-   ![DTEventRouteName](.\images\DTEventRouteName.png)
-
-   **d) Get twins hub connection string**
-
-   Go to the event hub namespace and click on the created twins hub below , choose shared access policies and click on created twins hub authorization rule , you can see the detailed view , copy the primary connection string as highlighted in the below image
-
-   ![EventHubConnectionString](.\images\eventHubConnStr.png)
-
-   **2. Create time series hub**
-
-   similar to twins hub create time series hub inside the existing event hub namespace
-
-   **a) Create time series hub authorization rule**
-
-   Go to the created time series hub  inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below 
-
-   ![tsi-auth-rule](.\images\tsi-auth-rule.png)
-
-   **b) Get time series connection string**
-
-   Go to the event hub namespace and click on the created time series hub below , choose shared access policies and click on created time series hub authorization rule , you can see the detailed view , copy the primary connection string as highlighted in the below image
-
-   ![tsi-conn-str](.\images\tsi-conn-str.png)
-
-make a note of both the twin and time series hub connection string to use them in tha Azure function below.
-
-**Create Azure Function C#**
-
-1. Create Azure Function with Event Hub Trigger
-
-   a) Create a new C# project and choose Azure Function as Project template
-
-![Azure_Fn](.\images\azureFn.png)
-
-​	  b) Choose the Event Hub trigger that runs whenever event is fired in Azure Digital Twin
-
-![eventHubTrigger](.\images\eventHubTrigger.png)
-
-
-
-**Go to project folder→code→AirQualityDataProcessing→AirQualityDataProcessing→ProcessDTTelemetryUpdateTSI.cs**
-
-copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
-
-**ProcessDTTelemetryUpdateTSI.cs**
-
-Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
-
-![eventHubandTriggerConnStr](.\images\eventHubandTriggerName.png)
-
-
-
-This Function gets the EventData from EventBus
-
-Event data is in array segment and we parse to get the string
-
-Convert JSON to .Net Object using (JObject) JsonConvert.DeserializeObject and cast it
-
-Get properties out of the JSON Object
-
-Serialize to JSON string and 
-
-Add telemetry value to TSI (Time Series Instance)
-
-Add a new json file **local.settings.json** with following information to the **AirQualityDataProcessing project**. 
-
-Set the property name for twin and time series hub and add the primary connection string  obtained from Azure as follows
-
-```json
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
-    "EventHubAppSetting-Twins": "Endpoint=sb://eventhubnamespace-ramya.servicebus.windows.net/;SharedAccessKeyName=twinHubAuthRule;SharedAccessKey=69U8vJHbaNdp4XrXFO/SRaplc6vu7hFTjXBcViwX1BY=;EntityPath=eventhub",
-    "EventHubAppSetting-TSI": "Endpoint=sb://eventhubnamespace-ramya.servicebus.windows.net/;SharedAccessKeyName=timeseriesauthrule;SharedAccessKey=AtrIf6/ZgErjLm+8Pzu4ms3PEKuHNd+P+8VYAwdC5kE=;EntityPath=timeserieshub",
-    "EventHubAppSetting-Twins-Structure": "Endpoint=sb://airqualitydatabus.servicebus.windows.net/;SharedAccessKeyName=automation;SharedAccessKey=Ayfn2C4d1sqF1RgZ0Vl488Ams2cH+K2Z8okQ/rsc8tI=;EntityPath=pushdtupdatetotsi",
-    "EventHubAppSetting-TSI-Structure": "Endpoint=sb://airqualitydatabus.servicebus.windows.net/;SharedAccessKeyName=automation;SharedAccessKey=R+uyKaMQXS9FYjCUW1LVwk6IeFRNoEKgsqJLWnPXgJ0=;EntityPath=pulldtstructureupdates"
-
-  }
-}
-```
-
-Set up the connection string for EventHubAppSetting-Twins and EventHubAppSetting-TSI from Azure .
-
-**Publish the Azure function** 
-
-Right click on the C# project and choose publish  ,give the name for publishing and make a note for later use in this project, choose the resource group for Azure resources and finish , after successful publish, you see the image as shown below
-
-![azureFnPublish](.\images\AzureFnPublish.png)
-
-**Verify the Azure function publish**
-
-search for the function name in Azure that we set while publishing the function app from C#.If its successfully publish you will see the function app in the Azure 
-
-![verifyAzureFnPublish](.\images\verifyPublish.png)
-
-**Set up security access for the function app**
-
-To access Azure Digital Twins, your function app needs a system-managed identity with permissions to access your Azure Digital Twins instance.
-
-Assign an access role for the function app so that it can access your Azure Digital Twins instance.
-
-1.In the Azure portal, search for your function app by typing its name in the search box. Select your app from the results.
-
-2.On the function app page, in the menu on the left, select **Identity** to work with a managed identity for the function. On the **System assigned** page, verify that the **Status** is set to **On**. If it's not, set it now and then **Save** the change.
-
-![FnAppSecurity](.\images\fnAppSecurity.png)
-
- **Configure App Settings for the two Event Hubs**
-
-To make the  function app accessible by twins hub and time series hub , you can set an environment variable in  function app's configuration.
-
-In the Azure portal search for function app and select the function app from results.
-
-Click on Configuration from side panel and click on button New Application setting,
-
-Create two  environment variable one for twin and other for time series hub
-
-**Twin Hub**
-
-**Name**: connection string name for twin hub as we provided in the C# Azure function
-
-**Value**: Use the twins hub **primaryConnectionString** value that you saved earlier when creating the shared access policies for twin hub. This connection string is also used in the local.settings.json file ,when we created Azure function app.  
-
-**Time Series Hub**
-
-**Name**: connection string name for time series hub as we provided in the C# Azure function
-
-**Value**: Use the time series hub **primaryConnectionString** value that you saved earlier when creating the shared access policies for time series hub.
-
-![FnAppSettings](.\images\appSettingCreate.png)
-
-After adding the application settings for twin and time series hub, the result would be as shown below
-
-![AppSettingsTwinTSI](.\images\AppSettingTwinTSI.png)
-
-**Azure Function Trigger**
-
-The Azure function execution happens automatically,  when the Digital Twin receives update or add events
-
-Debug the C# project and now you can see the output as shown below:
-Carbondioxide value is read and logged , this mock-up data has been received from azure (By executing python process.py which sends telemetry data to azure)
-
-<img src=".\images\AzureFnOutput.png" alt="AzureFnOutput" style="zoom:120%;" />
-
-
-
+You can check the cpuinfo if the version isBCM2711or just use the lines above and retry to
+use the library. The library should work as intended after this fix and there where no further
+issues detected.
+The filesensortestDT11.pyis situated in thepicodefolder and has an example im-
+plementation to access the DHT11 sensor. The current values are requested with the following
+function:
+
+humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
+The variables humidity and temperature are floats and can then be used for further use.
+
+#### 1.6.4 CCS811
+
+Adafruit provides a Python library for the [CCS811 sensor](https://github.com/adafruit/Adafruit_CircuitPython_CCS811). In subsection Python and Libraries
+1.5 you will find more information on how to install the library. This sensor is using I2C for
+communication, therefor it is important to activate it like mentioned in subsection Raspberry
+Pi Setup 1.3.1.
+The example below is located on the Raspberry Pi inside thepycodefolder namedsen-
+sortestCCS811.py.
+i2c = busio. I2C ( board .SCL, board .SDA)
+ccs811 = adafruit ccs811. CCS811( i2c )
+print ( ccs811 )
+# Wait f o r the sensor to be ready and c a l i b r a t e the thermistor
+while not ccs811. data ready :
+pass
+temp = ccs811. temperature
+ccs811. temp offset = temp− 25.
+
+while True :
+print (”CO2: {}PPM, TVOC: {} PPM, Temp: {} C”. format ( ccs811. eco2 , ccs811. tvoc , ccs811. temperature ))
+time. sleep ( 0. 5 )
+First the script is configuring the I2C with the related SCL and SDA pins, then it waits for
+the sensor to be ready by checking if dataready is true. When finished a temperature offset
+(tempoffset) will be added to get more accurate results. From this point on the data can be
+read periodically with a delay in between.
+
+# FOR SETTING UP NEXT STEP
+For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
 
 =======
 >>>>>>> d33a7b984ab2e45aee127af3526c7b4387c032be:raspberry/actual_data/README.md
