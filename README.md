@@ -28,13 +28,13 @@
       - 2.5.2 Visual Studio Code Azure Extension
    - 2.6 Azure library for Python on Raspberry Pi
    - 2.7 Setup Debug Environment for Azure Functions in Visual Studio
-   - 2.8 Physical Model
-   - 2.9 Machine Learning
-   - 2.10 Visualisation
-
+- 3 Applications
+   - 3.1 Physical Model
+   - 3.2 Machine Learning
+   - 3.3 Visualisation
 # Chapter 1
 
-# Introduction
+# Introduction & Hardware
 ### 1.1 Project Road Map
 
 In this section we will discuss about how our project is planned, its working architecture and
@@ -335,11 +335,11 @@ to a storage event on Azure Portal.
 Keep in mind that the local server instance is time-limited to 2 hours and you will need to
 update the endpoint in Azure evertime the server is restarted.
 
-
-### 2.8 Physical Model
+# Setup: Applications
+### 3.1 Physical Model
 This is to show sample [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/physical_model) it should land to physical model readme.
 
-### 2.9 Machine Learing
+### 3.2 Machine Learing
 Due to vast range of applications of Machine learning,
 its not exceptional to data driven engineering. As were are
 working with real time data’s (time-series) based data’s the
@@ -365,5 +365,5 @@ its depends on external factors such as environment, weather,
 location and so on... 
 For the details [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/machine_learning).
 
-### 2.10 Visualisation
+### 3.3 Visualisation
 For the details [click here])(https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/visualization).
