@@ -11,24 +11,10 @@
 
 ## Contents
 
-- 1 Setup: Sensor-Module
+- 1 Introduction 
    - 1.1 Project Road Map
    - 1.2 Raspberry Pi
-   - 1.3 Installing Ubuntu On Raspberry
-      - 1.3.1 Raspberry Pi Setup
-      - 1.3.2 Remote access via SSH
-   - 1.4 Hardware Setup
-      - 1.4.1 LED
-      - 1.4.2 Buzzer
-      - 1.4.3 Temperature and Humidity sensor DHT11
-      - 1.4.4 CO2 sensor CCS811
-      - 1.4.5 CO2 sensor SCD30
-   - 1.5 Required Libraries for the project
-   - 1.6 Code
-      - 1.6.1 LED
-      - 1.6.2 Buzzer
-      - 1.6.3 DHT11
-      - 1.6.4 CCS811
+   - 1.3 Using Raspberry pi on our project
 - 2 Setup: Microsoft Azure
    - 2.1 Create Account
    - 2.2 Install Azure CLI on your PC
@@ -48,8 +34,7 @@
 
 # Chapter 1
 
-# Setup: Sensor-Module
-
+# Introduction
 ### 1.1 Project Road Map
 
 In this section we will discuss about how our project is planned, its working architecture and
@@ -80,7 +65,10 @@ Required hardware:
 - Micro-HDMI to HDMI cable (for initialization)
 
 
-
+### 1.3 Using Raspberry pi on our project
+We can simulate the data in two ways, either in Simulated data or Actual data. Mostly simulated data will be used for checking purpose. 
+For More information about Actual data [click here for actual data](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/actual_data).
+For more information on simulated data [click here for Simulated data](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulated_data).
 
 # Chapter 2
 
