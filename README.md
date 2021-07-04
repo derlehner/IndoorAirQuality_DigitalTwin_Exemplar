@@ -1,6 +1,6 @@
-Digital Twin Airquality For Covid Risk Assessment
+# Digital Twin Airquality For Covid Risk Assessment
 
-Using Microsoft Azure Cloud Service
+## Using Microsoft Azure Cloud Service
 
 #### Hari Shankar
 

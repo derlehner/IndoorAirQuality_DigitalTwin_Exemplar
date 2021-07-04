@@ -1,4 +1,47 @@
-# Send Data from IoT Hub to Azure Digital Twin 
+# SETTING UP RASPBERRY BY HARDWARE AND GET IT READY TO SEND THE DATA
+
+## Contents
+
+- 1 Setup: Sensor-Module
+   - 1.1 Project Road Map
+   - 1.2 Raspberry Pi
+   - 1.3 Installing Ubuntu On Raspberry
+      - 1.3.1 Raspberry Pi Setup
+      - 1.3.2 Remote access via SSH
+   - 1.4 Hardware Setup
+      - 1.4.1 LED
+      - 1.4.2 Buzzer
+      - 1.4.3 Temperature and Humidity sensor DHT11
+      - 1.4.4 CO2 sensor CCS811
+      - 1.4.5 CO2 sensor SCD30
+   - 1.5 Required Libraries for the project
+   - 1.6 Code
+      - 1.6.1 LED
+      - 1.6.2 Buzzer
+      - 1.6.3 DHT11
+      - 1.6.4 CCS811
+
+
+# Chapter 1
+
+# Setup: Sensor-Module
+
+### 1.1 Project Road Map
+
+## 1.2 Raspberry Pi 4
+
+There were already some Raspberry Pi 4^1 boards at the CDL available, so it was an easy
+decision to go for this hardware platform. Other platforms would be Arduino or even smaller
+and cheaper boards, because of the low requirements for this Use-Case.
+Required hardware:
+
+- Raspberry Pi 4
+- Power adapter for Raspberry Pi 4 (USB-C)
+- SD-card
+- LAN-cable
+- Card-Reader (for initialization)
+- Keyboard (for initialization)
+- Micro-HDMI to HDMI cable (for initialization)
 
 ### 1.3 Installing Ubuntu On Raspberry
 
@@ -6,13 +49,19 @@ This procedure is needed when you bought new Raspberry/need to flash old raspber
 new Ubuntu.
 Required Things:
 
-<img align="right" src="pictures/piimager.png" width= 400/>
-
 1. Brand new Raspberry / Raspberry that need to be flashed new
-2. Download thePi Imagerfile and install it from [Here](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi##1-overview)
+2. Download thePi Imagerfile and install it from this link^2
 3. If your in Linux InstallPi Imagerby following the command
     sudo snap i n s t a l l r p i−i m a g e r
 
+(^1) https://www.raspberrypi.org/products/raspberry-pi-4-model-b/
+(^2) https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#
+2-prepare-the-sd-card
+
+
+```
+Figure 1.1: Raspberry pi Imager
+```
 4. choose the OS asRaspberry pi OS 32 bitprobably it will be in first option
 5. insert the sd card and click write
 6. After its been installed you can insert this sd card into raspberry and you have freshly
@@ -20,14 +69,12 @@ Required Things:
 
 #### 1.3.1 Raspberry Pi Setup
 
-For the setup of the Raspberry Pi an introduction is given on the [Raspberry Pi homepage](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up).
+For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi homepage^3.
 In the following section a short overview is given.
 First of all an operation system needs to be downloaded and an image needs to be installed
 on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi
-
-
 OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an
-Imager program available to fasten the [installation step here](https://www.raspberrypi.org/software/). The instructions of the program
+Imager program available to fasten the installation step^4. The instructions of the program
 need to be followed and afterward the SD-Card is ready to use.
 The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and
 HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login
@@ -35,8 +82,10 @@ data is:
 
 - user: pi
 - password: raspberry
-A few setting needs to be done initially, therefore enter the command
 
+```
+A few setting needs to be done initially, therefore enter the command
+```
 sudo raspi-config
 
 into the console. The following settings had been changed:
@@ -47,8 +96,14 @@ into the console. The following settings had been changed:
     be needed later to get the IP of the Raspberry Pi without a monitor)
 - Interfacing Options - SSH: enable remote command line access to the Raspberry Pi via
     SSH
+
+(^3) https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up
+(^4) https://www.raspberrypi.org/software/
+
+
 - Interfacing Options - I2C: enable I2C interface and loading the I2C kernel module auto-
     matically (will be needed for some of the used sensors)
+
 Afterward the Raspberry Pi needs to be restarted and logged in with the new password.
 To be sure that the OS and its programs are up-to-date the following commands need to be
 executed:
@@ -74,20 +129,18 @@ IP address is in the IPv4 format.
 ping -4 rpi-cdl
 
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
-putty. Figure 1.3 shows a screenshot of the applicationputtywith the local IP address of the
+putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the
 Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved
 and used for later access. If the Raspberry Pi was connected over another LAN-connection,
 the IP address needs to be updated.
 
-<img align="center" src="pictures/puttyScreenshot_marked.png" width= 400/>
-
-
-Figure 1.3: Applicationputtywith example settings for the SSH connection to the Raspberry
+Figure 1.2: Applicationputtywith example settings for the SSH connection to the Raspberry
 Pi.
+
 
 ### 1.4 Hardware Setup
 
-In this section the setup of the Hardware is further described. Figure 1.4 shows a picture of
+In this section the setup of the Hardware is further described. Figure 1.3 shows a picture of
 the setup of the AirQuality Hardware. The current setup is done on a breadboard, for further
 usage it is recommended to solder the components to a board. The AirQuality Sensor-Module
 includes the following components:
@@ -98,6 +151,9 @@ includes the following components:
 - CO2 sensor CCS811 (MOS sensor)
 - CO2 sensor SCD30 (NDIR sensor; not connected yet)
 
+```
+Figure 1.3: Picture of the current Hardware Setup of the AirQuality Raspberry Pi.
+```
 Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
 It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
 transistor has 3 pins and is connected between the GPIO and the component, which should
@@ -106,7 +162,7 @@ needs to be connected to the ground too. An example can of such a circuit is sho
 ??in subsection 1.4.1 LED. The transistor prevents that the component is using too much
 current from the GPIO and instead is using the voltage suppy pin to power the component.
 The complete circuit diagram of the current state of the AirQuality Raspberry Pi Module is
-shown in figure 1.5. Table 1.1 lists all the components connected to the AirQuality Raspberry
+shown in figure 1.4. Table 1.1 lists all the components connected to the AirQuality Raspberry
 Pi and their connected pin and GPIO references.
 
 #### 1.4.1 LED
@@ -114,10 +170,6 @@ Pi and their connected pin and GPIO references.
 The LEDs will be used to give a visual response to the user about the CO2 amount in the air
 and therefor about the air quality. It should be used as an indicator to open the windows and
 insert fresh air into the room. At the moment only one LED is connected to the board and
-is used as an indicator, that a set of telemetry is sent to the hub. The LED used was already
-part of the CDL equipment and i was not sure if it was part of the Arduino Sensor Pack, which
-
-<img align="center" src="pictures/fotoHWAll.jpg" width= 400/>
 
 
 ```
@@ -131,6 +183,11 @@ CCS811 SCL Pin 5 GPIO 3 (SCL)
 Table 1.1: List of components connected to the AirQuality Raspberry Pi with related pin and
 GPIO references.
 
+Figure 1.4: Circuit diagram of current AirQuality Raspberry Pi Setup. The supply and ground
+connection are marked: blue - ground, yellow - 3.3 V supply, red - 5 V supply.
+
+is used as an indicator, that a set of telemetry is sent to the hub. The LED used was already
+part of the CDL equipment and i was not sure if it was part of the Arduino Sensor Pack, which
 would include some specification for the components. The specification for the LED of the
 Arduino Pack listed the LEDs as follow:
 
@@ -152,14 +209,10 @@ to the transistor. Depending on the transistor and LED in use, the resistors nee
 accordingly.
 More information on how to access the LED in Python can be found in subsection 1.6.1.
 
-<img align="center" src="pictures/circuitAll_marked.png" width= 400/>
 
-Figure 1.5: Circuit diagram of current AirQuality Raspberry Pi Setup. The supply and ground
-connection are marked: blue - ground, yellow - 3.3 V supply, red - 5 V supply.
-
-<img align="center" src="pictures/circuitLED.png" width= 400/>
-
-
+```
+Figure 1.5: Circuit diagram for LED connection to the Raspberry Pi.
+```
 #### 1.4.2 Buzzer
 
 The buzzer will be used to give an acoustical response to the user. It should be used as an
@@ -191,11 +244,14 @@ ductor) principle and can provide a total volatile organic compound (tVOC) or ca
 equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as
 an CO2 value and can only be used as a reference.
 To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
-There are datasheet and manual available at the homepage of [joy-it](https://joy-it.net/en/products/SEN-CCS811V1). The manual also includes
+There are datasheet and manual available at the homepage of joy-it^5. The manual also includes
 an example of how to access the sensor in code. A short summery is available in subsection
 1.6.4 datasheet and manual are located at the repository for further information.
 
-#### 1.4.5 CO2 sensor SCD30
+(^5) https://joy-it.net/en/products/SEN-CCS811V
+
+
+#### 1.4.5 CO2 sensor SCD
 
 This sensor is using the i2C protocol too. The wiring is the same as for the CCS811 sensor. It
 is based on the NDIR (non-dispersive infrared) principle and can provide a CO2 value and a
@@ -205,8 +261,6 @@ At the moment this sensor is not connected to the AirQuality Sensor-Modul, but i
 compatible with the Raspberry Pi and an extension with it should be easy. There are libraries
 for Python and C available to access the sensor via code. The datasheet can be located at the
 repository for further information.
-
-
 
 ### 1.5 Required Libraries for the project
 
@@ -221,7 +275,7 @@ Package for Link to section
 RPi.GPIO Raspberry Pi GPIO (LED & Buzzer) 1.6.1, 1.6.
 Adafruit-DHT temperature sensor DHT 1.6.
 adafruit-circuitpython-ccs811 CO2 sensor CCS811 1.6.
-azure-iot-device Azure IoT device functions 2.
+azure-iot-device Azure IoT device functions ??
 ```
 Table 1.3: Python packages needed for this project on the Raspberry Pi with links to the
 related sections.
@@ -248,6 +302,7 @@ the GPIO needs to be set as output, because you want to send signals out to the 
 RED_LED_GPIO = 17
 GPIO.setup(RED_LED_GPIO, GPIO.OUT)
 
+
 The variable for the GPIO is used, because it will be needed more often.
 To enable the LED you will need to set the output to HIGH.
 
@@ -262,7 +317,6 @@ GPIO.output(RED_LED_GPIO, GPIO.HIGH)
 time.sleep(1)
 GPIO.output(RED_LED_GPIO, GPIO.LOW)
 time.sleep(1)
-
 
 #### 1.6.2 Buzzer
 
@@ -300,10 +354,11 @@ time.sleep(1)
 
 The sound will change with the frequency used to send to the PWM output.
 
+
 #### 1.6.3 DHT11
 
 There are a lot of libraries available for the DHT11 temperature and humidity sensor. For this
-project we used the Python library [AdafruitDHT](https://github.com/adafruit/Adafruit_Python_DHT/). There is a problem with the detection of
+project we used the Python library AdafruitDHT^6. There is a problem with the detection of
 the Raspberry Pi, that need some fixes. The library is checking, which version of Raspberry
 Pi or Beaglebord is used. But the Version for Raspberry Pi 4 is not covered and needs to be
 added. You will get an error, that there is no Raspberry Pi or Beagleboard found. To fix this
@@ -316,9 +371,6 @@ Here you need to open and change the fileplatformdetect.py. The script is readin
 versions. At the end of the file you will find a functionpiversion. Inside this function you
 will find a search with a Regex and a if-elif-else construct afterwards. To fix the problem, you
 need to add anelifreferencing the Hardware version for the Raspberry Pi 4 like this:
-
-
-
 
 ```
 elif match.group(1) == ’BCM2711’:
@@ -338,7 +390,7 @@ The variables humidity and temperature are floats and can then be used for furth
 
 #### 1.6.4 CCS811
 
-Adafruit provides a Python library for the [CCS811 sensor](https://github.com/adafruit/Adafruit_CircuitPython_CCS811). In subsection Python and Libraries
+Adafruit provides a Python library for the CCS811 sensor^7. In subsection Python and Libraries
 1.5 you will find more information on how to install the library. This sensor is using I2C for
 communication, therefor it is important to activate it like mentioned in subsection Raspberry
 Pi Setup 1.3.1.
@@ -353,13 +405,21 @@ pass
 temp = ccs811. temperature
 ccs811. temp offset = temp− 25.
 
+```
 while True :
 print (”CO2: {}PPM, TVOC: {} PPM, Temp: {} C”. format ( ccs811. eco2 , ccs811. tvoc , ccs811. temperature ))
 time. sleep ( 0. 5 )
+```
+(^6) https://github.com/adafruit/Adafruit_Python_DHT/
+(^7) https://github.com/adafruit/Adafruit_CircuitPython_CCS
+
+
 First the script is configuring the I2C with the related SCL and SDA pins, then it waits for
 the sensor to be ready by checking if dataready is true. When finished a temperature offset
 (tempoffset) will be added to get more accurate results. From this point on the data can be
 read periodically with a delay in between.
+
+
 
 # FOR SETTING UP AZURE AS NEXT STEP
 For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
