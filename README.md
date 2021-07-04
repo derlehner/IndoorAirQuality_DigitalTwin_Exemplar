@@ -57,6 +57,8 @@ data flow. Azure is the things we concentrate on more here as Hardware setup is 
 earlier now its time to concentrate on azure part where this is the place the data is arrived and
 plans for further computations.
 
+<img align="center" src="pictures/workpath.jpg" width= 400/>
+
 ```
 Figure 1.1: Data Flow map from sensor to our Planned applications
 ```
@@ -353,3 +355,6 @@ This is to show sample [click here](https://github.com/derlehner/DigitalTwin_Air
 
 ### 2.9 Machine Learing
 For the details [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/machine_learning)
+
+### 2.10 Visualisation
+For the details [click here])(https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/visualization)
