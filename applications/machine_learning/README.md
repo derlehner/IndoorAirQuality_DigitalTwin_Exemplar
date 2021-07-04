@@ -1,7 +1,37 @@
 # Readme for Applications
+## Contents
 
-### MACHINELEARNING
-As we plan to use this data for our
+- 1 Machine Learning Introduction
+   - 1.1 Trend
+   - 1.2 Seasonality
+   - 1.3 Cyclic Variations
+   - 1.4 Internal and External factors
+- 2 ML Model
+### MACHINE LEARNING Introduction
+
+Due to vast range of applications of Machine learning,
+its not exceptional to data driven engineering. As were are
+working with real time data’s (time-series) based data’s the
+utilization of machine learning would occupy big part in
+predicting the future forecast.
+
+Time series is a collection of data basted on some period of
+time where each data points hold their respective data value
+and its attributes. In addition the method of analysing, comput-
+ing and predicting these kind of data is know as Time-Series
+analysis. Entire time series predicting and analysing works
+on with patterns and its seasonal sequences of behaviour.
+These mathematical patters sometimes either visible directly
+or need to be computed further with data’s with its attributes
+if needed eg. Regression. This time series can me denoted by
+chronological order over some period of years, months, weeks
+or even in hours and minutes. most of the time these time based
+data are used to be Univariate (doesn’t depend on internal
+factors), But could be depend on external factors. For example
+if we take temperature forecast as example for period of 1
+day its not dependant on time (which is internal attribute) but
+its depends on external factors such as environment, weather,
+location and so on... As we plan to use this data for our
 predicting the futre by an Machine learning algorithm there is
 some factors to be noted as follows for better understanding
 of what we going to do:
@@ -11,14 +41,15 @@ of what we going to do:
 - Cyclic Variations
 - Internal and External factors
 
-A. Trend
+#### 1.1 Trend
 
 Its nothing but one of characteristic of a data which says
 about increasing or decreasing trend. This can be easily
 calculated by averaging the a specific amount of past data.
 
 
-B. Seasonality
+#### 1.2 Seasonality
+
 Its about extracting or reviewing our data weather does it
 contain any seasonal variations (eg. any sequence of change
 which occurs often based on something). For better under-
@@ -28,14 +59,14 @@ time. This is due to time and this can be taken as seasonality
 changes. Any frequent changes can be referred as seasonality
 if the frequency it next change is more or less same as their
 past changes.
-C. Cyclic Variations
+#### 1.3 Cyclic Variations
 Cyclic Variations are more or less same as ”Seasonality”
 as we described it earlier but the difference is this occurs
 not more often like seasonality. In seasonality there is high
 probability that it will occur each day. In here it could happen
 often but not as frequent. There is not in need of frequency
 of changes should be same as their past.
-D. Internal and External factors
+#### 1.4 Internal and External factors
 As this is more common and important factor to data
 observations predicting right factors will reflect the accuracy of
 predicting in our final results. All internal and external factors
@@ -56,7 +87,8 @@ Further upon theses if there is need we need to use further
 processing like ”Smoothing Data”, ”Out-layers”, ”Data Noise
 Reduction”, ”Regression Techniques” and ”Biases - Variance
 estimation”.
-E. ML Model
+
+### 2 ML Model
 Since our data is Univariate and Based on Time we can use
 ARIMA (AutoRegressive Integrated Moving Avarage) model
 for our case. ARIMA is a type of AR (AutoRegressive Model).
