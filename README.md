@@ -57,7 +57,7 @@ data flow. Azure is the things we concentrate on more here as Hardware setup is 
 earlier now its time to concentrate on azure part where this is the place the data is arrived and
 plans for further computations.
 
-<img align="center" src="pictures/workpath.jpg" width= 800/>
+<img align="center" src="pictures/workpath.jpg" width= 1000/>
 
 
 First a ”Data Receiving point” IOT hub will be created, then a Digital Twins platform will
