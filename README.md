@@ -2,11 +2,9 @@
 
 ## Using Microsoft Azure Cloud Service
 
-#### Hari Shankar
+#### Author: Hari Shankar
 
-#### Last update:
-
-#### June 30, 2021
+#### Last updated July 5, 2021
 
 
 ## Contents
@@ -30,7 +28,9 @@
       - 2.5.2 Visual Studio Code Azure Extension
    - 2.6 Azure library for Python on Raspberry Pi
    - 2.7 Setup Debug Environment for Azure Functions in Visual Studio
-
+   - 2.8 Physical Model
+   - 2.9 Machine Learning
+   - 2.10 Visualisation
 
 # Chapter 1
 
@@ -363,7 +363,7 @@ if we take temperature forecast as example for period of 1
 day its not dependant on time (which is internal attribute) but
 its depends on external factors such as environment, weather,
 location and so on... 
-For the details [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/machine_learning)
+For the details [click here](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/machine_learning).
 
 ### 2.10 Visualisation
-For the details [click here])(https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/visualization)
+For the details [click here])(https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/visualization).
