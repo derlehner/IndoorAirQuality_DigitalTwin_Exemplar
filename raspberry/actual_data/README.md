@@ -361,13 +361,6 @@ the sensor to be ready by checking if dataready is true. When finished a tempera
 (tempoffset) will be added to get more accurate results. From this point on the data can be
 read periodically with a delay in between.
 
-# FOR SETTING UP NEXT STEP
+# FOR SETTING UP AZURE AS NEXT STEP
 For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
-
-=======
->>>>>>> d33a7b984ab2e45aee127af3526c7b4387c032be:raspberry/actual_data/README.md
-
-
-
-
 
