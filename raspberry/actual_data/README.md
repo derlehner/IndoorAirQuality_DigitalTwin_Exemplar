@@ -30,7 +30,7 @@
 
 ## 1.2 Raspberry Pi 4
 
-There were already some Raspberry Pi 4^1 boards at the CDL available, so it was an easy
+There were already some[Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards at the CDL available, so it was an easy
 decision to go for this hardware platform. Other platforms would be Arduino or even smaller
 and cheaper boards, because of the low requirements for this Use-Case.
 Required hardware:
@@ -50,18 +50,11 @@ new Ubuntu.
 Required Things:
 
 1. Brand new Raspberry / Raspberry that need to be flashed new
-2. Download thePi Imagerfile and install it from this link^2
+2. Download thePi Imagerfile and install it from [this link](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#)
 3. If your in Linux InstallPi Imagerby following the command
     sudo snap i n s t a l l r p i−i m a g e r
 
-(^1) https://www.raspberrypi.org/products/raspberry-pi-4-model-b/
-(^2) https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#
-2-prepare-the-sd-card
 
-
-```
-Figure 1.1: Raspberry pi Imager
-```
 4. choose the OS asRaspberry pi OS 32 bitprobably it will be in first option
 5. insert the sd card and click write
 6. After its been installed you can insert this sd card into raspberry and you have freshly
