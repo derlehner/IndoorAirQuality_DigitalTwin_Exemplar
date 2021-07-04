@@ -40,7 +40,7 @@ Its nothing but one of characteristic of a data which says
 about increasing or decreasing trend. This can be easily
 calculated by averaging the a specific amount of past data.
 
-```
+
 B. Seasonality
 Its about extracting or reviewing our data weather does it
 contain any seasonal variations (eg. any sequence of change
@@ -68,7 +68,7 @@ And whatever factors which affects up to observable level it
 should be considered as important factor.
 For our machine learning case there are the steps to be
 followed:
-```
+
 - Data Abstraction
 - Pre-process and Data Wrangling
 - Choose appropriate Algorithm
