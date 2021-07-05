@@ -1,0 +1,14 @@
+{
+    "dtid": "Raspberry1",
+    "content": {
+        "$metadata": {
+            "$model": "dtmi:org:example:AirQualityController;2"
+        },
+        "CO2Sensor": {
+            "$metadata":{
+            },
+            "type": "testType"
+        }
+    }
+
+}
