@@ -1,8 +1,17 @@
 # Readme for Azure
 
-**Introduction**
+## Introduction
+[DL] Please use headings instead of bold font when appropriate (see above).
 
-This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure and predict COVID-19 risk with mock up sensor data. In this project, we will set up IoT hub and Azure Digital Twin and send telemetry data from IoT device to Digital Twin
+IN this file, the setup of the Diital Twin using tools from the Azure platform is described. More specifically, 
+1. the Azure IoT-Hub is used ...
+2. the Azure Digital Twins Service (ADT) is used ...
+3. The Azure Time Series Insights Service (TSI) is used ...
+4. Azure Event Hubs are used ...
+[DL] describe in one sentence what we do with each service above.
+[DL] Do we have a fiure that we can show here
+[DL] We can make a Table of Contents above this line.
+
 
 **Prerequisites**
 
@@ -10,7 +19,7 @@ Azure account subscription
 [DL] We can set a link here to the readme file where the creation of the azure account is described
 
 **Resources**
-
+[DL] What do you mean with "Resources"?
 1. IoT Hub
 
 2. Azure Digital Twin
@@ -26,6 +35,8 @@ what is IoT Hub?
 1. Create a new resource, IoT Hub by typing in the search bar,create new resource group for managing all the azure resources.
 
 Create IoT Hub by specifying subscription, resource group, region and assign IoT hub name
+[DL] We should make a screenshot here
+[DL] we can use a running example that should help a reader understand what to put where.
 
 **Azure Digital Twin**
 
@@ -38,7 +49,6 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 
 ![Workflow](./images/01.jpg)
-
 
 
 **IoT Hub Setup**
