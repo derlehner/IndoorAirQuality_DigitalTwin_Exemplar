@@ -1,4 +1,4 @@
-# Readme for Azure
+# Readme for Azure -> [DL] Find a different name here
 
 ## Introduction
 [DL] Please use headings instead of bold font when appropriate (see above).
@@ -10,18 +10,16 @@ IN this file, the setup of the Diital Twin using tools from the Azure platform i
 4. Azure Event Hubs are used ...
 [DL] describe in one sentence what we do with each service above.
 [DL] Do we have a fiure that we can show here
-[DL] We can make a Table of Contents above this line.
+[DL] We can make a Table of Contents below this line.
 
 
 **Prerequisites**
-
 Azure account subscription
 [DL] We can set a link here to the readme file where the creation of the azure account is described
 
 **Resources**
-[DL] What do you mean with "Resources"?
+[DL] What do you mean with "Resources"? I think we should delete this part, and rather describe the role of the used services + links in the introduction.
 1. IoT Hub
-
 2. Azure Digital Twin
 
 [DL] We can also set links to the tools here.
@@ -43,15 +41,19 @@ Create IoT Hub by specifying subscription, resource group, region and assign IoT
 what is Azure Digital Twin?
 
 Azure Digital Twin is an Internet of Things (IoT) platform that enables users to create digital representation of real-world things and monitor the asset, component or process in real-time
+[DL] We should make a screenshot here
+[DL] we can use a running example that should help a reader understand what to put where.
 
    **Workflow**
 
 
-
+[DL] you need to add a folder "images" and add pictures there that you want to display!
+[DL] what kind of "workflow" do you want to show here? Is this maybe better suited in the Introduction?
 ![Workflow](./images/01.jpg)
 
 
 **IoT Hub Setup**
+[DL] This is already described above???
 
 1. Create a new resource IoT Hub by typing in the search bar,we require resource group for managing all the azure resources, if it not created then create new resource group and add IoT Hub to the resource group. Choose your Azure subscription, resource group, region and assign IoT Hub name
 
@@ -74,7 +76,7 @@ Azure Digital Twin is an Internet of Things (IoT) platform that enables users to
 
 
 **Client App for Mock-up data generation**
-
+**[DL] This should not be here (in this folder)**
 Prepare the client application to send mock-up telemetry data to the created IoT device
 [DL] we have to put the code for this client app into this github folder, and then reference the files from here
 [DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
