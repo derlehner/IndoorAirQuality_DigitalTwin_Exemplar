@@ -1,8 +1,5 @@
-# Readme for Applications
+# 1 Documentation of the Physical Modelling
 
-
-
-## 1 Documentation of the Physical Modelling
 
 ### 1.0.1 Translating the Geometrical Data into a Computational Model
 
