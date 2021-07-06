@@ -623,11 +623,12 @@ To get the auth_token, enter the following command in the Azure CLI:
   ```bash
    az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
    ```
-- Adaptation of auth_token for TSI: In the file [tsi_api.py](/create_twins/tsi_api.py), adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
+- Adaptation of base_url and auth_token for TSI: In the file [tsi_api.py](/create_twins/tsi_api.py), adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
  ```bash
    az account get-access-token --resource 120d688d-1518-4cf7-bd38-182f158850b6
    ```
 
+After these prerequisites are met, the models and twins described in the folders [interface_models](./create_twins/interface_models) and [twin_models](./create_twins/twin_models) are created in the ADT and TSI service.
 
 ### 3. Create Endpoints for Devices in IoT-Hub
 For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to...
