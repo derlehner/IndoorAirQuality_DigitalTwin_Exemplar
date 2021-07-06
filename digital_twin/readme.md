@@ -1,21 +1,16 @@
-# Readme for Azure
+# Digital Twin in Azure
 
-**Introduction**
+To create Digital Twins for the Hardware Setting described in [DL] reference to physical twin folder.
 
-This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure and predict COVID-19 risk with mock up sensor data. In this project, we will set up IoT hub and Azure Digital Twin and send telemetry data from IoT device to Digital Twin
-
-**Prerequisites**
-
-Azure account subscription
-[DL] We can set a link here to the readme file where the creation of the azure account is described
-
-**Resources**
-
-1. IoT Hub
-
-2. Azure Digital Twin
+1. Azure IoT-Hub ...
+2. Azure Digital Twins Service (ADT) ...
+3. Azure Time Series Insights Service (TSI) ...
+4. Azure Event Hub and Event Grid ...
 
 [DL] We can also set links to the tools here.
+[DL] One sentence about the individual tools above.
+
+
 
 **IoT Hub Setup:**
 
@@ -847,4 +842,15 @@ Carbondioxide value is read and logged , this mock-up data has been received fro
 
 <img src=".\images\AzureFnOutput.png" alt="AzureFnOutput" style="zoom:120%;" />
 
+## Implementation of Use Case
+In this section, we describe the implementation of our air quality use case as described above.
+Therefore, we create a single room calle
+- The Room with name "Room101" contains a Controller called "Raspberry1" and has a connected "CO2Sensor" and "LED".
+- The Room with name "Lobby100" contains a Controller called "Raspberry2" and has a connected "CO2Sensor" and "LED".
+- Both CO2Sensors send co2Values, and the LEDs have a Property called "color" that indicate the color in which it is currently blinking (NONE if the LED is turned off).
 
+### Setup of Devices in Iot-Hub
+
+### Setup of Twins in ADT
+
+### Setup of Endpoints in TSI-Service
