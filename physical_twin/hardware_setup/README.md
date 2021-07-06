@@ -1,4 +1,4 @@
-# SETTING UP RASPBERRY BY HARDWARE AND GET IT READY TO SEND THE DATA
+# Setup Physical Twin with actual hardware
 
 ## Contents
 
@@ -21,20 +21,26 @@
       - 1.6.3 DHT11
       - 1.6.4 CCS811
 
+## Prerequisites
+### Digital Twin
+For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
+### Hardware
+**CO2 Sensor DHT811**: This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
+wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
+the SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semicon-
+ductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide
+equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as
+an CO2 value and can only be used as a reference.
+To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
+There are datasheet and manual available at the homepage of joy-it^5. The manual also includes
+an example of how to access the sensor in code. A short summery is available in subsection
+1.6.4 datasheet and manual are located at the repository for further information.
 
-# Chapter 1
+**LED**: The LEDs will be used to give a visual response to the user about the CO2 amount in the air
+and therefor about the air quality. It should be used as an indicator to open the windows and
+insert fresh air into the room.
 
-# Setup: Sensor-Module
-
-### 1.1 Project Road Map
-
-## 1.2 Raspberry Pi 4
-
-There were already some[Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards at the CDL available, so it was an easy
-decision to go for this hardware platform. Other platforms would be Arduino or even smaller
-and cheaper boards, because of the low requirements for this Use-Case.
-Required hardware:
-
+**Raspberry Pi:** As controller to (i) send measured co2 values to the cloud and (ii) change the color of the LED on threshhold violation, we ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. An alternative would e.g. be the Arduiono. [DL] Link to Arduiono here. Anyways, for setting up the Raspberry, we need the following hardware:
 - Raspberry Pi 4
 - Power adapter for Raspberry Pi 4 (USB-C)
 - SD-card
@@ -43,8 +49,12 @@ Required hardware:
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
-### 1.3 Installing Ubuntu On Raspberry
 
+## Setup
+### Wiring of Hardware
+describe how co2 sensor and LED must be wired to the Raspberry
+
+### 1.3.1 Initial Setup of Raspberry OS
 This procedure is needed when you bought new Raspberry/need to flash old raspberry to install
 new Ubuntu.
 Required Things:
@@ -60,7 +70,7 @@ Required Things:
 6. After its been installed you can insert this sd card into raspberry and you have freshly
     installed linux on you device.
 
-#### 1.3.1 Raspberry Pi Setup
+
 
 For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi homepage^3.
 In the following section a short overview is given.
@@ -130,132 +140,9 @@ the IP address needs to be updated.
 Figure 1.2: Applicationputtywith example settings for the SSH connection to the Raspberry
 Pi.
 
+### Deploy Code to Raspberry
 
-### 1.4 Hardware Setup
-
-In this section the setup of the Hardware is further described. Figure 1.3 shows a picture of
-the setup of the AirQuality Hardware. The current setup is done on a breadboard, for further
-usage it is recommended to solder the components to a board. The AirQuality Sensor-Module
-includes the following components:
-
-- LED (currently only one LED is connected, but this can be extended)
-- Buzzer (the connection can be used for an Active Buzzer or an Passive Buzzer)
-- Temperature and Humidity sensor DHT
-- CO2 sensor CCS811 (MOS sensor)
-- CO2 sensor SCD30 (NDIR sensor; not connected yet)
-
-```
-Figure 1.3: Picture of the current Hardware Setup of the AirQuality Raspberry Pi.
-```
-Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
-It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
-transistor has 3 pins and is connected between the GPIO and the component, which should
-be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it
-needs to be connected to the ground too. An example can of such a circuit is shown in figure
-??in subsection 1.4.1 LED. The transistor prevents that the component is using too much
-current from the GPIO and instead is using the voltage suppy pin to power the component.
-The complete circuit diagram of the current state of the AirQuality Raspberry Pi Module is
-shown in figure 1.4. Table 1.1 lists all the components connected to the AirQuality Raspberry
-Pi and their connected pin and GPIO references.
-
-#### 1.4.1 LED
-
-The LEDs will be used to give a visual response to the user about the CO2 amount in the air
-and therefor about the air quality. It should be used as an indicator to open the windows and
-insert fresh air into the room. At the moment only one LED is connected to the board and
-
-
-```
-component pin GPIO
-LED Pin 11 GPIO 17
-Buzzer Pin 13 GPIO 27
-DHT11 Pin 15 GPIO 22
-CCS811 SDA Pin 3 GPIO 2 (SDA)
-CCS811 SCL Pin 5 GPIO 3 (SCL)
-```
-Table 1.1: List of components connected to the AirQuality Raspberry Pi with related pin and
-GPIO references.
-
-Figure 1.4: Circuit diagram of current AirQuality Raspberry Pi Setup. The supply and ground
-connection are marked: blue - ground, yellow - 3.3 V supply, red - 5 V supply.
-
-is used as an indicator, that a set of telemetry is sent to the hub. The LED used was already
-part of the CDL equipment and i was not sure if it was part of the Arduino Sensor Pack, which
-would include some specification for the components. The specification for the LED of the
-Arduino Pack listed the LEDs as follow:
-
-```
-Color V (max) mA (peak)
-red 2.0 (2.5) 50 (100)
-yellow 2.0 (2.5) 50 (100)
-green 3.6 (4.0) 20 (50)
-```
-```
-Table 1.2: Specification values for LED of Andurino Sensor Set
-```
-The values for the calculation needs to be in between the two values listed in the table 1.
-The LED connection is done indirect over a transistor, so that the GPIO of the Raspberry
-Pi is not stressed out. See image /reffigure:circuitLED for the circuit diagram. The circuit
-consists of an LED, two resistors and a transistor. One resistor is set between the GPIO and
-the transistor, the other one is set between the power source and the LED, which is connected
-to the transistor. Depending on the transistor and LED in use, the resistors need to be sized
-accordingly.
-More information on how to access the LED in Python can be found in subsection 1.6.1.
-
-
-```
-Figure 1.5: Circuit diagram for LED connection to the Raspberry Pi.
-```
-#### 1.4.2 Buzzer
-
-The buzzer will be used to give an acoustical response to the user. It should be used as an
-indicator to open the windows and insert fresh air into the room. At the moment the buzzer
-is not used in code. Both active and passive Buzzer need a 5 V power supply. The connection
-of the GPIO is also done via transistor, but only one resistor is needed between the GPIO and
-the transistor, because the buzzer itself does not need an additional one. There are two types
-of buzzers, active and passive. In the Arduino Sensor Pack is one of each available. There is
-no difference in connecting them, but there is a difference in accessing them via code. At the
-moment, the passive buzzer is connected.
-For more information on how to access a buzzer (active and passive), see subsection 1.6.2.
-
-#### 1.4.3 Temperature and Humidity sensor DHT11
-
-The DHT11 sensor is used because this sensor was already available at the CDL and is part of
-the sensor set for Arduino. This sensor is connected via single wire. Because the sensor given
-is already on a module, there is no need for filtering capacitor and pull-up resistor on the data
-wire. Both are available on the module. The sensor is connected to a GPIO, the 3.3 V power
-supply and the ground. To access the sensor in code a Python package is available. (More in
-subsection 1.6.3 in section Software Setup). A datasheet is located at the repository for further
-information.
-
-#### 1.4.4 CO2 sensor CCS811
-
-This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
-wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
-the SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semicon-
-ductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide
-equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as
-an CO2 value and can only be used as a reference.
-To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
-There are datasheet and manual available at the homepage of joy-it^5. The manual also includes
-an example of how to access the sensor in code. A short summery is available in subsection
-1.6.4 datasheet and manual are located at the repository for further information.
-
-(^5) https://joy-it.net/en/products/SEN-CCS811V
-
-
-#### 1.4.5 CO2 sensor SCD
-
-This sensor is using the i2C protocol too. The wiring is the same as for the CCS811 sensor. It
-is based on the NDIR (non-dispersive infrared) principle and can provide a CO2 value and a
-temperature value. NDIR sensors are more accurate and durable than MOS sensors, but they
-are more expensive.
-At the moment this sensor is not connected to the AirQuality Sensor-Modul, but it is
-compatible with the Raspberry Pi and an extension with it should be easy. There are libraries
-for Python and C available to access the sensor via code. The datasheet can be located at the
-repository for further information.
-
-### 1.5 Required Libraries for the project
+#### 1.5 Required Libraries for the project
 
 Now, you need to install some packages with the integrated package installer of Pythonpip.
 You can do this by entering the following command, where<PackageName>represents the name
@@ -273,7 +160,8 @@ azure-iot-device Azure IoT device functions ??
 Table 1.3: Python packages needed for this project on the Raspberry Pi with links to the
 related sections.
 
-### 1.6 Code
+#### 1.6 Code
+  [DL] Also describe adaptations that are required to successfully run the code with a given azure setup.
 
 In this section the code of the various components connected to the Raspberry Pi is descried
 with examples and links to resources.
@@ -414,6 +302,132 @@ read periodically with a delay in between.
 
 
 
-# FOR SETTING UP AZURE AS NEXT STEP
-For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
+### 1.4 Hardware Setup
+
+In this section the setup of the Hardware is further described. Figure 1.3 shows a picture of
+the setup of the AirQuality Hardware. The current setup is done on a breadboard, for further
+usage it is recommended to solder the components to a board. The AirQuality Sensor-Module
+includes the following components:
+
+- LED (currently only one LED is connected, but this can be extended)
+- Buzzer (the connection can be used for an Active Buzzer or an Passive Buzzer)
+- Temperature and Humidity sensor DHT
+- CO2 sensor CCS811 (MOS sensor)
+- CO2 sensor SCD30 (NDIR sensor; not connected yet)
+
+```
+Figure 1.3: Picture of the current Hardware Setup of the AirQuality Raspberry Pi.
+```
+Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
+It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
+transistor has 3 pins and is connected between the GPIO and the component, which should
+be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it
+needs to be connected to the ground too. An example can of such a circuit is shown in figure
+??in subsection 1.4.1 LED. The transistor prevents that the component is using too much
+current from the GPIO and instead is using the voltage suppy pin to power the component.
+The complete circuit diagram of the current state of the AirQuality Raspberry Pi Module is
+shown in figure 1.4. Table 1.1 lists all the components connected to the AirQuality Raspberry
+Pi and their connected pin and GPIO references.
+
+#### 1.4.1 LED
+
+The LEDs will be used to give a visual response to the user about the CO2 amount in the air
+and therefor about the air quality. It should be used as an indicator to open the windows and
+insert fresh air into the room. At the moment only one LED is connected to the board and
+
+
+```
+component pin GPIO
+LED Pin 11 GPIO 17
+Buzzer Pin 13 GPIO 27
+DHT11 Pin 15 GPIO 22
+CCS811 SDA Pin 3 GPIO 2 (SDA)
+CCS811 SCL Pin 5 GPIO 3 (SCL)
+```
+Table 1.1: List of components connected to the AirQuality Raspberry Pi with related pin and
+GPIO references.
+
+Figure 1.4: Circuit diagram of current AirQuality Raspberry Pi Setup. The supply and ground
+connection are marked: blue - ground, yellow - 3.3 V supply, red - 5 V supply.
+
+is used as an indicator, that a set of telemetry is sent to the hub. The LED used was already
+part of the CDL equipment and i was not sure if it was part of the Arduino Sensor Pack, which
+would include some specification for the components. The specification for the LED of the
+Arduino Pack listed the LEDs as follow:
+
+```
+Color V (max) mA (peak)
+red 2.0 (2.5) 50 (100)
+yellow 2.0 (2.5) 50 (100)
+green 3.6 (4.0) 20 (50)
+```
+```
+Table 1.2: Specification values for LED of Andurino Sensor Set
+```
+The values for the calculation needs to be in between the two values listed in the table 1.
+The LED connection is done indirect over a transistor, so that the GPIO of the Raspberry
+Pi is not stressed out. See image /reffigure:circuitLED for the circuit diagram. The circuit
+consists of an LED, two resistors and a transistor. One resistor is set between the GPIO and
+the transistor, the other one is set between the power source and the LED, which is connected
+to the transistor. Depending on the transistor and LED in use, the resistors need to be sized
+accordingly.
+More information on how to access the LED in Python can be found in subsection 1.6.1.
+
+
+```
+Figure 1.5: Circuit diagram for LED connection to the Raspberry Pi.
+```
+#### 1.4.2 Buzzer
+
+The buzzer will be used to give an acoustical response to the user. It should be used as an
+indicator to open the windows and insert fresh air into the room. At the moment the buzzer
+is not used in code. Both active and passive Buzzer need a 5 V power supply. The connection
+of the GPIO is also done via transistor, but only one resistor is needed between the GPIO and
+the transistor, because the buzzer itself does not need an additional one. There are two types
+of buzzers, active and passive. In the Arduino Sensor Pack is one of each available. There is
+no difference in connecting them, but there is a difference in accessing them via code. At the
+moment, the passive buzzer is connected.
+For more information on how to access a buzzer (active and passive), see subsection 1.6.2.
+
+#### 1.4.3 Temperature and Humidity sensor DHT11
+
+The DHT11 sensor is used because this sensor was already available at the CDL and is part of
+the sensor set for Arduino. This sensor is connected via single wire. Because the sensor given
+is already on a module, there is no need for filtering capacitor and pull-up resistor on the data
+wire. Both are available on the module. The sensor is connected to a GPIO, the 3.3 V power
+supply and the ground. To access the sensor in code a Python package is available. (More in
+subsection 1.6.3 in section Software Setup). A datasheet is located at the repository for further
+information.
+
+#### 1.4.4 CO2 sensor CCS811
+
+This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
+wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
+the SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semicon-
+ductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide
+equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as
+an CO2 value and can only be used as a reference.
+To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
+There are datasheet and manual available at the homepage of joy-it^5. The manual also includes
+an example of how to access the sensor in code. A short summery is available in subsection
+1.6.4 datasheet and manual are located at the repository for further information.
+
+(^5) https://joy-it.net/en/products/SEN-CCS811V
+
+
+#### 1.4.5 CO2 sensor SCD
+
+This sensor is using the i2C protocol too. The wiring is the same as for the CCS811 sensor. It
+is based on the NDIR (non-dispersive infrared) principle and can provide a CO2 value and a
+temperature value. NDIR sensors are more accurate and durable than MOS sensors, but they
+are more expensive.
+At the moment this sensor is not connected to the AirQuality Sensor-Modul, but it is
+compatible with the Raspberry Pi and an extension with it should be easy. There are libraries
+for Python and C available to access the sensor via code. The datasheet can be located at the
+repository for further information.
+
+
+
+
+
 
