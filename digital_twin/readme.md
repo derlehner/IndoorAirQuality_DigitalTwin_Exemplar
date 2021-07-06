@@ -853,4 +853,118 @@ Therefore, we create a single room calle
 
 ### Setup of Twins in ADT
 
+First, we create so-called models. Therefore, we use the [Digital Twins Definition Language (DTDL) - Version 2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md) offered by Microsoft. TODO: Reference example files. TODO: describe where to store files
+Then, we create so-called Digital Twins that represent specific devices that conform to the structure imposed by their models. We use the format imposed by the ADT-service as json representation. TODO: Reference example files. TODO: describe where to store files
+
+Based on this information, the data can be automatically set up by using the script TODO: reference main script TODO: describe necessary adaptations. TODO: describe how to run the script.
+
+
+
+| FileName            | Functionalities                                              |
+| ------------------- | ------------------------------------------------------------ |
+| digital_twin_api.py | functions for performing CRUD operations on Digital Twin with Telemetry Data |
+| test.py             | call functions of digital_twin_api for creating interface and instances of Digital Twin |
+| process.py          | import test.py and calls function to send telemetry data to digital twin |
+
+Now let's look into each of them in detail
+
+1. **digital_twin_api.py**
+
+   [digital_twin_api.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/Digital%20Twin/digital_twin_api.py)
+
+   Replace base_url and auth_token for accessing Azure Digital Twin resource 
+
+   a) Go to Azure Digital Twin and copy the host name ,this is to be added as base_url string
+
+   ![DigitalTwin](./images/AzureDT.PNG)
+
+   
+
+   b) Generate auth_token from Azure CLI 
+
+   Prerequisites:
+
+   1.Install Azure CLI on windows 
+
+   a) Open Microsoft Azure Command Prompt in windows and enter command below logging into your Azure account
+
+   ![AzureCLIWindows](./images/AzureCLIWindows.PNG)
+
+   b) Generate Access Token using the command(resource id differs for each account)
+
+   az account get-access-token --resource {resource id}
+
+   ```bash
+   az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
+   ```
+
+   ![auth_Token](./images/auth_Token.PNG)
+
+   Update the auth_token in digital_twin_api.py file
+
+2. **test.py**
+
+   [test.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/Digital%20Twin/test.py)
+
+The python script has functions for performing following operations:
+
+function calls for digital_twin_api.py file is done here and we pass arguments for each of them
+
+**Prerequisites:**
+
+import digital_twin_api 
+
+**Python libraries used** 
+
+1. json
+
+2. urllib3
+
+a) Creating structure of Telemetry Data and its properties 
+
+ **create_schema()**
+
+Create Digital Twin interface with created models from folder(interface_models) , we load the created models and call the function **create_interface** in digital_twin_api.py from test.py
+
+ b) Creating API instances of digital twin 
+
+ **create_instances()**
+
+we load the created twin models from folder (twin_models) and call function **create_twin** for creating Digital Twin and **create_relationship** for creating relationships between twins
+
+c) Sending telemetry data 
+
+ **send_telemetry_data()**
+
+we load the sample telemetry data from folder(telemetry_data) and pass as arguments the function **send_telemetry_for_component** in digital_twin_api
+
+d) Clean-up function for deleting the digital twin relationships 
+
+**cleanup()**
+
+You can decide which resources are needed and use it for future. Remove other resources when not in use by deleting the Digital twin , its relationship and interface 
+
+
+3.**process.py**
+
+[process.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/Digital%20Twin/process.py)
+
+This function imports the test.py file and calls the function send_telemetry_data for sending telemetry data to Digital Twin
+
+```python
+import test
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+test.send_telemetry_data()
+```
+
+### **5. Run the API**
+
+Navigate to the folder and run the python file 
+
+[Digital_Twin](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/raspberry/simulated_data/cdlmint-airqualityusecase/Digital%20Twin)
+
+![TD_API](./images/TD-API.PNG)
+
 ### Setup of Endpoints in TSI-Service
