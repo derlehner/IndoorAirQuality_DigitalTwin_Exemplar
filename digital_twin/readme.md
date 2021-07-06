@@ -844,27 +844,33 @@ Carbondioxide value is read and logged , this mock-up data has been received fro
 
 ## Implementation of Use Case
 In this section, we describe the implementation of our air quality use case as described above.
-Therefore, we create a single room calle
+As an example, we use the following setting of our use case that has to be created in the Azure Setup described above.
 - The Room with name "Room101" contains a Controller called "Raspberry1" and has a connected "CO2Sensor" and "LED".
-- The Room with name "Lobby100" contains a Controller called "Raspberry2" and has a connected "CO2Sensor" and "LED".
+- The Room with name "Room102" contains a Controller called "Raspberry2" and has a connected "CO2Sensor" and "LED".
+- The Room with name "Lobby100" contains a Controller called "Raspberry3" and has a connected "CO2Sensor" and "LED".
 - Both CO2Sensors send co2Values, and the LEDs have a Property called "color" that indicate the color in which it is currently blinking (NONE if the LED is turned off).
 
-### Setup of Devices in Iot-Hub
+To implement this setting in Azure, the following steps are necessary.
 
-### Setup of Twins in ADT
+### 1. Specify Digital Twins
+First, information of the physical devices must be specified in a way 
+This information must be defined on the following two levels of abstraction:
+- **Interfaces:** Therefore, we use the [Digital Twins Definition Language (DTDL) - Version 2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md) offered by Microsoft. The [folder /create_twins/interface_models](./create_twins/interface_models) contains the json files of the interfaces required for our use case, namely Room, AirQualityController and AirQualitySensor.In order to allow automation in Step 2, created files must be placed into the [folder /create_twins/interface_models](./create_twins/interface_models).
+- **Digital Twins:** represent specific devices that conform to the structure imposed by their models. We use the format imposed by the ADT-service as json representation. The [folder /create_twins/twin_models](./create_twins/twin_models)  contains the json files of the Digital Twins required for our use case, namely Room101, Room102, Lobby100, Raspberry1, Raspberry2 and Rapsberry3. In order to allow automation in Step 2, created files must be placed into the [folder /create_twins/twin_models](./create_twins/twin_models).
 
-First, we create so-called models. Therefore, we use the [Digital Twins Definition Language (DTDL) - Version 2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md) offered by Microsoft. TODO: Reference example files. TODO: describe where to store files
-Then, we create so-called Digital Twins that represent specific devices that conform to the structure imposed by their models. We use the format imposed by the ADT-service as json representation. TODO: Reference example files. TODO: describe where to store files
+### 2. Create Digital Twins in ADT and TSI
 
-Based on this information, the data can be automatically set up by using the script TODO: reference main script TODO: describe necessary adaptations. TODO: describe how to run the script.
+This information can be automatically set up using the json files described in Step 1 and the automation script provided in Folder [/create_twins](./create_twins).
+In order to perform this step, the following prerequisites must be met:
+- Installation of required python libraries:
+- Adaptation of auth_token for ADT: 
+- Adaptation of auth_token for TSI: 
 
-
-
-| FileName            | Functionalities                                              |
-| ------------------- | ------------------------------------------------------------ |
-| digital_twin_api.py | functions for performing CRUD operations on Digital Twin with Telemetry Data |
-| test.py             | call functions of digital_twin_api for creating interface and instances of Digital Twin |
-| process.py          | import test.py and calls function to send telemetry data to digital twin |
+### 3. Create Endpoints for Devices in IoT-Hub
+For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to...
+TODO: Describe what we need device for
+TODO: Describe individual steps required to create device(s) for Digital Twins mentioned above.
+@Ramya: please add this here!
 
 Now let's look into each of them in detail
 
