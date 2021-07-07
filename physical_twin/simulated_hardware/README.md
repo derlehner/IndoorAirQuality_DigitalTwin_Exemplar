@@ -33,6 +33,7 @@ The client app could be developed using any of the languages Python, C#, Java, J
 [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
 
 **Changes to be made in client application**
+
 Download the python script SimulatedDevice.py and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
 [DL] we have to put the code for this client app into this github folder, and then reference the files from here
 [DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
