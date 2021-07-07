@@ -24,7 +24,9 @@ The following resources have to be set up in advance to send the data from IoT H
 
    **Workflow**
 
-![Workflow](./images/IoTHubToDTWorkflow.png)**Client App for Mock-up data generation**
+![Workflow](./images/IoTHubToDTWorkflow.png)
+
+**Client App for Mock-up data generation**
 
 Prepare the client application to send mock-up telemetry data to the created IoT device
 [DL] we have to put the code for this client app into this github folder, and then reference the files from here
