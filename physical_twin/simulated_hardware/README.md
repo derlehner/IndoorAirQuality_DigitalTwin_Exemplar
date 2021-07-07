@@ -11,7 +11,8 @@ In this sample, we are sending data to IoT device **Raspberry1** which is in Lob
 [DL] We could use a "running example" here - e.g. send co2 values for Raspi1 which is in Room101. Then, you can reference in the description the specific names. Example: The device created in IoT-Hub ("Raspi1" in our example).
 **Prerequisites Resources**
 
-The following resources have to be set up in advance to send the data from IoT Hub to Digital Twin instance.
+The following resources have to be set up in advance to send the data from IoT Hub to Digital Twin instance. The link for setting up the resources in present in the readme file.
+[readme](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin/readme.md)
 
 1. Azure account subscription
 2. IoT Hub 
