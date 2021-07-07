@@ -101,27 +101,7 @@ linked to your existing Microsoft account. Either way in the next step you will 
 your academic status with entering your academic e-mail address. Now you have a new account
 and can start with the next steps.
 
-### 2.2 Install Azure CLI on your PC
 
-Azure CLI is available for Windows, macOS and Linux. There is a [related documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-available for the different operating systems. After the installation it is possible to access Azure
-via terminal with the keywordaz. There are extensions of commands that are related to [Digital Twins](https://docs.microsoft.com/en-us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (az dt) and [IoT hub](https://docs.microsoft.com/en-us/cli/azure/iot?view=azure-cli-latest) (az iot).
-
-
-
-
-For working on azure azure CLI is one of recommended thing to be installed on working
-device (not on raspi). It can be done using commends below you can find the details:
-
-- Linux by single line command:
-    curl -sL https://aka.ms/InstallAzureCLIDeb — sudo bash
-- On Windows and Others:
-    https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-
-With Azure CLI it is possible to sign into your Azure account and do most of the steps, that
-are possible at the Azure Portal homepage. It is recommended to install Azure CLI because it
-is the easiest way to log into your Azure account and some steps are done via Azure CLI in the
-documentation. The reference for Azure CLI is [available online](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest).
 
 ### 2.3 IoT Hub App
 
@@ -150,113 +130,7 @@ the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstar
 
 
 
-#### 2.3.2 Usage and further info
 
-- Manage IoT Devices (make successful connections for data transfer)
-- You can send Telemetry-data securely from physical hardware (sensor) to Azure. For info
-    [refer this website](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-python)
-- Using ‘Message Routhing’ option telemetry messages can be sent to : Events, Storage,
-    Event Hubs and much more.
-
-<img align="center" src="pictures/iotrouting.png" width= 400/>
-
-
-For further info:
-
-
-- About[ IOT Hub](https://channel9.msdn.com/Shows/Azure-Friday/Azure-IoT-Hub?term=iot)
-- For [Device Streaming](https://channel9.msdn.com/Shows/Internet-of-Things-Show/Azure-IoT-Hub-Device-Streams?term=iot)
-- IOT to [Event Grid Integration](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-and-Event-Grid?term=iot)
-
-### 2.4 Create Digital Twins Platform
-
-Azure Digital Twins is an Internet of Things (IoT) platform that enables you to create a digital
-representation of real-world things, places, and business processes. Azure Digital Twins is an
-IoT platform that enables the creation of comprehensive digital models of entire environments
-to gain insights that drive better products, optimization of operations, cost reduction and
-breakthrough customer experiences. Examples include buildings, factories.
-
-- Model any environment and bring digital twins to life in a scalable and secure manner.
-- Connect assets such as IoT devices as well as existing business systems to Azure Digital
-    Twins.
-
-<img align="center" src="pictures/digitaltwinhomepage.png" width= 400/>
-
-
-In this section a Digital Twins platform will be created. A related documentation is part of
-the [linked Quickstart](https://docs.microsoft.com/en-us/azure/digital-twins/quickstart-adt-explorer).
-
-1. Search for”Azure Digital Twin”in [azure resource](https://portal.azure.com)
-2. You will need to press the Button+ Addat the Azure Digital Twins page.
-3. At the next page you will have to add
-    - a resource group,
-    - a location and
-    - a name for the Digital Twins service.
-
-<img align="center" src="pictures/digitaltwincreation.png" width= 400/>
-
-In above figure you can find the”Host Name”where you can find in DT homepage is the
-string should be noted. It is used further for installing DT Explorer.
-The resource group will be later used for all other resources related to the AirQuality project.
-It needs to be created, if this wasn’t done before. To do so, press theCreate newbutton
-below the Resource group selection. You only need a name or the resource group to do so.
-Regarding location, it is worth to mention that the Digital Twins resource is only available
-for Australia East, East US, East US 2, North Europe, South Central US, Southeast Asia,
-UK South, West Central US, West Europe and West US 2 at the moment. These locations
-are the locations of the Azure servers. For the current instance for the AirQuality project the
-locationWest Europewas chosen. If everything is filled out, you can continue by clicking the
-Review + createbutton at the lower left corner. A short summery to check again will be
-listed. By pressing theCreatebutton in the lower left corner you will finish the creation. The
-deployment will take some. A window in the upper right corner will show you a message when
-completed.
-
-#### 2.4.1 Digital Twin Explorer
-
-Digital Twin Exploreris the easy way to visualise our model architecture, import, export
-our models. This should be installed in our pc. Requirements for DT Explorer: Node.js (not
-less then version 10), npm. The process to install DT Explorer:
-
-1. Installing node.js on ubuntu by command line:
-    sudo a p t i n s t a l l c u r l
-       c u r l −sL h t t p s : / / deb. n o d e s o u r c e. com/ s e t u p 1 0. x | sudo −E bash −
-    sudo a p t i n s t a l l n o d e j s
-2. Download and extract the Digital Twin Explorer files []]:^13
-2. Download and extract the Digital Twin Explorer files [from the git]()
-
-
-
-
-3. Run terminal under this directory: digital-twins-explorer-main/client/src
-4. Run the command: to install the npm
-    npm i n s t a l l
-5. Run the command: to start the DT Explorer
-    npm run s t a r t
-<img align="center" src="pictures/dtexplorer.png" width= 400/>
-
-
-#### 2.4.2 To connect DT explorer to your Azure DT:
-
-1. Copy host name from your Digital twin home page, and add‘https://’ in front for
-    example:
-    https://DigitalTwin-DigitalTwinApp.api.weu.digitaltwins.azure.net
-2. Then click login icon on top right on DT explorer you already opened Paste the string
-    here and click ok. You will be now connected to the azure
-
-#### 2.4.3 Creating and uploading the model
-
-1. All dt models should be written in .json file
-
-2. Open your favourite code editor and create new .json file
-<img align="center" src="pictures/dtexplorer.png" width= 400/>
-
-3. This code above is the example simple model which contains ‘temperature’ and ‘Humid-
-    ity’: It is based on azure dtdl language. [More about it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models)
-4. For uploading click the upload button on DT explorer and select the .json file you created before. Then your model will be shown below.
-
-<img align="center" src="pictures/uploadmodel.png" width= 200/>
-
-5. Then finally the model is created and will be visualised if added to explorer.
-<img align="center" src="pictures/dtmodel.png" width= 400/>
 
 
 ### 2.5 Local development with Azure

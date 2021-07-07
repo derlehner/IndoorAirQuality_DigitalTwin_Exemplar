@@ -1,30 +1,23 @@
 # Setup Physical Twin with actual hardware
 
 ## Contents
-
-- 1 Setup: Sensor-Module
-   - 1.1 Project Road Map
-   - 1.2 Raspberry Pi
-   - 1.3 Installing Ubuntu On Raspberry
-      - 1.3.1 Raspberry Pi Setup
-      - 1.3.2 Remote access via SSH
-   - 1.4 Hardware Setup
-      - 1.4.1 LED
-      - 1.4.2 Buzzer
-      - 1.4.3 Temperature and Humidity sensor DHT11
-      - 1.4.4 CO2 sensor CCS811
-      - 1.4.5 CO2 sensor SCD30
-   - 1.5 Required Libraries for the project
-   - 1.6 Code
-      - 1.6.1 LED
-      - 1.6.2 Buzzer
-      - 1.6.3 DHT11
-      - 1.6.4 CCS811
-
+- Prerequisites
+- Hardware setup
+- Wiring of Hardware
+- Initial Setup of Raspberry OS
+	- Remote access via SSH
+	- Deploy Code to Raspberry
+	- Required Libraries for the project
+	- Code
+	- LED
+	- Buzzer
+	- DHT11
+	- CCS811
+	- Wait for the sensor to be ready and calibrate the thermistor
 ## Prerequisites
 ### Digital Twin
 For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
-### Hardware
+### Hardware setup
 **CO2 Sensor DHT811**: This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
 wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
 the SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semicon-
@@ -49,10 +42,19 @@ insert fresh air into the room.
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
-
-## Setup
 ### Wiring of Hardware
-describe how co2 sensor and LED must be wired to the Raspberry
+	For wiringt he hardware we should follow some documentations for sensor and raspberry pi. the list followes:
+	
+	Sensor:
+	SDA - GPIO2
+	SCL - GPIO 3
+	Vcc - +5v
+	Grn - Ground
+	init - Ground
+	
+	LED:
+	LED Bulb - GPIO 17
+	
 
 ### 1.3.1 Initial Setup of Raspberry OS
 This procedure is needed when you bought new Raspberry/need to flash old raspberry to install
@@ -280,7 +282,7 @@ sortestCCS811.py.
 i2c = busio. I2C ( board .SCL, board .SDA)
 ccs811 = adafruit ccs811. CCS811( i2c )
 print ( ccs811 )
-# Wait f o r the sensor to be ready and c a l i b r a t e the thermistor
+# Wait f o r the sensor to be ready and calibrate the thermistor
 while not ccs811. data ready :
 pass
 temp = ccs811. temperature
@@ -425,7 +427,6 @@ At the moment this sensor is not connected to the AirQuality Sensor-Modul, but i
 compatible with the Raspberry Pi and an extension with it should be easy. There are libraries
 for Python and C available to access the sensor via code. The datasheet can be located at the
 repository for further information.
-
 
 
 

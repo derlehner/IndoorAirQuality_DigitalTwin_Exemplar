@@ -1,0 +1,92 @@
+{
+  "main": {
+    "id": "6ec139b2e35186aa",
+    "type": "split",
+    "children": [
+      {
+        "id": "80d9af567e4b853e",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a2c857ff85fff370",
+    "type": "split",
+    "children": [
+      {
+        "id": "dd8a43ec39a7ef40",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "490315949756cd56",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "de11d202c4e5dadb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 180
+  },
+  "right": {
+    "id": "c764b2a4a3943cc6",
+    "type": "split",
+    "children": [
+      {
+        "id": "8998b4a7fa9bc08c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "939e3131661e71f1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "80d9af567e4b853e",
+  "lastOpenFiles": [
+    "physical_twin/hardware_setup/README.md",
+    "digital_twin/readme.md",
+    "README.md",
+    "physical_twin/simulated_hardware/README.md"
+  ]
+}
