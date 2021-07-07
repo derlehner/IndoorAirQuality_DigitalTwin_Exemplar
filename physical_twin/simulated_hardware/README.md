@@ -29,18 +29,18 @@ The following resources have to be set up in advance to send the data from IoT H
 
 **Client App for Mock-up data generation**
 
-Prepare the client application to send mock-up telemetry data to the created IoT device
+The client app could be developed using any of the languages Python, C#, Java, JavaScript Go. We are using Python to create the client app and the link to script is as follows.
+[SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
+
+**Changes to be made in client application**
+Download the python script SimulatedDevice.py and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
 [DL] we have to put the code for this client app into this github folder, and then reference the files from here
 [DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
 [DL] What about the script that creates Digital Twins in Azure (this is also a prerequisite for sending data).
 
-1. Required libraries:
+1. Libraries Used:
 
    1.a) azure.iot.device
-
-   The client app could be developed using any of the languages Python, C#, Java, JavaScript Go. We are using Python to create the client app and the script is as follows.
-
-   The client app is connected with IoT device using the device connection string, replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
 
 **Get the IoT device connection string**
 
@@ -72,10 +72,10 @@ Telemetry properties :
 
    Using windows command line navigate to the python file  [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/physical_twin/simulated_hardware/SimulatedDevice.py)
 
-   Run python script with command line interface
+   Run python script with command line interface - python {filename.py}
    
    ```python
-   python {filename.py}
+   python SimulatedDevice.py
    ```
 
    **Output of the Client App**
