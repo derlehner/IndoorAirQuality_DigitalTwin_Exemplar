@@ -1,6 +1,6 @@
 # Digital Twin
 
-[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).
+**[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
 
 ## Contents
 - 1 Setup Digital Twin Infrastructure in Azure
