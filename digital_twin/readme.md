@@ -1,23 +1,16 @@
-
 # Digital Twin
+
 ## Contents
-1 Digital Twin
-   - 1.1 Setup Azure
-      - 1.1.1 Azure Account
-      - 1.1.2 Install Azure CLI on your PC
-   - 1.2 IoT-Hub
-      - 1.2.1 Device Creation
-      - 1.2.2 Connecting to azure by connection string
-   - 1.3 Azure Digital Twins Service (ADT)
-      - 1.3.1 Digital Twin Explorer
-      - 1.3.2 To connect DT explorer to your Azure DT:
-      - 1.3.3 Creating and uploading the model
-   - 1.4 Function 1: ExtractDeviceData
-   - 1.5 Time Series Insights Service (TSI)
-   - 1.6 Function 2: TransformTwinData
-   - 1.7 Connect ExtractDeviceData to ADT and TSI
-      - 1.7.1 Create new Event Hub namespace in Azure
-      - 1.7.2 Create time series hub
+- 1 Setup Digital Twin Infrastructure in Azure
+   - 1.1 Create an Azure Account
+   - 1.2 Setup IoT-Hub
+   - 1.3 Setup Azure Digital Twins Service (ADT)
+   - 1.4 Setup Azure Function 1: ExtractDeviceData
+   - 1.5 Connect ExtractDeviceData to IoT-Hub and ADT
+   - 1.5 Setup Time Series Insights Service (TSI)
+   - 1.6 Setup Azure Function 2: TransformTwinData
+   - 1.7 Connect TransformTwinData to ADT and TSI
+- 2 Create
       
 ### 1.1 Setup Azure
 
