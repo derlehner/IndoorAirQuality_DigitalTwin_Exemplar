@@ -1,47 +1,29 @@
-# Send Data from IoT Hub to Azure Digital Twin 
-
-
-
-**Introduction**
+# Simulate Hardware with randomly generated CO2 values
 
 This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure and predict COVID-19 risk with mock up sensor data. In this project, we will send data to IoT device which updates the Digital Twin.
 
 In this sample, we are sending data to IoT device **Raspberry1** which is in Lobby100
+## Prerequisites
 
-[DL] We could use a "running example" here - e.g. send co2 values for Raspi1 which is in Room101. Then, you can reference in the description the specific names. Example: The device created in IoT-Hub ("Raspi1" in our example).
-**Prerequisites Resources**
+In order to send data to the Digital Twin of Lobby100 and Raspberry3, we need to set up the corresponding Digital Twin infrastructure and the respective Digital Twins. The documentation for that is give in the [folder digital_twin of this repository](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin).
 
-The following resources have to be set up in advance to send the data from IoT Hub to Digital Twin instance. The link for setting up the resources in present in the readme file.
-[readme](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin/readme.md)
+More specifically, we need the following prerequisites to be met:
+1. IoT-Hub, ADT-Service, TSI-Service are set up
+2. The services above are connected via the respective Azure functions
+3. A Digital Twin for Lobby100 and Raspberry3 is created in all of these services, using the example data provided in the [digital_twin folder](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin)
 
-1. Azure account subscription
-2. IoT Hub 
-3. Azure Digital Twin
+## Sending simulated data to the Digital Twin
+To send the simulated data, we provide an example client app coded in Python, which is available via the following link: [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
+In order to run the app, we need to install required packages via the follwoing command
+```
+pip install azure.iot.device
+```
 
-[DL] We can set a link here to the readme file where the creation of the azure account is described
-[DL] I would describe the Setup of IoT-Hub in Azure Part of the documentation, and then say that a prerequisite is that the IoT-Hub must be set up.
+The configuration and running of the example client app is described in the following.
 
-[DL] We can also set links to the tools here.
+### Configuring the client app
 
-   **Workflow**
-
-![Workflow](./images/IoTHubToDTWorkflow.png)
-
-**Client App for Mock-up data generation**
-
-The client app could be developed using any of the languages Python, C#, Java, JavaScript Go. We are using Python to create the client app and the link to script is as follows.
-[SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
-
-**Changes to be made in client application**
-
-Download the python script SimulatedDevice.py and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
-[DL] we have to put the code for this client app into this github folder, and then reference the files from here
-[DL] Then, we can first describe the adaptations that a user has to do after downloading the code, and then which commands has to be entered in order to send example data to the created service. So basically what you've already done, but with the reference to the code as a downloadable file
-[DL] What about the script that creates Digital Twins in Azure (this is also a prerequisite for sending data).
-
-1. Libraries Used:
-
-   1.a) azure.iot.device
+Download the python script [SimulatedDevice.py](./SimulateDevice.py) and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
 
 **Get the IoT device connection string**
 
@@ -51,41 +33,19 @@ Go to IoT Hub ---> click on specific IoT device to which you need to send data -
 
 copy paste the connection string into the python script.
 
-python function description:
+### Run the client app
 
-1. iothub_client_init()
-
-Initializes the Azure IoT Hub 
-
-2. iothub_client_telemetry_sample_run()
-
-if client is initialized then set up  telemetry data properties with random values
-
-Telemetry properties :
-
-1. Temperature
-
-2. Humidity
-
-3. CarbonDioxideValue
-
-   **Run the Client App**
-
-   Using windows command line navigate to the python file  [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/physical_twin/simulated_hardware/SimulatedDevice.py)
-
-   Run python script with command line interface - python {filename.py}
-   
-   ```python
-   python SimulatedDevice.py
-   ```
-
-   **Output of the Client App**
-   
-   ![outputClientApp](./images/SimulatedData_To_IoTDevice1.png)
+Using windows command line navigate to the folder in which the SimulatedDevice.py file is located (if you cloned the repository, then this is the current folder that you're in) python file. To run the app, execute the following command via the command line in this folder:
+```python
+python SimulatedDevice.py
+```
+**Example Output of the Client App**
+![outputClientApp](./images/SimulatedData_To_IoTDevice1.png)
 
 
 
-**Testing the Client App:**
+## Testing the Client App:
+To validate the correct functioning of the app (or debug in the case of errors), two methods are possible:
 
 **Method-1:** IoT Hub Overview
 
