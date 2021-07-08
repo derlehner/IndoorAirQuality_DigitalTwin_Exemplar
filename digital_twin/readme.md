@@ -35,30 +35,7 @@ address for Azure. Follow the process:
 2. On next page click ”start for free”
 3. Enter your data and your account will be created.
 
-#### 1.1.2 Install Azure CLI on your PC
 
-2.2 Install Azure CLI on your PC
-Azure CLI is available for Windows, macOS and Linux. There is a [related
-documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) avail-
-able for the different operating systems. After the installation it is possible
-to access Azure via terminal with the keywordaz. There are extensions of
-commands that are related to [Digital Twins](https://docs.microsoft.com/en-
-us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (az dt) and [IoT hub](https://docs.microsoft.com/en-
-us/cli/azure/iot?view=azure-cli-latest) (az iot).
-For working on azure azure CLI is one of recommended thing to be installed
-on working device (not on raspi). It can be done using commends below you
-can find the details:
-
-
-- Linux by single line command: curl -sL https://aka.ms/InstallAzureCLIDeb
-— sudo bash - On Windows and Others: https://docs.microsoft.com/en-us/cli/azure/install-
-azure-cli
-With Azure CLI it is possible to sign into your Azure account and do most
-of the steps, that are possible at the Azure Portal homepage. It is recom-
-mended to install Azure CLI because it is the easiest way to log into your
-Azure account and some steps are done via Azure CLI in the documentation.
-The reference for Azure CLI is [available online](https://docs.microsoft.com/en-
-us/cli/azure/reference-index?view=azure-cli-latest).
 
 ### 1.2 IoT-Hub
 
@@ -356,14 +333,29 @@ Digital Twins: represent specific devices that conform to the structure imposed 
 ### 2.2. Create Digital Twins in ADT and TSI
 This information can be automatically set up using the json files described in Step 1 and the automation script provided in Folder /create_twins. In order to perform this step, the following prerequisites must be met:
 
-Installation of required python libraries: Install Libraries json and urllib3. Therefore, open a Terminal and enter the following two commands:
+- **Installation of required python libraries:** Install Libraries json and urllib3. Therefore, open a Terminal and enter the following two commands:
+```python
 pip install json
 pip install urllib3
-Download of and Authentication in Azure CLI: Open Microsoft Azure Command Prompt in windows and enter command below logging into your Azure account AzureCLIWindows
-Adaptation of base_url and auth_token for ADT: In the file digital_twin_api.py, you have to adapt the base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, go to ADT in your Azure Account and copy the host name. DigitalTwin To get the auth_token, enter the following command in the Azure CLI:
- az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0
-Adaptation of base_url and auth_token for TSI: In the file tsi_api.py, adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
-  az account get-access-token --resource 120d688d-1518-4cf7-bd38-182f158850b6
+```
+- **Download of Azure CLI:** To interact with your azure account from your computer, you need to install Azure CLI. With Azure CLI it is possible to sign into your Azure account and do most
+of the steps, that are possible at the Azure Portal homepage. It is recom-
+mended to install Azure CLI because it is the easiest way to log into your
+Azure account and some steps are done via Azure CLI in the documentation.
+The reference for Azure CLI is [available online](https://docs.microsoft.com/en-
+us/cli/azure/reference-index?view=azure-cli-latest).
+Azure CLI is available for Windows, macOS and Linux. There is a [related
+documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) avail-
+able for the different operating systems. After the installation it is possible
+to access Azure via terminal with the keyword ```az```. There are extensions of
+commands that are related to [Digital Twins](https://docs.microsoft.com/en-
+us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (keyword ```az dt```) and [IoT hub](https://docs.microsoft.com/en-
+us/cli/azure/iot?view=azure-cli-latest) (keyword ```az iot```).
+- **Login into Azure CLI:** After Azure CLI is installed on your PC, you can login via the command ```az login```.
+- **Adaptation of base_url and auth_token for ADT:** In the file digital_twin_api.py, you have to adapt the base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, go to ADT in your Azure Account and copy the host name. DigitalTwin To get the auth_token, enter the following command in the Azure CLI:
+ ```az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0```
+- **Adaptation of base_url and auth_token for TSI:** In the file tsi_api.py, adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
+ ``` az account get-access-token --resource 120d688d-1518-4cf7-bd38-182f158850b6```
 After these prerequisites are met, the models and twins described in the folders interface_models and twin_models are created in the ADT and TSI service.
 
 ### 2.3. Create Endpoints for Devices in IoT-Hub
