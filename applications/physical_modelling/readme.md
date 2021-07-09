@@ -69,7 +69,7 @@ python script on jupyter.
 
 ## Model Driven Engineering Techniques
 
-**[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).
+**[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).**
 
 ![model_picture](./images/models_picture.JPG)
 
