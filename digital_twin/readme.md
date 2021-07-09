@@ -16,7 +16,6 @@
    - 2.1 Specify Digital Twins
    - 2.2 Create Digital Twins in ADT and TSI
    - 2.3 Create Device Endpoints in IoT-Hub
-      
 ### 1.1 Setup Digital Twin Infrastructure in Azure
 
 #### 1.1.1 Create Azure Account
@@ -61,7 +60,7 @@ Usage:
     us/azure/iot-hub/quickstart-send-telemetry-python)
 - Using ‘Message Routing’ option telemetry messages can be sent to : Events,
     Storage, Event Hubs and much more.
-**[DL] The general description of IoT-Hub can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the IoT-Hub.**
+    **[DL] The general description of IoT-Hub can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the IoT-Hub.**
 
 1. In the azure resources search for IoT Hub
 2. click create
@@ -174,15 +173,15 @@ the string here and click ok. You will be now connected to the azure
 
 1. All dt models should be written in .json file
     2. Open your favourite code editor and create new .json file ¡img align=”center”
-src=”pictures/dtexplorer.png” width= 400/¿
+    src=”pictures/dtexplorer.png” width= 400/¿
     3. This code above is the example simple model which contains ‘temper-
-ature’ and ‘Humid- ity’: It is based on azure dtdl language. [More about
-it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 4. For
-uploading click the upload button on DT explorer and select the .json file you
-created before. Then your model will be shown below.
+    ature’ and ‘Humid- ity’: It is based on azure dtdl language. [More about
+    it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 4. For
+    uploading click the upload button on DT explorer and select the .json file you
+    created before. Then your model will be shown below.
     ¡img align=”center” src=”pictures/uploadmodel.png” width= 200/¿
     5. Then finally the model is created and will be visualised if added to
-explorer. ¡img align=”center” src=”pictures/dtmodel.png” width= 400/¿
+    explorer. ¡img align=”center” src=”pictures/dtmodel.png” width= 400/¿
 
 
 ### 1.4 Setup Azure Function 1: ExtractDeviceData
@@ -370,3 +369,40 @@ After these prerequisites are met, the models and twins described in the folders
 
 ### 2.3. Create Endpoints for Devices in IoT-Hub
 For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to... TODO: Describe what we need device for TODO: Describe individual steps required to create device(s) for Digital Twins mentioned above. @Ramya: please add this here!
+
+Prerequisites:
+
+1. Set up Azure IoT Hub
+
+Next step is to create IoT devices.
+
+For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to create a digital twin of the physical device.
+
+In our use-case [twin_models](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/digital_twin/create_twins/twin_models) we have three different raspberry pi's for three different rooms. So, let us go ahead and create them in Azure IoT Hub.
+
+sample 1:
+
+Raspberry1-Lobby100.json
+
+In this sample we want to create IoT device with device id as **Raspberry1** as we have mentioned the digital twin id with property **dtid** in the  [Raspberry1.json](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin/create_twins/twin_models/Raspberry1.json) while creating the model instance of digital twin.
+
+![Raspberry1](./images/NewIoTDevice.png)
+
+After successful creation of IoT device, we can view them under IoT devices section inside IoT Hub.
+
+![Raspberry1Created](./images/SuccessIoTDeviceCreation.png) 
+
+Similarly create IoT devices in accordance with the twin_models. As per our use case we have created the IoT devices with names Raspberry2 and Raspberry3.
+
+After creation the final output will be as follows.
+
+![All_IotDevices](./images/All_IoTDevices.PNG) 
+
+We have created the IoT device name in accordance with twin models because of the following reasons:
+
+1. We want to automatically update the Digital twin with device data that IoT device receives
+2. The device data that we send to IoT Hub device is transmitted to Digital twin internally by Azure function.
+
+
+
+ 
