@@ -1,5 +1,5 @@
 # Physical Modelling of CO2 on Abaqus 
-
+**[DL] Give a short summary here on what we are using the physical model for in our use case, and what the expected benefits are**
 
 ## Introduction to the Importance and Need of Physical Modeling
 
@@ -8,6 +8,9 @@ Computational modelling is a very good time and money sparing tool which is a me
 destructive investigation. Most of all the analysed system can be put into complex scenarios which
 
 wouldn’t be possible in real life. 
+
+**[DL] How does this picture belong to the text in this section?**
+**[DL] Please make sure that there are no red underlinings in the picture (this happens when you make a screenshot in non-presentation mode in powerpoint)**
 
 
 ![model_picture](./images/models_picture.JPG)
@@ -27,7 +30,13 @@ the geometrical changes to the CO2 particles. This could be in context of FSI wh
 raspberry or in another context.
 
 
-## Modelling the Virtual Room with the Air Particles
+## Creating the Physical Model in Abaqus
+
+**[DL] reference the individual files here that are used for the individual steps.**
+**[DL] Describe How to import these files into Abaqus so that you can get the physical model**
+**[DL] Show some screenshots here of the resulting physical model in Abaqus**
+
+### Modeling the fluid flow
 
 
 For the fluid flow, SPH was considered on Abaqus. Python Scripting was used
@@ -40,7 +49,9 @@ All of the details on how each geometry was created on the FE program of Abaqus 
 
 in the following sections.
 
-## Modelling the Shape of the Room
+### Modelling the shape of the room
+
+**[DL] Didn't you first model the room, and then the fluid flow?? If yes, you should also put the description in this order**
 
 The walls of the room (the nodes) are deformed by boundary conditions. As the boundary
 
@@ -57,6 +68,8 @@ These raw data were then translated into an input ﬁle for Abaqus. This was don
 python script on jupyter.
 
 ## Model Driven Engineering Techniques
+
+**[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).
 
 ![model_picture](./images/models_picture.JPG)
 
