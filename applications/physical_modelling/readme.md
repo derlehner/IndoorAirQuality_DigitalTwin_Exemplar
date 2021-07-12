@@ -1,5 +1,8 @@
 # Physical Modelling of CO2 on Abaqus 
-**[DL] Give a short summary here on what we are using the physical model for in our use case, and what the expected benefits are**
+
+In this project the physical model is used for modelling the CO2 molecules in the air. The benefits of using a physical model are that the air quality can be visualized in the simulation. This is done via visualizing the movement of the particles in the air with color coding in order to show the dangerous and safe levels in a dynamic way.
+
+From a scientific point of view physical modeling has the advantage of showing how the variable that is being analysed is behaving. This analysis includes both the structure (properties) and the functions of the variable. Therefore extracting a physical model from a digital twin can help understand the real model better and give a better overall overview of the model.
 
 ## Introduction to the Importance and Need of Physical Modeling
 
