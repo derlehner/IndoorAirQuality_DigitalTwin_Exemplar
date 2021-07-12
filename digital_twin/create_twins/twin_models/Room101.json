@@ -1,0 +1,18 @@
+{
+    "dtid": "Room101",
+    "content": {
+        "$metadata": {
+            "$model": "dtmi:com:example:Room;2"
+        }
+    },
+    "relationships":[
+        {
+            "id": "rel2",
+            "content":{
+                "$targetId": "Raspberry2",
+                "$relationshipName": "airQualityControllers"
+            }
+        }
+    ]
+
+}

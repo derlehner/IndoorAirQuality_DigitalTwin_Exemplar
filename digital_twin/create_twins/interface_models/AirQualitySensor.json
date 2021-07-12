@@ -1,0 +1,26 @@
+{
+	"@type": "Interface",
+	"displayName": "AirQualitySensor",
+	"@id": "dtmi:org:example:cotwoSensor;2",
+	"contents":[
+			{
+			"@type": [
+				"Telemetry"
+			],
+			"schema": "double",
+			"displayName": "carbonDioxideValue",
+			"@id": "dtmi:org:example:cotwoSensor:cotwoValue;2",
+			"name": "carbonDioxideValue"
+			},
+			{
+			"@type": [
+				"Property"
+			],
+			"schema": "string",
+			"displayName": "type",
+			"@id": "dtmi:org:example:cotwoSensor:type;2",
+			"name": "type"
+			}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}

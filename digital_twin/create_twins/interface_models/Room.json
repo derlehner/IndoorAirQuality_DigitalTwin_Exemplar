@@ -1,0 +1,27 @@
+{
+	"@type": "Interface",
+	"displayName": "Room",
+	"@id": "dtmi:com:example:Room;2",
+	"contents":[
+			{
+			"@type": ["Relationship"],
+			"displayName": "airQualityControllers",
+			"@id": "dtmi:org:example:whatever;2",
+			"target": "dtmi:org:example:AirQualityController;2",
+			"minMultiplicity": 0,
+			"writable": true,
+			"properties": [
+				{
+				"@type": [
+					"Property"
+				],
+				"schema": "boolean",
+				"displayName": "room",
+				"name": "room"
+				}
+			],
+			"name": "airQualityControllers"
+			}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}
