@@ -34,6 +34,9 @@ raspberry or in another context.
 
 
 ## Creating the Physical Model in Abaqus
+Input files can be created in two ways on Abaqus either by scripting the file with keywords on an editor (these would be .inp files which can be seen on the seperate document of scripts) or by a graphical interface manually. 
+
+If created manually 
 
 **[DL] reference the individual files here that are used for the individual steps.**
 **[DL] Describe How to import these files into Abaqus so that you can get the physical model**
