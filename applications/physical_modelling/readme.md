@@ -13,7 +13,7 @@ destructive investigation. Most of all the analysed system can be put into compl
 wouldn’t be possible in real life. 
 
 **[DL] How does this picture belong to the text in this section?**
-**[DL] Please make sure that there are no red underlinings in the picture (this happens when you make a screenshot in non-presentation mode in powerpoint)**
+
 
 
 ![model_picture](./images/abaqus_metaModel.JPG)
@@ -40,7 +40,6 @@ Input files can be created in two ways on Abaqus either by scripting the file wi
 If created manually the graphical interface must be used which has its benefits for simple usage but the disadvantage of having fixed defined geometries. This is an important part of the input files. 
 
 ![model_picture](./images/abaqus_creatingParts.JPG)
-
 
 
 
@@ -76,6 +75,11 @@ in the following sections.
 
 ## Model Driven Engineering Techniques
 
+### Meta-Model of Abaqus
+
+### Additions needed in the Digital to create the Abaqus model
+you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model
+
 **[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).**
 
 ![model_picture](./images/models_picture.JPG)
@@ -97,6 +101,8 @@ depending on the need for the ﬂuid ﬂow.In the end the for better modelling o
 
 sources, the hollow shapes could be extended.
 
+![model_picture](./images/co2_molecules.JPG)
+![model_picture](./images/time_frames.JPG)
 
 ### Modelling the Fluid Flow (Air Particle Properties-SPH particles)
 
@@ -145,8 +151,6 @@ of air particles:
 newtonian ﬂuid of density:
 
 ρ = 1056kg/m3
-
-
 
 dynamic viscosity:
 
