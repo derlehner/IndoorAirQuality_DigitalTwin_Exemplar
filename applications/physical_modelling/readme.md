@@ -16,7 +16,8 @@ wouldn’t be possible in real life.
 **[DL] Please make sure that there are no red underlinings in the picture (this happens when you make a screenshot in non-presentation mode in powerpoint)**
 
 
-![model_picture](./images/models_picture.JPG)
+![model_picture](./images/abaqus_metaModel.JPG)
+![model_picture](./images/abaqus_iot.JPG)
 
 
 
@@ -36,11 +37,10 @@ raspberry or in another context.
 ## Creating the Physical Model in Abaqus
 Input files can be created in two ways on Abaqus either by scripting the file with keywords on an editor (these would be .inp files which can be seen on the seperate document of scripts) or by a graphical interface manually. 
 
-If created manually 
+If created manually the graphical interface must be used which has its benefits for simple usage but the disadvantage of having fixed defined geometries. This is an important part of the input files. 
 
-**[DL] reference the individual files here that are used for the individual steps.**
-**[DL] Describe How to import these files into Abaqus so that you can get the physical model**
-**[DL] Show some screenshots here of the resulting physical model in Abaqus**
+![model_picture](./images/abaqus_creatingParts.JPG)
+
 
 ### Modeling the fluid flow
 
