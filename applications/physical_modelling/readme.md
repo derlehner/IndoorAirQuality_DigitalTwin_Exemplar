@@ -42,22 +42,10 @@ If created manually the graphical interface must be used which has its benefits 
 ![model_picture](./images/abaqus_creatingParts.JPG)
 
 
-### Modeling the fluid flow
 
-
-For the fluid flow, SPH was considered on Abaqus. Python Scripting was used
-
-to read in the input data for the geometry of the time states.
-
-On Abaqus the simulation was created as a Dynamic Explicit Step with the units: mm,t and s.
-
-All of the details on how each geometry was created on the FE program of Abaqus will be discussed
-
-in the following sections.
 
 ### Modelling the shape of the room
-
-**[DL] Didn't you first model the room, and then the fluid flow?? If yes, you should also put the description in this order**
+ 
 
 The walls of the room (the nodes) are deformed by boundary conditions. As the boundary
 
@@ -72,6 +60,19 @@ of elements and and the columns the respective nodes belonging to each element.
 These raw data were then translated into an input ﬁle for Abaqus. This was done by writing a
 
 python script on jupyter.
+
+### Modeling the fluid flow
+
+
+For the fluid flow, SPH was considered on Abaqus. Python Scripting was used
+
+to read in the input data for the geometry of the time states.
+
+On Abaqus the simulation was created as a Dynamic Explicit Step with the units: mm,t and s.
+
+All of the details on how each geometry was created on the FE program of Abaqus will be discussed
+
+in the following sections.
 
 ## Model Driven Engineering Techniques
 
