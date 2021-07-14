@@ -14,6 +14,7 @@
 	- DHT11
 	- CCS811
 	- Wait for the sensor to be ready and calibrate the thermistor
+- Start the raspberry to send the data to azure
 ## Prerequisites
 ### Digital Twin
 For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
