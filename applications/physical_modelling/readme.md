@@ -17,7 +17,7 @@ wouldn’t be possible in real life.
 
 
 ![model_picture](./images/abaqus_metaModel.JPG)
-![model_picture](./images/abaqus_iot.JPG)
+
 
 
 
