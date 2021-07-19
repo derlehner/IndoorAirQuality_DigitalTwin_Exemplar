@@ -16,7 +16,7 @@ wouldn’t be possible in real life.
 
 
 
-![model_picture](./images/abaqus_metaModel.JPG = 250x250)
+![model_picture](./images/abaqus_metaModel.JPG)
 
 
 
