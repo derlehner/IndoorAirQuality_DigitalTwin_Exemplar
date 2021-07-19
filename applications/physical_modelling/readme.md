@@ -12,11 +12,11 @@ destructive investigation. Most of all the analysed system can be put into compl
 
 wouldn’t be possible in real life. 
 
-**[DL] How does this picture belong to the text in this section?**
 
 
 
-![model_picture](./images/abaqus_metaModel.JPG)
+
+![model_picture](./images/abaqus_metaModel.JPG = 250x250)
 
 
 
@@ -39,7 +39,7 @@ Input files can be created in two ways on Abaqus either by scripting the file wi
 
 If created manually the graphical interface must be used which has its benefits for simple usage but the disadvantage of having fixed defined geometries. This is an important part of the input files. 
 
-![model_picture](./images/abaqus_creatingParts.JPG)
+![model_picture](./images/abaqus_creatingParts.JPG = 250x250)
 
 
 
@@ -82,7 +82,7 @@ you can auto-generate the abaqus model using some template files that are adapte
 
 **[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).**
 
-![model_picture](./images/models_picture.JPG)
+![model_picture](./images/models_picture.JPG = 250x250)
 
 ### Modelling the CO2 source(s) in the room
 
@@ -101,8 +101,8 @@ depending on the need for the ﬂuid ﬂow.In the end the for better modelling o
 
 sources, the hollow shapes could be extended.
 
-![model_picture](./images/co2_molecules.JPG)
-![model_picture](./images/time_frames.JPG)
+![model_picture](./images/co2_molecules.JPG = 250x250)
+![model_picture](./images/time_frames.JPG = 250x250)
 
 ### Modelling the Fluid Flow (Air Particle Properties-SPH particles)
 
