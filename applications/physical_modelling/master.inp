@@ -1,0 +1,159 @@
+*Heading
+*Preprint, echo=NO, model=NO, history=NO, contact=NO
+**
+********************************************************************************
+** Define prototypes
+*Include, Input=room.inp
+*Include, Input=molecular_extensions.inp
+
+
+********************************************************************************
+*Surface Section, elset=El_Endo, density = 1e-08
+*Surface Section, elset=plane, density = 1e-08
+*Surface Section, elset=AV, density = 1e-08
+*Surface Section, elset=MV, density = 1e-08
+*Surface Section, elset=sealing, density = 1e-08
+*Surface Section, elset=pressure_surf, density = 1e-08
+*Surface Section, elset=AV_surf, density = 1e-08
+**
+********************************************************************************
+** Surfaces
+*Surface, type=ELEMENT, name=pressure_surf
+pressure_surf, SPOS
+*Surface, type=ELEMENT, name=AV_outlet
+AV_surf, SPOS
+*Surface, type=ELEMENT, name=Endo
+El_Endo, SPOS
+*Surface, type=ELEMENT, name=AV
+AV, SPOS
+*Surface, type=ELEMENT, name=MV
+MV, SPOS
+*Surface, type=ELEMENT, name=sealing
+sealing, SPOS
+*Surface, type=ELEMENT, name=plane
+plane, SPOS
+*Surface, type=ELEMENT, name=pacemaker
+pacemaker, SPOS
+**Surface, type=ELEMENT, name=pacemaker_lid
+**pacemaker_lid, SPOS
+********************************************************************************
+*AMPLITUDE, name=zero
+0.0, 0.0, 10.0, 0.0
+*AMPLITUDE, name=systole_lin
+0.0, 0.0, 0.3, 1.0
+*AMPLITUDE, name=distole_lin
+0.0, 0.0, 0.5, -1
+*AMPLITUDE, name=filling, DEFINITION=SMOOTH STEP
+0.0, 0.0, 0.2, 1.0, 0.95 , 1.0, 1.0, -1.0
+********************************************************************************
+** 
+********************************************************************************
+********************************************************************************
+********************************************************************************
+** MATERIALS
+** 
+*Material, name=Al
+*Density
+ 2.77e-09,
+*Elastic
+73100., 0.33
+*Material, name=blood
+*Density
+ 1.056e-11,
+*Eos, type=USUP
+**145e+03,0.,0. von paper Mao
+1.45e+05,0.,0.
+*Viscosity
+ 3.5e-09,
+*********************************************************************************
+**
+** INTERACTION PROPERTIES
+** 
+*Surface Interaction, name=IntProp-1
+*Friction
+0.,
+**ein versuch:SPH SURFACE BEHAVIOR, TYPE=NO SLIP 
+*Surface Behavior, pressure-overclosure=HARD
+** 
+** INTERACTIONS
+** 
+** Interaction: Int-1
+*Contact, op=NEW
+*Contact Inclusions, All Exterior
+*Contact Exclusions
+sealing, Endo
+pressure_surf, Endo
+*Contact Property Assignment
+ ,  , IntProp-1
+** 
+*******************************************************************************
+**-----------------------------------------------------------------------------
+** STEP: filling
+** 
+*Step, name=filling, nlgeom=YES
+*Dynamic, Explicit, DIRECT USER CONTROL
+10e-06, 0.01
+*Bulk Viscosity
+0.06, 1.2
+** 
+********************************
+** Boundary Conditions
+**DLOAD
+**E_SPH , GRAV, 9810, 1., 0., 0.
+*Boundary,OP=New, amplitude=filling, type=Displacement
+N_pressure_surf , 1,1, 757.9
+**original 761.0
+*Boundary,OP=New, amplitude=zero, type=Displacement
+*Include, Input=b_BC_Endo_ED_ES.inp
+**Include, Input=b_BC_pacemaker.inp
+*Boundary, OP=New
+2256, ENCASTRE
+TOP_LV, ENCASTRE
+All_Top, ENCASTRE
+N_pressure_surf , 2, 3
+**************************************
+** FIELD OUTPUT: F-Output-1
+** 
+*Output, field, NUMBER INTERVAL=1, variable=PRESELECT
+**Output, field, NUMBER INTERVAL=50, variable=PRESELECT
+** 
+** HISTORY OUTPUT: H-Output-1
+** 
+*Output, history, variable=PRESELECT
+*End Step
+**-----------------------------------------------------------------------------
+**-----------------------------------------------------------------------------
+** STEP: systole
+** 
+*Step, name=systole, nlgeom=YES
+**NOHAF if nonlinearities are not important
+*Dynamic, Explicit, DIRECT USER CONTROL
+10e-06, 0.3
+*Bulk Viscosity
+0.06, 1.2
+** 
+********************************
+** Boundary Conditions
+**DLOAD
+**E_SPH , GRAV, 9810, 1., 0., 0.
+*Boundary,OP=New, amplitude=systole_lin, type=Displacement
+*Include, Input=b_BC_Endo_ED_ES.inp
+**Include, Input=b_BC_pacemaker.inp
+2256, 1, 1, -4.393118
+2256, 2, 2, -3.873000
+2256, 3, 3, -0.002245
+2256, 4,6,0
+*Boundary, OP=New
+TOP_LV, ENCASTRE
+All_Top, ENCASTRE
+N_pressure_surf , 1, 3
+**************************************
+** FIELD OUTPUT: F-Output-1
+** 
+*Output, field, NUMBER INTERVAL=30, variable=PRESELECT
+** 
+** HISTORY OUTPUT: H-Output-1
+** 
+*Output, history, variable=PRESELECT
+*End Step
+**-----------------------------------------------------------------------------
