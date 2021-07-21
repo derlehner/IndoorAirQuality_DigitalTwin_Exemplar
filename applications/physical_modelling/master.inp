@@ -7,35 +7,7 @@
 *Include, Input=molecular_extensions.inp
 
 
-********************************************************************************
-*Surface Section, elset=El_Endo, density = 1e-08
-*Surface Section, elset=plane, density = 1e-08
-*Surface Section, elset=AV, density = 1e-08
-*Surface Section, elset=MV, density = 1e-08
-*Surface Section, elset=sealing, density = 1e-08
-*Surface Section, elset=pressure_surf, density = 1e-08
-*Surface Section, elset=AV_surf, density = 1e-08
-**
-********************************************************************************
-** Surfaces
-*Surface, type=ELEMENT, name=pressure_surf
-pressure_surf, SPOS
-*Surface, type=ELEMENT, name=AV_outlet
-AV_surf, SPOS
-*Surface, type=ELEMENT, name=Endo
-El_Endo, SPOS
-*Surface, type=ELEMENT, name=AV
-AV, SPOS
-*Surface, type=ELEMENT, name=MV
-MV, SPOS
-*Surface, type=ELEMENT, name=sealing
-sealing, SPOS
-*Surface, type=ELEMENT, name=plane
-plane, SPOS
-*Surface, type=ELEMENT, name=pacemaker
-pacemaker, SPOS
-**Surface, type=ELEMENT, name=pacemaker_lid
-**pacemaker_lid, SPOS
+
 ********************************************************************************
 *AMPLITUDE, name=zero
 0.0, 0.0, 10.0, 0.0
@@ -57,7 +29,7 @@ pacemaker, SPOS
  2.77e-09,
 *Elastic
 73100., 0.33
-*Material, name=blood
+*Material, name=air
 *Density
  1.056e-11,
 *Eos, type=USUP
@@ -104,8 +76,8 @@ pressure_surf, Endo
 N_pressure_surf , 1,1, 757.9
 **original 761.0
 *Boundary,OP=New, amplitude=zero, type=Displacement
-*Include, Input=b_BC_Endo_ED_ES.inp
-**Include, Input=b_BC_pacemaker.inp
+
+
 *Boundary, OP=New
 2256, ENCASTRE
 TOP_LV, ENCASTRE
@@ -138,7 +110,6 @@ N_pressure_surf , 2, 3
 **E_SPH , GRAV, 9810, 1., 0., 0.
 *Boundary,OP=New, amplitude=systole_lin, type=Displacement
 *Include, Input=b_BC_Endo_ED_ES.inp
-**Include, Input=b_BC_pacemaker.inp
 2256, 1, 1, -4.393118
 2256, 2, 2, -3.873000
 2256, 3, 3, -0.002245
