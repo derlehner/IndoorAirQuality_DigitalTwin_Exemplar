@@ -58,7 +58,7 @@ Therefore, this tool can be used to satisfy visualization need (3).
 Although existing tools provided by Azure satisfy some of the visualization needs for our use case (i.e. visualization need 1 and 3, and visualization need 2 in part), some visualization needs are still not covered. Visualization need 4 is not satisfied as Azure offers dedicated tools for serving different visualization needs, but does not allow to combine these tools into a single system for visualization. Although Azure already provides a mobile App for their services, this app does not allow access to existing visualization tools. Therefore, visualization need 5 is not satisfied.
 To overcome these limitations, we propose a mobile app solution for custom visualization and also to take immediate actions even from remote locations.
 
-![MobileOverview](C:/Users/ramya/DigitalTwin_Airquality_For_Covid_Risk_Assessment/applications/visualisation/images/mobileView.JPG)
+![MobileOverview](./images/mobileView.JPG)
 
 However, to enable real-time data visualization in a mobile app, this app requires access to the information provided by the DT in Azure. Therefore, both the ADT and TSI service provide dedicated RESTful APIs. 
 
