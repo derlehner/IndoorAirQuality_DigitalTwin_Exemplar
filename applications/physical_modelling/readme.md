@@ -4,6 +4,8 @@ In this project the physical model is used for modelling the CO2 molecules in th
 
 From a scientific point of view physical modeling has the advantage of showing how the variable that is being analysed is behaving. This analysis includes both the structure (properties) and the functions of the variable. Therefore extracting a physical model from a digital twin can help understand the real model better and give a better overall overview of the model.
 
+An important information to note here because our project is open source is that the free software of Abaqus can be downloaded as a student or academic institution but is not allowed to be used for commercial purposes.
+
 ## Introduction to the Importance and Need of Physical Modeling
 
 Computational modelling is a very good time and money sparing tool which is a method for non-
@@ -21,7 +23,7 @@ wouldn’t be possible in real life.
 
 
 
-There are many biomechatronic applications where the virtual model would be very useful. One
+There are many  applications where the virtual model would be very useful. One
 
 such application would deﬁnitely be in simulating the ﬂuid ﬂow in the Room and exchange between
 
@@ -227,24 +229,11 @@ In order to renumber the nodes of the pacemaker, the settings on was chosen. Thi
 
 setting could be reached via editing the mesh on Abaqus.
 
- Renumbering nodes of the pacemaker to include in the master input ﬁle
 
 Since it was not enough to only renumber the nodes but also necessary to renumber the elements,
 
-the following renumbering settings on had to be additionally applied.
+the following renumbering settings  had to be additionally applied.
 
-
- Renumbering elements of the pacemaker to include in the master input ﬁle
-
-Afterwards it was possible to mesh the source with quadrilateral R3D4 elements, as seen in
-model of Source
-
-
-Overall building a FE model of a virtual LV on Abaqus is possible and easy to handle if the nodes,
-
-elements and time states of the position of the nodes as displacements are given from accurate
-
-measurements. 
 
 
 
