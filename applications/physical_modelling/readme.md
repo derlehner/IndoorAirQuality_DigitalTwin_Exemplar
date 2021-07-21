@@ -1,6 +1,6 @@
 # Physical Modelling of CO2 on Abaqus 
 
-In this project the physical model is used for modelling the CO2 molecules in the air. The benefits of using a physical model are that the air quality can be visualized in the simulation. This is done via visualizing the movement of the particles in the air with color coding in order to show the dangerous and safe levels in a dynamic way.
+In this project the physical model is used for modelling the CO2 molecules in the air. The benefits of using a physical model are that the air quality can be visualized in the simulation. This is done via visualizing the movement of the particles in the air with color coding in order to show the dangerous and safe levels in a dynamic and visual way.
 
 From a scientific point of view physical modeling has the advantage of showing how the variable that is being analysed is behaving. This analysis includes both the structure (properties) and the functions of the variable. Therefore extracting a physical model from a digital twin can help understand the real model better and give a better overall overview of the model.
 
@@ -25,7 +25,7 @@ wouldn’t be possible in real life.
 
 There are many  applications where the virtual model would be very useful. One
 
-such application would deﬁnitely be in simulating the ﬂuid ﬂow in the Room and exchange between
+such application would deﬁnitely be in simulating the ﬂuid ﬂow in the room and exchange between
 
 people and analysing the FSI (velocity changes) in order to understand the air quality of the room.
 
@@ -37,11 +37,14 @@ raspberry or in another context.
 
 
 ## Creating the Physical Model in Abaqus
+
+### Input Files
 Input files can be created in two ways on Abaqus either by scripting the file with keywords on an editor (these would be .inp files which can be seen on the seperate document of scripts) or by a graphical interface manually. 
 
 If created manually the graphical interface must be used which has its benefits for simple usage but the disadvantage of having fixed defined geometries. This is an important part of the input files. 
 
 ![model_picture](./images/abaqus_creatingParts.JPG)
+
 
 
 
@@ -236,7 +239,7 @@ the following renumbering settings  had to be additionally applied.
 
 
 
-
+## Output Files on Abaqus and post-processing of the simulation
 
 
 
