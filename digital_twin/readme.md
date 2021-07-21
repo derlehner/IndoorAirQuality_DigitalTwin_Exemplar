@@ -1,8 +1,14 @@
 # Digital Twin
-
-**[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
+Digital Twins normally defineed as exact replica of the physical obejcts. Here in our case we build exact replica of our entire archtecture like our systems in real world which will be the core idea of our project to use Digital Twin to monitor, visualize and control the entire systems.
+Azure Digital Twins is an Internet of Things (IoT) platform that enables you
+to create a digital representation of real-world things, places, and business pro-
+cesses. Azure Digital Twins is an IoT platform that enables the creation of
+comprehensive digital models of entire environments to gain insights that drive
+better products, optimization of operations, cost reduction and breakthrough
+customer experiences. Examples include buildings, factories. 
 
 ## Contents
+- Introduction 
 - 1 Setup Digital Twin Infrastructure in Azure
    - 1.1 Create an Azure Account
    - 1.2 Setup IoT-Hub
@@ -16,7 +22,14 @@
    - 2.1 Specify Digital Twins
    - 2.2 Create Digital Twins in ADT and TSI
    - 2.3 Create Device Endpoints in IoT-Hub
+
 ### 1.1 Setup Digital Twin Infrastructure in Azure
+we have several parts in azure, will be described each and every on here as follows:
+- IoT Hub: Used to receieve the data from raspbrerry via 'connection_string' and used to pass data to other azure services. IoT-Hub also manages the devices from the physicalsystem and collects data sent by these devices to forwardthem to the Digital Twin (ADT) Service
+- Digital Twins: Our Digital Twin will contain the physical archetecture like, number of building and rooms in it what the current data and so on. It will be act like monitoring systems if the user needs to anazlysing realtime data.
+- Time Series Insights: is to visualize the data over past time for example 1 month of data and see used to pass the data to our use case applications like Machine Learining, Visualisation and physical modelling.
+- Function App1: ExtractDeviceData is the triggering function app which used to bring the data from Iot-hub to Digital Twins
+- Function App2: TransformTwinData is the triggering function app which used to bring the data from Digital twins to Time series insights.
 
 #### 1.1.1 Create Azure Account
 
@@ -84,34 +97,9 @@ After this we can create a new device. **[DL] What do we need this device for??*
 
 **[DL] Again, add a screenshot!**
 
-#### 1.2.2 Connecting to azure by connection string
-**[DL] This is already described in the physical_twin/simulated_hardware. We don't need this here, again. Please delete.**
-If you click the device name which you created new before you will land into
-the page were you will find all properties for that particular device. Under
-”Primary Connection String” you can find the connection string. You can use
-this connection string on other Azure apps or send the data to this device to
-get connect to this exact device. Please note it’s different for different devices.
-For further information about azure (https://channel9.msdn.com/Shows/Azure-
-Friday/Azure-IoT-Hub?term=iot) - For [Device Streaming](https://channel9.msdn.com/Shows/Internet-
-of-Things-Show/Azure-IoT-Hub-Device-Streams?term=iot) - IOT to [Event Grid
-Integration](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-
-and-Event-Grid?term=iot)
 
 ### 1.3 Setup Azure Digital Twins Service (ADT)
 
-Azure Digital Twins is an Internet of Things (IoT) platform that enables you
-to create a digital representation of real-world things, places, and business pro-
-cesses. Azure Digital Twins is an IoT platform that enables the creation of
-comprehensive digital models of entire environments to gain insights that drive
-better products, optimization of operations, cost reduction and breakthrough
-customer experiences. Examples include buildings, factories. Usage:
-
-1. Model any environment and bring digital twins to life in a scalable and
-    secure manner.
-2. Connect assets such as IoT devices as well as existing business systems to
-    Azure Digital Twins.
-3. ¡img align=”center” src=”pictures/digitaltwinhomepage.png” width= 400/¿
-**[DL] The general description of ADT can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the ADT.**
 In this section a Digital Twins platform will be created. A related doc-
 umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-
 us/azure/digital-twins/quickstart-adt-explorer).
@@ -123,7 +111,6 @@ us/azure/digital-twins/quickstart-adt-explorer).
     - location and
     - a name for the Digital Twins service.
 
-¡img align=”center” src=”pictures/digitaltwincreation.png” width= 400/¿ **[DL] Please fix this**
 In above figure you can find the”Host Name”where you can find in DT
 homepage is the string should be noted. 
 It is used further for installing ADT Explorer. The resource group will be later used for all other resources related to the AirQuality project. It needs to be created, if this wasn’t done before.
