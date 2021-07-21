@@ -15,8 +15,11 @@
 	- CCS811
 	- Wait for the sensor to be ready and calibrate the thermistor
 ## Prerequisites
-### Digital Twin
-For sending the data succefully you need to setup the Azure which you can see the entire (process here)[https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/azure/readme.md].
+- Raspberry and accessories
+- Sensors
+- Electronics like resistors, LED lights 
+- Bread board and connection wires 
+
 ### Hardware setup
 **CO2 Sensor DHT811**: This sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
 wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
