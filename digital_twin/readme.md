@@ -1,219 +1,408 @@
-# Setup Physical Twin with actual hardware
+# Digital Twin
+
+**[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
 
 ## Contents
-- Prerequisites
-- Hardware setup
-	- Sensor CCS811 (CO2 measurement)
-	- Raspberry Pi
-	- Wiring of Hardware
-- Initial Setup of Raspberry OS
-	- Remote access via SSH
-	- Deploy Code to Raspberry
-	- Required Libraries for the project
-	- Code
-- Possilble Frequent Errors:
+- 1 Setup Digital Twin Infrastructure in Azure
+   - 1.1 Create an Azure Account
+   - 1.2 Setup IoT-Hub
+   - 1.3 Setup Azure Digital Twins Service (ADT)
+   - 1.4 Setup Azure Function 1: ExtractDeviceData
+   - 1.5 Connect ExtractDeviceData to IoT-Hub and ADT
+   - 1.5 Setup Time Series Insights Service (TSI)
+   - 1.6 Setup Azure Function 2: TransformTwinData
+   - 1.7 Connect TransformTwinData to ADT and TSI
+- 2 Implementation of Use Case
+   - 2.1 Specify Digital Twins
+   - 2.2 Create Digital Twins in ADT and TSI
+   - 2.3 Create Device Endpoints in IoT-Hub
+### 1.1 Setup Digital Twin Infrastructure in Azure
 
-## Prerequisites
-- Raspberry and accessories
-- CCS811 and DHT11 Sensors
-- Electronics like resistors, LED lights 
-- Bread board and connection wires
+#### 1.1.1 Create Azure Account
 
-## Hardware setup
-### Sensor CCS811 (CO2 measurement)
-- This [CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
-- Wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
-- The SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semiconductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as an CO2 value and can only be used as a reference.
-- To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
-- There are datasheet and manual available at the homepage of joy-it^5. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
+Microsoft Azure is a cloud solution with a lot of resources and services. The
+once that are interesting for this project and are covered by this documentation.
+The following sections describe the relevant steps to get an Azure Setup needed
+for this project. All information covered by this chapter are also covered by
+the documentation of Microsoft. It is possible to get a free Microsoft Azure
+account, but it is recommended to create an Microsoft Azure student account,
+because it will apply$100 credit to the account.To create an Microsoft Azure
+student account it is necessary to have 2 different e-mail addresses which is
+the academic e-mail address (@jku.at) to verify you are eligible or the student
+account, another e-mail address, that will be used as login and main e-mail
+address for Azure. Follow the process:
 
-**LED**: 
-The LEDs will be used to give a visual response to the user about the CO2 amount in the air and therefor about the air quality. It should be used as an indicator to open the windows and insert fresh air into the room.
+1. Go to this link and click ”free account” on top right.
+2. On next page click ”start for free”
+3. Enter your data and your account will be created.
 
-### Raspberry Pi
- We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is dedicated computer with all neccesary things which normal pc has.  This send measured co2 values to the cloud and also used to command the treshold triggers if the valued reached above the limit by change the color of the LED or by Beeping sounds. 
- An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). Anyways, in this project Raspberry is used, we need the following hardware for setting up the raspberry:
-- (Fully Integrated) Raspberry Pi 4 - Board
-- Power adapter for Raspberry Pi 4 (USB-C)
-- SD-card
-- LAN-cable
-- Card-Reader (for initialization)
-- Keyboard (for initialization)
-- Micro-HDMI to HDMI cable (for initialization)
 
-### Wiring of Hardware
-Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
-It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
-transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage suppy pin to power the component.
 
-For wiring the hardware we should follow some documentations for sensor and raspberry pi. The required pinout connections are as follows:
-```sh
-	Sensor SDA - GPIO2
-	Sensor SCL - GPIO 3
-	Sensor Vcc - +5v
-	Sensor Grn - Ground
-	Sensor init - Ground
-	LED Bulb - GPIO 17
+### 1.2 Setup IoT-Hub
+
+**IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in
+the cloud, that acts as a central message hub for bi-directional commu-
+nication between an IoT application and the devices it manages. This is
+one of the services which Azure enables highly secure and reliable communi-
+cation between your Internet of Things (IoT) application and the devices it
+manages. Azure IoT Hub provides a cloud-hosted solution back end to con-
+nect virtually any device. IoT Hub is the entry point to the data which
+we actually want to work on after receiving here we have huge options to
+work on with. We can use the IoT app as a source for other azure services.
+In this section an Azure IoT hub will be created. A related documentation
+is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-
+hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
+Usage:
+
+- Manage IoT Devices (make successful connections for data transfer)
+- You can send Telemetry-data securely from physical hardware (sensor)
+    to Azure. For info [refer this website](https://docs.microsoft.com/en-
+    us/azure/iot-hub/quickstart-send-telemetry-python)
+- Using ‘Message Routing’ option telemetry messages can be sent to : Events,
+    Storage, Event Hubs and much more.
+    **[DL] The general description of IoT-Hub can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the IoT-Hub.**
+
+1. In the azure resources search for IoT Hub
+2. click create
+3. Using this required data create the azure app. The required data:
+- Resource group
+- Resource Locationd
+- IOT hub Name
+4. You will be created the azure IoT-Hub app now.
+**[DL] We should add some screenshots here to show how IoT-Hub is created**
+
+#### 1.2.1 Device Creation
+
+After this we can create a new device. **[DL] What do we need this device for??**
+2. In the IoT-Hub app go to IoT devices section from left side, then you will
+    able to view all the available devices if any.
+
+
+3. Click ”new” button on top and enter the preferred name for a device and
+    then save it.
+4. Now you have been created new device now.
+
+**[DL] Again, add a screenshot!**
+
+#### 1.2.2 Connecting to azure by connection string
+**[DL] This is already described in the physical_twin/simulated_hardware. We don't need this here, again. Please delete.**
+If you click the device name which you created new before you will land into
+the page were you will find all properties for that particular device. Under
+”Primary Connection String” you can find the connection string. You can use
+this connection string on other Azure apps or send the data to this device to
+get connect to this exact device. Please note it’s different for different devices.
+For further information about azure (https://channel9.msdn.com/Shows/Azure-
+Friday/Azure-IoT-Hub?term=iot) - For [Device Streaming](https://channel9.msdn.com/Shows/Internet-
+of-Things-Show/Azure-IoT-Hub-Device-Streams?term=iot) - IOT to [Event Grid
+Integration](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-
+and-Event-Grid?term=iot)
+
+### 1.3 Setup Azure Digital Twins Service (ADT)
+
+Azure Digital Twins is an Internet of Things (IoT) platform that enables you
+to create a digital representation of real-world things, places, and business pro-
+cesses. Azure Digital Twins is an IoT platform that enables the creation of
+comprehensive digital models of entire environments to gain insights that drive
+better products, optimization of operations, cost reduction and breakthrough
+customer experiences. Examples include buildings, factories. Usage:
+
+1. Model any environment and bring digital twins to life in a scalable and
+    secure manner.
+2. Connect assets such as IoT devices as well as existing business systems to
+    Azure Digital Twins.
+3. ¡img align=”center” src=”pictures/digitaltwinhomepage.png” width= 400/¿
+**[DL] The general description of ADT can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the ADT.**
+In this section a Digital Twins platform will be created. A related doc-
+umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-
+us/azure/digital-twins/quickstart-adt-explorer).
+
+1. Search for”Azure Digital Twin” in [azure resource](https://portal.azure.com)
+2. You will need to press the Button "+ Add" at the Azure Digital Twins page. **[DL] Screenshot for steps 1 + 2]**
+3. At the next page you will have to add **[DL] Screenshot for step 3**
+    - a resource group,
+    - location and
+    - a name for the Digital Twins service.
+
+¡img align=”center” src=”pictures/digitaltwincreation.png” width= 400/¿ **[DL] Please fix this**
+In above figure you can find the”Host Name”where you can find in DT
+homepage is the string should be noted. 
+It is used further for installing ADT Explorer. The resource group will be later used for all other resources related to the AirQuality project. It needs to be created, if this wasn’t done before.
+To do so, press the Create new button below the Resource group selection. You only
+need a name or the resource group to do so. Regarding location, it is worth
+to mention that the Digital Twins resource is only available for Australia East,
+East US, East US 2, North Europe, South Central US, Southeast Asia, UK
+South, West Central US, West Europe and West US 2 at the moment. These
+locations are the locations of the Azure servers. For the current instance for the
+AirQuality project the locationWest Europewas chosen. If everything is filled
+out, you can continue by clicking the Review + createbutton at the lower left
+corner. A short summery to check again will be listed. By pressing theCreate-
+button in the lower left corner you will finish the creation. The deployment will
+take some. A window in the upper right corner will show you a message when
+completed.
+
+#### 1.3.1 Digital Twin Explorer
+**[DL] Please read through the whole text again and check for missing spaces.**
+**[DL] This should not be here. We could either describe this in Part 2, or leave it out at all.**
+Digital Twin Exploreris the easy way to visualise our model architecture, import,
+export our models. This should be installed in our pc. Requirements for DT
+Explorer: Node.js (not less then version 10), npm. The process to install DT
+Explorer:
+
+1. Installing node.js on ubuntu by command line: 
 ```
-	
-## Initial Setup of Raspberry OS
-After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
-Required Things:
-1. Brand new Raspberry / Raspberry that need to be flashed new
-2. Download thePi Imagerfile and install it from [this link](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#)
-3. If your in Linux InstallPi Imagerby following the command
-```sh
- sudo snap install rpi-imager
+sudo a p t i n s t a l l c u r l
+curl sL https://deb.nodesource.com/setup10.x — sudo E bash
+sudo apt install node js 
 ```
-4. choose the OS as [Raspberry pi OS](https://www.raspberrypi.org/software/) 32 bitprobably it will be in first option
-5. insert the sd card and click write
-6. After its been installed you can insert this sd card into raspberry and you have freshly
-    installed linux on you device.
+2. Download and extract the Digital Twin Ex-
+plorer files. DownloadandextracttheDigitalT winExplorerf iles[f romthegit]()
+3. Run terminal under this directory: digital-twins-explorer-main/client/src
+4. Run the command: to install the npm npm i n s t a l l 5. Run the
+command: to start the DT Explorer 
+```
+npm run start
+```
+1.3.2 To connect DT explorer to your Azure DT:
 
-For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi homepage^3.
-In the following section a short overview is given.
-First of all an operation system needs to be downloaded and an image needs to be installed
-on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi
-OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an
-Imager program available to fasten the installation step^4. The instructions of the program
-need to be followed and afterward the SD-Card is ready to use.
-The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and
-HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login
-data is:
+1. Copy host name from your Digital twin home page, and add‘https://’ in front
+for example: https://DigitalTwin-DigitalTwinApp.api.weu.digitaltwins.azure.net
+2. Then click login icon on top right on DT explorer you already opened Paste
+the string here and click ok. You will be now connected to the azure
 
-- user: pi
-- password: raspberry
+1.3.3 Creating and uploading the model
 
-A few setting needs to be done initially, therefore enter the command:
-```sh
-sudo raspi-config
-```
-into the console. The following settings had been changed:
+1. All dt models should be written in .json file
+    2. Open your favourite code editor and create new .json file ¡img align=”center”
+    src=”pictures/dtexplorer.png” width= 400/¿
+    3. This code above is the example simple model which contains ‘temper-
+    ature’ and ‘Humid- ity’: It is based on azure dtdl language. [More about
+    it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 4. For
+    uploading click the upload button on DT explorer and select the .json file you
+    created before. Then your model will be shown below.
+    ¡img align=”center” src=”pictures/uploadmodel.png” width= 200/¿
+    5. Then finally the model is created and will be visualised if added to
+    explorer. ¡img align=”center” src=”pictures/dtmodel.png” width= 400/¿
 
-- System Options - Password: the password has been changed tocdl, the username remains
-    the same
-- System Options - Hostname: the hostname has been changed torpi-cdl(this name will
-    be needed later to get the IP of the Raspberry Pi without a monitor)
-- Interfacing Options - SSH: enable remote command line access to the Raspberry Pi via
-    SSH
-- Interfacing Options - I2C: enable I2C interface and loading the I2C kernel module auto-
-    matically (will be needed for some of the used sensors)
 
-Afterward the Raspberry Pi needs to be restarted and logged in with the new password.
-To be sure that the OS and its programs are up-to-date the following commands need to be
-executed:
-```sh
-sudo apt-get update
-sudo apt-get upgrade
-```
-### Remote access via SSH
+### 1.4 Setup Azure Function 1: ExtractDeviceData
 
-It is planned that the AirQuality module will be running continuously in a predefined position
-(e.g.: in the stairway below the TV), therefor it needs to be accessible remotely without any
-monitor and input device connected. To solve this requirement, the Raspberry Pi can be
-accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection
-1.3.1. The IP address of the Raspberry Pi can be set as static, to ensure the connection to
-it. It is also possible to get the IP address with apingcommand on the hostname of the
-Raspberry Pi from another computer. For Linux it is easy as entering the following command.
-```sh
-ping rpi-cdl
-```
-For Windows it is needed to add the parameter -4 to the ping command, so that the resolved IP address is in the IPv4 format.
-```sh
-ping -4 rpi-cdl
-```
-With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
-putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address needs to be updated.
-```sh
+### 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
 
-Figure 1.2: Applicationputtywith example settings for the SSH connection to the Raspberry
-Pi.
-```
-### Deploy Code to Raspberry
-The required scripts and documents are already available on Git-Hub as [DigitalTwin_Airquality_For_Covid_Risk_Assessment](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment).
-To Clone the project onto raspberry pi just run the command with project our project https link which can be found under Git-Hub project page under clone section.
-```sh
-git clone https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment.git
-```
-the project will be cloned and the active branch is 'development branch' you can change it by following command
-```sh
-git checkout <branch_name>
-In our case:
-git checkout development
-```
-### Required Libraries for the project
+### 1.5 Setup Time Series Insights Service (TSI)
 
-Now, you need to install some packages with the integrated package installer of Pythonpip.
-The Required packages are as follows:
-- RPi.GPIO
-- Adafruit-DHT
-- adafruit-circuitpython-ccs811CO2
-- azure-iot-device
+### 1.6 Setup Function 2: TransformTwinData
 
-You can Install these packages by following this syntax below in the command terminal.
-```sh
-	For example:
-	python3 -m pip install <PackageName>	
-```
-Execute all these commands one by one each:
-```sh
-	python3 -m pip install RPi.GPIO
-	python3 -m pip install Adafruit-DHT
-	python3 -m pip install adafruit-circuitpython-ccs811
-	python3 -m pip install azure-iot-device
-```
+### 1.7 Connect TransformTwinData to ADT and TSI
+
+Azure functions is a serverless concept of cloud native design that allows a
+piece of code deployed and execute without any need of server infrastructure,
+web server, or any configurations. Azure functions can be written in multiple
+languages such as C, Java, JavaScript, TypeScript, and Python We are using C
+language as it has predefined project template for creating the Azure Function.
+Azure function supports Event Hub Trigger and is executed automatically
+when event is fired from Azure Digital Twin
+**[DL] The general description of Azure Functions can be shortened and put into the introduction at the top of this readme file. This part should be rather about describing and setting up this specific azure function.**
+
+#### 1.7.1 Create new Event Hub namespace in Azure
+
+Search for event hub and create new Event Hub namespace with name and
+resource group. Event Hub namespace will receive events from your Azure
+Digital Twins instance, You’ll be using this event hubs namespace to hold the
+two event hubs:
+
+1. Twins hub - Event hub to receive twin change events
+2. Time series hub - Event hub to stream events to Time Series Insights
+3. Create Twins Hub:
+    Create new Event Hub inside Event Hub namespace by clicking add but-
+    ton. This event hub will receive twin change events from Azure Digital
+    Twins. To set up the twins hub, you’ll complete the following steps in this
+    section:
 
 ```
-Table 1.3: Python packages needed for this project on the Raspberry Pi with links to the
-related sections.
+(a) Create an authorization rule to control permissions to the hub
+(b) Create an endpoint in Azure Digital Twins that uses the authoriza-
+tion rule to access the hub
+(c) Create a route in Azure Digital Twins that sends twin updates event
+to the endpoint and connected twins hub
+(d) Get the twins hub connection string
 ```
+- Create twins hub authorization rule Go to the created event hub
+    inside the event hub namespace and select shared access policies
+    from side menu and click on add button for creating new autho-
+    rization policy and choose Send and Listen for the authorization
+    rule as highlighted below
+- Create twins hub endpoint Create an Azure Digital Twins end-
+    point that links your event hub to your Azure Digital Twins
+    instance. Specify a name for your twins hub endpoint. Go to
+    Digital Twin and choose Endpoints from side menu
+    *Endpoint type**- choose Event Hub
 
 
-###  Code
-  [DL] Also describe adaptations that are required to successfully run the code with a given azure setup.
-  
-In this section the code of the various components connected to the Raspberry Pi is descried.
-
-after successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also being ready to receive the data if still not been setup follow this [readme process](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin)
-
-Here under our 'physical_twin' we will have the scripts named data_abstract.py sctipt which will be used to get the data from sensor and send it to azure environment.
-
-For sending the data to raspberry please have the device 'connection_string' ready from [IoT-Hub Device section](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin) and replace the string in connection_string in the data_abstract.py script. To summarize:
-
-- Do wiring and successful hardware setup
-- Make azure environment running
-- Change the connection string in the data_abstract.py script
-- Run the data_abstract.py script
-
-
-Wait for the sensor to be ready and calibrate the thermistor
-First the script is configuring the I2C with the related SCL and SDA pins, then it waits for
-the sensor to be ready by checking if dataready is true. When finished a temperature offset
-(tempoffset) will be added to get more accurate results. From this point on the data can be
-read periodically with a delay in between.
-
-## Possilble Frequent Errors:
-###### Error: Script not running in raspberry:
-Make sure you have the updated OS and all lybraries installed and make sure the script is running in python v3 not in v2
-
-###### Error: Runtime Errror: 
-Baud Rate of device and sensor isn't matching preferred one is '100000' kHz. process to change is decribed above.
-
-###### Error: Device not Found:
-Wiring is not good for sensor. you can always check the sensor is in connection by the command:
-```sh
-sudo i2cdetect -y 1
 ```
-This will show if the device is connected or not. Further detailed discriptoin is under [this link](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c)
+*Subscription**- choose your azure subscription
+*Event hub namespace** and **Event Hub**- choose already
+created event hub namespace and event hub name
+*Authentication type**- key based
+*Authorization rule**- choose already created twin hub autho-
+rization rule
+```
+- Create twins hub event route Azure Digital Twins instances can
+    emit twin update events whenever a twin’s state is updated. In
+    this section, you’ll create an Azure Digital Twins **event route**
+    that will direct these update events to the twins hub for further
+    processing.
+    Create a route in Azure Digital Twins to send twin update events
+    to your endpoint from above. The filter in this route will only
+    allow twin update messages to be passed to your endpoint. Spec-
+    ify a name for the twins hub event route. choose already created
+    endpoint name.
+- Get twins hub connection string Go to the event hub namespace
+    and click on the created twins hub below , choose shared access
+    policies and click on created twins hub authorization rule , you
+    can see the detailed view , copy the primary connection string
+    as highlighted in the below image
+4. Create time series hub
+similar to twins hub create time series hub inside the existing event hub
+namespace
+- Create time series hub authorization rule
+Go to the created time series hub inside the event hub namespace
+and select shared access policies from side menu and click on add
+button for creating new authorization policy and choose Send and
+Listen for the authorization rule as highlighted below.
+- Get time series connection string
+Go to the event hub namespace and click on the created time series
+hub below , choose shared access policies and click on created time
+series hub authorization rule , you can see the detailed view , copy
+the primary connection string as highlighted in the below image
+5. Create Azure Function C
+- Create Azure Function with Event Hub Trigger
+Create a new C project and choose Azure Function as Project tem-
+plate
+Choose the Event Hub trigger that runs whenever event is fired in
+Azure Digital Twin
+- Go to project folder→code→AirQualityDataProcessing→AirQualityDataProcessing→ProcessDTTelemetryUpdateTSI.cs
+- ProcessDTTelemetryUpdateTSI.cs
+Set up the connection string name for eventhub twins and time series
+insights according to your project. Provide the EventHubTrigger and
+EventHub with twin hub and time series hub name as we created
+earlier in Azure event hub namespace.
 
-###### Error: Try Reapplying the voltage:
-Some wiring connection problem
 
-###### Error: Constant CO2 value:
-Sensor is not sensing good or sensor calibration is needed.
-###### Error: Data not receieved on Azure:
-Connection string is bad or no device is to receive the data from Azure side
+```
+copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to
+your new project or use the existing AirQualityDataProcessing project
+with solution file and set this as start-up project in visual studio.
+```
+```
+make a note of both the twin and time series hub connection string to use
+them in tha Azure function below.
+```
+#### 1.7.2 Create time series hub
+
+similar to twins hub create time series hub inside the existing event hub names-
+pace
+a) Create time series hub authorization rule
+Go to the created time series hub inside the event hub namespace and select
+shared access policies from side menu and click on add button for creating new
+authorization policy and choose Send and Listen for the authorization rule as
+highlighted below
+”.-auth-rule.png” is not created yet. Click to create. b) Get time series
+connection string
+Go to the event hub namespace and click on the created time series hub below
+, choose shared access policies and click on created time series hub authorization
+rule , you can see the detailed view , copy the primary connection string as
+highlighted in the below image
+”.-conn-str.png” is not created yet. Click to create. make a note of both the
+twin and time series hub connection string to use them in tha Azure function
+below.
+Create Azure Function C
+Create Azure Function with Event Hub Trigger
+a) Create a new C project and choose Azure Function as Project template
+”..png” is not created yet. Click to create. b) Choose the Event Hub trigger
+that runs whenever event is fired in Azure Digital Twin
+”..png” is not created yet. Click to create.
+
+## 2. Implementation of Use Case
+In this section, we describe the implementation of our air quality use case as described above. As an example, we use the following setting of our use case that has to be created in the Azure Setup described above.
+
+The Room with name "Room101" contains a Controller called "Raspberry1" and has a connected "CO2Sensor" and "LED".
+The Room with name "Room102" contains a Controller called "Raspberry2" and has a connected "CO2Sensor" and "LED".
+The Room with name "Lobby100" contains a Controller called "Raspberry3" and has a connected "CO2Sensor" and "LED".
+Both CO2Sensors send co2Values, and the LEDs have a Property called "color" that indicate the color in which it is currently blinking (NONE if the LED is turned off).
+To implement this setting in Azure, the following steps are necessary.
+
+### 2.1. Specify Digital Twins
+First, information of the physical devices must be specified in a way This information must be defined on the following two levels of abstraction:
+
+Interfaces: Therefore, we use the Digital Twins Definition Language (DTDL) - Version 2 offered by Microsoft. The folder /create_twins/interface_models contains the json files of the interfaces required for our use case, namely Room, AirQualityController and AirQualitySensor.In order to allow automation in Step 2, created files must be placed into the folder /create_twins/interface_models.
+Digital Twins: represent specific devices that conform to the structure imposed by their models. We use the format imposed by the ADT-service as json representation. The folder /create_twins/twin_models contains the json files of the Digital Twins required for our use case, namely Room101, Room102, Lobby100, Raspberry1, Raspberry2 and Rapsberry3. In order to allow automation in Step 2, created files must be placed into the folder /create_twins/twin_models.
+
+### 2.2. Create Digital Twins in ADT and TSI
+This information can be automatically set up using the json files described in Step 1 and the automation script provided in Folder /create_twins. In order to perform this step, the following prerequisites must be met:
+
+- **Installation of required python libraries:** Install Libraries json and urllib3. Therefore, open a Terminal and enter the following two commands:
+```python
+pip install json
+pip install urllib3
+```
+- **Download of Azure CLI:** To interact with your azure account from your computer, you need to install Azure CLI. With Azure CLI it is possible to sign into your Azure account and do most
+of the steps, that are possible at the Azure Portal homepage. It is recom-
+mended to install Azure CLI because it is the easiest way to log into your
+Azure account and some steps are done via Azure CLI in the documentation.
+The reference for Azure CLI is [available online](https://docs.microsoft.com/en-
+us/cli/azure/reference-index?view=azure-cli-latest).
+Azure CLI is available for Windows, macOS and Linux. There is a [related
+documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) avail-
+able for the different operating systems. After the installation it is possible
+to access Azure via terminal with the keyword ```az```. There are extensions of
+commands that are related to [Digital Twins](https://docs.microsoft.com/en-
+us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (keyword ```az dt```) and [IoT hub](https://docs.microsoft.com/en-
+us/cli/azure/iot?view=azure-cli-latest) (keyword ```az iot```).
+- **Login into Azure CLI:** After Azure CLI is installed on your PC, you can login via the command ```az login```.
+- **Adaptation of base_url and auth_token for ADT:** In the file digital_twin_api.py, you have to adapt the base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, go to ADT in your Azure Account and copy the host name. DigitalTwin To get the auth_token, enter the following command in the Azure CLI:
+ ```az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0```
+- **Adaptation of base_url and auth_token for TSI:** In the file tsi_api.py, adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
+ ``` az account get-access-token --resource 120d688d-1518-4cf7-bd38-182f158850b6```
+
+
+After these prerequisites are met, the models and twins described in the folders interface_models and twin_models are created in the ADT and TSI service.
+
+### 2.3. Create Endpoints for Devices in IoT-Hub
+For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to... TODO: Describe what we need device for TODO: Describe individual steps required to create device(s) for Digital Twins mentioned above. @Ramya: please add this here!
+
+Prerequisites:
+
+1. Set up Azure IoT Hub
+
+Next step is to create IoT devices.
+
+For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to create a digital twin of the physical device.
+
+In our use-case [twin_models](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/digital_twin/create_twins/twin_models) we have three different raspberry pi's for three different rooms. So, let us go ahead and create them in Azure IoT Hub.
+
+sample 1:
+
+Raspberry1-Lobby100.json
+
+In this sample we want to create IoT device with device id as **Raspberry1** as we have mentioned the digital twin id with property **dtid** in the  [Raspberry1.json](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin/create_twins/twin_models/Raspberry1.json) while creating the model instance of digital twin.
+
+![Raspberry1](./images/NewIoTDevice.png)
+
+After successful creation of IoT device, we can view them under IoT devices section inside IoT Hub.
+
+![Raspberry1Created](./images/SuccessIoTDeviceCreation.png) 
+
+Similarly create IoT devices in accordance with the twin_models. As per our use case we have created the IoT devices with names Raspberry2 and Raspberry3.
+
+After creation the final output will be as follows.
+
+![All_IotDevices](./images/All_IoTDevices.PNG) 
+
+We have created the IoT device name in accordance with twin models because of the following reasons:
+
+1. We want to automatically update the Digital twin with device data that IoT device receives
+2. The device data that we send to IoT Hub device is transmitted to Digital twin internally by Azure function.
 
 
 
-
+ 
