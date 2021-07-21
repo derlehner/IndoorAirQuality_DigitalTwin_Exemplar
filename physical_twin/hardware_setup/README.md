@@ -14,6 +14,7 @@
 	- DHT11
 	- CCS811
 	- Wait for the sensor to be ready and calibrate the thermistor
+- Start the raspberry to send the data to azure
 ## Prerequisites
 - Raspberry and accessories
 - Sensors
