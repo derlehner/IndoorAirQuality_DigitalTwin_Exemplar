@@ -47,15 +47,17 @@ It is recommended to use transistors to keep the current on the GPIOs at a minim
 transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage suppy pin to power the component.
 
 For wiring the hardware we should follow some documentations for sensor and raspberry pi. The required pinout connections are as follows:
-```sh
-	Sensor SDA - GPIO2
-	Sensor SCL - GPIO 3
-	Sensor Vcc - +5v
-	Sensor Grn - Ground
-	Sensor init - Ground
-	LED Bulb - GPIO 17
-```
-	
+
+| 	Pin 	| 	type 	| 	GIPO 	|
+|	---		|	---		|	---		|
+| 	Sensor	|	SDA 	| 	GPIO 2	|
+| 	Sensor 	| 	SCL 	| 	GPIO 3	|
+| 	Sensor 	| 	SDA 	| 	+5v 	|
+|	Sensor	|	Ground	| 	Grnd	|
+|	Sensor	| 	init	|	Grnd	|
+|	LED		| LED		|	GPIO 17	|
+
+
 ## Initial Setup of Raspberry OS
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
 Required Things:
