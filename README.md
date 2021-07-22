@@ -126,7 +126,7 @@ the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstar
 - Resource Locationd
 - IOT hub Name
 
-<img align="center" src="pictures/iothub.png" width= 400/>
+<img align="center" src="physical_twin/hardware_setup/images/piimager.png" width= 400/>
 
 
 

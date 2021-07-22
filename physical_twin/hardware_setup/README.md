@@ -20,18 +20,10 @@
 - Bread board and connection wires
 
 ## Hardware setup
-### Sensor CCS811 (CO2 measurement)
-- This [CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
-- Wiring is simple, the SDA (data) and SCL (clock) pins of the sensor need to be connected to
-- The SDA and SCL pins on the Raspberry Pi. It is based on the MOS (metal oxide semiconductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as an CO2 value and can only be used as a reference.
-- To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
-- There are datasheet and manual available at the homepage of joy-it^5. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
-
-**LED**: 
-The LEDs will be used to give a visual response to the user about the CO2 amount in the air and therefor about the air quality. It should be used as an indicator to open the windows and insert fresh air into the room.
-
 ### Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is dedicated computer with all neccesary things which normal pc has.  This send measured co2 values to the cloud and also used to command the treshold triggers if the valued reached above the limit by change the color of the LED or by Beeping sounds. 
+ <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
+ 
  An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). Anyways, in this project Raspberry is used, we need the following hardware for setting up the raspberry:
 - (Fully Integrated) Raspberry Pi 4 - Board
 - Power adapter for Raspberry Pi 4 (USB-C)
@@ -41,22 +33,30 @@ The LEDs will be used to give a visual response to the user about the CO2 amount
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
+### Sensor CCS811 (CO2 measurement)
+- This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
+- Wiring is simple, the `SDA` (data) and `SCL` (clock) pins of the sensor need to be connected to
+- The SDA and SCL pins on the Raspberry Pi. It is based on the `MOS` (metal oxide semiconductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as an CO2 value and can only be used as a reference.
+- To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
+- There are datasheet and manual available at the homepage of joy-it. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
+
 ### Wiring of Hardware
 Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
 It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
 transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage suppy pin to power the component.
 
-For wiring the hardware we should follow some documentations for sensor and raspberry pi. The required pinout connections are as follows:
+For wiring the hardware we should follow some documentations for sensor and raspberry pi. The required pinout connections are as follows: _for reference pin layout for the raspberry is also shown in the image_
 
 | 	Pin 	| 	type 	| 	GIPO 	|
 |	---		|	---		|	---		|
-| 	Sensor	|	SDA 	| 	GPIO 2	|
-| 	Sensor 	| 	SCL 	| 	GPIO 3	|
-| 	Sensor 	| 	SDA 	| 	+5v 	|
-|	Sensor	|	Ground	| 	Grnd	|
-|	Sensor	| 	init	|	Grnd	|
-|	LED		| LED		|	GPIO 17	|
+| 	Sensor	|	`SDA` 	| 	GPIO 2	|
+| 	Sensor 	| 	`SCL` 	| 	GPIO 3	|
+| 	Sensor 	| 	`+vcc` 	| 	+5v 	|
+|	Sensor	|	`Ground`	| 	Grnd	|
+|	Sensor	| 	`init`	|	Grnd	|
 
+
+<img src="https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png" width="600" />
 
 ## Initial Setup of Raspberry OS
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
@@ -68,8 +68,11 @@ Required Things:
  sudo snap install rpi-imager
 ```
 4. choose the OS as [Raspberry pi OS](https://www.raspberrypi.org/software/) 32 bitprobably it will be in first option
-5. insert the sd card and click write
-6. After its been installed you can insert this sd card into raspberry and you have freshly
+
+<img align="center" src="https://www.raspberrypi.org/app/uploads/2020/03/RPI_intro-e1583228263677.png" width= 400/>
+
+6. insert the sd card and click write
+7. After its been installed you can insert this sd card into raspberry and you have freshly
     installed linux on you device.
 
 For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi homepage^3.
@@ -118,19 +121,16 @@ accessed via SSH which can be enabled insudo raspi-configas mentioned in subsect
 it. It is also possible to get the IP address with apingcommand on the hostname of the
 Raspberry Pi from another computer. For Linux it is easy as entering the following command.
 ```sh
-ping rpi-cdl
+syntax:
+ping <pi_hostname>.local
 ```
 For Windows it is needed to add the parameter -4 to the ping command, so that the resolved IP address is in the IPv4 format.
 ```sh
-ping -4 rpi-cdl
+ping rpi-cdl.local
 ```
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address needs to be updated.
-```sh
 
-Figure 1.2: Applicationputtywith example settings for the SSH connection to the Raspberry
-Pi.
-```
 ### Deploy Code to Raspberry
 The required scripts and documents are already available on Git-Hub as [DigitalTwin_Airquality_For_Covid_Risk_Assessment](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment).
 To Clone the project onto raspberry pi just run the command with project our project https link which can be found under Git-Hub project page under clone section.
@@ -165,55 +165,46 @@ Execute all these commands one by one each:
 	python3 -m pip install azure-iot-device
 ```
 
-```
-Table 1.3: Python packages needed for this project on the Raspberry Pi with links to the
-related sections.
-```
-
-
 ###  Code
-  [DL] Also describe adaptations that are required to successfully run the code with a given azure setup.
-  
 In this section the code of the various components connected to the Raspberry Pi is descried.
 
 after successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also being ready to receive the data if still not been setup follow this [readme process](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin)
 
 Here under our 'physical_twin' we will have the scripts named data_abstract.py sctipt which will be used to get the data from sensor and send it to azure environment.
 
-For sending the data to raspberry please have the device 'connection_string' ready from [IoT-Hub Device section](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin) and replace the string in connection_string in the data_abstract.py script. To summarize:
+For sending the data to raspberry please have the device `connection_string` ready from [IoT-Hub Device section](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin) and replace the string in connection_string in the data_abstract.py script. To summarize:
 
 - Do wiring and successful hardware setup
 - Make azure environment running
-- Change the connection string in the data_abstract.py script
-- Run the data_abstract.py script
+- Change the `connection_string` in the data_abstract.py script eg:
+```sh
+connection_string = 'HostName=RaspberryIOTHUB.azure-devices.net;DeviceId=Birgit_Office;SharedAccessKey=xJFhL0ByzrNsChgMfU+Ad6bTRD25Aaph5UWzXuNw7OU='
+```
+- Run the data_abstract.py script by python v3
 
 
-Wait for the sensor to be ready and calibrate the thermistor
-First the script is configuring the I2C with the related SCL and SDA pins, then it waits for
-the sensor to be ready by checking if dataready is true. When finished a temperature offset
-(tempoffset) will be added to get more accurate results. From this point on the data can be
-read periodically with a delay in between.
+Wait for the sensor to be ready and calibrate the thermistor. First the script is configuring the I2C with the related SCL and SDA pins, then it waits for the sensor to be ready by checking if dataready is true. When finished a temperature offset (tempoffset) will be added to get more accurate results. From this point on the data can be read periodically with a delay in between.
 
 ## Possilble Frequent Errors:
-###### Error: Script not running in raspberry:
-Make sure you have the updated OS and all lybraries installed and make sure the script is running in python v3 not in v2
+###### Error: `Script not running in raspberry`:
+Make sure you have the updated OS and all lybraries installed and make sure the script is running in `python v3` not in v2
 
-###### Error: Runtime Errror: 
-Baud Rate of device and sensor isn't matching preferred one is '100000' kHz. process to change is decribed above.
+###### Error: `Runtime Errror`: 
+Baud Rate of device and sensor isn't matching preferred one is `Baud Rate = '100000'` kHz. process to change is decribed above.
 
-###### Error: Device not Found:
+###### Error: `Device not Found`:
 Wiring is not good for sensor. you can always check the sensor is in connection by the command:
 ```sh
 sudo i2cdetect -y 1
 ```
 This will show if the device is connected or not. Further detailed discriptoin is under [this link](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c)
 
-###### Error: Try Reapplying the voltage:
+###### Error: `Try Reapplying the voltage`:
 Some wiring connection problem
 
-###### Error: Constant CO2 value:
+###### Error: `Constant CO2 value`:
 Sensor is not sensing good or sensor calibration is needed.
-###### Error: Data not receieved on Azure:
+###### Error: `Data not receieved on Azure`:
 Connection string is bad or no device is to receive the data from Azure side
 
 
