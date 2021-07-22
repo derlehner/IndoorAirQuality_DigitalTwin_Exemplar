@@ -56,7 +56,7 @@ For wiring the hardware we should follow some documentations for sensor and rasp
 |	Sensor	| 	`init`	|	Grnd	|
 
 
-<img src="https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png" width="600" />
+<img src="https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png" width="400" />
 
 ## Initial Setup of Raspberry OS
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
