@@ -1,8 +1,4 @@
 # An Exemplar for Model-Driven Digital Twin Development
-
-<img align="Center" src="https://www.cdg.ac.at/typo3conf/ext/rockit_theme/Resources/Public/images/Logo.png" width= 400/> 
-
---------------------------------------
 <a href="https://cdl-mint.se.jku.at/" >
 <img alt="Qries" align="Right" src="https://cdl-mint.se.jku.at/wp-content/uploads/2019/04/CDL-MINT.png"
 width=120" height="120">
