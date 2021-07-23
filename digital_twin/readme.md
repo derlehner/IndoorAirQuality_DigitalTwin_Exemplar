@@ -191,9 +191,9 @@ Now we need to create Azure function to transform the twin data to the TSI insta
 
 
 
-Navigate to the project folder [AirQualityUseCase]() and file
+Navigate to the project folder [AirQualityUseCase](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin/AirQualityUseCase) and file
 
-[ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/AirQualityDataProcessing/AirQualityDataProcessing/ProcessDTTelemetryUpdatetoTSI.cs)
+[ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/main/digital_twin/AirQualityUseCase/AirQualityDataProcessing/ProcessDTTelemetryUpdatetoTSI.cs)
 Copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
 
 Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
