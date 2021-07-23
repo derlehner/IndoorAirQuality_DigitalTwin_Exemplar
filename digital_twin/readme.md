@@ -1,5 +1,8 @@
-# Digital Twin
+# Digita Twins
+<img src="https://miro.medium.com/max/1400/0*cbUNSheTkQxTjhL4" alt="Digital Twin" class="center" width= 700>
 
+
+The digital twin is a digital representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance.
 **[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
 
 ## Contents
@@ -16,24 +19,20 @@
    - 2.1 Specify Digital Twins
    - 2.2 Create Digital Twins in ADT and TSI
    - 2.3 Create Device Endpoints in IoT-Hub
-### 1.1 Setup Digital Twin Infrastructure in Azure
+ 
+ # Digital Twins on Azure Environment
+ [Microsoft Azure](https://azure.microsoft.com/en-gb/) is a cloud solution which provides services like [Internet-Of-Things](https://www.wikiwand.com/en/Internet_of_things) and other [Industries 4.0 services](https://www.wikiwand.com/en/Fourth_Industrial_Revolution) with a lot of resources and services. <img align="right" src="https://www.soeldner-consult.de/wp-content/uploads/2018/02/Azure-lockup-02.jpg" width= 350/> 
+ The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of "STATE OF THE ART"  idea that anyone of you reading this can implement it without any struggles.
+### 1.1 Setting up azure
 
 #### 1.1.1 Create Azure Account
 
-Microsoft Azure is a cloud solution with a lot of resources and services. The
-once that are interesting for this project and are covered by this documentation.
-The following sections describe the relevant steps to get an Azure Setup needed
-for this project. All information covered by this chapter are also covered by
-the documentation of Microsoft. It is possible to get a free Microsoft Azure
-account, but it is recommended to create an Microsoft Azure student account,
-because it will apply$100 credit to the account.To create an Microsoft Azure
-student account it is necessary to have 2 different e-mail addresses which is
-the academic e-mail address (@jku.at) to verify you are eligible or the student
-account, another e-mail address, that will be used as login and main e-mail
+The following sections describe the relevant steps to get an Azure Setup needed for this
+ All information covered by this chapter are also covered by the documentation of Microsoft. It is possible to get a free Microsoft Azure account, but it is recommended to create an Microsoft Azure student account, because it will apply$100 credit to the account.To create an Microsoft Azure student account it is necessary to have 2 different e-mail addresses which is the academic e-mail address (@jku.at) to verify you are eligible or the student account, another e-mail address, that will be used as login and main e-mail
 address for Azure. Follow the process:
 
-1. Go to this link and click ”free account” on top right.
-2. On next page click ”start for free”
+1. Go to this link and click [”free account”](https://azure.microsoft.com/en-us/free/students/) on top right.
+2. On next page click ”start free”
 3. Enter your data and your account will be created.
 
 
