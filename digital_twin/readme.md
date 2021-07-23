@@ -43,7 +43,7 @@ address for Azure. Follow the process:
 **IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your Internet of Things (IoT) application and the devices it manages. 
 <img 
 	 align="right" 
-	 src="https://www.overleaf.com/project/60c6345f0a090977d16c6bdf/file/60c71469d1075c213c9086a0" 
+	 src="images/iothubhomepage.png" 
 	 width= 300/> 
 
 Azure IoT Hub provides a cloud-hosted solution back end to connect virtually any device. IoT Hub is the entry point to the data which we actually want to work on after receiving here we have huge options to work on with. We can use the IoT app as a source for other azure services. In this section an Azure IoT hub will be created. A related documentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
