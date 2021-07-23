@@ -43,7 +43,7 @@ The actual work path will be explained in this image to get better understanding
 
 ### 1.2 Setup IoT-Hub
 
-**IoT Hub** is a `Platform-as-a-Services (PaaS)` managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your `Internet of Things (IoT)` application and the devices it manages. 
+[**IoT Hub**](https://docs.microsoft.com/en-us/azure/iot-hub/) is a `Platform-as-a-Services (PaaS)` managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your `Internet of Things (IoT)` application and the devices it manages. 
 
 
 Azure IoT Hub provides a cloud-hosted solution back end to connect virtually any device. IoT Hub is the entry point to the data which we actually want to work on after receiving here we have huge options to work on with. We can use the IoT app as a source for other azure services. In this section an Azure IoT hub will be created. A related documentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
@@ -51,8 +51,7 @@ The main Usage this service is:
 
 - Manage IoT Devices (make successful connections for data transfer)
 - You can send Telemetry-data securely from physical hardware (sensor)
-    to Azure. For info [refer this website](https://docs.microsoft.com/en-
-    us/azure/iot-hub/quickstart-send-telemetry-python)
+    to Azure. For info [refer this website](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-python)
 - Using ‘Message Routing’ option telemetry messages can be sent to : Events,
     Storage, Event Hubs and much more.
 
