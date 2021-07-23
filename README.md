@@ -1,12 +1,5 @@
 # Digital Twin Airquality For Covid Risk Assessment
 
-## Using Microsoft Azure Cloud Service
-
-#### Author: Hari Shankar
-
-#### Last updated July 5, 2021
-
-
 ## Contents
 
 - 1 Introduction 
@@ -32,9 +25,21 @@
    - 2.9 Machine Learning
    - 2.10 Visualisation
 
-# Chapter 1
+
 
 # Introduction
+<img align="right" src="https://www.cdg.ac.at/typo3conf/ext/rockit_theme/Resources/Public/images/Logo.png" width= 350/> 
+The Digital Twin Airquality For Covid Risk Assessment is the Digital Twin project managed by Christian Doppler Laboratory for Model-Integrated Smart Production in Johannes Keppler University Linz, Austria.
+
+
+[![Travis Build Status](https://travis-ci.org/MarlinFirmware/Marlin.svg)](https://cdl-mint.se.jku.at/)
+
+
+<a href="https://cdl-mint.se.jku.at/" >
+<img alt="Qries" src="https://cdl-mint.se.jku.at/wp-content/uploads/2019/04/CDL-MINT.png"
+width=100" height="100">
+</a>
+
 ### 1.1 Project Road Map
 
 In this section we will discuss about how our project is planned, its working architecture and
