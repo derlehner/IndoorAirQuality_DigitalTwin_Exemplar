@@ -2,30 +2,6 @@
 
 ## Contents
 
-- 1 Introduction 
-   - 1.1 Project Road Map
-   - 1.2 Raspberry Pi
-   - 1.3 Using Raspberry pi on our project
-- 2 Setup: Microsoft Azure
-   - 2.1 Create Account
-   - 2.2 Install Azure CLI on your PC
-   - 2.3 IoT Hub App
-      - 2.3.1 Creating the hub app
-      - 2.3.2 Usage and further info
-   - 2.4 Create Digital Twins Platform
-      - 2.4.1 Digital Twin Explorer
-      - 2.4.2 To connect DT explorer to your Azure DT:
-      - 2.4.3 Creating and uploading the model
-   - 2.5 Local development with Azure
-      - 2.5.1 Azure in Visual Studio
-      - 2.5.2 Visual Studio Code Azure Extension
-   - 2.6 Azure library for Python on Raspberry Pi
-   - 2.7 Setup Debug Environment for Azure Functions in Visual Studio
-   - 2.8 Physical Model
-   - 2.9 Machine Learning
-   - 2.10 Visualisation
-
-
 
 # Introduction
 <img align="Center" src="https://www.cdg.ac.at/typo3conf/ext/rockit_theme/Resources/Public/images/Logo.png" width= 400/> 
