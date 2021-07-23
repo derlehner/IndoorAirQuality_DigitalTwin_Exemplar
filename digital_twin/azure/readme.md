@@ -1,8 +1,4 @@
-# Digital Twins
-<img src="https://miro.medium.com/max/1400/0*cbUNSheTkQxTjhL4" alt="Digital Twin" class="center" width= 700>
-
-
-Digital twins are a critical component of Industry 4.0. Their basic principle is to replicate physical assets in a virtual world in order to model their dynamics. It's a representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance._
+# Implementation of Digital Twins with Azure tools
 
 ## Contents
 - 1 Digital Twins on Azure Environment
@@ -21,7 +17,7 @@ Digital twins are a critical component of Industry 4.0. Their basic principle is
    - 2.2 Create Digital Twins in ADT and TSI
    - 2.3 Create Device Endpoints in IoT-Hub
 
- # Digital Twins on Azure Environment
+## Digital Twins on Azure Environment
  [Microsoft Azure](https://azure.microsoft.com/en-gb/) is a cloud solution which provides services like [Internet-Of-Things](https://www.wikiwand.com/en/Internet_of_things) and other [Industries 4.0 services](https://www.wikiwand.com/en/Fourth_Industrial_Revolution) with a lot of resources and services. <img align="right" src="https://www.soeldner-consult.de/wp-content/uploads/2018/02/Azure-lockup-02.jpg" width= 350/> 
  The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of_"STATE OF THE ART"_  idea that anyone of you reading this can implement it without any struggles.
 ### 1.1 Setting up azure
