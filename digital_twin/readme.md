@@ -237,7 +237,7 @@ Add the following nuget packages to the project to interact with Azure Digital T
 
 4. Azure.Core
 
-   replace the function.cs file with the [project code] ()
+   replace the function.cs file with the [project code] (https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/main/digital_twin/AzureFunctionApp1/Function1.cs)
 
    In this function, we have created the environment variable  accessing the Digital twin instance. Once the IoT device receives the data, the event grid triggers the azure function and we do some pre-processing steps like the JSON serialization for converting the telemetry data into the required data format. Finally we use AddReplace method to update the twin with new data.
 
