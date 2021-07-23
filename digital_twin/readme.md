@@ -20,7 +20,7 @@ Digital twins are a critical component of Industry 4.0. Its basic principle is t
    - 2.1 Specify Digital Twins
    - 2.2 Create Digital Twins in ADT and TSI
    - 2.3 Create Device Endpoints in IoT-Hub
- 
+
  # Digital Twins on Azure Environment
  [Microsoft Azure](https://azure.microsoft.com/en-gb/) is a cloud solution which provides services like [Internet-Of-Things](https://www.wikiwand.com/en/Internet_of_things) and other [Industries 4.0 services](https://www.wikiwand.com/en/Fourth_Industrial_Revolution) with a lot of resources and services. <img align="right" src="https://www.soeldner-consult.de/wp-content/uploads/2018/02/Azure-lockup-02.jpg" width= 350/> 
  The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of_"STATE OF THE ART"_  idea that anyone of you reading this can implement it without any struggles.
@@ -116,7 +116,7 @@ In the above image you can find the home page of Digita twin of azure here in th
 
 ```sh
 Host name  :  Covid-Risk-Accessment-DigitalTwin.api.weu.digitaltwins.azure.net
-``` 
+```
 
 This ”Host Name”where you can find in DT homepage is the string should be noted. It is used further for installing ADT Explorer.
 
@@ -177,10 +177,72 @@ the string here and click ok. You will be now connected to the azure
 
 ### 1.6 Setup Function App 2: TransformTwinData
 
+Now we need to create Azure function to transform the twin data to the TSI instance. we have used C# to create Azure function as it provides ready-to-use project template for event hub triggers. 
 
+1. Create Azure Function with Event Hub Trigger
+
+   a) Create a new C# project and choose Azure Function as Project template
+
+![Azure_Fn](./images/azureFn.png)
+
+   b) Choose the Event Hub trigger that runs whenever event is fired in Azure Digital Twin
+
+![eventHubTrigger](./images/eventHubTrigger.PNG)
+
+
+
+Navigate to the project folder [AirQualityUseCase]() and file
+
+[ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/raspberry/simulated_data/cdlmint-airqualityusecase/AirQualityDataProcessing/AirQualityDataProcessing/ProcessDTTelemetryUpdatetoTSI.cs)
+Copy paste the contents from ProcessDTTelemetryUpdateTSI.cs to your new project or use the existing AirQualityDataProcessing project with solution file and set this as start-up project in visual studio.
+
+Set up the connection string name for eventhub twins and time series insights according to your project. Provide the EventHubTrigger and EventHub with twin hub and time series hub name as we created earlier in Azure event hub namespace.
+
+![eventHubandTriggerConnStr](./images/eventHubandTriggerName.png)
+
+
+
+**C# function overview**
+
+C# Function gets the EventData from EventBus.Event data is in array segment and we parse to get the string. Convert JSON to .Net Object using (JObject) JsonConvert.DeserializeObject and cast it. Get properties out of the JSON Object, serialize to JSON string and add telemetry value to TSI (Time Series Instance)
+
+Add a new json file **local.settings.json** with following information to the **AirQualityDataProcessing project**. 
+
+Set the property name for twin and time series hub and add the primary connection string  obtained from Azure as follows
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+    "EventHubAppSetting-Twins": "Endpoint=sb://eventhubnamespace-ramya.servicebus.windows.net/;SharedAccessKeyName=twinHubAuthRule;SharedAccessKey=69U8vJHbaNdp4XrXFO/SRaplc6vu7hFTjXBcViwX1BY=;EntityPath=eventhub",
+    "EventHubAppSetting-TSI": "Endpoint=sb://eventhubnamespace-ramya.servicebus.windows.net/;SharedAccessKeyName=timeseriesauthrule;SharedAccessKey=AtrIf6/ZgErjLm+8Pzu4ms3PEKuHNd+P+8VYAwdC5kE=;EntityPath=timeserieshub",
+    "EventHubAppSetting-Twins-Structure": "Endpoint=sb://airqualitydatabus.servicebus.windows.net/;SharedAccessKeyName=automation;SharedAccessKey=Ayfn2C4d1sqF1RgZ0Vl488Ams2cH+K2Z8okQ/rsc8tI=;EntityPath=pushdtupdatetotsi",
+    "EventHubAppSetting-TSI-Structure": "Endpoint=sb://airqualitydatabus.servicebus.windows.net/;SharedAccessKeyName=automation;SharedAccessKey=R+uyKaMQXS9FYjCUW1LVwk6IeFRNoEKgsqJLWnPXgJ0=;EntityPath=pulldtstructureupdates"
+
+  }
+}
+```
+
+Set up the connection string for EventHubAppSetting-Twins and EventHubAppSetting-TSI from Azure .
+
+**Publish the Azure function** 
+
+Right click on the C# project and choose publish  ,give the name for publishing and make a note for later use in this project, choose the resource group for Azure resources and finish , after successful publish, you see the image as shown below
+
+![azureFnPublish](./images/AzureFnPublish.png)
+
+**Verify the Azure function publish**
+
+search for the function name in Azure that we set while publishing the function app from C#.If its successfully publish you will see the function app in the Azure 
+
+![verifyAzureFnPublish](./images/verifyPublish.PNG)
 
 _____________________________________________________________________________________________
-**RAMYA PLEASE REVIEW THESE CONTENTS BELOW **
+Now , whenever the Digital twin instance receives data, Azure function is triggered and sends data from DT to TSI.
+
 ### 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
 
 ### 1.5 Setup Time Series Insights Service (TSI)
