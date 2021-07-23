@@ -1,8 +1,8 @@
-# Digita Twins
+# Digital Twins
 <img src="https://miro.medium.com/max/1400/0*cbUNSheTkQxTjhL4" alt="Digital Twin" class="center" width= 700>
 
-_
-Digital twins are a critical component of Industry 4.0. Its basic principle is to replicate physical assets in a virtual world in order to model its dynamics. It's a representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance._
+
+Digital twins are a critical component of Industry 4.0. Their basic principle is to replicate physical assets in a virtual world in order to model their dynamics. It's a representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance._
 
 ## Contents
 - 1 Digital Twins on Azure Environment
