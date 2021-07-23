@@ -45,7 +45,7 @@ If created manually the graphical interface must be used which has its benefits 
 
 ![model_picture](./images/abaqus_creatingParts.JPG)
 
-
+Downloading the input files at this is enough to get the model to work. The molecular_extensions.inp file is the single input file that works for one room and the master.inp file is for making all of the room sizes work. The input files need to be imported on Abaqus under File-> Import->Model and then clicking on run at the graphical user interface should be enough to get the simulation. For wholeness purposes, the model will be further described in general below in order to give a general idea about physical modelling of systems.
 
 
 ### Modelling the shape of the room
@@ -240,6 +240,6 @@ the following renumbering settings  had to be additionally applied.
 
 ## Output Files on Abaqus and post-processing of the simulation
 
-The analysis of the output files is only important when looking at the color codes as shown below.
+The analysis of the output files is only important when looking at the color codes as shown below. 
 
 ![model_picture](./images/co2_molecules.JPG)
