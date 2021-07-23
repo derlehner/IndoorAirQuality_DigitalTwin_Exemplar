@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<at.jku.se.mosumo.core.metamodel.monitoringmm:MOSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:at.jku.se.mosumo.core.metamodel.monitoringmm="http://www.se.jku.at/mosumo/metamodel"
+    name="Room">
+  <agents name="Sensor">
+    <elements
+        xsi:type="at.jku.se.mosumo.core.metamodel.monitoringmm:MOProperty"
+        name="value"/>
+    <elements
+        xsi:type="at.jku.se.mosumo.core.metamodel.monitoringmm:MOProperty"
+        name="type"/>
+    <elements
+        xsi:type="at.jku.se.mosumo.core.metamodel.monitoringmm:MOProperty"
+        name="unit"/>
+  </agents>
+  <agents name="Alarm">
+    <elements
+        xsi:type="at.jku.se.mosumo.core.metamodel.monitoringmm:MOProperty"
+        name="isActive"/>
+  </agents>
+</at.jku.se.mosumo.core.metamodel.monitoringmm:MOSystem>

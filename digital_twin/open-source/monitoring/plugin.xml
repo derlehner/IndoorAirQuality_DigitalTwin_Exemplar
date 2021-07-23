@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated monitoringmm -->
+      <package
+            uri="http://www.se.jku.at/mosumo/metamodel"
+            class="monitoringmm.MonitoringmmPackage"
+            genModel="model/monitoringmm.genmodel"/>
+   </extension>
+
+</plugin>
