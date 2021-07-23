@@ -1,9 +1,5 @@
 # Digital Twin Airquality For Covid Risk Assessment
 
-## Contents
-
-
-# Introduction
 <img align="Center" src="https://www.cdg.ac.at/typo3conf/ext/rockit_theme/Resources/Public/images/Logo.png" width= 400/> 
 
 --------------------------------------
