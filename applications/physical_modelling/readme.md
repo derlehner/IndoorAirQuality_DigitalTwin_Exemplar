@@ -85,7 +85,6 @@ in the following sections.
 ### Additions needed in the Digital to create the Abaqus model
 you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model
 
-**[DL] We can structure this section in the following way: first, describe the meta-model of abaqus. Then, describe what additions we need in the Digital Twin to create the Abaqus model. Then, describe what would be benefits of making this (you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model).**
 
 
 ### Modelling the CO2 source(s) in the room
@@ -241,5 +240,6 @@ the following renumbering settings  had to be additionally applied.
 
 ## Output Files on Abaqus and post-processing of the simulation
 
+The analysis of the output files is only important when looking at the color codes as shown below.
 
-
+![model_picture](./images/co2_molecules.JPG)
