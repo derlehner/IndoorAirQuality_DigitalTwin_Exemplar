@@ -173,6 +173,42 @@ the string here and click ok. You will be now connected to the azure
 
 ### 1.4 Setup Time Series Insights Service (TSI)
 
+we need to visualize the data from our event source to TSI. The event source could either be Event Hub or IoT Hub. In our case, we have chosen event source as the Event Hub to transfer the DT data. 
+
+we can create the new time series resource in Azure by following the steps below.
+
+1. Search for time series resource from Azure explorer and create new time series resource.
+
+![createTSI](./images/CreateTSI.JPG)
+
+2. Setup the event source as Event Hub in the next section as shown below. choose your event hub which you have already created inside your event hub namespace.
+
+   ![TSIEventSource](./images/TSIEventSource.JPG)
+
+   3. After successful creation of time series instance, you can view them in the Azure Time Series Insights Environment.
+
+      ![TimeSeriesEnvironment](./images/TSIEnvironment.JPG)
+
+   4. To view the time series graph, click on go to TSI Explorer button as shown below.
+
+      ![TSIExplorerMenu](./images/TSIExpMenu.JPG)
+
+   5. we can view the data in the TSI Explorer as shown below.
+
+      The time series explorer has the graph and model menu for displaying graph and setting model instances and hierarchies.
+
+      From model menu, choose the time series instance and the variable that need to be displayed in the graph. 
+
+      for instance , we have the co2 data in property co2 , select variable and add them into graph.
+
+      similarly, we can customise the graph with other chart types such as Heat map or scatter plot and can view specific data by choosing desired time intervals and applying filters for data.
+
+      ![TSIGraph](./images/TSIData_IoTEventSource.png)
+
+      
+
+   
+
 ### 1.5 Setup Function App 1: ExtractDeviceData
 
 ### 1.6 Setup Function App 2: TransformTwinData
@@ -242,10 +278,6 @@ search for the function name in Azure that we set while publishing the function 
 
 _____________________________________________________________________________________________
 Now , whenever the Digital twin instance receives data, Azure function is triggered and sends data from DT to TSI.
-
-### 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
-
-### 1.5 Setup Time Series Insights Service (TSI)
 
 
 ### 1.7 Connect TransformTwinData to ADT and TSI
