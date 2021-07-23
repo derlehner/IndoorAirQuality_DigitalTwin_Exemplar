@@ -187,25 +187,25 @@ we can create the new time series resource in Azure by following the steps below
 
    3. After successful creation of time series instance, you can view them in the Azure Time Series Insights Environment.
 
-      ![TimeSeriesEnvironment](./images/TSIEnvironment.JPG)
+   ![TimeSeriesEnvironment](./images/TSIEnvironment.JPG)
 
    4. To view the time series graph, click on go to TSI Explorer button as shown below.
 
-      ![TSIExplorerMenu](./images/TSIExpMenu.JPG)
+   ![TSIExplorerMenu](./images/TSIExpMenu.JPG)
 
-   5. we can view the data in the TSI Explorer as shown below.
+   we can view the data in the TSI Explorer as shown below.
 
-      The time series explorer has the graph and model menu for displaying graph and setting model instances and hierarchies.
+   The time series explorer has the graph and model menu for displaying graph and setting model instances and hierarchies.
 
-      From model menu, choose the time series instance and the variable that need to be displayed in the graph. 
+   From model menu, choose the time series instance and the variable that need to be displayed in the graph. 
 
-      for instance , we have the co2 data in property co2 , select variable and add them into graph.
+   for instance , we have the co2 data in property co2 , select variable and add them into graph.
 
-      similarly, we can customise the graph with other chart types such as Heat map or scatter plot and can view specific data by choosing desired time intervals and applying filters for data.
+   similarly, we can customise the graph with other chart types such as Heat map or scatter plot and can view specific data by choosing desired time intervals and applying filters for data.
 
-      ![TSIGraph](./images/TSIData_IoTEventSource.png)
+   ![TSIGraph](./images/TSIData_IoTEventSource.png)
 
-      
+   
 
    
 
@@ -213,9 +213,19 @@ we can create the new time series resource in Azure by following the steps below
 
 We are setting up this Azure function for transferring the device data from IoT Hub to DT. This function is triggered by Event Grid Trigger  and when the IoT device receives data it sends to DT internally.
 
-Create a new C#  Azure function and choose Event Grid Trigger template.
+**Creating Azure Function**
 
-Packages required:
+1. a) Create a new C# project and choose Azure Function as Project template
+
+![Azure_Fn](./images/azureFn.png)
+
+   b) Choose the Event Hub trigger that runs whenever event is fired in Azure Digital Twin
+
+![eventHubTrigger](./images/eventHubTrigger.PNG)
+
+
+
+**Packages required:**
 
 Add the following nuget packages to the project to interact with Azure Digital Twin
 
@@ -233,7 +243,7 @@ Add the following nuget packages to the project to interact with Azure Digital T
 
    Publish the app to Azure with a function name , resource group. 
 
-   **verify if publish is successful in Azure:**
+   **Verify if publish is successful in Azure:**
 
    search for the function name in azure and if it appears, the publish is successful.
 
