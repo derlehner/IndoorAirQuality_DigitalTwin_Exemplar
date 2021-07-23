@@ -1,8 +1,9 @@
 # Digita Twins
 <img src="https://miro.medium.com/max/1400/0*cbUNSheTkQxTjhL4" alt="Digital Twin" class="center" width= 700>
 
+_
+Digital twins are a critical component of Industry 4.0. Its basic principle is to replicate physical assets in a virtual world in order to model its dynamics. It's a representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance._
 
-The digital twin is a digital representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance.
 **[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
 
 ## Contents
@@ -39,19 +40,14 @@ address for Azure. Follow the process:
 
 ### 1.2 Setup IoT-Hub
 
-**IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in
-the cloud, that acts as a central message hub for bi-directional commu-
-nication between an IoT application and the devices it manages. This is
-one of the services which Azure enables highly secure and reliable communi-
-cation between your Internet of Things (IoT) application and the devices it
-manages. Azure IoT Hub provides a cloud-hosted solution back end to con-
-nect virtually any device. IoT Hub is the entry point to the data which
-we actually want to work on after receiving here we have huge options to
-work on with. We can use the IoT app as a source for other azure services.
-In this section an Azure IoT hub will be created. A related documentation
-is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-
-hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
-Usage:
+**IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your Internet of Things (IoT) application and the devices it manages. 
+<img 
+	 align="right" 
+	 src="https://www.overleaf.com/project/60c6345f0a090977d16c6bdf/file/60c71469d1075c213c9086a0" 
+	 width= 300/> 
+
+Azure IoT Hub provides a cloud-hosted solution back end to connect virtually any device. IoT Hub is the entry point to the data which we actually want to work on after receiving here we have huge options to work on with. We can use the IoT app as a source for other azure services. In this section an Azure IoT hub will be created. A related documentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
+The main Usage this service is:
 
 - Manage IoT Devices (make successful connections for data transfer)
 - You can send Telemetry-data securely from physical hardware (sensor)
@@ -68,7 +64,6 @@ Usage:
 - Resource Locationd
 - IOT hub Name
 4. You will be created the azure IoT-Hub app now.
-**[DL] We should add some screenshots here to show how IoT-Hub is created**
 
 #### 1.2.1 Device Creation
 
