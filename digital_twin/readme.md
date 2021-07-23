@@ -39,7 +39,7 @@ address for Azure. Follow the process:
 The actual work path will be explained in this image to get better understanding: For the **Hardware Setup** its been explained in [this sections](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/physical_twin/hardware_setup) under `/physical_twin/hardware_setup`
 
 <img src="images/workpath.jpg" 
-	 width= 500/> 
+	 width= 800/> 
 
 ### 1.2 Setup IoT-Hub
 
