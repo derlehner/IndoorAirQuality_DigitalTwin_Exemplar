@@ -4,18 +4,18 @@
 _
 Digital twins are a critical component of Industry 4.0. Its basic principle is to replicate physical assets in a virtual world in order to model its dynamics. It's a representation of a physical object, process, or service. A digital twin can be a digital replica of an object in the physical world, such as a jet engine, wind farms, or even larger items such as buildings, or whole cities. This twin technology is used to replicate processes to collect data and predict the performance._
 
-**[DL] We should write some introduction here. Mention that we are building Digital Twins using tools from Microsoft Azure, and then describe each used Azure tool in one sentence (I have made some comments on this in the initial version of this readme file created by Ramya).**
-
 ## Contents
-- 1 Setup Digital Twin Infrastructure in Azure
-   - 1.1 Create an Azure Account
+- 1 Digital Twins on Azure Environment
+   - 1.1 Setting up azure
    - 1.2 Setup IoT-Hub
    - 1.3 Setup Azure Digital Twins Service (ADT)
-   - 1.4 Setup Azure Function 1: ExtractDeviceData
-   - 1.5 Connect ExtractDeviceData to IoT-Hub and ADT
-   - 1.5 Setup Time Series Insights Service (TSI)
-   - 1.6 Setup Azure Function 2: TransformTwinData
-   - 1.7 Connect TransformTwinData to ADT and TSI
+   - 1.4 Setup Time Series Insights Service (TSI)
+   - 1.5 Setup Function App 1: ExtractDeviceData
+   - 1.6 Setup Function App 2: TransformTwinData
+   - 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
+   - 1.8 Setup Time Series Insights Service (TSI)
+   - 1.9 Setup Azure Function 2: TransformTwinData
+   - 1.10 Connect TransformTwinData to ADT and TSI
 - 2 Implementation of Use Case
    - 2.1 Specify Digital Twins
    - 2.2 Create Digital Twins in ADT and TSI
@@ -23,28 +23,28 @@ Digital twins are a critical component of Industry 4.0. Its basic principle is t
  
  # Digital Twins on Azure Environment
  [Microsoft Azure](https://azure.microsoft.com/en-gb/) is a cloud solution which provides services like [Internet-Of-Things](https://www.wikiwand.com/en/Internet_of_things) and other [Industries 4.0 services](https://www.wikiwand.com/en/Fourth_Industrial_Revolution) with a lot of resources and services. <img align="right" src="https://www.soeldner-consult.de/wp-content/uploads/2018/02/Azure-lockup-02.jpg" width= 350/> 
- The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of "STATE OF THE ART"  idea that anyone of you reading this can implement it without any struggles.
+ The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of_"STATE OF THE ART"_  idea that anyone of you reading this can implement it without any struggles.
 ### 1.1 Setting up azure
 
 #### 1.1.1 Create Azure Account
+ <img align="right" src="https://azurecomcdn.azureedge.net/cvt-1b404a5cb1fe588bd91d4f8dabcfa255f3368d3dda2e1fe7c181cc17468b7d2c/images/page/home/portal-screenshots/popular.png" width= 350/> 
 
-The following sections describe the relevant steps to get an Azure Setup needed for this
- All information covered by this chapter are also covered by the documentation of Microsoft. It is possible to get a free Microsoft Azure account, but it is recommended to create an Microsoft Azure student account, because it will apply$100 credit to the account.To create an Microsoft Azure student account it is necessary to have 2 different e-mail addresses which is the academic e-mail address (@jku.at) to verify you are eligible or the student account, another e-mail address, that will be used as login and main e-mail
+It is possible to get a free Microsoft Azure account, but it is recommended to create an Microsoft Azure student account, because it will apply $100 credit to the account. To create an Microsoft Azure student account it is necessary to have two different e-mail addresses which is the academic e-mail address (@jku.at) to verify you are eligible or the student account, another e-mail address, that will be used as login and main e-mail
 address for Azure. Follow the process:
 
-1. Go to this link and click [”free account”](https://azure.microsoft.com/en-us/free/students/) on top right.
-2. On next page click ”start free”
+1. Go to this link and click _[”free account”](https://azure.microsoft.com/en-us/free/students/)_ on top right.
+2. On next page click _”start free”_
 3. Enter your data and your account will be created.
 
+The actual work path will be explained in this image to get better understanding: For the **Hardware Setup** its been explained in [this sections](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/physical_twin/hardware_setup) under `/physical_twin/hardware_setup`
 
+<img src="images/workpath.jpg" 
+	 width= 500/> 
 
 ### 1.2 Setup IoT-Hub
 
-**IoT Hub** is a Platform-as-a-Services (PaaS) managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your Internet of Things (IoT) application and the devices it manages. 
-<img 
-	 align="right" 
-	 src="images/iothubhomepage.png" 
-	 width= 300/> 
+**IoT Hub** is a `Platform-as-a-Services (PaaS)` managed service, hosted in the cloud, that acts as a central message hub for bi-directional communication between an IoT application and the devices it manages. This is one of the services which Azure enables highly secure and reliable communication between your `Internet of Things (IoT)` application and the devices it manages. 
+
 
 Azure IoT Hub provides a cloud-hosted solution back end to connect virtually any device. IoT Hub is the entry point to the data which we actually want to work on after receiving here we have huge options to work on with. We can use the IoT app as a source for other azure services. In this section an Azure IoT hub will be created. A related documentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/iot-hub/quickstart-send-telemetry-pythoncreate-an-iot-hub). 
 The main Usage this service is:
@@ -55,86 +55,74 @@ The main Usage this service is:
     us/azure/iot-hub/quickstart-send-telemetry-python)
 - Using ‘Message Routing’ option telemetry messages can be sent to : Events,
     Storage, Event Hubs and much more.
-    **[DL] The general description of IoT-Hub can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the IoT-Hub.**
 
+Steps to create IoT-Hub:
 1. In the azure resources search for IoT Hub
+
+<img src="images/iothubhomepage.png" 
+	 width= 400/> 
+
 2. click create
 3. Using this required data create the azure app. The required data:
 - Resource group
 - Resource Locationd
 - IOT hub Name
+
+<img src="images/iothub.png" 
+	 width= 400/> 
+
 4. You will be created the azure IoT-Hub app now.
 
-#### 1.2.1 Device Creation
+#### 1.2.1 IoT-Devices
+IoT-Devices are digital devices which is same as we have in our physical world _sensor with raspberry_ in our example. We have phycial devices in each room, by using `IoT Device` we are defining in azure that this is a device and by that we can use it to data transfer to azure from phycial device.
 
-After this we can create a new device. **[DL] What do we need this device for??**
-2. In the IoT-Hub app go to IoT devices section from left side, then you will
-    able to view all the available devices if any.
+1. In the IoT-Hub app go to IoT devices section from left side, then you will
+    able to view all the available devices if any already.
 
+<img src="images/SuccessIoTDeviceCreation.png" width= 400/> 
 
-3. Click ”new” button on top and enter the preferred name for a device and
+2. Click ”new” button on top and enter the preferred name for a device and
     then save it.
-4. Now you have been created new device now.
 
-**[DL] Again, add a screenshot!**
+<img src="images/NewIoTDevice.png" width= 400/> 
 
-#### 1.2.2 Connecting to azure by connection string
-**[DL] This is already described in the physical_twin/simulated_hardware. We don't need this here, again. Please delete.**
-If you click the device name which you created new before you will land into
-the page were you will find all properties for that particular device. Under
-”Primary Connection String” you can find the connection string. You can use
-this connection string on other Azure apps or send the data to this device to
-get connect to this exact device. Please note it’s different for different devices.
-For further information about azure (https://channel9.msdn.com/Shows/Azure-
-Friday/Azure-IoT-Hub?term=iot) - For [Device Streaming](https://channel9.msdn.com/Shows/Internet-
-of-Things-Show/Azure-IoT-Hub-Device-Streams?term=iot) - IOT to [Event Grid
-Integration](https://channel9.msdn.com/Shows/Internet-of-Things-Show/IoT-Devices-
-and-Event-Grid?term=iot)
+4. Now you have been created new device now. If you click any one of available device you can view its properties like `device ID` ,`Primary Key`, `connection string` and so on... 
+
+<img src="images/iotdeviceproperties.png" width= 400/> 
+
 
 ### 1.3 Setup Azure Digital Twins Service (ADT)
 
 Azure Digital Twins is an Internet of Things (IoT) platform that enables you
 to create a digital representation of real-world things, places, and business pro-
-cesses. Azure Digital Twins is an IoT platform that enables the creation of
-comprehensive digital models of entire environments to gain insights that drive
-better products, optimization of operations, cost reduction and breakthrough
-customer experiences. Examples include buildings, factories. Usage:
-
-1. Model any environment and bring digital twins to life in a scalable and
-    secure manner.
-2. Connect assets such as IoT devices as well as existing business systems to
-    Azure Digital Twins.
-3. ¡img align=”center” src=”pictures/digitaltwinhomepage.png” width= 400/¿
-**[DL] The general description of ADT can be shortened and put into the introduction at the top of this readme file. This part should be rather about setting up the ADT.**
+cesses. 
 In this section a Digital Twins platform will be created. A related doc-
-umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-
-us/azure/digital-twins/quickstart-adt-explorer).
-
+umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/digital-twins/quickstart-adt-explorer).
+Please follow the process in azure portal:
 1. Search for”Azure Digital Twin” in [azure resource](https://portal.azure.com)
-2. You will need to press the Button "+ Add" at the Azure Digital Twins page. **[DL] Screenshot for steps 1 + 2]**
-3. At the next page you will have to add **[DL] Screenshot for step 3**
+
+<img src="images/digitaltwinhomepage.png" width= 400/> 
+
+2. You will need to press the Button "create" at the Azure Digital Twins page.
+
+3. At the next page you will have to add
     - a resource group,
     - location and
     - a name for the Digital Twins service.
 
-¡img align=”center” src=”pictures/digitaltwincreation.png” width= 400/¿ **[DL] Please fix this**
-In above figure you can find the”Host Name”where you can find in DT
-homepage is the string should be noted. 
-It is used further for installing ADT Explorer. The resource group will be later used for all other resources related to the AirQuality project. It needs to be created, if this wasn’t done before.
-To do so, press the Create new button below the Resource group selection. You only
-need a name or the resource group to do so. Regarding location, it is worth
-to mention that the Digital Twins resource is only available for Australia East,
-East US, East US 2, North Europe, South Central US, Southeast Asia, UK
-South, West Central US, West Europe and West US 2 at the moment. These
-locations are the locations of the Azure servers. For the current instance for the
-AirQuality project the locationWest Europewas chosen. If everything is filled
-out, you can continue by clicking the Review + createbutton at the lower left
-corner. A short summery to check again will be listed. By pressing theCreate-
-button in the lower left corner you will finish the creation. The deployment will
-take some. A window in the upper right corner will show you a message when
-completed.
+<img src="images/digitaltwincreation.png" width= 400/> 
 
-#### 1.3.1 Digital Twin Explorer
+
+In the above image you can find the home page of Digita twin of azure here in the _Essentials_ part you can find the detials and there will be `Host Name` on the right side in our case:
+
+```sh
+Host name  :  Covid-Risk-Accessment-DigitalTwin.api.weu.digitaltwins.azure.net
+``` 
+
+This ”Host Name”where you can find in DT homepage is the string should be noted. It is used further for installing ADT Explorer.
+
+
+#### 1.3.1 Setup Digital Twin Explorer
 **[DL] Please read through the whole text again and check for missing spaces.**
 **[DL] This should not be here. We could either describe this in Part 2, or leave it out at all.**
 Digital Twin Exploreris the easy way to visualise our model architecture, import,
@@ -144,18 +132,23 @@ Explorer:
 
 1. Installing node.js on ubuntu by command line: 
 ```
-sudo a p t i n s t a l l c u r l
+sudo apt install curl
 curl sL https://deb.nodesource.com/setup10.x — sudo E bash
 sudo apt install node js 
 ```
-2. Download and extract the Digital Twin Ex-
-plorer files. DownloadandextracttheDigitalT winExplorerf iles[f romthegit]()
-3. Run terminal under this directory: digital-twins-explorer-main/client/src
-4. Run the command: to install the npm npm i n s t a l l 5. Run the
-command: to start the DT Explorer 
+2. Download and extract the Digital Twin Explorer files. Download and extract the Digital Twin Explorer files [from this repo](https://github.com/Harighs/Azure-Digital-Twin-Explorer-Installation)
+3. Run terminal under this directory: `digital-twins-explorer-main/client/src`
+4. Run the command: to install the npm 
+```sh
+npm install 
 ```
+5. Run this below command: to start the `DT Explorer`. you will be launched locla host website from your brwoser opening the `Azure Digital Twin Explorer`
+```sh
 npm run start
 ```
+<img src="images/dtexplorer.png" width= 400/> 
+
+
 1.3.2 To connect DT explorer to your Azure DT:
 
 1. Copy host name from your Digital twin home page, and add‘https://’ in front
@@ -165,26 +158,34 @@ the string here and click ok. You will be now connected to the azure
 
 1.3.3 Creating and uploading the model
 
-1. All dt models should be written in .json file
-    2. Open your favourite code editor and create new .json file ¡img align=”center”
-    src=”pictures/dtexplorer.png” width= 400/¿
-    3. This code above is the example simple model which contains ‘temper-
-    ature’ and ‘Humid- ity’: It is based on azure dtdl language. [More about
-    it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 4. For
-    uploading click the upload button on DT explorer and select the .json file you
-    created before. Then your model will be shown below.
-    ¡img align=”center” src=”pictures/uploadmodel.png” width= 200/¿
-    5. Then finally the model is created and will be visualised if added to
-    explorer. ¡img align=”center” src=”pictures/dtmodel.png” width= 400/¿
+1. All dt models should be written in `.json` file
+2. Open your favourite code editor and create new .json file. in below image you can find sample code.
+
+<img src="images/sampledtcode.png" width= 300/> 
+
+3. This code above is the example simple model which contains ‘temperature’ and ‘Humidity’.It is based on azure dtdl language. [More about it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 
+4. For uploading click the upload button on DT explorer and select the .json file you created before. Then your model will be shown below.
+
+<img src="images/uploadmodel.png" width= 250/> 
+
+5. Then finally the model is created and will be visualised if added to the explorer. an example is shown here.
+
+<img src="images/dtmodel.png" width= 250/> 
+
+### 1.4 Setup Time Series Insights Service (TSI)
+
+### 1.5 Setup Function App 1: ExtractDeviceData
+
+### 1.6 Setup Function App 2: TransformTwinData
 
 
-### 1.4 Setup Azure Function 1: ExtractDeviceData
 
+_____________________________________________________________________________________________
+**RAMYA PLEASE REVIEW THESE CONTENTS BELOW **
 ### 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
 
 ### 1.5 Setup Time Series Insights Service (TSI)
 
-### 1.6 Setup Function 2: TransformTwinData
 
 ### 1.7 Connect TransformTwinData to ADT and TSI
 

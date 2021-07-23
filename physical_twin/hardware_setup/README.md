@@ -55,7 +55,10 @@ For wiring the hardware we should follow some documentations for sensor and rasp
 |	Sensor	|	`Ground`	| 	Grnd	|
 |	Sensor	| 	`init`	|	Grnd	|
 
-
+<img 
+	 align="center" 
+	 src="images/circuitAll_marked.png" 
+	 width= 300/> 
 
 ## Initial Setup of Raspberry OS
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
