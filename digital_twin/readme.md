@@ -211,6 +211,76 @@ we can create the new time series resource in Azure by following the steps below
 
 ### 1.5 Setup Function App 1: ExtractDeviceData
 
+We are setting up this Azure function for transferring the device data from IoT Hub to DT. This function is triggered by Event Grid Trigger  and when the IoT device receives data it sends to DT internally.
+
+Create a new C#  Azure function and choose Event Grid Trigger template.
+
+Packages required:
+
+Add the following nuget packages to the project to interact with Azure Digital Twin
+
+1. Azure.DigitalTwins.Core
+
+2. Azure.Identity
+
+3. System.Net.Http
+
+4. Azure.Core
+
+   replace the function.cs file with the [project code] ()
+
+   In this function, we have created the environment variable  accessing the Digital twin instance. Once the IoT device receives the data, the event grid triggers the azure function and we do some pre-processing steps like the JSON serialization for converting the telemetry data into the required data format. Finally we use AddReplace method to update the twin with new data.
+
+   Publish the app to Azure with a function name , resource group. 
+
+   **verify if publish is successful in Azure:**
+
+   search for the function name in azure and if it appears, the publish is successful.
+
+   ![img](./images/AzureFn1Publish.JPG)
+
+   
+
+**Set Environment Variable for published azure function:**
+
+We have created the environment variable in the Azure function, now we need to set up the DT url for the created environment variable in Azure , so that we can access the published azure function and get the data for further processing.
+
+Go to published function app in azure → configuration → new application settings.
+
+Put the **name** similar to environmental variable created for function app in C# and **value** as host name of Azure Digital Twin and save configuration settings.
+
+![EnvironmentVariableCreate](./images/AzureFn1EnvVar.JPG)
+
+Now we have successfully set up the security access for function app. Environment variable is created as follows
+
+![SuccessEnvVarCreation](./images/SuccessEnvVarFn1.JPG)
+
+**Connect the function app to IoT Hub**
+
+Set up IoT Hub to send device telemetry messages to function App as **Events**.
+
+Go to IoT Hub → Events → Event Subscription.
+
+Create new Event Subscription in IoT Hub.
+
+Choose Device Telemetry Event type and Select the end point type as Azure function. Select the published function App and function name from drop down menu as shown below.
+
+![EventSubscription](./images/eventSubscription.JPG)
+
+***Possible Errors:** Event Grid is not registered by default. Register Event Grid if it is not present in the subscriptions with the following steps
+
+Subscriptions → choose your subscription→ search event grid and add it.
+
+![addEventSubscription](./images/addEventSubscription.JPG)
+
+Now the event subscription is created . When data is sent to IoT Hub , events are registered and event subscription will receive the events from IoT Hub as shown below.
+
+![outputEventSubscription](./images/OutputEventSubscription.JPG)
+
+Now if the IoT device receives data,event grid is triggered and data is sent to DT azure function. The DT function receives data and appears as follows.
+
+![AzureFn1EventsOutput](./images/AzureFn1EventsOutput.JPG)
+
 ### 1.6 Setup Function App 2: TransformTwinData
 
 Now we need to create Azure function to transform the twin data to the TSI instance. we have used C# to create Azure function as it provides ready-to-use project template for event hub triggers. 
