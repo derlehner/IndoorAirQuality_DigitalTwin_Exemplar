@@ -48,7 +48,7 @@ If created manually the graphical interface must be used which has its benefits 
 Downloading the input files at this is enough to get the model to work. The molecular_extensions.inp file is the single input file that works for one room and the master.inp file is for making all of the room sizes work. The input files need to be imported on Abaqus under File-> Import->Model and then clicking on run at the graphical user interface should be enough to get the simulation to run. For wholeness purposes, the model will be further described in general below in order to give a general idea about physical modelling of systems. You can see an example picture down below:
 
 
-![model_picture](./images/Importing input files Abaqus.JPG)
+![model_picture](./images/Importing_input_files_Abaqus.JPG)
 
 
 ### Modelling the shape of the room
