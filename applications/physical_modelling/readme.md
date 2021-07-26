@@ -4,7 +4,7 @@ In this project the physical model is used for modelling the CO2 molecules in th
 
 From a scientific point of view physical modeling has the advantage of showing how the variable that is being analysed is behaving. This analysis includes both the structure (properties) and the functions of the variable. Therefore extracting a physical model from a digital twin can help understand the real model better and give a better overall overview of the model.
 
-An important information to note here because our project is open source is that the free software of Abaqus can be downloaded as a student or academic institution but is not allowed to be used for commercial purposes.
+An important information to note here because our project is open source is that the free version of the software of Abaqus can be downloaded as a student or academic institution but is not allowed to be used for commercial purposes.
 
 ## Introduction to the Importance and Need of Physical Modeling
 
@@ -25,9 +25,9 @@ wouldn’t be possible in real life.
 
 There are many  applications where the virtual model would be very useful. One
 
-such application would deﬁnitely be in simulating the ﬂuid ﬂow in the room and exchange between
+such application would deﬁnitely be in simulating the air (fluid) ﬂow in the room and exchange between
 
-people and analysing the FSI (velocity changes) in order to understand the air quality of the room.
+people and analysing the FSI (velocity changes) in order to understand the air quality of the room (or in other words when the CO2 levels reach dangerous (threshold) levels.
 
 Another application would be placing raspberries in diﬀerent areas of the room and analysing
 
@@ -45,7 +45,10 @@ If created manually the graphical interface must be used which has its benefits 
 
 ![model_picture](./images/abaqus_creatingParts.JPG)
 
-Downloading the input files at this is enough to get the model to work. The molecular_extensions.inp file is the single input file that works for one room and the master.inp file is for making all of the room sizes work. The input files need to be imported on Abaqus under File-> Import->Model and then clicking on run at the graphical user interface should be enough to get the simulation. For wholeness purposes, the model will be further described in general below in order to give a general idea about physical modelling of systems.
+Downloading the input files at this is enough to get the model to work. The molecular_extensions.inp file is the single input file that works for one room and the master.inp file is for making all of the room sizes work. The input files need to be imported on Abaqus under File-> Import->Model and then clicking on run at the graphical user interface should be enough to get the simulation to run. For wholeness purposes, the model will be further described in general below in order to give a general idea about physical modelling of systems. You can see an example picture down below:
+
+
+![model_picture](./images/Importing input files Abaqus.JPG)
 
 
 ### Modelling the shape of the room
@@ -81,8 +84,7 @@ in the following sections.
 ## Model Driven Engineering Techniques
 
 ### Meta-Model of Abaqus
-
-### Additions needed in the Digital to create the Abaqus model
+### Additions needed in the Digital Twin to create the Abaqus model
 you can auto-generate the abaqus model using some template files that are adapted based on the digital twin model
 
 
