@@ -21,10 +21,10 @@
 
 ## Hardware setup
 ### Raspberry Pi
- We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is dedicated computer with all neccesary things which normal pc has.  This send measured co2 values to the cloud and also used to command the treshold triggers if the valued reached above the limit by change the color of the LED or by Beeping sounds. 
+ We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
- An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). Anyways, in this project Raspberry is used, we need the following hardware for setting up the raspberry:
+ An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). However in this project a Raspberry is used and for this following hardware for setting up the raspberry is needed:
 - (Fully Integrated) Raspberry Pi 4 - Board
 - Power adapter for Raspberry Pi 4 (USB-C)
 - SD-card
@@ -43,9 +43,9 @@
 ### Wiring of Hardware
 Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
 It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
-transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage suppy pin to power the component.
+transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage supply pin to power the components.
 
-For wiring the hardware we should follow some documentations for sensor and raspberry pi. The required pinout connections are as follows: _for reference pin layout for the raspberry is also shown in the image_
+For wiring the hardware we should follow some documentations for the sensors and the raspberry pi. The required pinout connections are as follows: _for reference pin layout for the raspberry is also shown in the image_
 
 | 	Pin 	| 	type 	| 	GIPO 	|
 |	---		|	---		|	---		|
@@ -74,15 +74,15 @@ Required Things:
 <img align="center" src="https://www.raspberrypi.org/app/uploads/2020/03/RPI_intro-e1583228263677.png" width= 400/>
 
 6. insert the sd card and click write
-7. After its been installed you can insert this sd card into raspberry and you have freshly
-    installed linux on you device.
+7. After it has been installed you can insert this sd card into raspberry and you have an updated version of linux
+    installed on you device.
 
-For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi homepage^3.
+For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi's official homepage.
 In the following section a short overview is given.
-First of all an operation system needs to be downloaded and an image needs to be installed
+First of all an operating system needs to be downloaded and an image needs to be installed
 on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi
 OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an
-Imager program available to fasten the installation step^4. The instructions of the program
+Imager program available to speed up the installation step. The instructions of the program
 need to be followed and afterward the SD-Card is ready to use.
 The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and
 HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login
@@ -116,8 +116,8 @@ sudo apt-get upgrade
 ### Remote access via SSH
 
 It is planned that the AirQuality module will be running continuously in a predefined position
-(e.g.: in the stairway below the TV), therefor it needs to be accessible remotely without any
-monitor and input device connected. To solve this requirement, the Raspberry Pi can be
+(e.g.: in the stairway below the TV), therefore it needs to be accessible remotely without any
+connected monitor and input device. To solve this requirement, the Raspberry Pi can be
 accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection
 1.3.1. The IP address of the Raspberry Pi can be set as static, to ensure the connection to
 it. It is also possible to get the IP address with apingcommand on the hostname of the
@@ -131,11 +131,11 @@ For Windows it is needed to add the parameter -4 to the ping command, so that th
 ping rpi-cdl.local
 ```
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
-putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address needs to be updated.
+putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
 ### Deploy Code to Raspberry
 The required scripts and documents are already available on Git-Hub as [DigitalTwin_Airquality_For_Covid_Risk_Assessment](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment).
-To Clone the project onto raspberry pi just run the command with project our project https link which can be found under Git-Hub project page under clone section.
+To Clone the project onto raspberry pi just run the command with our project https link which can be found under Git-Hub project page under clone section.
 ```sh
 git clone https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment.git
 ```
@@ -170,9 +170,9 @@ Execute all these commands one by one each:
 ###  Code
 In this section the code of the various components connected to the Raspberry Pi is descried.
 
-after successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also being ready to receive the data if still not been setup follow this [readme process](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin)
+after successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also ready to receive the data. If it is still not setup follow this [readme process](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin)
 
-Here under our 'physical_twin' we will have the scripts named data_abstract.py sctipt which will be used to get the data from sensor and send it to azure environment.
+Here under our 'physical_twin' we will have the scripts named data_abstract.py script which will be used to get the data from the sensor and send it to the azure environment.
 
 For sending the data to raspberry please have the device `connection_string` ready from [IoT-Hub Device section](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin) and replace the string in connection_string in the data_abstract.py script. To summarize:
 
@@ -199,7 +199,7 @@ Wiring is not good for sensor. you can always check the sensor is in connection 
 ```sh
 sudo i2cdetect -y 1
 ```
-This will show if the device is connected or not. Further detailed discriptoin is under [this link](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c)
+This will show if the device is connected or not. Further detailed discription is under [this link](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c)
 
 ###### Error: `Try Reapplying the voltage`:
 Some wiring connection problem
