@@ -19,13 +19,13 @@
 
 ## Digital Twins on Azure Environment
  [Microsoft Azure](https://azure.microsoft.com/en-gb/) is a cloud solution which provides services like [Internet-Of-Things](https://www.wikiwand.com/en/Internet_of_things) and other [Industries 4.0 services](https://www.wikiwand.com/en/Fourth_Industrial_Revolution) with a lot of resources and services. <img align="right" src="https://www.soeldner-consult.de/wp-content/uploads/2018/02/Azure-lockup-02.jpg" width= 350/> 
- The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of_"STATE OF THE ART"_  idea that anyone of you reading this can implement it without any struggles.
+ The once that are interesting for this project and are covered by this documentation like [IoT-Hub](https://azure.microsoft.com/en-us/services/iot-hub/), [Digital Twins](https://azure.microsoft.com/en-us/services/digital-twins/), [Time Series Insights](https://azure.microsoft.com/en-us/services/time-series-insights/). Also we explained how we can get adavantages out of these services and integrate our project as one of_"STATE OF THE ART"_  idea that everyone can implement without any struggles.
 ### 1.1 Setting up azure
 
 #### 1.1.1 Create Azure Account
  <img align="right" src="https://azurecomcdn.azureedge.net/cvt-1b404a5cb1fe588bd91d4f8dabcfa255f3368d3dda2e1fe7c181cc17468b7d2c/images/page/home/portal-screenshots/popular.png" width= 350/> 
 
-It is possible to get a free Microsoft Azure account, but it is recommended to create an Microsoft Azure student account, because it will apply $100 credit to the account. To create an Microsoft Azure student account it is necessary to have two different e-mail addresses which is the academic e-mail address (@jku.at) to verify you are eligible or the student account, another e-mail address, that will be used as login and main e-mail
+It is possible to get a free Microsoft Azure account, but it is recommended to create a Microsoft Azure student account, because it will apply $100 credit to the account. To create a Microsoft Azure student account it is necessary to have two different e-mail addresses which is the academic e-mail address (@jku.at) to verify you are eligible or the student account, another e-mail address, that will be used as login and main e-mail
 address for Azure. Follow the process:
 
 1. Go to this link and click _[”free account”](https://azure.microsoft.com/en-us/free/students/)_ on top right.
@@ -69,10 +69,10 @@ Steps to create IoT-Hub:
 4. You will be created the azure IoT-Hub app now.
 
 #### 1.2.1 IoT-Devices
-IoT-Devices are digital devices which is same as we have in our physical world _sensor with raspberry_ in our example. We have phycial devices in each room, by using `IoT Device` we are defining in azure that this is a device and by that we can use it to data transfer to azure from phycial device.
+IoT-Devices are digital devices which is same as we have in our physical world _sensor with raspberry_ in our example. We have phycial devices in each room, by using `IoT Device` we are defining in azure that this is a device and by that we can use it to transfer the data to azure from the physical device.
 
-1. In the IoT-Hub app go to IoT devices section from left side, then you will
-    able to view all the available devices if any already.
+1. In the IoT-Hub app go to the IoT devices section from the left side, then you will
+    able to view all the available devices if there are already any stored.
 
 <img src="images/SuccessIoTDeviceCreation.png" width= 400/> 
 
@@ -93,7 +93,7 @@ to create a digital representation of real-world things, places, and business pr
 cesses. 
 In this section a Digital Twins platform will be created. A related doc-
 umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/azure/digital-twins/quickstart-adt-explorer).
-Please follow the process in azure portal:
+Please follow the process on the azure portal:
 1. Search for”Azure Digital Twin” in [azure resource](https://portal.azure.com)
 
 <img src="images/digitaltwinhomepage.png" width= 400/> 
@@ -108,7 +108,7 @@ Please follow the process in azure portal:
 <img src="images/digitaltwincreation.png" width= 400/> 
 
 
-In the above image you can find the home page of Digita twin of azure here in the _Essentials_ part you can find the detials and there will be `Host Name` on the right side in our case:
+In the above image you can find the home page of the Digital twin of azure here in the _Essentials_ part you can find the detials and there will be `Host Name` on the right side in our case:
 
 ```sh
 Host name  :  Covid-Risk-Accessment-DigitalTwin.api.weu.digitaltwins.azure.net
@@ -118,8 +118,7 @@ This ”Host Name”where you can find in DT homepage is the string should be no
 
 
 #### 1.3.1 Setup Digital Twin Explorer
-**[DL] Please read through the whole text again and check for missing spaces.**
-**[DL] This should not be here. We could either describe this in Part 2, or leave it out at all.**
+
 Digital Twin Exploreris the easy way to visualise our model architecture, import,
 export our models. This should be installed in our pc. Requirements for DT
 Explorer: Node.js (not less then version 10), npm. The process to install DT
@@ -153,17 +152,17 @@ the string here and click ok. You will be now connected to the azure
 
 1.3.3 Creating and uploading the model
 
-1. All dt models should be written in `.json` file
+1. All DT models should be written in `.json` file
 2. Open your favourite code editor and create new .json file. in below image you can find sample code.
 
 <img src="images/sampledtcode.png" width= 300/> 
 
-3. This code above is the example simple model which contains ‘temperature’ and ‘Humidity’.It is based on azure dtdl language. [More about it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 
-4. For uploading click the upload button on DT explorer and select the .json file you created before. Then your model will be shown below.
+3. This code above is the example simple model which contains ‘temperature’ and ‘Humidity’.It is based on azure DTDL language. [More about it](https://docs.microsoft.com/en-us/azure/digital-twins/concepts-models) 
+4. For uploading, click the upload button on DT explorer and select the .json file you created before. Then your model will be shown below.
 
 <img src="images/uploadmodel.png" width= 250/> 
 
-5. Then finally the model is created and will be visualised if added to the explorer. an example is shown here.
+5. Then finally the model is created and will be visualized if added to the explorer. an example is shown here.
 
 <img src="images/dtmodel.png" width= 250/> 
 
@@ -197,7 +196,7 @@ we can create the new time series resource in Azure by following the steps below
 
    for instance , we have the co2 data in property co2 , select variable and add them into graph.
 
-   similarly, we can customise the graph with other chart types such as Heat map or scatter plot and can view specific data by choosing desired time intervals and applying filters for data.
+   similarly, we can customise the graph with other chart types such as Heat map or scatter plot and can view specific data by choosing desired time intervals and applying filters on the data.
 
    ![TSIGraph](./images/TSIData_IoTEventSource.png)
 
@@ -207,7 +206,7 @@ we can create the new time series resource in Azure by following the steps below
 
 ### 1.5 Setup Function App 1: ExtractDeviceData
 
-We are setting up this Azure function for transferring the device data from IoT Hub to DT. This function is triggered by Event Grid Trigger  and when the IoT device receives data it sends to DT internally.
+We are setting up this Azure function for transferring the device data from IoT Hub to DT. This function is triggered by Event Grid Trigger  and when the IoT device receives data it sends this to the DT internally.
 
 **Creating Azure Function**
 
@@ -223,7 +222,7 @@ We are setting up this Azure function for transferring the device data from IoT 
 
 **Packages required:**
 
-Add the following nuget packages to the project to interact with Azure Digital Twin
+Add the following NuGet packages to the project to interact with Azure Digital Twin
 
 1. Azure.DigitalTwins.Core
 
@@ -348,12 +347,12 @@ Right click on the C# project and choose publish  ,give the name for publishing 
 
 **Verify the Azure function publish**
 
-search for the function name in Azure that we set while publishing the function app from C#.If its successfully publish you will see the function app in the Azure 
+search for the function name in Azure that we set while publishing the function app from C#.If its successfully published you will see the function app in the Azure 
 
 ![verifyAzureFnPublish](./images/verifyPublish.PNG)
 
 _____________________________________________________________________________________________
-Now , whenever the Digital twin instance receives data, Azure function is triggered and sends data from DT to TSI.
+Now , whenever the Digital twin instance receives data, the Azure function is triggered and sends data from DT to TSI.
 
 
 ### 1.7 Connect TransformTwinData to ADT and TSI
@@ -361,11 +360,11 @@ Now , whenever the Digital twin instance receives data, Azure function is trigge
 Azure functions is a serverless concept of cloud native design that allows a
 piece of code deployed and execute without any need of server infrastructure,
 web server, or any configurations. Azure functions can be written in multiple
-languages such as C, Java, JavaScript, TypeScript, and Python We are using C
-language as it has predefined project template for creating the Azure Function.
+languages such as C, Java, JavaScript, TypeScript, and Python. We are using C
+language as it has a predefined project template for creating the Azure Function.
 Azure function supports Event Hub Trigger and is executed automatically
 when event is fired from Azure Digital Twin
-**[DL] The general description of Azure Functions can be shortened and put into the introduction at the top of this readme file. This part should be rather about describing and setting up this specific azure function.**
+
 
 #### 1.7.1 Create new Event Hub namespace in Azure
 
@@ -418,7 +417,7 @@ rization rule
     Create a route in Azure Digital Twins to send twin update events
     to your endpoint from above. The filter in this route will only
     allow twin update messages to be passed to your endpoint. Spec-
-    ify a name for the twins hub event route. choose already created
+    ify a name for the twins hub event route. choose an already created
     endpoint name.
 - Get twins hub connection string Go to the event hub namespace
     and click on the created twins hub below , choose shared access
@@ -477,7 +476,7 @@ Go to the event hub namespace and click on the created time series hub below
 rule , you can see the detailed view , copy the primary connection string as
 highlighted in the below image
 ”.-conn-str.png” is not created yet. Click to create. make a note of both the
-twin and time series hub connection string to use them in tha Azure function
+twin and time series hub connection string to use them in the Azure function
 below.
 Create Azure Function C
 Create Azure Function with Event Hub Trigger
@@ -496,7 +495,7 @@ Both CO2Sensors send co2Values, and the LEDs have a Property called "color" that
 To implement this setting in Azure, the following steps are necessary.
 
 ### 2.1. Specify Digital Twins
-First, information of the physical devices must be specified in a way This information must be defined on the following two levels of abstraction:
+First, information of the physical devices must be specified in some order. This information must be defined on the following two levels of abstraction:
 
 Interfaces: Therefore, we use the Digital Twins Definition Language (DTDL) - Version 2 offered by Microsoft. The folder /create_twins/interface_models contains the json files of the interfaces required for our use case, namely Room, AirQualityController and AirQualitySensor.In order to allow automation in Step 2, created files must be placed into the folder /create_twins/interface_models.
 Digital Twins: represent specific devices that conform to the structure imposed by their models. We use the format imposed by the ADT-service as json representation. The folder /create_twins/twin_models contains the json files of the Digital Twins required for our use case, namely Room101, Room102, Lobby100, Raspberry1, Raspberry2 and Rapsberry3. In order to allow automation in Step 2, created files must be placed into the folder /create_twins/twin_models.
@@ -532,7 +531,7 @@ us/cli/azure/iot?view=azure-cli-latest) (keyword ```az iot```).
 After these prerequisites are met, the models and twins described in the folders interface_models and twin_models are created in the ADT and TSI service.
 
 ### 2.3. Create Endpoints for Devices in IoT-Hub
-For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub, in order to... TODO: Describe what we need device for TODO: Describe individual steps required to create device(s) for Digital Twins mentioned above. @Ramya: please add this here!
+For every physical device that sends data to Azure, a dedicated device must be created in Azure IoT-Hub.
 
 Prerequisites:
 
