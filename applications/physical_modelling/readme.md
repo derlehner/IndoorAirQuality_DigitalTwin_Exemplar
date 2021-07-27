@@ -212,7 +212,7 @@ then also scripted right below the surface and surface sections.
 
 ### Virtual Room with Short Sources
 
-The initial model of the virtual room with the geometries taken from the Caballero paper resulted
+The initial model of the virtual room with the geometries taken  resulted
 
 in some stability issues and less control of the movements of the air particles on Abaqus which is the
 
