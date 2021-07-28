@@ -389,11 +389,12 @@ tion rule to access the hub
 to the endpoint and connected twins hub
 (d) Get the twins hub connection string
 ```
-- Create twins hub authorization rule Go to the created event hub
-    inside the event hub namespace and select shared access policies
-    from side menu and click on add button for creating new autho-
-    rization policy and choose Send and Listen for the authorization
-    rule as highlighted below
+- Create twins hub authorization rule.
+
+     Go to the created event hub,inside the event hub namespace and select shared access policies from side menu and click on add button for creating new authorization policy and choose Send and Listen for the authorization rule as highlighted below.
+
+    ![twinHubAuthRule](./images/twinHubAuth.PNG)
+
 - Create twins hub endpoint Create an Azure Digital Twins end-
     point that links your event hub to your Azure Digital Twins
     instance. Specify a name for your twins hub endpoint. Go to
@@ -416,39 +417,44 @@ rization rule
     processing.
     Create a route in Azure Digital Twins to send twin update events
     to your endpoint from above. The filter in this route will only
-    allow twin update messages to be passed to your endpoint. Spec-
-    ify a name for the twins hub event route. choose an already created
+    allow twin update messages to be passed to your endpoint. Specify a name for the twins hub event route. choose an already created
     endpoint name.
+    
 - Get twins hub connection string Go to the event hub namespace
     and click on the created twins hub below , choose shared access
     policies and click on created twins hub authorization rule , you
     can see the detailed view , copy the primary connection string
     as highlighted in the below image
+    
+    ![eventHubConnStr](./images/eventHubConnStr.png)
 4. Create time series hub
 similar to twins hub create time series hub inside the existing event hub
 namespace
 - Create time series hub authorization rule
-Go to the created time series hub inside the event hub namespace
-and select shared access policies from side menu and click on add
-button for creating new authorization policy and choose Send and
-Listen for the authorization rule as highlighted below.
+  Go to the created time series hub inside the event hub namespace
+  and select shared access policies from side menu and click on add
+  button for creating new authorization policy and choose Send and
+  Listen for the authorization rule as highlighted below.
+
+  ![tsi_auth_rule](./images/tsi-auth-rule.png)
+
 - Get time series connection string
-Go to the event hub namespace and click on the created time series
-hub below , choose shared access policies and click on created time
-series hub authorization rule , you can see the detailed view , copy
-the primary connection string as highlighted in the below image
-5. Create Azure Function C
+  Go to the event hub namespace and click on the created time series
+  hub below , choose shared access policies and click on created time
+  series hub authorization rule , you can see the detailed view , copy
+  the primary connection string as highlighted in the below image
+
+  ![tsi_conn_str](./images/tsi-conn-str.png)
+5. Create Azure Function in C#
 - Create Azure Function with Event Hub Trigger
-Create a new C project and choose Azure Function as Project tem-
-plate
+Create a new C# project and choose Azure Function as Project template
 Choose the Event Hub trigger that runs whenever event is fired in
 Azure Digital Twin
-- Go to project folder→code→AirQualityDataProcessing→AirQualityDataProcessing→ProcessDTTelemetryUpdateTSI.cs
-- ProcessDTTelemetryUpdateTSI.cs
-Set up the connection string name for eventhub twins and time series
-insights according to your project. Provide the EventHubTrigger and
-EventHub with twin hub and time series hub name as we created
-earlier in Azure event hub namespace.
+- Go to project file [ProcessDTTelemetryUpdateTSI.cs](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/main/digital_twin/azure/AirQualityUseCase/AirQualityDataProcessing/ProcessDTTelemetryUpdatetoTSI.cs)
+  Set up the connection string name for eventhub twins and time series
+  insights according to your project. Provide the EventHubTrigger and
+  EventHub with twin hub and time series hub name as we created
+  earlier in Azure event hub namespace.
 
 
 ```
@@ -462,28 +468,32 @@ them in tha Azure function below.
 ```
 #### 1.7.2 Create time series hub
 
-similar to twins hub create time series hub inside the existing event hub names-
-pace
+similar to twins hub create time series hub inside the existing event hub namespace
 a) Create time series hub authorization rule
 Go to the created time series hub inside the event hub namespace and select
 shared access policies from side menu and click on add button for creating new
 authorization policy and choose Send and Listen for the authorization rule as
 highlighted below
-”.-auth-rule.png” is not created yet. Click to create. b) Get time series
-connection string
+![tsi_auth_rule](./images/tsi-auth-rule.png)
+
+b) Get time series connection string
 Go to the event hub namespace and click on the created time series hub below
 , choose shared access policies and click on created time series hub authorization
 rule , you can see the detailed view , copy the primary connection string as
 highlighted in the below image
-”.-conn-str.png” is not created yet. Click to create. make a note of both the
+![tsi_conn_str](./images/tsi-conn-str.png)
+
+make a note of both the
 twin and time series hub connection string to use them in the Azure function
 below.
-Create Azure Function C
+Create Azure Function in C#
 Create Azure Function with Event Hub Trigger
-a) Create a new C project and choose Azure Function as Project template
-”..png” is not created yet. Click to create. b) Choose the Event Hub trigger
+a) Create a new C# project and choose Azure Function as Project template
+![Azure_Fn](./images/azureFn.png) 
+
+b) Choose the Event Hub trigger
 that runs whenever event is fired in Azure Digital Twin
-”..png” is not created yet. Click to create.
+![eventHubTrigger](./images/eventHubTrigger.PNG)
 
 ## 2. Implementation of Use Case
 In this section, we describe the implementation of our air quality use case as described above. As an example, we use the following setting of our use case that has to be created in the Azure Setup described above.
@@ -509,22 +519,37 @@ pip install json
 pip install urllib3
 ```
 - **Download of Azure CLI:** To interact with your azure account from your computer, you need to install Azure CLI. With Azure CLI it is possible to sign into your Azure account and do most
-of the steps, that are possible at the Azure Portal homepage. It is recom-
-mended to install Azure CLI because it is the easiest way to log into your
-Azure account and some steps are done via Azure CLI in the documentation.
-The reference for Azure CLI is [available online](https://docs.microsoft.com/en-
-us/cli/azure/reference-index?view=azure-cli-latest).
-Azure CLI is available for Windows, macOS and Linux. There is a [related
-documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) avail-
-able for the different operating systems. After the installation it is possible
-to access Azure via terminal with the keyword ```az```. There are extensions of
-commands that are related to [Digital Twins](https://docs.microsoft.com/en-
-us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (keyword ```az dt```) and [IoT hub](https://docs.microsoft.com/en-
-us/cli/azure/iot?view=azure-cli-latest) (keyword ```az iot```).
+  of the steps, that are possible at the Azure Portal homepage. It is recom-
+  mended to install Azure CLI because it is the easiest way to log into your
+  Azure account and some steps are done via Azure CLI in the documentation.
+  The reference for Azure CLI is [available online](https://docs.microsoft.com/en-
+  us/cli/azure/reference-index?view=azure-cli-latest).
+  Azure CLI is available for Windows, macOS and Linux. There is a [related
+  documentation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) avail-
+  able for the different operating systems. After the installation it is possible
+  to access Azure via terminal with the keyword ```az```. There are extensions of
+  commands that are related to [Digital Twins](https://docs.microsoft.com/en-
+  us/cli/azure/ext/azure-iot/dt?view=azure-cli-latest) (keyword ```az dt```) and [IoT hub](https://docs.microsoft.com/en-
+  us/cli/azure/iot?view=azure-cli-latest) (keyword ```az iot```).
+
 - **Login into Azure CLI:** After Azure CLI is installed on your PC, you can login via the command ```az login```.
-- **Adaptation of base_url and auth_token for ADT:** In the file digital_twin_api.py, you have to adapt the base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, go to ADT in your Azure Account and copy the host name. DigitalTwin To get the auth_token, enter the following command in the Azure CLI:
+
+- **Adaptation of base_url and auth_token for ADT:** In the file [digital_twin_api.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/main/digital_twin/azure/create_twins/digital_twin_api.py), you have to adapt the base_url in line 6 and auth_token in line 7 with the information from your azure setup. 
+ 
+- To get the base_url, go to ADT in your Azure Account and select overview section from the side menu, you can see the essential details about the DT environment as shown below,copy paste url from the Host name property.
+ 
+ ![DT_BaseUrl_Hostname](./images/DT_BaseUrl_Hostname.JPG)
+ 
+-  To get the auth_token, enter the following command in the Azure CLI:
  ```az account get-access-token --resource 0b07f429-9f4b-4714-9392-cc5e8e80c8b0```
-- **Adaptation of base_url and auth_token for TSI:** In the file tsi_api.py, adapt base_url in line xx and auth_token in line xx with the information from your azure setup. To get the base_url, TODO:describe. To get the auth_token, enter the following command in the Azure CLI:
+ 
+- **Adaptation of base_url and auth_token for TSI:** In the file [tsi_api.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/main/digital_twin/azure/create_twins/tsi_api.py), adapt base_url in line 6 and auth_token in line 7 with the information from your azure setup. 
+
+- To get the base_url, go to the TSI environment and select overview section from the side menu, you can see the essential details about the TSI environment as shown below, copy paste url from the Data Access FQDN property .
+
+   ![TSI_BaseUrl](./images/TSI_BaseUrl_FQDN.JPG)
+
+- To get the auth_token, enter the following command in the Azure CLI:
  ``` az account get-access-token --resource 120d688d-1518-4cf7-bd38-182f158850b6```
 
 
@@ -569,3 +594,4 @@ We have created the IoT device name in accordance with twin models because of th
 
 
  
+
