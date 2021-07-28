@@ -24,7 +24,7 @@ Predict the COVID19 risk infection in indoor environment by measuring the Co2 va
 
 **Prerequisite:**
 
-Set up the hardware Raspberry pi with Co2 sensor- CCS811 for different rooms as described in the section [physical twin](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/physical_twin/hardware_setup) and send co2 values to Azure .
+Set up the hardware Raspberry pi with Co2 sensor- CCS811 for different rooms as described in the section [physical twin](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/physical_twin/hardware_setup) and send co2 values to Azure as described in the section [simulated hardware](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/physical_twin/simulated_hardware)
 
 ### **3. Visualization needs**
 
@@ -40,7 +40,7 @@ Based on our use case, we envision the following visualization needs:
 
 (5) To monitor a building and take actions even from a remote location, there is the need to access existing visualizations using e.g. a mobile device.
 
-#### **3.1 Azure Visualization Tools **
+#### **3.1 Azure Visualization Tools**
 
 Microsoft Azure provides the following tools for visualization
 
@@ -88,7 +88,7 @@ https://docs.microsoft.com/en-us/rest/api/azure-digitaltwins/
 
 allows to query historical data of DTs  with custom search span and filter options.
 
-### **4. Mobile App **
+### **4. Mobile App**
 
 To fulfil visualization need 2,4 and 5 completely, we have developed a mobile app solution with following features.
 
