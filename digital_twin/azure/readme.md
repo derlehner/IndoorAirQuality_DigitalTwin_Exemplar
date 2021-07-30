@@ -55,7 +55,7 @@ Steps to create IoT-Hub:
 1. In the azure resources search for IoT Hub
 
 <img src="images/iothubhomepage.png" 
-	 width= 400/> 
+	 width= 800/> 
 
 2. click create
 3. Using this required data create the azure app. The required data:
@@ -64,7 +64,7 @@ Steps to create IoT-Hub:
 - IOT hub Name
 
 <img src="images/iothub.png" 
-	 width= 400/> 
+	 width= 800/> 
 
 4. You will be created the azure IoT-Hub app now.
 
@@ -74,16 +74,16 @@ IoT-Devices are digital devices which is same as we have in our physical world _
 1. In the IoT-Hub app go to the IoT devices section from the left side, then you will
     able to view all the available devices if there are already any stored.
 
-<img src="images/SuccessIoTDeviceCreation.png" width= 400/> 
+<img src="images/SuccessIoTDeviceCreation.png" width= 800/> 
 
 2. Click ”new” button on top and enter the preferred name for a device and
     then save it.
 
-<img src="images/NewIoTDevice.png" width= 400/> 
+<img src="images/NewIoTDevice.png" width= 800/> 
 
 4. Now you have been created new device now. If you click any one of available device you can view its properties like `device ID` ,`Primary Key`, `connection string` and so on... 
 
-<img src="images/iotdeviceproperties.png" width= 400/> 
+<img src="images/iotdeviceproperties.png" width= 800/> 
 
 
 ### 1.3 Setup Azure Digital Twins Service (ADT)
@@ -96,7 +96,7 @@ umentation is part of the [linked Quickstart](https://docs.microsoft.com/en-us/a
 Please follow the process on the azure portal:
 1. Search for”Azure Digital Twin” in [azure resource](https://portal.azure.com)
 
-<img src="images/digitaltwinhomepage.png" width= 400/> 
+<img src="images/digitaltwinhomepage.png" width= 800/> 
 
 2. You will need to press the Button "create" at the Azure Digital Twins page.
 
@@ -105,7 +105,7 @@ Please follow the process on the azure portal:
     - location and
     - a name for the Digital Twins service.
 
-<img src="images/digitaltwincreation.png" width= 400/> 
+<img src="images/digitaltwincreation.png" width= 800/> 
 
 
 In the above image you can find the home page of the Digital twin of azure here in the _Essentials_ part you can find the detials and there will be `Host Name` on the right side in our case:
@@ -140,7 +140,7 @@ npm install
 ```sh
 npm run start
 ```
-<img src="images/dtexplorer.png" width= 400/> 
+<img src="images/dtexplorer.png" width= 800/> 
 
 
 1.3.2 To connect DT explorer to your Azure DT:
