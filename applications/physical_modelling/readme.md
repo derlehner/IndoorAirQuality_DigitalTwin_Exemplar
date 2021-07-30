@@ -1,3 +1,25 @@
+## Contents
+- 1 Physical Modelling of CO2 on Abaqus
+    - 1.1 Introduction to the Importance and Need of Physical Modeling
+- 2 Creating the Physical Model on Abaqus
+    - 2.1 Input Files
+- 3 Modelling the Shape of the Room
+- 4 Modelling the Fluid Flow
+- 5 Model Driven Engineering Techniques
+    - 5.1 Meta-Model of Abaqus
+    - 5.2 Additions Needed in the Digital Twin to create the Abaqus Model
+    - 5.3 Modelling the CO2 Sources in the Room
+    - 5.4 Modelling the Fluid Flow (Air Particle Properties- SPH Particles)
+
+- 6 Settings on Abaqus for Air Particles
+- 7 Dynamic Air Flow in and out of the CO2 on Abaqus
+- 8 Limitations of the SPH particles on Abaqus
+- 9 The Complete Model of the Virtual Room
+    - 9.1 Virtual Room with Short Sources
+- 10 Building Parts (different sources) on Abaqus
+- 11 Output Files on Abaqus and Post-Processing of the Simulaiton
+     
+
 # Physical Modelling of CO2 on Abaqus 
 
 In this project the physical model is used for modelling the CO2 molecules in the air. The benefits of using a physical model are that the air quality can be visualized in the simulation. This is done via visualizing the movement of the particles in the air with color coding in order to show the dangerous and safe levels in a dynamic and visual way.
