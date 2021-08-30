@@ -1,0 +1,229 @@
+﻿<CAEXFile xmlns="http://www.dke.de/CAEX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FileName="airquality.aml" SchemaVersion="3.0" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd">
+  <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
+  <SourceDocumentInformation LastWritingDateTime="2021-08-23T08:40:13.4832297+02:00" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginName="AutomationML Editor" OriginProjectID="unspecified" OriginProjectTitle="unspecified" OriginRelease="5.3.3.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" OriginVersion="5.3.3.0" />
+  <InstanceHierarchy Name="ÎnstanceHierarchy">
+    <Version>0</Version>
+    <InternalElement ID="8c3b4092-b9d8-4a36-b55a-12b4b3b08a8f" Name="Lobby100" RefBaseSystemUnitPath="SystemUnitClassLib/Room">
+      <ExternalInterface ID="afb42b41-0ccc-402a-a9d9-f6d6d13346c9" Name="AirQualityController" RefBaseClassPath="DTDLInterfaceClassLib/Relationship" />
+      <InternalLink Name="Link" RefPartnerSideA="afb42b41-0ccc-402a-a9d9-f6d6d13346c9" RefPartnerSideB="2c865415-6a93-4c93-ac81-18ab710e29e0" />
+    </InternalElement>
+    <InternalElement ID="071e01c5-de7f-494e-ac99-905a834896f7" Name="Raspberry1" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController">
+      <ExternalInterface ID="2c865415-6a93-4c93-ac81-18ab710e29e0" Name="room" />
+      <InternalElement Name="AirQualitySensor" ID="48094194-3cea-467d-9ef6-8a5c06b3b83e" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController/CO2Sensor">
+        <Attribute Name="type" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Constant" />
+        <Attribute Name="co2Value" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Loggable" />
+      </InternalElement>
+    </InternalElement>
+    <InternalElement ID="86fc7f38-0639-47fe-9b76-d253b9dc226e" Name="Room101" RefBaseSystemUnitPath="SystemUnitClassLib/Room">
+      <ExternalInterface ID="b0cfa3d0-4fef-4a68-bac7-dce256dbcf47" Name="AirQualityController" RefBaseClassPath="DTDLInterfaceClassLib/Relationship">
+        <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+        </Attribute>
+        <Attribute AttributeDataType="xs:boolean" Name="writable" />
+      </ExternalInterface>
+      <InternalLink Name="InternalLink" RefPartnerSideA="b0cfa3d0-4fef-4a68-bac7-dce256dbcf47" RefPartnerSideB="59363151-4ea1-47d0-a015-833191369894" />
+    </InternalElement>
+    <InternalElement ID="1073bca7-e584-44d2-99de-10bd8f8543f7" Name="Raspberry2" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController">
+      <ExternalInterface ID="59363151-4ea1-47d0-a015-833191369894" Name="room" />
+      <InternalElement Name="AirQualitySensor" ID="d2231393-9164-49af-8e31-280d4927193f" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController/CO2Sensor">
+        <Attribute Name="type" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Constant" />
+        <Attribute Name="co2Value" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Loggable" />
+      </InternalElement>
+    </InternalElement>
+    <InternalElement Name="Room102" ID="feafd7cd-4d6e-4222-84a8-5a5117f6c324" RefBaseSystemUnitPath="SystemUnitClassLib/Room">
+      <ExternalInterface ID="cbfe0f9a-50cd-49fe-9edc-30b3c547a2f7" Name="AirQualityController" RefBaseClassPath="DTDLInterfaceClassLib/Relationship">
+        <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+        </Attribute>
+        <Attribute AttributeDataType="xs:boolean" Name="writable" />
+      </ExternalInterface>
+      <InternalLink RefPartnerSideA="cbfe0f9a-50cd-49fe-9edc-30b3c547a2f7" RefPartnerSideB="74ae10b8-21c7-4a80-8b17-6ba6b7ec1a81" Name="Link" />
+    </InternalElement>
+    <InternalElement Name="Raspberry3" ID="0714f924-8f80-4085-aec4-70661266d108" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController">
+      <ExternalInterface ID="74ae10b8-21c7-4a80-8b17-6ba6b7ec1a81" Name="interface_to_room" />
+      <InternalElement Name="AirQualitySensor" ID="5e3b4914-bb7d-469c-843d-e2f55a1cb755" RefBaseSystemUnitPath="SystemUnitClassLib/AirQualityController/CO2Sensor">
+        <Attribute Name="type" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Constant" />
+        <Attribute Name="co2Value" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Loggable" />
+      </InternalElement>
+    </InternalElement>
+  </InstanceHierarchy>
+  <InterfaceClassLib ChangeMode="state" Name="AutomationMLInterfaceClassLib">
+    <Description>Standard Automation Markup Language Interface Class Library - Part 1 Content </Description>
+    <Version>2.10</Version>
+    <Copyright>AutomationML e.V.</Copyright>
+    <InterfaceClass Name="AutomationMLBaseInterface">
+      <Attribute Name="AssociatedExternalValue" RefAttributeType="AutomationMLBaseAttributeTypeLib/AssociatedExternalValue">
+        <Attribute AttributeDataType="xs:string" Name="refCAEXAttribute" />
+        <Attribute AttributeDataType="xs:string" Name="refURI" />
+        <Attribute AttributeDataType="xs:string" Name="Direction" />
+      </Attribute>
+      <InterfaceClass Name="Order" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+        <Attribute AttributeDataType="xs:string" Name="Direction" RefAttributeType="AutomationMLBaseAttributeTypeLib/Direction">
+          <DefaultValue>InOut</DefaultValue>
+          <Constraint Name="AllowedValues">
+            <NominalScaledType>
+              <RequiredValue>In</RequiredValue>
+              <RequiredValue>Out</RequiredValue>
+              <RequiredValue>InOut</RequiredValue>
+            </NominalScaledType>
+          </Constraint>
+        </Attribute>
+      </InterfaceClass>
+      <InterfaceClass Name="Port" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+        <Attribute AttributeDataType="xs:string" Name="Direction" RefAttributeType="AutomationMLBaseAttributeTypeLib/Direction">
+          <Constraint Name="AllowedValues">
+            <NominalScaledType>
+              <RequiredValue>In</RequiredValue>
+              <RequiredValue>Out</RequiredValue>
+              <RequiredValue>InOut</RequiredValue>
+            </NominalScaledType>
+          </Constraint>
+        </Attribute>
+        <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+        </Attribute>
+        <Attribute AttributeDataType="xs:string" Name="Category" RefAttributeType="AutomationMLBaseAttributeTypeLib/Category" />
+      </InterfaceClass>
+      <InterfaceClass Name="PPRConnector" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface" />
+      <InterfaceClass Name="ExternalDataConnector" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+        <Attribute AttributeDataType="xs:anyURI" Name="refURI" RefAttributeType="AutomationMLBaseAttributeTypeLib/refURI" />
+        <InterfaceClass Name="COLLADAInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector">
+          <Attribute AttributeDataType="xs:string" Name="refType" />
+          <Attribute AttributeDataType="xs:token" Name="target" />
+        </InterfaceClass>
+        <InterfaceClass Name="PLCopenXMLInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector" />
+        <InterfaceClass Name="ExternalDataReference" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector">
+          <Attribute AttributeDataType="xs:string" Name="MIMEType" RefAttributeType="AutomationMLBaseAttributeTypeLib/MIMEType" />
+        </InterfaceClass>
+      </InterfaceClass>
+      <InterfaceClass Name="Communication" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+        <InterfaceClass Name="SignalInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/Communication" />
+      </InterfaceClass>
+    </InterfaceClass>
+  </InterfaceClassLib>
+  <InterfaceClassLib Name="DTDLInterfaceClassLib">
+    <Version>0</Version>
+    <InterfaceClass Name="Relationship">
+      <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+        <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+        <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+      </Attribute>
+      <Attribute AttributeDataType="xs:boolean" Name="writable" />
+    </InterfaceClass>
+  </InterfaceClassLib>
+  <RoleClassLib Name="AutomationMLBaseRoleClassLib">
+    <Description>Automation Markup Language Base Role Class Library - Part 1</Description>
+    <Version>2.10.0</Version>
+    <RoleClass ChangeMode="state" Name="AutomationMLBaseRole">
+      <RoleClass Name="Group" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole">
+        <Attribute AttributeDataType="xs:string" Name="AssociatedFacet" RefAttributeType="AutomationMLBaseAttributeTypeLib/AssociatedFacet" />
+      </RoleClass>
+      <RoleClass Name="Facet" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole" />
+      <RoleClass Name="Resource" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole" />
+      <RoleClass Name="Product" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole" />
+      <RoleClass Name="Process" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole" />
+      <RoleClass Name="Structure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole">
+        <RoleClass Name="ProductStructure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure" />
+        <RoleClass Name="ProcessStructure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure" />
+        <RoleClass Name="ResourceStructure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure" />
+      </RoleClass>
+      <RoleClass Name="ExternalData" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole" />
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="TwinRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="TwinRole">
+      <RoleClass Name="Property">
+        <Attribute AttributeDataType="xs:string" Name="writable" />
+      </RoleClass>
+      <RoleClass Name="Command" />
+      <RoleClass Name="CommandPayload" />
+    </RoleClass>
+  </RoleClassLib>
+  <SystemUnitClassLib Name="SystemUnitClassLib">
+    <Version>0</Version>
+    <SystemUnitClass ID="c60d856f-ccd1-4fb9-954f-bb71ab9d9831" Name="Room">
+      <ExternalInterface ID="7a271462-3a28-4cbb-9e31-6d6e4cee2ee2" Name="AirQualityController" RefBaseClassPath="DTDLInterfaceClassLib/Relationship">
+        <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+          <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+        </Attribute>
+        <Attribute AttributeDataType="xs:boolean" Name="writable" />
+      </ExternalInterface>
+    </SystemUnitClass>
+    <SystemUnitClass ID="93d44518-037b-40ea-a094-ee6586004ccf" Name="AirQualityController">
+      <ExternalInterface ID="492fde27-a599-4999-80d0-cc08b8d6b894" Name="interface_to_room" />
+      <SystemUnitClass ID="cb0b80c4-6dd6-459e-9bcb-ed26014f8b27" Name="CO2Sensor">
+        <Attribute Name="type" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Constant" />
+        <Attribute Name="co2Value" AttributeDataType="xs:string" RefAttributeType="DTDLAttributeTypeLib/Loggable" />
+        <SupportedRoleClass RefRoleClassPath="" />
+      </SystemUnitClass>
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <AttributeTypeLib ChangeMode="state" Name="AutomationMLBaseAttributeTypeLib">
+    <Description>Standard Automation Markup Language Attribute Type Library</Description>
+    <Version>2.10.0</Version>
+    <Copyright>AutomationML e.V.</Copyright>
+    <AttributeType Name="AssociatedExternalValue">
+      <Attribute AttributeDataType="xs:string" Name="refCAEXAttribute" />
+      <Attribute AttributeDataType="xs:string" Name="refURI" />
+      <Attribute AttributeDataType="xs:string" Name="Direction" />
+    </AttributeType>
+    <AttributeType AttributeDataType="xs:string" Name="AssociatedFacet" />
+    <AttributeType Name="Cardinality">
+      <Attribute AttributeDataType="xs:unsignedInt" Name="MinOccur" />
+      <Attribute AttributeDataType="xs:unsignedInt" Name="MaxOccur" />
+    </AttributeType>
+    <AttributeType AttributeDataType="xs:string" Name="Category" />
+    <AttributeType AttributeDataType="xs:string" Name="Direction">
+      <DefaultValue>InOut</DefaultValue>
+      <Constraint Name="AllowedValues">
+        <NominalScaledType>
+          <RequiredValue>In</RequiredValue>
+          <RequiredValue>Out</RequiredValue>
+          <RequiredValue>InOut</RequiredValue>
+        </NominalScaledType>
+      </Constraint>
+    </AttributeType>
+    <AttributeType AttributeDataType="xs:string" Name="DocLang" />
+    <AttributeType AttributeDataType="" Name="Frame">
+      <Attribute AttributeDataType="xs:double" Name="x">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+      <Attribute AttributeDataType="xs:double" Name="y">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+      <Attribute AttributeDataType="xs:double" Name="z">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+      <Attribute AttributeDataType="xs:double" Name="rx">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+      <Attribute AttributeDataType="xs:double" Name="ry">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+      <Attribute AttributeDataType="xs:double" Name="rz">
+        <DefaultValue>0</DefaultValue>
+        <Value>0</Value>
+      </Attribute>
+    </AttributeType>
+    <AttributeType AttributeDataType="xs:string" Name="ListType" />
+    <AttributeType AttributeDataType="xs:string" Name="LocalizedAttribute" />
+    <AttributeType AttributeDataType="xs:string" Name="MIMEType" />
+    <AttributeType AttributeDataType="xs:string" Name="OrderedListType" />
+    <AttributeType AttributeDataType="xs:anyURI" Name="refURI" />
+  </AttributeTypeLib>
+  <AttributeTypeLib Name="DTDLAttributeTypeLib">
+    <Version>0</Version>
+    <AttributeType AttributeDataType="xs:string" Name="Loggable" />
+    <AttributeType AttributeDataType="xs:string" Name="Constant" />
+  </AttributeTypeLib>
+</CAEXFile>
