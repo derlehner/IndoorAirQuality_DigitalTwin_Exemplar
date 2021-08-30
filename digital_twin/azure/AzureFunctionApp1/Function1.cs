@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace IotHubtoTwins
 {
@@ -42,9 +43,15 @@ namespace IotHubtoTwins
                     // <Find_device_ID_and_temperature>
                     JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
                     string deviceId = (string)deviceMessage["systemProperties"]["iothub-connection-device-id"];
-                    var temperature = deviceMessage["body"]["Temperature"];
-                    var humidity = deviceMessage["body"]["Humidity"];
-                    var co2Value = deviceMessage["body"]["CarbonDioxideValue"];
+
+                    // body seems to be a base64 encoded string
+                    string base64EncodedBody =  (string)deviceMessage["body"];
+                    var decodedBody = Encoding.UTF8.GetString(Convert.FromBase64String(base64EncodedBody));
+                    JObject messageBody = (JObject)JsonConvert.DeserializeObject(decodedBody);
+
+                    var temperature = messageBody["Temperature"];
+                    var humidity = messageBody["Humidity"];
+                    var co2Value = messageBody["CarbonDioxideValue"];
                     // </Find_device_ID_and_temperature>
 
                     log.LogInformation($"Device:{deviceId} Temperature is:{temperature}");
