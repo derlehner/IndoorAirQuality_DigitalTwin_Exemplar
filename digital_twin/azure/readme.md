@@ -6,7 +6,7 @@
    - 1.2 Setup IoT-Hub
    - 1.3 Setup Azure Digital Twins Service (ADT)
    - 1.4 Setup Time Series Insights Service (TSI)
-   - 1.5 Setup Function App 1: ExtractDeviceData
+   - [1.5 Setup Function App 1: ExtractDeviceData](#1-5-functions-app-1)
    - 1.6 Setup Function App 2: TransformTwinData
    - 1.7 Connect ExtractDeviceData to IoT-Hub and ADT
    - 1.8 Setup Time Series Insights Service (TSI)
@@ -204,7 +204,7 @@ we can create the new time series resource in Azure by following the steps below
 
    
 
-### 1.5 Setup Function App 1: ExtractDeviceData
+### <a name="1-5-functions-app-1"></a> 1.5 Setup Function App 1: ExtractDeviceData
 
 We are setting up this Azure function for transferring the device data from IoT Hub to DT. This function is triggered by Event Grid Trigger  and when the IoT device receives data it sends this to the DT internally.
 
@@ -236,7 +236,8 @@ Add the following NuGet packages to the project to interact with Azure Digital T
 
    In this function, we have created the environment variable  accessing the Digital twin instance. Once the IoT device receives the data, the event grid triggers the azure function and we do some pre-processing steps like the JSON serialization for converting the telemetry data into the required data format. Finally we use AddReplace method to update the twin with new data.
 
-   Publish the app to Azure with a function name , resource group. 
+   Publish the app to Azure with a function name , resource group.
+
 
    **Verify if publish is successful in Azure:**
 
@@ -286,6 +287,18 @@ Now if the IoT device receives data,event grid is triggered and data is sent to 
 
 ![AzureFn1EventsOutput](./images/AzureFn1EventsOutput.JPG)
 
+#### **Allow functions-app to access Azure Digital Twins**
+
+As the function-app uses the [`ManagedIdentityCredential`](https://docs.microsoft.com/en-us/dotnet/api/azure.identity.managedidentitycredential?view=azure-dotnet) to connect to the Azure Digital Twins platform, it needs to have extended privileges. To configure these privileges, first the Azure Function App needs to have system-assigned identity enabled. To do so open up your Function App in the Azure Portal and navigate to `Settings > Identity` and turn the status of `System assigned` to `On`.
+
+![Enabling-system-assigned-identity](./images/1-5-identity-on.JPG)
+
+After enabling the system-assigned identity, you need to assign the "Azure Digital Twins Data Owner" role to the Function App. Navigate to your Azure Digital Twins instance in the Azure Portal and select `Access control (IAM)`. Click `Add > Add role assignment` next. Select role `Azure Digital Twins Data Owner` and `Assign access to` "Function App", finally select the corresponding `Subscription` and pick the correct function.
+
+![Assign-ADT-data-owner-role-to-function-app](./images/1-5-role-assignment.JPG)
+
+Alternatively you can also use the Azure-Powershell to do so. More detailed instructions can be found [here](https://docs.microsoft.com/en-us/azure/digital-twins/how-to-authenticate-client#assign-an-access-role)
+
 ### 1.6 Setup Function App 2: TransformTwinData
 
 Now we need to create Azure function to transform the twin data to the TSI instance. we have used C# to create Azure function as it provides ready-to-use project template for event hub triggers. 
@@ -318,7 +331,7 @@ Set up the connection string name for eventhub twins and time series insights ac
 C# Function gets the EventData from EventBus.Event data is in array segment and we parse to get the string. Convert JSON to .Net Object using (JObject) JsonConvert.DeserializeObject and cast it. Get properties out of the JSON Object, serialize to JSON string and add telemetry value to TSI (Time Series Instance)
 
 Add a new json file **local.settings.json** with following information to the **AirQualityDataProcessing project**. 
-
+* 
 Set the property name for twin and time series hub and add the primary connection string  obtained from Azure as follows
 
 ```json
