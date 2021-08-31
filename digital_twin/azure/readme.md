@@ -516,6 +516,11 @@ The Room with name "Room102" contains a Controller called "Raspberry2" and has a
 The Room with name "Lobby100" contains a Controller called "Raspberry3" and has a connected "CO2Sensor" and "LED".
 Both CO2Sensors send co2Values, and the LEDs have a Property called "color" that indicate the color in which it is currently blinking (NONE if the LED is turned off).
 To implement this setting in Azure, the following steps are necessary.
+1. Specify Digital Twins
+2. Create Digital Twins in ADT and TSI
+3. Create Endpoints for Devices in IoT-Hub
+
+These steps are described in more detail below.
 
 ### 2.1. Specify Digital Twins
 First, information of the physical devices must be specified in some order. This information must be defined on the following two levels of abstraction:
@@ -604,7 +609,11 @@ We have created the IoT device name in accordance with twin models because of th
 1. We want to automatically update the Digital twin with device data that IoT device receives
 2. The device data that we send to IoT Hub device is transmitted to Digital twin internally by Azure function.
 
-
-
- 
+### 2.4. Results
+After all of the steps mentioned above (setting up azure + creating digital twins for the use case) are performed, the following functionality is available.
+1. Data can be sent from the physical system to the respective Digital Twins via the created endpoints in the IoT-Hub
+2. Available Digital Twins and their metadata can be queried and visualized via the ADT-Explorer (see example visualization below, read more about ADT-Explorer in the [Visualization Application](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation)
+![ADT-Example](./images/adt_explorer_example.png)
+3. Historical data sent by different devices can be queried using TSI and visualized using the TSI-Explorer (see example visualization below, read more about TSI-Explorer in the [Visualization Application](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation)
+![TSI-Example](./images/tsi_explorer_example.png)
 
