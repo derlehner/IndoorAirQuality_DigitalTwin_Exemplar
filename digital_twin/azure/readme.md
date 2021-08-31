@@ -613,7 +613,10 @@ We have created the IoT device name in accordance with twin models because of th
 After all of the steps mentioned above (setting up azure + creating digital twins for the use case) are performed, the following functionality is available.
 1. Data can be sent from the physical system to the respective Digital Twins via the created endpoints in the IoT-Hub
 2. Available Digital Twins and their metadata can be queried and visualized via the ADT-Explorer (see example visualization below, read more about ADT-Explorer in the [Visualization Application](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation)
+
 ![ADT-Example](./images/adt_explorer_example.png)
+
 3. Historical data sent by different devices can be queried using TSI and visualized using the TSI-Explorer (see example visualization below, read more about TSI-Explorer in the [Visualization Application](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation)
+
 ![TSI-Example](./images/tsi_explorer_example.png)
 
