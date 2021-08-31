@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:DigitalTwinProfile="http:///schemas/DigitalTwinProfile/_KrpvoFu9Eeus8K1tc4P4VA/1" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_xIVMIFTGEeu15ObSYm9ssg" name="model">
+    <packageImport xmi:id="_xJj7MFTGEeu15ObSYm9ssg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_lLxBgAo2EeysYPi8YTUVWw" name="Science Park 3">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_OeQL8AovEeysYPi8YTUVWw"/>
+      <slot xmi:id="_1i9gIAo7EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_eNtR8AowEeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_4T26cAo7EeysYPi8YTUVWw" name="" instance="_y-fKgAo2EeysYPi8YTUVWw">
+          <type xmi:type="uml:Class" href="baseline.uml#_4HCqsFTGEeu15ObSYm9ssg"/>
+        </value>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_y8IIIAo4EeysYPi8YTUVWw" name="Science Park 3.rooms">
+      <classifier xmi:type="uml:Association" href="baseline.uml#_59BYAAo4EeysYPi8YTUVWw"/>
+      <slot xmi:id="_l6gvIAo8EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_z1WZsAo5EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_qMwncAo8EeysYPi8YTUVWw" instance="_lLxBgAo2EeysYPi8YTUVWw"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_y-fKgAo2EeysYPi8YTUVWw" name="Room 101">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_4HCqsFTGEeu15ObSYm9ssg"/>
+      <slot xmi:id="_5Luv4Ao2EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_RCy9kAo1EeysYPi8YTUVWw"/>
+      </slot>
+      <slot xmi:id="_2MhlEAo8EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_BObnwFp_EeutDexZeaWgGg"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_JUf7gAo9EeysYPi8YTUVWw" instance="_IC1uEAo3EeysYPi8YTUVWw"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_gF0pIAo7EeysYPi8YTUVWw" name="Room 101.controllers">
+      <classifier xmi:type="uml:Association" href="baseline.uml#_rzLTAAo5EeysYPi8YTUVWw"/>
+      <slot xmi:id="_MxGlQAo9EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_Q8dSwAo6EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_PnaEAAo9EeysYPi8YTUVWw" instance="_y-fKgAo2EeysYPi8YTUVWw"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_IC1uEAo3EeysYPi8YTUVWw" name="Raspberry 1">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_2RUfMFTGEeu15ObSYm9ssg"/>
+      <slot xmi:id="_qdb6AAo3EeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_GoK3IFqAEeutDexZeaWgGg"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_eZqakApBEeysYPi8YTUVWw" instance="_cc_eEAo3EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_ihRJIApBEeysYPi8YTUVWw" instance="_kMDbgAo3EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_nVK9AApBEeysYPi8YTUVWw" instance="_gjbH8Ao3EeysYPi8YTUVWw"/>
+      </slot>
+      <slot xmi:id="_sDyoQApBEeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_R67qAAo2EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_UwuU8ApCEeysYPi8YTUVWw" instance="_SmM_IAo3EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_XTJOYApCEeysYPi8YTUVWw" instance="_tlv1IAo_EeysYPi8YTUVWw"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_gzfqoAo_EeysYPi8YTUVWw" name="Raspberry 1.sensors">
+      <classifier xmi:type="uml:Association" href="baseline.uml#_uO1dIAo5EeysYPi8YTUVWw"/>
+      <slot xmi:id="_NXX-QApBEeysYPi8YTUVWw">
+        <definingFeature xmi:type="uml:Property" href="baseline.uml#_lXMRkAo6EeysYPi8YTUVWw"/>
+        <value xmi:type="uml:InstanceValue" xmi:id="_RLtLgApBEeysYPi8YTUVWw" instance="_IC1uEAo3EeysYPi8YTUVWw"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_P0XIoApCEeysYPi8YTUVWw" name="Raspberry 1.alarms"/>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_cc_eEAo3EeysYPi8YTUVWw" name="SCD30 Sensor 1 - CO2">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_Shyn8AoxEeysYPi8YTUVWw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_gjbH8Ao3EeysYPi8YTUVWw" name="SCD30 Sensor 1 - Temperature">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_Shyn8AoxEeysYPi8YTUVWw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_kMDbgAo3EeysYPi8YTUVWw" name="SCD30 Sensor 1 - Humidity">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_Shyn8AoxEeysYPi8YTUVWw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_SmM_IAo3EeysYPi8YTUVWw" name="LED 1">
+      <classifier xmi:type="uml:Class" href="baseline.uml#_Un6m8AoxEeysYPi8YTUVWw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_tlv1IAo_EeysYPi8YTUVWw" name="Buzzer 1"/>
+  </uml:Model>
+  <DigitalTwinProfile:DTElement xmi:id="_Ar0dEFv3EeujF8wUM4Bf5g" id_scheme="dtmi" id_path="org:example:abc" id_version="1"/>
+  <DigitalTwinProfile:DTElement xmi:id="_BxbaQFv3EeujF8wUM4Bf5g" id_scheme="dtmi" id_path="org:example:relationshipProperty" id_version="1"/>
+</xmi:XMI>
