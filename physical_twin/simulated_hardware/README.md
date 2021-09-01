@@ -1,20 +1,21 @@
-# Simulate Hardware with randomly generated CO2 values
+# Simulate Hardware with Actual Sensor Values
 
-This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure and predict COVID-19 risk with mock up sensor data. In this project, we will send data to IoT device which updates the Digital Twin.
+This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure the air quality in indoor environment and update the IoT devices with measurements. This project uses the air quality measurements from room. Now let us see how we can send these sensor data to IoT device which updates the Digital Twin.
 
-In this sample, we are sending data to IoT device **Raspberry1** which is in Lobby100
+In this sample, we are sending sensor data to IoT device **Raspberry1** which is in room Lobby100
 ## Prerequisites
 
-In order to send data to the Digital Twin of Lobby100 and Raspberry3, we need to set up the corresponding Digital Twin infrastructure and the respective Digital Twins. The documentation for that is give in the [folder digital_twin of this repository](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin).
+In order to send data to the Digital Twin of Lobby100 and Raspberry1, we need to set up the corresponding Digital Twin infrastructure and the respective Digital Twins. The documentation for that is give in the [folder digital_twin of this repository](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin).
 
 More specifically, we need the following prerequisites to be met:
 1. IoT-Hub, ADT-Service, TSI-Service are set up
 2. The services above are connected via the respective Azure functions
-3. A Digital Twin for Lobby100 and Raspberry3 is created in all of these services, using the example data provided in the [digital_twin folder](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin)
+3. A Digital Twin for Lobby100 and Raspberry1 is created in all of these services, using the example data provided in the [digital_twin folder](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin)
 
-## Sending simulated data to the Digital Twin
+## Send simulated data to the Digital Twin
 To send the simulated data, we provide an example client app coded in Python, which is available via the following link: [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
-In order to run the app, we need to install required packages via the follwoing command
+In order to run the app, we need to install required packages via the following command
+
 ```
 pip install azure.iot.device
 ```
@@ -33,6 +34,10 @@ Go to IoT Hub ---> click on specific IoT device to which you need to send data -
 
 copy paste the connection string into the python script.
 
+**Sensor data in csv file**
+
+We have used the actual sensor data obtained from room Lobby100 and exported the data into csv file [SensorData.csv](./sensorData.csv) .The csv file is parsed to get co2 measurements and then sent to IoT device. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
+
 ### Run the client app
 
 Using windows command line navigate to the folder in which the SimulatedDevice.py file is located (if you cloned the repository, then this is the current folder that you're in) python file. To run the app, execute the following command via the command line in this folder:
@@ -44,7 +49,7 @@ python SimulatedDevice.py
 
 
 
-## Testing the Client App:
+## Testing the client app:
 To validate the correct functioning of the app (or debug in the case of errors), two methods are possible:
 
 **Method-1:** IoT Hub Overview
