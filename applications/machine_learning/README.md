@@ -38,7 +38,7 @@ Before continuing the data should be converted pandas dataframe structure so it 
 % reading the csv
 df = pd.read_csv('co2_data.csv')
 % modyfying 'Time' column in format we need 
-df['Time'] = pd.to_datetime(df["Time"], format='%Y-%m-%d %H:%M:%S')
+df["Time"] = pd.to_datetime(df["Time"], format='%Y-%m-%d %H:%M:%S')
 ```
 
 
