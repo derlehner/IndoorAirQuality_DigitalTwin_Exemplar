@@ -5,7 +5,7 @@
     - 1.3 Input Files
     - 1.4 Modelling the Shape of the Room
     - 1.5 Modelling the Fluid Flow
--   - 1.6 Model Driven Engineering Techniques
+    - 1.6 Model Driven Engineering Techniques
     - 1.7 Meta-Model of Abaqus
     - 1.8 Additions Needed in the Digital Twin to create the Abaqus Model
     - 1.9 Modelling the CO2 Sources in the Room
