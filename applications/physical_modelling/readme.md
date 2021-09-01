@@ -1,23 +1,22 @@
 ## Contents
 - 1 Physical Modelling of CO2 on Abaqus
     - 1.1 Introduction to the Importance and Need of Physical Modeling
-- 2 Creating the Physical Model on Abaqus
-    - 2.1 Input Files
-- 3 Modelling the Shape of the Room
-- 4 Modelling the Fluid Flow
-- 5 Model Driven Engineering Techniques
-    - 5.1 Meta-Model of Abaqus
-    - 5.2 Additions Needed in the Digital Twin to create the Abaqus Model
-    - 5.3 Modelling the CO2 Sources in the Room
-    - 5.4 Modelling the Fluid Flow (Air Particle Properties- SPH Particles)
-
-- 6 Settings on Abaqus for Air Particles
-- 7 Dynamic Air Flow in and out of the CO2 on Abaqus
-- 8 Limitations of the SPH particles on Abaqus
-- 9 The Complete Model of the Virtual Room
-    - 9.1 Virtual Room with Short Sources
-- 10 Building Parts (different sources) on Abaqus
-- 11 Output Files on Abaqus and Post-Processing of the Simulaiton
+    - 1.2 Creating the Physical Model on Abaqus
+    - 1.3 Input Files
+    - 1.4 Modelling the Shape of the Room
+    - 1.5 Modelling the Fluid Flow
+-   - 1.6 Model Driven Engineering Techniques
+    - 1.7 Meta-Model of Abaqus
+    - 1.8 Additions Needed in the Digital Twin to create the Abaqus Model
+    - 1.9 Modelling the CO2 Sources in the Room
+- 2  Modelling the Fluid Flow (Air Particle Properties- SPH Particles)
+    - 2.1 Settings on Abaqus for Air Particles
+    - 2.2 Dynamic Air Flow in and out of the CO2 on Abaqus
+    - 2.3 Limitations of the SPH particles on Abaqus
+    - 2.4 The Complete Model of the Virtual Room
+    - 2.5 Virtual Room with Short Sources
+    - 2.6 Building Parts (different sources) on Abaqus
+    - 2.7 Output Files on Abaqus and Post-Processing of the Simulaiton
      
 
 # Physical Modelling of CO2 on Abaqus 
