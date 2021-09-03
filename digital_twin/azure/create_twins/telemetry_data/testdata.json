@@ -4,7 +4,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -12,7 +12,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1001,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -20,7 +20,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -28,7 +28,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -36,7 +36,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -44,7 +44,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -52,7 +52,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -60,7 +60,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1010,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -68,7 +68,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1010,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -76,7 +76,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1010,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -84,7 +84,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1050,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -92,7 +92,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1050,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -100,7 +100,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1050,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -108,7 +108,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1050,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -116,7 +116,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1100,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -124,7 +124,7 @@
         "componentId": "CO2Sensor",
         "content":{
          "carbonDioxideValue": 1100,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -132,7 +132,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1100,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -140,7 +140,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1100,
-            "timestamp":"2021-05-12T12:53Z"
+           
         }
     },
     {
@@ -148,7 +148,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1100,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -156,7 +156,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     },
     {
@@ -164,7 +164,7 @@
         "componentId": "CO2Sensor",
         "content":{
             "carbonDioxideValue": 1000,
-            "timestamp":"2021-05-12T12:53Z"
+            
         }
     }
 ]
