@@ -5,15 +5,15 @@ This project briefly describes about creation of IoT Hub, digital twin and commu
 In this sample, we are sending sensor data to IoT device **Raspberry1** which is in room Lobby100
 ## Prerequisites
 
-In order to send data to the Digital Twin of Lobby100 and Raspberry1, we need to set up the corresponding Digital Twin infrastructure and the respective Digital Twins. The documentation for that is give in the [folder digital_twin of this repository](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin).
+In order to send data to the Digital Twin of Lobby100 and Raspberry1, we need to set up the corresponding Digital Twin infrastructure and the respective Digital Twins. The documentation for that is give in the [folder digital_twin of this repository](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin).
 
 More specifically, we need the following prerequisites to be met:
 1. IoT-Hub, ADT-Service, TSI-Service are set up
 2. The services above are connected via the respective Azure functions
-3. A Digital Twin for Lobby100 and Raspberry1 is created in all of these services, using the example data provided in the [digital_twin folder](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/digital_twin)
+3. A Digital Twin for Lobby100 and Raspberry1 is created in all of these services, using the example data provided in the [digital_twin folder](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin)
 
 ## Send simulated data to the Digital Twin
-To send the simulated data, we provide an example client app coded in Python, which is available via the following link: [SimulatedDevice.py](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/blob/development/physical_twin/simulated_hardware/SimulatedDevice.py)
+To send the simulated data, we provide an example client app coded in Python, which is available via the following link: [SimulatedDevice.py](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/SimulatedDevice.py)
 In order to run the app, we need to install required packages via the following command
 
 ```
@@ -24,7 +24,7 @@ The configuration and running of the example client app is described in the foll
 
 ### Configuring the client app
 
-Download the python script [SimulatedDevice.py](./SimulateDevice.py) and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
+Download the python script [SimulatedDevice.py](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/SimulatedDevice.py) and replace the **connection string** property with your own IoT device primary connection string to which the telemetry data is to be sent.
 
 **Get the IoT device connection string**
 
@@ -36,7 +36,7 @@ copy paste the connection string into the python script.
 
 **Sensor data in csv file**
 
-We have used the actual sensor data obtained from room Lobby100 and exported the data into csv file [SensorData.csv](./sensorData.csv) .The csv file is parsed to get co2 measurements and then sent to IoT device. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
+We have used the actual sensor data obtained from CCS811 sensor which is setup in room Lobby100.The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
 
 ### Run the client app
 
