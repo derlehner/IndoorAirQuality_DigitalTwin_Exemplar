@@ -23,7 +23,8 @@
     "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^8.1.0",
     "victory-core": "^30.0.0",
-    "victory-native": "^33.0.0"
+    "victory-native": "^33.0.1",
+    "victory-voronoi-container": "^32.3.7"
   },
   "devDependencies": {
     "@babel/core": "7.14.3",

@@ -4,7 +4,7 @@ import {Pressable, Button, View, Text, StyleSheet} from 'react-native';
 import {Header, Card} from 'react-native-elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import DetailsScreen from './Chart';
+import charts from './Chart';
 import overview from './OverviewCo2';
 
 const Stack = createStackNavigator();
@@ -13,17 +13,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Overview of Co2 levels in Scp-3"
+        initialRouteName="Overview of Co2 levels in Building "
         headerMode="screen"
         screenOptions={{
           headerTintColor: 'white',
           headerStyle: {backgroundColor: '#2C76F0'},
+          headerTitleStyle: {fontSize: 22, alignItems: 'center'},
         }}>
         <Stack.Screen
-          name="Overview of Co2 levels in Scp-3"
+          name="Overview of Co2 levels in Building "
           component={overview}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Sensor Data" component={charts} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -31,7 +32,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    alignItems: 'center',
     backgroundColor: '#eeeeee',
   },
 

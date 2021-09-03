@@ -1,21 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Button,
-  Text,
-  useColorScheme,
-  FlatList,
-  View,
-} from 'react-native';
-import {Header} from 'react-native-elements';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {
-  VictoryBar,
-  VictoryStack,
-  VictoryGroup,
+  VictoryLine,
   VictoryChart,
   VictoryTheme,
   VictoryZoomContainer,
@@ -26,22 +13,14 @@ import {
   createContainer,
 } from 'victory-native';
 import {NavigationContainer} from '@react-navigation/native';
+import * as co2data from './co2data.json';
 
-// https://49d10b83ed9e.ngrok.io
-//rimport Ionicons from 'react-native-vector-icons/Ionicons';
-function DetailsScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-/* function App() {
-  const [loading, setLoading] = useState(null);
-  const [sensorData, setSensorData] = useState([]);
+export default function charts({navigation}) {
   const VictoryZoomVoronoiContainer = createContainer('zoom', 'voronoi');
+
   const [selectedDomain, setSelectedDomain] = useState();
   const [zoomDomain, setZoomDomain] = useState();
+
   const handleZoom = domain => {
     setSelectedDomain(domain);
   };
@@ -49,95 +28,91 @@ function DetailsScreen() {
     setZoomDomain(domain);
   };
 
-  if (loading) return 'Loading...';
+  const sensorData = co2data['default'];
+
   return (
-    <View style={styles.container}>
-      <Header
-        backgroundColor="#005fff"
-        leftComponent={{icon: 'menu', color: '#fff'}}
-        centerComponent={{
-          text: 'Sensor Data',
-          style: {color: '#fff', fontSize: 16, fontWeight: 'bold'},
-          color: '#fff',
-          fontSize: 14,
-          fontWeight: 'bold',
-        }}
-        rightComponent={{
-          icon: 'settings',
-          color: '#fff',
-        }}
-      />
+    <>
+      <View style={styles.container}>
+        <Text style={styles.heading}>Room Lobby:100 - Raspberry1</Text>
 
-      <VictoryChart
-        theme={VictoryTheme.material}
-        width={400}
-        height={400}
-        padding={{top: 40, left: 70, right: 30, bottom: 100}}
-        domainPadding={20}
-        containerComponent={
-          <VictoryZoomVoronoiContainer
-            zoomDimension="x"
-          
-            zoomDomain={{x: [0, 5], y: [0, 8000]}}
-            onZoomDomainChange={handleZoom}
-           
+        <VictoryChart
+          domain={{y: [0, 800]}}
+          theme={VictoryTheme.material}
+          width={370}
+          height={700}
+          padding={{top: 40, left: 60, right: 5, bottom: 100}}
+          domainPadding={20}
+          containerComponent={
+            <VictoryZoomVoronoiContainer
+              zoomDimension="x"
+              zoomDomain={zoomDomain}
+              onZoomDomainChange={handleZoom}
+              labels={({datum}) => `co2:${datum.co2}`}
+            />
+          }>
+          <VictoryAxis
+            dependentAxis
+            fixLabelOverlap={true}
+            label="Co2 in ppm"
+            style={{
+              axisLabel: {
+                padding: 35,
+                fontSize: 15,
+                fontWeight: 'bold',
+                fill: 'blue',
+              },
+              axis: {stroke: 'black'},
+              ticks: {stroke: 'black', size: 5},
+              tickLabels: {
+                fill: 'black', //CHANGE COLOR OF Y-AXIS LABELS
+                fontWeight: 'bold',
+                fontSize: 12,
+              },
+            }}
           />
-        }>
-        <VictoryAxis fixLabelOverlap />
-        <VictoryAxis dependentAxis />
-        <VictoryAxis
-          dependentAxis
-          label="Count"
-          style={{
-            axisLabel: {padding: 50, fontSize: 15, fontWeight: 'bold'},
-            axis: {stroke: 'black'},
-            ticks: {stroke: 'purple', size: 5},
-          }}
-        />
-        <VictoryAxis
-          independentAxis
-          label="Hourly Interval"
-          style={{
-            axisLabel: {padding: 30, fontSize: 15, fontWeight: 'bold'},
-            axis: {stroke: 'black'},
-            ticks: {stroke: 'purple', size: 5},
-          }}
-        />
+          <VictoryAxis
+            independentAxis
+            fixLabelOverlap={true}
+            label="DateTime Interval"
+            style={{
+              axisLabel: {
+                padding: 40,
+                fontSize: 15,
+                fontWeight: 'bold',
+                fill: 'blue',
+              },
+              axis: {stroke: 'black'},
+              ticks: {stroke: 'black', size: 5},
+              tickLabels: {
+                fill: 'black', //CHANGE COLOR OF X-AXIS LABELS
+                fontWeight: 'bold',
+                fontSize: 12,
+              },
+            }}
+          />
 
-        <VictoryGroup offset={20} colorScale={'qualitative'}>
-          <VictoryBar
-            data={[
-              {x: 1, y: 1},
-              {x: 2, y: 2},
-              {x: 3, y: 5},
-            ]}
+          <VictoryLine
+            style={{
+              data: {stroke: '#00b300', strokeWidth: 3},
+              parent: {border: '1px solid #ccc'},
+            }}
+            interpolation="catmullRom"
+            data={sensorData}
+            x="Time"
+            y="co2"
           />
-          <VictoryBar
-            data={[
-              {x: 1, y: 2},
-              {x: 2, y: 1},
-              {x: 3, y: 7},
-            ]}
-          />
-          <VictoryBar
-            data={[
-              {x: 1, y: 3},
-              {x: 2, y: 4},
-              {x: 3, y: 9},
-            ]}
-          />
-        </VictoryGroup>
-      </VictoryChart>
-    </View>
+        </VictoryChart>
+      </View>
+    </>
   );
-} */
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
 
     paddingTop: 13,
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#ffffff',
   },
   sectionContainer: {
     marginTop: 32,
@@ -161,6 +136,10 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: 'bold',
   },
+  heading: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: 'blue',
+    fontWeight: 'bold',
+  },
 });
-
-export default DetailsScreen;

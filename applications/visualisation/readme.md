@@ -1,30 +1,36 @@
 ## Visualization of Co2 values in a Mobile App
 
-### Table of Contents
+### Contents
 
 1.Introduction
 
-2.Rasperry Pi and Azure Setup
+2.Prerequisites
+
+​	- 2.1 Raspberry Pi and Azure Setup
 
 3.Visualization Needs
 
-​	-3.1 Azure Visualization Tools
+​	- 3.1 Azure Visualization Tools
 
-​	-3.2 Existing Visualization Capabilities in the Azure Platform
+​	- 3.2 Existing Visualization Capabilities in the Azure Platform
 
-​	-3.3 Extending Existing Capabilities
+​	- 3.3 Extending Existing Capabilities
 
 4.Mobile App
 
+​	- 4.1 Prerequisites
+
+​	- 4.2 Run the App
+
 ### **1. Introduction**
 
-Predict the COVID19 risk infection in indoor environment by measuring the Co2 value from rooms. Increased levels of Co2 in rooms increases the probability of COVID-19 risk infection. So we need to monitor the Co2 and maintain certain level of air-quality inside rooms to prevent the risk infection . 
+Measure the air quality in indoor environment by using the CCS811 sensor in rooms. The overview of the sensor data in each rooms can be visualized in a mobile app. The sensor data from rooms is collected in a [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.csv),parsed into required json format using the [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used as the dataset for visualization. 
 
-### **2. Raspberry Pi and Azure Setup** 
+### **2. **Prerequisites:
 
-**Prerequisite:**
+#### 2.1 Raspberry Pi and Azure Setup
 
-Set up the hardware Raspberry pi with Co2 sensor- CCS811 for different rooms as described in the section [physical twin](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/physical_twin/hardware_setup) and send co2 values to Azure as described in the section [simulated hardware](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/physical_twin/simulated_hardware)
+Set up the hardware Raspberry pi with Co2 sensor- CCS811 for different rooms as described in the section [physical twin](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) and send co2 values to Azure as described in the section [simulated hardware](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/simulated_hardware)
 
 ### **3. Visualization needs**
 
@@ -48,7 +54,7 @@ Microsoft Azure provides the following tools for visualization
 
 ​	2. Time Series Explorer
 
-#### **3.2 Existing Visualization Capabilities in the Azure Platform:**
+#### 3.2 Existing Visualization Capabilities in the Azure Platform
 
 The  Azure platform provides out of the box visualization capabilities. To some extent, the following tools can be used to achieve the visualization goals mentioned above.
 
@@ -92,11 +98,11 @@ allows to query historical data of DTs  with custom search span and filter optio
 
 To fulfil visualization need 2,4 and 5 completely, we have developed a mobile app solution with following features.
 
-We have used **React-Native framework** for cross-platform mobile app development and you can find the source code for the app here [App](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/development/applications/visualisation/App)
+We have used **React-Native framework** for cross-platform mobile app development and you can find the source code for the app here [App](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/App)
 
-**Prerequisites:**
+#### Prerequisites:
 
-Set up the React Native development environment by following the instructions from [link](https://reactnative.dev/docs/environment-setup). We have used the following operating systems and ide tools for app development. 
+Set up the React Native development environment by following the instructions from [environment setup](https://reactnative.dev/docs/environment-setup). We have used the following operating systems and ide tools for app development. 
 
 Development OS-Windows
 
@@ -112,7 +118,7 @@ Physical mobile device
 
 **Run the App in Android Mobile:**
 
-1. To run the app in an android mobile device, plug an usb cable to connect your android mobile to the system and enable developer options in your phone by following the instructions [here](https://reactnative.dev/docs/running-on-device).
+1. To run the app in an android mobile device, plug an usb cable to connect your android mobile to the system and enable developer options in your phone by following the instructions [ run in device](https://reactnative.dev/docs/running-on-device).
 
 2. Clone and navigate to the project folder from command line.
 
@@ -124,9 +130,45 @@ Physical mobile device
 
 **Mobile App Screenshot**
 
-An App with a overview of current Co2 levels in different rooms with risk level indicators. The color  are used to indicate the risk level in each of the rooms. (Red-High, Orange-Medium and Green-Low).
+**1.Overview of Co2 levels in Building:**
 
-![MobileOverview](./images/mobileView.JPG)
+The initial screen of the app displays overview of current Co2 levels in different rooms with risk level indicators. The color  are used to indicate the risk level in each of the rooms. (Red-High, Orange-Medium and Green-Low).
+
+![Co2Overview_inRooms](./images/overview.JPG)
+
+**2. Chart View**
+
+By clicking on the room image from screen1 , you will be navigated to the sensor data of that room(in our sample, it is Lobby 100 and data is from Raspberry1). 
+
+**Dataset**
+
+The chart uses the [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.csv) with sensor data obtained from CCS811 sensor, setup in room Lobby 100.The csv file is parsed into the required [json format](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.json) using the  [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used in charts. The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime.
+
+**Line Chart**
+
+The line chart  displays the co2 values obtained from Raspberry1 setup in room Lobby 100.
+
+**Axis**
+
+The x- axis displays the datetime interval in year month date hour minutes and seconds format(yyyy-mm-dd hh:mm:ss).
+
+The y-axis displays the Co2 in parts per million(ppm).
+
+**Optimum Level**
+
+The co2 level in indoor environment should not exceed 1000.
+
+The maximum co2 value in Lobby 100 is 722.23 as shown below in screenshot. 
+
+![MobileOverview](./images/chartView.JPG)
+
+**3.Detailed View of Charts**
+
+The chart provides option to pan and zoom to get detailed overview of the co2 levels between the timespan.
+
+![DetailedView_Charts](./images/detailView.jpg)
+
+
 
  **Application of MDE techniques**
 

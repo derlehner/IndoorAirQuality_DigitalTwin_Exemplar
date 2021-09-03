@@ -1,115 +1,65 @@
-import React, {useState, useEffect} from 'react';
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import {Card} from 'react-native-elements';
-import {Header} from 'react-native-elements';
+
 function overview({navigation}) {
-  //function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
-      {/*   <Header
-          backgroundColor="#005fff"
-          leftComponent={{icon: 'menu', color: '#fff'}}
-          centerComponent={{
-            text: 'Feature Overview',
-            style: {color: '#fff', fontSize: 16, fontWeight: 'bold'},
-            color: '#fff',
-            fontSize: 14,
-            textColor: '#fff',
-            fontWeight: 'bold',
-          }}
-          rightComponent={{
-            icon: 'settings',
-            color: '#fff',
-          }}
-        /> */}
-
-      <Pressable
-        onPress={() => {
-          navigation.navigate('Details');
-          // setTimesPressed((current) => current + 1);
-        }}>
-        <View style={styles.cardRow}>
+      <View style={styles.cardRow}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Sensor Data');
+          }}>
           <Card containerStyle={styles.cardStyle1}>
-            {/*   <Card.Title style={styles.cardTitle}>Scp-3 </Card.Title> */}
             <Text>
-              <Text style={styles.subHeading}>Room:</Text> 0080
+              <Text style={styles.subHeading}>Lobby: 100 - Raspberry 1</Text>
+            </Text>
+            <Text>
+              <Text style={styles.subHeading}></Text>
             </Text>
             <Card.Image
               style={styles.image}
               source={require('./images/Room.jpg')}
             />
-            <Text>
-              <Text style={styles.subHeading}>Co2 level:</Text> 2500.50
-            </Text>
-            <Text>
-              <Text style={styles.subHeading}>Risk:</Text> High
-            </Text>
-          </Card>
-          <Card containerStyle={styles.cardStyle2}>
-            {/*  <Card.Title style={styles.cardTitle}>Scp-3 </Card.Title> */}
 
-            <Text>
-              <Text style={styles.subHeading}>Room:</Text> 0086
-            </Text>
-            <Card.Image
-              style={styles.image}
-              source={require('./images/Room.jpg')}
-            />
-            <Text>
-              <Text style={styles.subHeading}>Co2 level:</Text> 3600.90
-            </Text>
-            <Text>
-              <Text style={styles.subHeading}>Risk:</Text> Very High
-            </Text>
+            <Text style={styles.subHeading}>Co2 level: 689.60</Text>
+
+            <Text style={styles.subHeading}>Risk: Low</Text>
           </Card>
-        </View>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          navigation.navigate('Details');
-        }}>
-        <View style={styles.cardRow}>
-          <Card containerStyle={styles.cardStyle3}>
-            {/*  <Card.Title style={styles.cardTitle}>Scp-3</Card.Title> */}
-            <Text>
-              <Text style={styles.subHeading}>Room:</Text> 0090
-            </Text>
-            <Card.Image
-              style={styles.image}
-              source={require('./images/Room.jpg')}
-            />
-            <Text>
-              <Text style={styles.subHeading}>Co2 level:</Text> 1250.80
-            </Text>
-            <Text>
-              <Text style={styles.subHeading}>Risk:</Text> Medium
-            </Text>
-          </Card>
-          <Card containerStyle={styles.cardStyle4}>
-            {/*  <Card.Title style={styles.cardTitle}>Scp-3</Card.Title> */}
-            <Text>
-              <Text style={styles.subHeading}>Room:</Text> 0076
-            </Text>
-            <Card.Image
-              style={styles.image}
-              source={require('./images/Room.jpg')}
-            />
-            <Text>
-              <Text style={styles.subHeading}>Co2 level:</Text> 1000.25
-            </Text>
-            <Text>
-              <Text style={styles.subHeading}>Risk:</Text> Low
-            </Text>
-          </Card>
-        </View>
-      </Pressable>
+        </TouchableOpacity>
+        <Card containerStyle={styles.cardStyle2}>
+          <Text>
+            <Text style={styles.subHeading}>Room: 101 - Raspberry 2</Text>
+          </Text>
+          <Text>
+            <Text style={styles.subHeading}></Text>
+          </Text>
+          <Card.Image
+            style={styles.image}
+            source={require('./images/Room.jpg')}
+          />
+
+          <Text style={styles.subHeading}>Co2 level: 2500.50</Text>
+
+          <Text style={styles.subHeading}>Risk: High</Text>
+        </Card>
+        <Card containerStyle={styles.cardStyle3}>
+          <Text>
+            <Text style={styles.subHeading}>Room: 102 - Raspberry 3</Text>
+          </Text>
+          <Text>
+            <Text style={styles.subHeading}></Text>
+          </Text>
+          <Card.Image
+            style={styles.image}
+            source={require('./images/Room.jpg')}
+          />
+
+          <Text style={styles.subHeading}>Co2 level: 1000.90</Text>
+
+          <Text style={styles.subHeading}>Risk: Medium</Text>
+        </Card>
+      </View>
     </View>
   );
 }
@@ -125,11 +75,10 @@ const styles = StyleSheet.create({
   Heading: {
     fontWeight: 'bold',
     color: '#0087ff',
-    fontSize: 16,
+    fontSize: 14,
   },
   cardRow: {
-    //flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   modelCard: {
     borderRadius: 20,
@@ -138,15 +87,18 @@ const styles = StyleSheet.create({
   },
   cardStyle1: {
     borderRadius: 20,
-    width: 180,
+    width: 350,
+    height: 220,
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
-    backgroundColor: 'orange',
+    backgroundColor: '#83EE68',
+    padding: 10,
   },
   cardStyle2: {
     borderRadius: 20,
-    width: 180,
+    width: 350,
+    height: 220,
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
@@ -154,15 +106,17 @@ const styles = StyleSheet.create({
   },
   cardStyle3: {
     borderRadius: 20,
-    width: 180,
+    width: 350,
+    height: 220,
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
-    backgroundColor: '#FDDE66',
+    backgroundColor: 'orange',
   },
   cardStyle4: {
     borderRadius: 20,
     width: 180,
+    height: 220,
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
@@ -174,9 +128,12 @@ const styles = StyleSheet.create({
   },
   subHeading: {
     fontWeight: 'bold',
+    fontSize: 18,
+    padding: 2,
   },
   image: {
-    width: 150,
-    height: 70,
+    padding: 10,
+    width: 350,
+    height: 100,
   },
 });
