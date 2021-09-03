@@ -26,7 +26,7 @@
 
 Measure the air quality in indoor environment by using the CCS811 sensor in rooms. The overview of the sensor data in each rooms can be visualized in a mobile app. The sensor data from rooms is collected in a [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.csv),parsed into required json format using the [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used as the dataset for visualization. 
 
-### **2. **Prerequisites:
+### 2. Prerequisites:
 
 #### 2.1 Raspberry Pi and Azure Setup
 
@@ -134,7 +134,7 @@ Physical mobile device
 
 The initial screen of the app displays overview of current Co2 levels in different rooms with risk level indicators. The color  are used to indicate the risk level in each of the rooms. (Red-High, Orange-Medium and Green-Low).
 
-![Co2Overview_inRooms](./images/overview.JPG)
+![Co2Overview_inRooms](./images/overview.jpg)
 
 **2. Chart View**
 
@@ -160,7 +160,7 @@ The co2 level in indoor environment should not exceed 1000.
 
 The maximum co2 value in Lobby 100 is 722.23 as shown below in screenshot. 
 
-![MobileOverview](./images/chartView.JPG)
+![MobileOverview](./images/chartView.jpg)
 
 **3.Detailed View of Charts**
 
