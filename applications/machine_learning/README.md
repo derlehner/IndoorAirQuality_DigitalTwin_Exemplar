@@ -16,7 +16,11 @@
 
 
 ### Overview of the implementation <a name="section-1"></a>
-The goal of integrating temporal AI model for our scenario is to predict the certain time period of future from current real time. lets say '$t$' is real-time and we estimate the future of 30 minutes. the model's task is to estimate the value of $$t+30$$ which considers several factors as parameters for example our past data, trend, noise, seasonality with addition to make our model more robust external factors like state of windows/doors (open or closed), number of peoples in room, air ventilation or air-conditioner (on or off) can also considered in our model. This model should be based on ARIMA (Auto Regressive Integrated Moving Average) used to estimate the basic $$t+30$$ value and based on our internal and external factors the results changes according to respective time.
+The goal of integrating temporal AI model for our scenario is to predict the certain time period of future from current real time. lets say '$t$' is real-time and we estimate the future of 30 minutes. the model's task is to estimate the value of 
+$$
+t+30
+$$ 
+which considers several factors as parameters for example our past data, trend, noise, seasonality with addition to make our model more robust external factors like state of windows/doors (open or closed), number of peoples in room, air ventilation or air-conditioner (on or off) can also considered in our model. This model should be based on ARIMA (Auto Regressive Integrated Moving Average) used to estimate the basic $$t+30$$ value and based on our internal and external factors the results changes according to respective time.
 Then the final predicted data flows to the visualization part for comparison and to get overview to the client via inferencing our model either in-environment or remote devices via cloud based inference (depending on individual cases and usage). 
 Future upgrade could based on automating and upgrading model's knowledge itself to achieve robust results. But ever since the below points represents the current challenges.
 
