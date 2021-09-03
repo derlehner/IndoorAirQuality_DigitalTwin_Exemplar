@@ -58,9 +58,18 @@ Microsoft Azure provides the following tools for visualization
 
 The  Azure platform provides out of the box visualization capabilities. To some extent, the following tools can be used to achieve the visualization goals mentioned above.
 
+**Prerequisites:**
+
+set up the Azure DT and TSI explorer as described in [Azure section](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
+
 **Azure Digital Twins Explorer**
 
-It is used for visualizing of the current system snapshot during runtime, which is represented by the DT. Visualization capabilities include a graph view of DTs and their relationships to each other, as well as a detailed view of current property values of a DT.  Users can view, query, and edit the models, twins, and relationships according to specific user needs.
+It is used for visualizing of the current system snapshot during runtime, which is represented by the DT. Visualization capabilities include a graph view of DTs and their relationships to each other, as well as a detailed view of current property values of a DT.  Users can view, query, and edit the models, twins, and relationships according to specific user needs. 
+
+In our sample project, the DT is created with [twin models](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure/create_twins/twin_models)  and the output of DT explorer is shown below. The DT explorer has the digital twin of Raspberry 1,2 and Room101 and 102, the Rooms and Raspberry are connected with relationship airQualityControllers as described in [Room101.json](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/digital_twin/azure/create_twins/twin_models/Room101.json)
+
+![DTExplorer](./images/adt_explorer_example.png)
+
 This satisfies visualization need (1) and also partly satisfies visualization need (2) as it lacks the capabilities to directly compare Co2 values from different rooms.
 
 **Azure Time Series Explorer**
@@ -72,6 +81,10 @@ It is used to visualize historical values measured by a DT. Data visualization c
 (ii)Filtering displayed data with user-defined queries.
 
 (iii)Monitor data from different environments and sensors, analyse data patterns and also statistics.
+
+The TSI explorer displays the historical sensor data as shown below. The x-axis denotes the datetime interval and the y-axis denotes the co2 values in parts per million(ppm).
+
+![TSIExplorer](./images/tsi_explorer_example.png)
 
 Therefore, this tool can be used to satisfy visualization need (3).
 
@@ -118,7 +131,7 @@ Physical mobile device
 
 **Run the App in Android Mobile:**
 
-1. To run the app in an android mobile device, plug an usb cable to connect your android mobile to the system and enable developer options in your phone by following the instructions [ run in device](https://reactnative.dev/docs/running-on-device).
+1. To run the app in an android mobile device, plug an USB cable to connect your android mobile to the system and enable developer options in your phone by following the instructions [ run in device](https://reactnative.dev/docs/running-on-device).
 
 2. Clone and navigate to the project folder from command line.
 
@@ -152,7 +165,7 @@ The line chart  displays the co2 values obtained from Raspberry1 setup in room L
 
 The x- axis displays the datetime interval in year month date hour minutes and seconds format(yyyy-mm-dd hh:mm:ss).
 
-The y-axis displays the Co2 in parts per million(ppm).
+The y-axis displays the Co2 in ppm.
 
 **Optimum Level**
 
