@@ -3,16 +3,16 @@
 ## Contents
 -[Prerequisites](#Prerequisites)
 - [Hardware setup](#Hardware_setup)
-	- [Raspberry Pi]
-	- [[#Sensor CCS811]]
-	- [[#Sensor SCD30]]
-	- [[#Wiring of Hardware]]
+	- Raspberry Pi
+	- Sensor CCS811
+	- Sensor SCD30
+	- Wiring of Hardware
 - [Initial Setup of Raspberry OS](#Initial_Setup_of_Raspberry_OS)
 - [Send Sensor data to cloud](#Send_Sensor_data_to_cloud)
-	- [[#Required Libraries for the project]]
-	- [[#Remote access via SSH]]
-	- [[#Deploy Code to Raspberry]]
-	- [[#Code]]
+	- Required Libraries for the project
+	- Remote access via SSH
+	- Deploy Code to Raspberry
+	- Sending data to IoT-hub
 - [Possilble Frequent Errors](#Possilble_Frequent_Errors)
 
 ## <a name="Prerequisites"></a>Prerequisites
