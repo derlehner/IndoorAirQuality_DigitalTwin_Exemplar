@@ -1,9 +1,9 @@
 # Setup Physical Twin with actual hardware
 
 ## Contents
--[Prerequisites]<a name="Prerequisites"></a>
-- [Hardware setup](<a name="Hardware setup"></a>)
-	- [Raspberry Pi](<a name="Raspberry Pi"></a>)
+-[Prerequisites](#Prerequisites)
+- [Hardware setup](#Hardware setup)
+	- [Raspberry Pi](#Raspberry Pi)
 	- [[#Sensor CCS811]]
 	- [[#Sensor SCD30]]
 	- [[#Wiring of Hardware]]
