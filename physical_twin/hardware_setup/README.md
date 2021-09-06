@@ -1,9 +1,9 @@
 # Setup Physical Twin with actual hardware
 
 ## Contents
--[[#Prerequisites]]
-- [[#Hardware setup]]
-	- [[#Raspberry Pi]]
+-[Prerequisites]<a name="Prerequisites"></a>
+- [Hardware setup](<a name="Hardware setup"></a>)
+	- [Raspberry Pi](<a name="Raspberry Pi"></a>)
 	- [[#Sensor CCS811]]
 	- [[#Sensor SCD30]]
 	- [[#Wiring of Hardware]]
@@ -15,14 +15,14 @@
 	- [[#Code]]
 - [[#Possilble Frequent Errors]]
 
-## Prerequisites
+## <a name="Prerequisites"></a>Prerequisites
 - Raspberry and accessories
 - CCS811 and DHT11 Sensors
 - Electronics like resistors, LED lights 
 - Bread board and connection wires
 
-## Hardware setup
-### Raspberry Pi
+## <a name="Hardware setup"></a>Hardware setup
+### <a name="Raspberry Pi"></a>Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
