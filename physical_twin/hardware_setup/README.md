@@ -1,18 +1,17 @@
 # Setup Physical Twin with actual hardware
 
 ## Contents
--[Prerequisites](#Prerequisites)
+- [Prerequisites](#Prerequisites)
 - [Hardware setup](#Hardware_setup)
-	- Raspberry Pi
-	- Sensor CCS811
-	- Sensor SCD30
-	- Wiring of Hardware
+	- [Raspberry Pi](#Raspberry)
+	- [Sensor CCS811](#ccs811)
+	- [Sensor SCD30](#scd30)
 - [Initial Setup of Raspberry OS](#Initial_Setup_of_Raspberry_OS)
 - [Send Sensor data to cloud](#Send_Sensor_data_to_cloud)
-	- Required Libraries for the project
-	- Remote access via SSH
-	- Deploy Code to Raspberry
-	- Sending data to IoT-hub
+	- [Required Libraries for the project](#libraries)
+	- [Remote access via SSH](#ssh)
+	- [Deploy Code to Raspberry](#Deploy)
+	- [Sending data to IoT-hub](#Sending)
 - [Possilble Frequent Errors](#Possilble_Frequent_Errors)
 
 ## <a name="Prerequisites"></a>Prerequisites
@@ -22,7 +21,7 @@
 - Bread board and connection wires
 
 ## <a name="Hardware_setup"></a>Hardware setup
-### Raspberry Pi
+### <a name="Raspberry"></a>Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
@@ -35,7 +34,7 @@
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
-### Sensor CCS811 
+### <a name="ccs811"></a>Sensor CCS811 
 - This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol
 - It has Measurement range: 400 ppm – 8192 ppm for $CO^2$ values
 - To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
@@ -50,7 +49,7 @@
 | scl        	| clock line 	|
 | Rst        	| Reset port 	|
 
-### Sensor SCD30
+### <a name="scd30"></a>Sensor SCD30
 -  SCD30 - Sensor Module for HVAC and Indoor Air Quality Applications. it has Integrated temperature and humidity sensor
 -  It has Measurement range: 400 ppm – 10.000 ppm for $CO^2$ values
 -  works with Digital interface UART or I2C modules
@@ -105,7 +104,7 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 ## <a name="Send_Sensor_data_to_cloud"></a>Send Sensor data to cloud
-### Required Libraries for the project
+### <a name="libraries"></a>Required Libraries for the project
 
 Now, you need to install some packages with the integrated package installer of Pythonpip.
 The Required packages are as follows:
@@ -127,7 +126,7 @@ Execute all these commands one by one each:
 	python3 -m pip install azure-iot-device
 ```
 
-### Remote access via SSH
+### <a name="ssh"></a>Remote access via SSH
 
 It is planned that the AirQuality module will be running continuously in a predefined position (e.g.: in the stairway below the TV), therefore it needs to be accessible remotely without any connected monitor and input device. To solve this requirement, the Raspberry Pi can be accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection. The IP address of the Raspberry Pi can be set as static, to ensure the connection to it. It is also possible to get the IP address with apingcommand on the hostname of the Raspberry Pi from another computer. For Linux it is easy as entering the following command.
 ```sh
@@ -141,14 +140,14 @@ ping rpi-cdl.local
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
-### Deploy Code to Raspberry
+### <a name="Deploy"></a>Deploy Code to Raspberry
 The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
 To Clone the project onto raspberry pi just run the command with our project https link which can be found under Git-Hub project page under clone section.
 ```sh
 git clone https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar.git
 ```
 
-###  Sending data to IoT-hub
+###  <a name="Sending"></a>Sending data to IoT-hub
 Before Continuing please make sure that your azure environemnt is already setup to make it ready for receiving our data. 
 Process can be found under: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
 
