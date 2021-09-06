@@ -17,13 +17,10 @@ def iothub_client_init(sensor_name):
 def iothub_client_telemetry_run():
     try:
         client_scd30 = iothub_client_init('scd_30')
-
         while True:
             scd30 = SCD30()
-
             scd30.set_measurement_interval(2)
             scd30.start_periodic_measurement()
-
             time.sleep(2)
 
             while True:

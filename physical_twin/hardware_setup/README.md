@@ -1,17 +1,19 @@
 # Setup Physical Twin with actual hardware
 
 ## Contents
-- Prerequisites
-- Hardware setup
-	- Sensor CCS811 (CO2 measurement)
-	- Raspberry Pi
-	- Wiring of Hardware
-- Initial Setup of Raspberry OS
-	- Remote access via SSH
-	- Deploy Code to Raspberry
-	- Required Libraries for the project
-	- Code
-- Possilble Frequent Errors:
+-[[#Prerequisites]]
+- [[#Hardware setup]]
+	- [[#Raspberry Pi]]
+	- [[#Sensor CCS811]]
+	- [[#Sensor SCD30]]
+	- [[#Wiring of Hardware]]
+- [[#Initial Setup of Raspberry OS]]
+- [[#Send Sensor data to cloud]]
+	- [[#Required Libraries for the project]]
+	- [[#Remote access via SSH]]
+	- [[#Deploy Code to Raspberry]]
+	- [[#Code]]
+- [[#Possilble Frequent Errors]]
 
 ## Prerequisites
 - Raspberry and accessories
@@ -33,32 +35,35 @@
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
-### Sensor CCS811 (CO2 measurement)
-- This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol, because of that, the I2C was enabled in raspi-config. The
-- Wiring is simple, the `SDA` (data) and `SCL` (clock) pins of the sensor need to be connected to
-- The SDA and SCL pins on the Raspberry Pi. It is based on the `MOS` (metal oxide semiconductor) principle and can provide a total volatile organic compound (tVOC) or carbon dioxide equivalent (eCO2) level as well as a temperature value. The eCO2 value is not as accurate as an CO2 value and can only be used as a reference.
+### Sensor CCS811 
+- This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol
+- It has Measurement range: 400 ppm – 8192 ppm for $CO^2$ values
 - To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
 - There are datasheet and manual available at the homepage of joy-it. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
+- Wiring scheme:
+ 
+| sensor pin 	| Raspi pin  	|
+|------------	|------------	|
+| vdd        	| +5v        	|
+| gnd        	| Ground     	|
+| sda        	| data line  	|
+| scl        	| clock line 	|
+| Rst        	| Reset port 	|
 
-### Wiring of Hardware
-Raspberry Pi GPIOs are limited to max. 15 mA current per pin and 50 mA over all GPIOs.
-It is recommended to use transistors to keep the current on the GPIOs at a minimum. A
-transistor has 3 pins and is connected between the GPIO and the component, which should be connected to the GPIO. The current is taken from the 3.3 V or 5 V supply pin and it needs to be connected to the ground too. The transistor prevents that the component is using too much current from the GPIO and instead is using the voltage supply pin to power the components.
+### Sensor SCD30
+-  SCD30 - Sensor Module for HVAC and Indoor Air Quality Applications. it has Integrated temperature and humidity sensor
+-  It has Measurement range: 400 ppm – 10.000 ppm for $CO^2$ values
+-  works with Digital interface UART or I2C modules
+-  further documentation can be found under this [homepage](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/)
 
-For wiring the hardware we should follow some documentations for the sensors and the raspberry pi. The required pinout connections are as follows: _for reference pin layout for the raspberry is also shown in the image_
+| sensor pin 	| Raspi pin  	|
+|------------	|------------	|
+| vdd        	| +3v        	|
+| gnd        	| Ground     	|
+| sda        	| data line  	|
+| scl        	| clock line 	|
+| Rst        	| Reset port 	|
 
-| 	Pin 	| 	type 	| 	GIPO 	|
-|	---		|	---		|	---		|
-| 	Sensor	|	`SDA` 	| 	GPIO 2	|
-| 	Sensor 	| 	`SCL` 	| 	GPIO 3	|
-| 	Sensor 	| 	`+vcc` 	| 	+5v 	|
-|	Sensor	|	`Ground`	| 	Grnd	|
-|	Sensor	| 	`init`	|	Grnd	|
-
-<img 
-	 align="center" 
-	 src="images/circuitAll_marked.png" 
-	 width= 300/> 
 
 ## Initial Setup of Raspberry OS
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
@@ -77,16 +82,7 @@ Required Things:
 7. After it has been installed you can insert this sd card into raspberry and you have an updated version of linux
     installed on you device.
 
-For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi's official homepage.
-In the following section a short overview is given.
-First of all an operating system needs to be downloaded and an image needs to be installed
-on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi
-OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an
-Imager program available to speed up the installation step. The instructions of the program
-need to be followed and afterward the SD-Card is ready to use.
-The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and
-HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login
-data is:
+For the setup of the Raspberry Pi an introduction is given on the Raspberry Pi's official homepage. In the following section a short overview is given. First of all an operating system needs to be downloaded and an image needs to be installed on the SD-card. For this step the Card-Reader is needed. For this project the Raspberry Pi OS Lite (32-bit) is used, which is a port of Debian with no desktop environment. There is an Imager program available to speed up the installation step. The instructions of the program need to be followed and afterward the SD-Card is ready to use. The next step is to connect the Raspberry Pi (Power adapter, LAN-cable, Keyboard and HDMI cable) and to insert the SD-Card. The initial startup is done and thedefault login data is:
 
 - user: pi
 - password: raspberry
@@ -97,54 +93,18 @@ sudo raspi-config
 ```
 into the console. The following settings had been changed:
 
-- System Options - Password: the password has been changed tocdl, the username remains
-    the same
+- System Options - Password: the password has been changed tocdl, the username remains  the same 
 - System Options - Hostname: the hostname has been changed torpi-cdl(this name will
     be needed later to get the IP of the Raspberry Pi without a monitor)
-- Interfacing Options - SSH: enable remote command line access to the Raspberry Pi via
-    SSH
-- Interfacing Options - I2C: enable I2C interface and loading the I2C kernel module auto-
-    matically (will be needed for some of the used sensors)
+- Interfacing Options - SSH: enable remote command line access to the Raspberry Pi via SSH
+- Interfacing Options - I2C: enable I2C interface and loading the I2C kernel module automatically (will be needed for some of the used sensors)
 
-Afterward the Raspberry Pi needs to be restarted and logged in with the new password.
-To be sure that the OS and its programs are up-to-date the following commands need to be
-executed:
+Afterward the Raspberry Pi needs to be restarted and logged in with the new password. To be sure that the OS and its programs are up-to-date the following commands need to be executed:
 ```sh
 sudo apt-get update
 sudo apt-get upgrade
 ```
-### Remote access via SSH
-
-It is planned that the AirQuality module will be running continuously in a predefined position
-(e.g.: in the stairway below the TV), therefore it needs to be accessible remotely without any
-connected monitor and input device. To solve this requirement, the Raspberry Pi can be
-accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection
-1.3.1. The IP address of the Raspberry Pi can be set as static, to ensure the connection to
-it. It is also possible to get the IP address with apingcommand on the hostname of the
-Raspberry Pi from another computer. For Linux it is easy as entering the following command.
-```sh
-syntax:
-ping <pi_hostname>.local
-```
-For Windows it is needed to add the parameter -4 to the ping command, so that the resolved IP address is in the IPv4 format.
-```sh
-ping rpi-cdl.local
-```
-With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
-putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
-
-### Deploy Code to Raspberry
-The required scripts and documents are already available on Git-Hub as [DigitalTwin_Airquality_For_Covid_Risk_Assessment](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment).
-To Clone the project onto raspberry pi just run the command with our project https link which can be found under Git-Hub project page under clone section.
-```sh
-git clone https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment.git
-```
-the project will be cloned and the active branch is 'development branch' you can change it by following command
-```sh
-git checkout <branch_name>
-In our case:
-git checkout development
-```
+## Send Sensor data to cloud
 ### Required Libraries for the project
 
 Now, you need to install some packages with the integrated package installer of Pythonpip.
@@ -167,22 +127,38 @@ Execute all these commands one by one each:
 	python3 -m pip install azure-iot-device
 ```
 
-###  Code
-In this section the code of the various components connected to the Raspberry Pi is descried.
+### Remote access via SSH
 
-after successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also ready to receive the data. If it is still not setup follow this [readme process](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin)
-
-Here under our 'physical_twin' we will have the scripts named data_abstract.py script which will be used to get the data from the sensor and send it to the azure environment.
-
-For sending the data to raspberry please have the device `connection_string` ready from [IoT-Hub Device section](https://github.com/derlehner/DigitalTwin_Airquality_For_Covid_Risk_Assessment/tree/main/digital_twin) and replace the string in connection_string in the data_abstract.py script. To summarize:
-
-- Do wiring and successful hardware setup
-- Make azure environment running
-- Change the `connection_string` in the data_abstract.py script eg:
+It is planned that the AirQuality module will be running continuously in a predefined position (e.g.: in the stairway below the TV), therefore it needs to be accessible remotely without any connected monitor and input device. To solve this requirement, the Raspberry Pi can be accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection. The IP address of the Raspberry Pi can be set as static, to ensure the connection to it. It is also possible to get the IP address with apingcommand on the hostname of the Raspberry Pi from another computer. For Linux it is easy as entering the following command.
 ```sh
-connection_string = 'HostName=RaspberryIOTHUB.azure-devices.net;DeviceId=Birgit_Office;SharedAccessKey=xJFhL0ByzrNsChgMfU+Ad6bTRD25Aaph5UWzXuNw7OU='
+syntax:
+ping <pi_hostname>.local
 ```
-- Run the data_abstract.py script by python v3
+For Windows it is needed to add the parameter -4 to the ping command, so that the resolved IP address is in the IPv4 format.
+```sh
+ping rpi-cdl.local
+```
+With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
+putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
+
+### Deploy Code to Raspberry
+The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
+To Clone the project onto raspberry pi just run the command with our project https link which can be found under Git-Hub project page under clone section.
+```sh
+git clone https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar.git
+```
+
+###  Sending data to IoT-hub
+Before Continuing please make sure that your azure environemnt is already setup to make it ready for receiving our data. 
+Process can be found under: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
+
+In this section the code of the various components connected to the Raspberry Pi is descried. After successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also ready to receive the data If it is still not setup.
+
+Here under our [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) we will have the scripts named **IoTHubDevice.py** script which will be used to get the data from the sensor and send it to the azure environment.
+
+> Note: in .py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure) 
+
+- After make sure correct packages are installed successfully and Run the **IoTHubDevice.py.py** script by python v3
 
 
 Wait for the sensor to be ready and calibrate the thermistor. First the script is configuring the I2C with the related SCL and SDA pins, then it waits for the sensor to be ready by checking if dataready is true. When finished a temperature offset (tempoffset) will be added to get more accurate results. From this point on the data can be read periodically with a delay in between.

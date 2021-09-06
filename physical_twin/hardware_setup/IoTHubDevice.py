@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-
-import time
-from datetime import datetime
-
+```
 # Using the Python Device SDK for IoT Hub:
 #   https://github.com/Azure/azure-iot-sdk-python
 # The sample connects to a device-specific MQTT endpoint on your IoT Hub.
+```
+import time
+from datetime import datetime
 from azure.iot.device import IoTHubDeviceClient, Message
 from sensor_DHT11 import sensor_DHT11
 from sensor_CCS811 import sensor_CCS811
