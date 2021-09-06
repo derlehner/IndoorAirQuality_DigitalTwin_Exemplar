@@ -7,7 +7,7 @@
 	- [[#Sensor CCS811]]
 	- [[#Sensor SCD30]]
 	- [[#Wiring of Hardware]]
-- [[#Initial Setup of Raspberry OS]]
+- [Initial Setup of Raspberry OS](#Initial Setup of Raspberry OS)
 - [[#Send Sensor data to cloud]]
 	- [[#Required Libraries for the project]]
 	- [[#Remote access via SSH]]
@@ -65,7 +65,7 @@
 | Rst        	| Reset port 	|
 
 
-## Initial Setup of Raspberry OS
+## Initial Setup of Raspberry OS <a name="Initial Setup of Raspberry OS"></a>
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
 Required Things:
 1. Brand new Raspberry / Raspberry that need to be flashed new
