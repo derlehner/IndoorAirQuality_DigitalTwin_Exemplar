@@ -2,18 +2,18 @@
 
 ## Contents
 -[Prerequisites](#Prerequisites)
-- [Hardware setup](#Hardware setup)
-	- [Raspberry Pi](#Raspberry Pi)
+- [Hardware setup](#Hardware_setup)
+	- [Raspberry Pi]
 	- [[#Sensor CCS811]]
 	- [[#Sensor SCD30]]
 	- [[#Wiring of Hardware]]
 - [Initial Setup of Raspberry OS](#Initial_Setup_of_Raspberry_OS)
-- [[#Send Sensor data to cloud]]
+- [Send Sensor data to cloud](#Send_Sensor_data_to_cloud)
 	- [[#Required Libraries for the project]]
 	- [[#Remote access via SSH]]
 	- [[#Deploy Code to Raspberry]]
 	- [[#Code]]
-- [[#Possilble Frequent Errors]]
+- [Possilble Frequent Errors](#Possilble_Frequent_Errors)
 
 ## <a name="Prerequisites"></a>Prerequisites
 - Raspberry and accessories
@@ -21,8 +21,8 @@
 - Electronics like resistors, LED lights 
 - Bread board and connection wires
 
-## <a name="Hardware setup"></a>Hardware setup
-### <a name="Raspberry Pi"></a>Raspberry Pi
+## <a name="Hardware_setup"></a>Hardware setup
+### Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
@@ -104,7 +104,7 @@ Afterward the Raspberry Pi needs to be restarted and logged in with the new pass
 sudo apt-get update
 sudo apt-get upgrade
 ```
-## Send Sensor data to cloud
+## <a name="Send_Sensor_data_to_cloud"></a>Send Sensor data to cloud
 ### Required Libraries for the project
 
 Now, you need to install some packages with the integrated package installer of Pythonpip.
@@ -163,7 +163,7 @@ Here under our [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_set
 
 Wait for the sensor to be ready and calibrate the thermistor. First the script is configuring the I2C with the related SCL and SDA pins, then it waits for the sensor to be ready by checking if dataready is true. When finished a temperature offset (tempoffset) will be added to get more accurate results. From this point on the data can be read periodically with a delay in between.
 
-## Possilble Frequent Errors:
+## <a name="Possilble_Frequent_Errors"></a>Possilble Frequent Errors
 ###### Error: `Script not running in raspberry`:
 Make sure you have the updated OS and all lybraries installed and make sure the script is running in `python v3` not in v2
 
