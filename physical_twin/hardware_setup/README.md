@@ -148,16 +148,15 @@ git clone https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar.git
 ```
 
 ###  <a name="Sending"></a>Sending data to IoT-hub
-Before Continuing please make sure that your azure environemnt is already setup to make it ready for receiving our data. 
-Process can be found under: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
 
-In this section the code of the various components connected to the Raspberry Pi is descried. After successfull achievement of wiring and hardware setup, Please make sure that the azure environment is also ready to receive the data If it is still not setup.
+In this section the code of the various components connected to the Raspberry Pi is described. 
+Before Continuing please make sure that (1) you completed the previous steps of this tutorial, and (2) your azure environemnt is already setup to make it ready for receiving our data. The Tutorial on how to set up the azure environment is found here: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
 
-Here under our [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) we will have the scripts named **IoTHubDevice.py** script which will be used to get the data from the sensor and send it to the azure environment.
+In the current folder [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) there is a file named **IoTHubDevice.py**  which will be used to get the data from the sensor and send it to the azure environment.
 
-> Note: in .py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure) 
+> Note: in IoTHubDevice.py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure) 
 
-- After make sure correct packages are installed successfully and Run the **IoTHubDevice.py.py** script by python v3
+- After make sure correct packages are installed successfully and Run the **IoTHubDevice.py** script using python v3.
 
 
 Wait for the sensor to be ready and calibrate the thermistor. First the script is configuring the I2C with the related SCL and SDA pins, then it waits for the sensor to be ready by checking if dataready is true. When finished a temperature offset (tempoffset) will be added to get more accurate results. From this point on the data can be read periodically with a delay in between.
