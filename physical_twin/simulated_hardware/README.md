@@ -1,7 +1,6 @@
 # Simulate Hardware with Actual Sensor Values
 
 This project briefly describes about creation of IoT Hub, digital twin and communication between them. The main goal is to measure the air quality in indoor environment and update the IoT devices with measurements. This project uses the air quality measurements from room. Now let us see how we can send these sensor data to IoT device which updates the Digital Twin.
-
 In this sample, we are sending sensor data to IoT device **Raspberry1** which is in room Lobby100
 ## Prerequisites
 
@@ -36,7 +35,7 @@ copy paste the connection string into the python script.
 
 **Sensor data in csv file**
 
-We have used the actual sensor data obtained from CCS811 sensor which is setup in room Lobby100.The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
+We have used the actual sensor data obtained from an SCD30 sensor which is set up in a room at our organization to send data to virtual room "Lobby100". The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
 
 ### Run the client app
 
