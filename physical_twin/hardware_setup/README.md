@@ -11,6 +11,7 @@
 	- [Required Libraries for the project](#libraries)
 	- [Remote access via SSH](#ssh)
 	- [Deploy Code to Raspberry](#Deploy)
+	- [Deploy Code to multiple Raspberries](#DeployMultiDevice)
 	- [Sending data to IoT-hub](#Sending)
 - [Possilble Frequent Errors](#Possilble_Frequent_Errors)
 
@@ -140,7 +141,7 @@ ping rpi-cdl.local
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
-### <a name="Deploy"></a>Deploy Code to Raspberry
+### <a name="Deploy"></a>Deploy Code to single Raspberry
 The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
 
 To deploy the script to make the raspberry to use just `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup)with all required packages installed in the machine.
@@ -163,6 +164,21 @@ python3 IoTHubDevice.py
 ```
 4. Finally the script will start send the data to the cloud
 
+### <a name="DeployMultiDevice"></a>Deploy Code to multiple Raspberries
+1. We can use the Automation script for deploying code to multiple raspberries. the scipt can by found in same directory as `auto_deploy_script.py`
+2. First addd the 'Destination_file_path', ip_address, user_id, passcode, deviceid as list as shown in the code snippet below in the line 48: 	
+```ruby
+rasp01 = ['cdlmint_airqualityusecase', '140.78.42.111', 'pi', 'cdl', 'Rasp01']
+
+# ADD MORE RASPBERRY HERE AS THE EXAMPLE SHOWN IN NEXT LINE
+#rasp02 = ['haridir', '192.168.0.136', 'pi', 'cdl', 'Rasp02']
+```
+3. Run the script by the command
+```ruby
+python auto_depoly_script.py
+```
+5. This will deploy script on to device which are scpecified in the list with unique device id
+6. 
 ###  <a name="Sending"></a>Sending data to IoT-hub
 
 In this section the code of the various components connected to the Raspberry Pi is described. 
