@@ -63,8 +63,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "313628c4b6601f08",
@@ -101,6 +100,7 @@
   "active": "502c973d69faf515",
   "lastOpenFiles": [
     "physical_twin/hardware_setup/README.md",
+    "digital_twin/azure/readme.md",
     "README.md",
     "applications/machine_learning/README.md"
   ]

@@ -143,11 +143,25 @@ putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP ad
 ### <a name="Deploy"></a>Deploy Code to Raspberry
 The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
 
-To deploy the script to make the raspberry to use just 
+To deploy the script to make the raspberry to use just `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup)with all required packages installed in the machine.
 
-```sh
-git clone https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar.git
+Steps to follow:
+1. copy the `IoTHubDevice.py` script for each raspberry device under home directry
+2. make sure all the packages are installed in it. if not refer the topic above [Required Libraries for the project](#libraries).
+3. create new txt file as  `device_id.txt` and enter device id as one line without spaces. this will considered as device_id for that particular device. if not the device will be set to default id as `raspi_01` for example given below:
+```ruby
+Raspberry_KitchenRoom
 ```
+5. Set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub
+```ruby
+CONNECTION_STRING_CCS811 = "<specify the connection string>"
+CONNECTION_STRING_SCD_30 = "<specify the connection string>"
+```
+6. Start run the `IoTHubDevice.py` by python3 by running the command in the cmd terminal
+```ruby
+python3 IoTHubDevice.py
+```
+4. Finally the script will start send the data to the cloud
 
 ###  <a name="Sending"></a>Sending data to IoT-hub
 

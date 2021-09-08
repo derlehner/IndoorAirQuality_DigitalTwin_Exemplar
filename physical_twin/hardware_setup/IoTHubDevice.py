@@ -22,18 +22,19 @@ CONNECTION_STRING_SCD_30 = "<specify the connection string>"
 
 ### messages format or IoT Hub  ###
 # TODO: could be parameterized
-MSG_TXT_DHT11 = '{{"temperature": {temperature},"humidity": {humidity}}}'
-MSG_TXT_CCS811 = '{{"temperature": {temperature},"co2Value": {eco2},"tvoc": {tvoc}}}'
-MSG_TXT_RASPI = '{{"alarmC02": {alarmCO2}}}'
+# MSG_TXT_CCS811 = '{{"temperature": {temperature},"co2Value": {eco2},"tvoc": {tvoc}}}'
+# MSG_TXT_RASPI = '{{"alarmC02": {alarmCO2}}}'
 
 # TODO: could be parameterized
 SLEEP_TIME = 2
 
 
 ### SPECIFYING DEVICE ID  ###
-# with open('file_name.txt', 'r') as f:
-#     DEVICE_ID = f.readline()
-DEVICE_ID = 'Raspberry1'
+# TODO: should be unique for each devices
+if with open('device_id.txt', 'r') as f:
+    DEVICE_ID = f.readline()
+else:
+    DEVICE_ID = 'raspi_01'
 
 def iothub_client_init(sensor_name):
     # Create an IoT Hub client
