@@ -143,54 +143,64 @@ putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP ad
 
 ### <a name="Deploy"></a>Deploy Code to single Raspberry
 
-To deploy the script to make the raspberry to use just we need `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) with all required packages installed in the machine. Please follow the procedure below:
+To deploy the script to make the raspberry to use just we need `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) Please follow the procedure below: 
+>Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above [Required Libraries for the project](#libraries)
 
 Steps to follow:
-1. copy the `IoTHubDevice.py` script from [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) to  designated raspberry device under home directry
-2. make sure all the packages are installed in it. if not refer the topic above [Required Libraries for the project](#libraries).
-3. create new txt file as  `device_id.txt` and enter device id as one line without spaces. this will considered as device_id for that particular device. if not the device will be set to default id as `raspi_01` for example given below:
+1. Copy the `IoTHubDevice.py` script from [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) to  designated raspberry device under home directry `pi/home/`
+2. Make sure all the packages are installed in deploying macine.
+3. Default device name 	`device_id` will be 'raspi_01'. For using single device you can leave as it is, if multiple device are planned to usage refer [next section for multiple device deployment](#DeployMultiDevice) 
+%%4. Create new txt file as  `device_id.txt` and enter device id as one line without spaces. this will considered as device_id for that particular device. if not the device will be set to default id as `raspi_01` for example given below:
 ```ruby
 Raspberry_KitchenRoom
 ```
-5. Set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub
+%%
+5. Inside `IoTHubDevice.py` set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub for example:
 ```ruby
 CONNECTION_STRING_CCS811 = "<specify the connection string>"
 CONNECTION_STRING_SCD_30 = "<specify the connection string>"
 ```
-6. Start run the `IoTHubDevice.py` by python3 by running the command in the cmd terminal
-```ruby
-python3 IoTHubDevice.py
-```
-4. Finally the script will start send the data to the cloud
+6. This will get ready to script to send the data (Note: data is not yet sent to cloud). Refer [Sending data to IoT-Hub](#Sending) to start sending the data.
 
 ### <a name="DeployMultiDevice"></a>Deploy Code to multiple Raspberries
-1. We can use the Automation script for deploying code to multiple raspberries. the scipt can by found in same directory as `auto_deploy_script.py`
-2. First addd the 'Destination_file_path', ip_address, user_id, passcode, deviceid as list as shown in the code snippet below in the line 48: 	
+>All the raspberry should be connected to same network, if not this doesn't work
+1. We can use the Automation script for deploying code to multiple raspberries. the scipt can by found in same directory under [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup)  as `auto_deploy_script.py`
+2. Place the script on same directory where your 'directory/file to be deployed' is present
+3. Then open the script and  ip_address, user_id, passcode, deviceid as list as shown in the code snippet below in the line 48 for the devices which you want to deploy
 ```ruby
-rasp01 = ['cdlmint_airqualityusecase', '140.78.42.111', 'pi', 'cdl', 'Rasp01']
+rasp01 = ['IoTHubDevice.py', '140.78.42.111', 'pi1', 'cdl', 'Rasp01']
 
 # ADD MORE RASPBERRY HERE AS THE EXAMPLE SHOWN IN NEXT LINE
-#rasp02 = ['haridir', '192.168.0.136', 'pi', 'cdl', 'Rasp02']
+rasp02 = ['IoTHubDevice.py', '192.168.0.136', 'pi2', 'cdl', 'Rasp02']
 ```
-3. Run the script by the command
+3. Run the script by the command to copy to each devices listed in the script. time taken for this based on size of the file/directory
 ```ruby
 python auto_depoly_script.py
 ```
-5. This will deploy script on to device which are scpecified in the list with unique device id
+5. This will deploy the scripts to individual devices.
+
+7. Then you can start individual devices to sed the data by tringgering the file by ssh terminal, refer the topic [Remote access via SSH](#ssh) for futher information.
 
 ###  <a name="Sending"></a>Sending data to IoT-hub
+>
+Before Continuing please make sure that
+>1. You completed the previous steps of this tutorial, and 
+>2. You have all pysical connections (wirings, power suppy and all are working fine)
+2. Your azure environemnt is already setup to make it ready for receiving our data. The Tutorial on how to set up the azure environment is found here: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
+3. You sucessfully deployed the code in each of device that should be running
 
-In this section the code of the various components connected to the Raspberry Pi is described. 
-Before Continuing please make sure that (1) you completed the previous steps of this tutorial, and (2) your azure environemnt is already setup to make it ready for receiving our data. The Tutorial on how to set up the azure environment is found here: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
+In each device there will be a file named **IoTHubDevice.py**  which will be used to send the data from the sensor to the azure environment.
 
-In the current folder [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) there is a file named **IoTHubDevice.py**  which will be used to get the data from the sensor and send it to the azure environment.
-
-> Note: in IoTHubDevice.py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure) 
-
-- After make sure correct packages are installed successfully and Run the **IoTHubDevice.py** script using python v3.
+> Note: in IoTHubDevice.py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). 
 
 
-Wait for the sensor to be ready and calibrate the thermistor. First the script is configuring the I2C with the related SCL and SDA pins, then it waits for the sensor to be ready by checking if dataready is true. When finished a temperature offset (tempoffset) will be added to get more accurate results. From this point on the data can be read periodically with a delay in between.
+
+To start send the data to cloud run the `IoTHubDevice.py` by python3 by running the command in the cmd terminal for each devices. 
+You should do it for each individual devices to sed the data by tringgering the file by ssh terminal, refer the topic [Remote access via SSH](#ssh) for futher information.
+```ruby
+python3 IoTHubDevice.py
+```
+Finally the script will start send the data to the cloud
 
 ## <a name="Possilble_Frequent_Errors"></a>Possilble Frequent Errors
 ###### Error: `Script not running in raspberry`:
