@@ -9,8 +9,19 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "applications/machine_learning/README.md",
+            "file": "physical_twin/hardware_setup/README.md",
             "mode": "source"
+          }
+        }
+      },
+      {
+        "id": "42e46a54979a09a8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "physical_twin/hardware_setup/README.md",
+            "mode": "preview"
           }
         }
       }
@@ -52,7 +63,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "313628c4b6601f08",
@@ -68,7 +80,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "applications/machine_learning/README.md",
+                "file": "physical_twin/hardware_setup/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,6 +100,8 @@
   },
   "active": "502c973d69faf515",
   "lastOpenFiles": [
+    "physical_twin/hardware_setup/README.md",
+    "README.md",
     "applications/machine_learning/README.md"
   ]
 }

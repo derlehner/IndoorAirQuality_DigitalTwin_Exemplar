@@ -142,7 +142,9 @@ putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP ad
 
 ### <a name="Deploy"></a>Deploy Code to Raspberry
 The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
-To Clone the project onto raspberry pi just run the command with our project https link which can be found under Git-Hub project page under clone section.
+
+To deploy the script to make the raspberry to use just 
+
 ```sh
 git clone https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar.git
 ```
