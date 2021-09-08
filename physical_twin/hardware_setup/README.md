@@ -142,9 +142,8 @@ With this IP address it is easy to access the Raspberry Pi with an SSH capable t
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
 ### <a name="Deploy"></a>Deploy Code to single Raspberry
-The required scripts and documents are already available on Git-Hub as [IndoorAirQuality_DigitalTwin_Exemplar](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar).
 
-To deploy the script to make the raspberry to use just `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup)with all required packages installed in the machine.
+To deploy the script to make the raspberry to use just we need `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) with all required packages installed in the machine. Please follow the procedure below:
 
 Steps to follow:
 1. copy the `IoTHubDevice.py` script for each raspberry device under home directry
