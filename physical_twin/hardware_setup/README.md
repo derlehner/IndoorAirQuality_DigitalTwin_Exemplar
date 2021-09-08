@@ -146,7 +146,7 @@ putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP ad
 To deploy the script to make the raspberry to use just we need `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) with all required packages installed in the machine. Please follow the procedure below:
 
 Steps to follow:
-1. copy the `IoTHubDevice.py` script for each raspberry device under home directry
+1. copy the `IoTHubDevice.py` script from [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) to  designated raspberry device under home directry
 2. make sure all the packages are installed in it. if not refer the topic above [Required Libraries for the project](#libraries).
 3. create new txt file as  `device_id.txt` and enter device id as one line without spaces. this will considered as device_id for that particular device. if not the device will be set to default id as `raspi_01` for example given below:
 ```ruby
