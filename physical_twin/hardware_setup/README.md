@@ -178,7 +178,7 @@ rasp01 = ['cdlmint_airqualityusecase', '140.78.42.111', 'pi', 'cdl', 'Rasp01']
 python auto_depoly_script.py
 ```
 5. This will deploy script on to device which are scpecified in the list with unique device id
-6. 
+
 ###  <a name="Sending"></a>Sending data to IoT-hub
 
 In this section the code of the various components connected to the Raspberry Pi is described. 
