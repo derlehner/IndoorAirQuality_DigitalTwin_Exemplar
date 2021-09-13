@@ -39,6 +39,7 @@ def checking_dir_if_already_exitst(source, ip_ad, username, password, device_nam
     ssh_conn(cmd= 'rm -Rf {}'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Deleting old device.txt file if already exist
     ssh_conn(cmd= 'echo {} > /home/pi/device_id.txt'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Creating new device_name.txt for device name
     print('File Created')
+    session.exec_command(command='python3 IotHubDevice.py')
     return None
 
 
