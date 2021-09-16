@@ -142,25 +142,24 @@ With this IP address it is easy to access the Raspberry Pi with an SSH capable t
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
 ### <a name="Deploy"></a>Deploy Code to single Raspberry
+_Description on auto_deploy_script :_
 
-To deploy the script to make the raspberry to use just we need `IoTHubDevice.py` script under this directory [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) Please follow the procedure below: 
->Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above [Required Libraries for the project](#libraries)
+To deploy the script (`IoTHubDevice.py` ) which sends data to cloud we use `auto_deploy_script.py` Please follow the procedure below: 
+>_Note: Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above_ [Required Libraries for the project](#libraries)
 
 Steps to follow:
-1. Copy the `IoTHubDevice.py` script from [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup) to  designated raspberry device under home directry `pi/home/`
-2. Make sure all the packages are installed in deploying macine.
-3. Default device name 	`device_id` will be 'raspi_01'. For using single device you can leave as it is, if multiple device are planned to usage refer [next section for multiple device deployment](#DeployMultiDevice) 
-%%4. Create new txt file as  `device_id.txt` and enter device id as one line without spaces. this will considered as device_id for that particular device. if not the device will be set to default id as `raspi_01` for example given below:
-```ruby
-Raspberry_KitchenRoom
-```
-%%
-5. Inside `IoTHubDevice.py` set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub for example:
+1. Just edit the list in `device_list.txt` with requried details of ip address and much more.
+2. Inside `IoTHubDevice.py` set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub for example:
 ```ruby
 CONNECTION_STRING_CCS811 = "<specify the connection string>"
 CONNECTION_STRING_SCD_30 = "<specify the connection string>"
 ```
 6. This will get ready to script to send the data (Note: data is not yet sent to cloud). Refer [Sending data to IoT-Hub](#Sending) to start sending the data.
+3. run the auto_deploy_script with the syntax:
+```md
+python3 auto_deploy_script.py <filename_to_be_deployed>
+```
+8.  This will deploy the code and also trigger the code and runs it continuously without interuptions so the data is sent constantly.
 
 ### <a name="DeployMultiDevice"></a>Deploy Code to multiple Raspberries
 >All the raspberry should be connected to same network, if not this doesn't work
