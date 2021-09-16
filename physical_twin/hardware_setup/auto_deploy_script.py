@@ -1,6 +1,7 @@
 import paramiko
 import sys
 import os
+
 '''
 This script was writen by Hari and Managed by Burcu for:
 If you want to copy a file/dir from your computer to raspberry we can use this script as to copy the files to them:
@@ -38,15 +39,14 @@ def checking_dir_if_already_exitst(source, ip_ad, username, password, device_nam
     copying_file_to_raspberry(source, ip_ad)   # copying file/dir From: 'source' as path To: /home/pi/ path in all raspberry
     ssh_conn(cmd= 'rm -Rf {}'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Deleting old device.txt file if already exist
     ssh_conn(cmd= 'echo {} > /home/pi/device_id.txt'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Creating new device_name.txt for device name
-    print('File Created')
-    session.exec_command(command='python3 IotHubDevice.py')
+    ssh_conn(cmd= 'python3 test_scd30.py &', ip_ad=ip_ad, username=username, password=password) # to kill the bg process kill $(jobs -p)
     return None
 
 
 # List of Raspberries that the Files to be transfered with its details
 # Args_Format:  <source file/path>, <ip_address>, <host_user_id>, <password>, <device_name>
 
-rasp01 = ['cdlmint_airqualityusecase', '140.78.42.111', 'pi', 'cdl', 'Rasp01']
+rasp01 = [sys.argv[1], '140.78.42.104', 'pi', 'cdl', 'Rasp01']
 # ADD MORE RASPBERRY HERE AS THE EXAMPLE SHOWN IN NEXT LINE
 #rasp02 = ['haridir', '192.168.0.136', 'pi', 'cdl', 'Rasp02']
 

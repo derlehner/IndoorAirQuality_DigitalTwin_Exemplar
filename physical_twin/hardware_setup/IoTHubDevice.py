@@ -11,6 +11,9 @@ from sensor_CCS811 import sensor_CCS811
 from scd30_i2c import SCD30
 import digital_twin_api
 import urllib3
+import sys
+import requests
+import json
 urllib3.disable_warnings()
 
 # The device connection string to authenticate the device with your IoT hub.
@@ -35,6 +38,27 @@ if with open('device_id.txt', 'r') as f:
     DEVICE_ID = f.readline()
 else:
     DEVICE_ID = 'raspi_01'
+
+def post_SensorData_Server(co2, temp, hum, sensor_name, room_number):
+    jsonObjects={}
+    url="http://140.78.155.6:5000/api/sensordata"
+    headers = {
+    'Content-Type':'application/json', 
+    'Accept':'application/json'}
+
+    co2,temp,hum=raspi_sensordata.split(',')
+    jsonObjects['sensorname']='scd30'       # SENSOR NAME
+    jsonObjects['roomnumber']='s30076'      # ROOM NUMBER
+    jsonObjects['co2']=float(co2)           # CO2 VALUE
+    jsonObjects['temperature']=float(temp)  # Temp VALUE
+    jsonObjects['humidity']=float(hum)      # Hum VALUE
+    jsonformat=json.dumps(jsonObjects)      # DUMPING DATA TO BE SENT
+    postdata=requests.post(url,headers=headers,data=jsonformat)     # SENDING THE DATA
+    if postdata.status_code==201:
+        print('Sensor data sending successfully....')
+    else:
+        print(postdata.text+'Failed to post Sensor data to server!')
+    return response
 
 def iothub_client_init(sensor_name):
     # Create an IoT Hub client
@@ -78,7 +102,10 @@ def iothub_client_telemetry_run(sensor_in_use):
                     if scd_co2 is not None:
                         print(f"CO2: {scd_co2:.2f}ppm, temp: {scd_temp:.2f}'C, rh: {scd_rh:.2f}%")
                         # Sending Telemetry data to cloud
-                        digital_twin_api.send_telemetry_for_component(DEVICE_ID, 'CO2Sensor', "'carbonDioxideValue': {}".format(scd_co2))
+                        scd_co2=scd_co2:.2f
+                        scd_temp=scd_temp:.2f
+                        scd_rh=scd_rh:.2f
+                        post_SensorData_Server(co2=scd_co2, temp= scd_temp, hum= scd_rh, sensor_name='scd30', room_number='s30076')
                         time.sleep(SLEEP_TIME)
                 else:
                     pass
