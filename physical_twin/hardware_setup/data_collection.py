@@ -8,6 +8,7 @@ from datetime import datetime
 from azure.iot.device import IoTHubDeviceClient, Message
 from SCD30Sensor import SCD30Sensor
 from TimeScaleService import TimeScaleService
+from AzureService import AzureService
 from scd30_i2c import SCD30
 import urllib3
 import sys
@@ -22,12 +23,11 @@ DEVICE_ID = "raspi01"
 with open('device_id.txt', 'r') as f:
     DEVICE_ID = f.readline()
 sensors = [SCD30Sensor("port", "Sensor1", "co2", "azure_connection_string"), SCD30Sensor("port", "Sensor1", "temperature", "azure_connection_string")]
-alarms = []
 dt_service = TimeScaleService() # alternatively: AzureService()
 
 for sensor in sensors:
     timestamp, value = sensor.get_value()
-    dt_service.send_data(DEVICE_ID, "Sensor1", "co2", timestamp, value) 
+    dt_service.send_data(DEVICE_ID, sensor.sensor_name, sensor.property_name, timestamp, value) 
 
 # TODO: everything below this line should be in a different file, or deleted
 
