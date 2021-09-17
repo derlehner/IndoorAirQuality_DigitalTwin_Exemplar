@@ -27,20 +27,20 @@ def ssh_conn(cmd:str, ip_ad, username, password):
     return results
 
 # copying_file_to_raspberry() will take source and ip as input and copy file/dir to raspberry
-def copying_file_to_raspberry(source:str, ip_ad):
+def copy_files(source:str, ip_ad, username, password, device_name):
     os.system('scp -r {} pi@{}:'.format(source, ip_ad)) # Command to copy to the rasberry
-    return None
-
-# Check the dir if already exist if yes deletes and copy the updated file
-def checking_dir_if_already_exitst(source, ip_ad, username, password, device_name):
-    available_files = ssh_conn(cmd='ls', ip_ad=ip_ad, username=username, password=password) # Getting list of files/dirs
-    if source in available_files: ssh_conn(cmd='rm -Rf {}'.format(source), ip_ad= ip_ad, username=username, password=password) # Remove the file if exist
-    else: pass
-    copying_file_to_raspberry(source, ip_ad)   # copying file/dir From: 'source' as path To: /home/pi/ path in all raspberry
     ssh_conn(cmd= 'rm -Rf {}'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Deleting old device.txt file if already exist
     ssh_conn(cmd= 'echo {} > /home/pi/device_id.txt'.format(device_name), ip_ad=ip_ad, username=username, password=password) # Creating new device_name.txt for device name
-    ssh_conn(cmd= 'python3 {}'.format(sys.argv[1]), ip_ad=ip_ad, username=username, password=password) # to kill the bg process kill $(jobs -p)
     return None
+
+def run_data_collection(ip_ad, username, password):
+    ssh_conn(cmd= 'python3 {}'.format(sys.argv[1]), ip_ad=ip_ad, username=username, password=password) # to kill the bg process kill $(jobs -p)
+    
+# Check the dir if already exist if yes deletes and copy the updated file
+def create_dir(source, ip_ad, username, password, device_name):
+    available_files = ssh_conn(cmd='ls', ip_ad=ip_ad, username=username, password=password) # Getting list of files/dirs
+    if source in available_files: 
+        ssh_conn(cmd='rm -Rf {}'.format(source), ip_ad= ip_ad, username=username, password=password) # Remove the file if exist
 
 
 # List of Raspberries that the Files to be transfered with its details
@@ -53,5 +53,7 @@ rasp01 = [sys.argv[1], '140.78.42.104', 'pi', 'cdl', 'Rasp01']
 all_raspberries =[rasp01] # dont forget to mention here all rasp## here as list
 for each_raspberry in all_raspberries:
     source, ip_ad, username, password , device_name= each_raspberry
-    checking_dir_if_already_exitst(source, ip_ad, username, password, device_name)
+    create_dir(source, ip_ad, username, password, device_name)
+    copy_files(source, ip_ad, username, password, device_name)
+    run_data_collection(ip_ad, username, password)
 sys.exit()

@@ -2,7 +2,7 @@ import time
 import board
 import adafruit_dht
 
-class sensor_DHT11:
+class DHT11Sensor:
     def __init__(self):
         # pin assignment
         # initialize sensor values
