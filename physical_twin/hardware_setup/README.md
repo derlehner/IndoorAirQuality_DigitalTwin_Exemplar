@@ -104,6 +104,54 @@ Afterward the Raspberry Pi needs to be restarted and logged in with the new pass
 sudo apt-get update
 sudo apt-get upgrade
 ```
+
+
+
+### To Enable SSH without using Monitor:
+To setup raspi without hdmi this is the process:
+
+first flash the sd card with new pi OS. Then Power off your Raspberry Pi and remove the SD card. and follow thes
+
+1.  Insert the SD card into your computer’s card reader. The SD card will mount automatically.
+2.  Navigate to the SD card boot directory using your OS file manager. Linux and macOS users can also do this from the command line.
+3.  Create a new empty file named ssh, without any extension, inside the boot directory.
+4.  Remove the SD card from your computer and put it in your Raspberry Pi.
+5.  Power on your Pi board. On boot Pi will check whether this file exists and if it does, SSH will be enabled and the file is removed.
+
+### Connecting Raspi by SSH (without knowing IP address): 
+**Using your computer & Ping command**
+
+1.  Connect your computer to the same Network as Raspberry Pi
+2.  Open a terminal window (Command Prompt on Windows)
+3.  Run the following command `ping raspberrypi.local` (If you have changed the default hostname of your Raspberry Pi, type `ping YOUR_HOSTNAME.local` instead)
+    
+    > Note: On Windows PC, mDNS driver is required for .local addresses to work, you may install this service: [https://support.apple.com/kb/DL999?locale=en_US 761](https://support.apple.com/kb/DL999?locale=en_US "https://support.apple.com/kb/dl999?locale=en_us")
+    
+4.  If the Raspberry Pi is reachable, ping will show its IP address, e.g:  
+    `PING raspberrypi.local (192.168.1.33): 56 data bytes`  
+    `64 bytes from 192.168.1.33: icmp_seq=0 ttl=255 time=2.618 ms`
+	
+### If you want to connect raspi To WIFI without monitor:
+If you already flashed raspi with new os or cant connect to monitor use this step to connect to wifi automatically.
+
+1.  Remove the sd card and plug in any of your pc
+2.  navigate to the particular mount: under boot create a 'wpa_supplicant.txt' file
+3.  open it and add these texts
+4.  ```bash
+    country=US # Your 2-digit country code
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    network={​​​​​
+        ssid="YOUR_NETWORK_NAME"
+        psk="YOUR_PASSWORD"
+        key_mgmt=WPA-PSK
+    }​​​​​
+    ```
+    
+5.  Save the file with your wifi ssid=' ' and password = ' '
+6.  Finally just chanage the file extention from .txt to .conf
+
+This will connect the raspi to wifi right after starting, No monitor is needed. you can do it right after flasing the os
+
 ## <a name="Send_Sensor_data_to_cloud"></a>Send Sensor data to cloud
 ### <a name="libraries"></a>Required Libraries for the project
 
