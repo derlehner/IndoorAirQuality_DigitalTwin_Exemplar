@@ -35,7 +35,7 @@ copy paste the connection string into the python script.
 
 **Sensor data in csv file**
 
-We have used the actual sensor data obtained from an SCD30 sensor which is set up in a room at our organization to send data to virtual room "Lobby100". The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
+We have used the actual sensor data obtained from an SCD30 sensor which is set up in three rooms at our organization to send data to virtual room "Lobby100", Room 101 and Room 102. The timespan of the dataset is five hours(from 10.45 am until 15:45 pm). The data was collected when almost two persons were working in room during daytime and windows were occasionally opened at every hour. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
 
 ### Run the client app
 
