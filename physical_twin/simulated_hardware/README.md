@@ -33,9 +33,42 @@ Go to IoT Hub ---> click on specific IoT device to which you need to send data -
 
 copy paste the connection string into the python script.
 
-**Sensor data in csv file**
+**Datasets**
 
-We have used the actual sensor data obtained from an SCD30 sensor which is set up in three rooms at our organization to send data to virtual room "Lobby100", Room 101 and Room 102. The timespan of the dataset is five hours(from 10.45 am until 15:45 pm). The data was collected when almost two persons were working in room during daytime and windows were occasionally opened at every hour. The sensor data is exported into csv file [SensorData.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/simulated_hardware/sensorData.csv) and parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sensor data or replace with your own csv file with actual or mock up sensor values.
+1.dataSet1.csv
+
+2.dataSet2.csv
+
+We have obtained the real-time sensor data with SCD-30 sensors setup in three rooms and datacollection was made during the day time when people are working. The data collection set up is as follows :
+
+| Dataset      | Room                    | Sensor_Type | No_of_Sensors | Time_Span |
+| ------------ | ----------------------- | ----------- | ------------- | --------- |
+| dataSet1.csv | Lobby100,Room102        | SCD-30      | 2             | 6 hours   |
+| dataSet2.csv | Room101,Room102,Room103 | SCD-30      | 3             | 5 hours   |
+
+**Dataset description:**
+
+**a) dataSet1 **
+
+**1.Room 102**
+
+The dataSet1 was collected based on the following properties,There was maximum of two people working in Room 102 and windows were closed. 
+
+**b) dataSet2**
+
+**1. Room 101**
+
+The dataSet2 from Room 101 was collected when there were maximum of two people working in room for most of the time and three more people were also present in room for few minutes. The window was opened in the room for every one hour.
+
+**2. Room 102**
+
+The dataSet2 from Room 102 was collected when there were maximum of two people working in room for most of the time and two more people were also present in room for few minutes. The windows were closed in the room.
+
+**3. Room 103**
+
+The dataSet2 from Room 103 was collected when there was only one person working in room. The window was opened in the room for about three hours.
+
+The sensor data from the datasets  [dataSet1.csv, dataSet2.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/simulated_hardware) is parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sample sensor data or replace with your own csv file with actual or mock up sensor values.
 
 ### Run the client app
 
