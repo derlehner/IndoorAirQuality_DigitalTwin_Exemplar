@@ -35,10 +35,9 @@ copy paste the connection string into the python script.
 
 **Datasets**
 
-1.dataSet1.csv
+[1.dataSet1.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/simulated_hardware)
 
-2.dataSet2.csv
-
+[2.dataSet2.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/simulated_hardware)
 We have obtained the real-time sensor data with SCD-30 sensors setup in three rooms and datacollection was made during the day time when people are working. The data collection set up is as follows :
 
 | Dataset      | Room                    | Sensor_Type | No_of_Sensors | Time_Span |
@@ -48,7 +47,7 @@ We have obtained the real-time sensor data with SCD-30 sensors setup in three ro
 
 **Dataset description:**
 
-**a) dataSet1 **
+**a) dataSet1**
 
 **1.Room 102**
 
