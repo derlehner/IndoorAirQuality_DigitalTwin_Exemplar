@@ -10,9 +10,8 @@
 - [Send Sensor data to cloud](#Send_Sensor_data_to_cloud)
 	- [Required Libraries for the project](#libraries)
 	- [Remote access via SSH](#ssh)
-	- [Deploy Code to Raspberry](#Deploy)
-	- [Deploy Code to multiple Raspberries](#DeployMultiDevice)
-	- [Sending data to IoT-hub](#Sending)
+	- [Deploy script for sending data to web-server](#Deploy)
+	- [Deploy script for sending data to IoT-hub](#Sending)
 - [Possilble Frequent Errors](#Possilble_Frequent_Errors)
 
 ## <a name="Prerequisites"></a>Prerequisites
@@ -152,7 +151,7 @@ If you already flashed raspi with new os or cant connect to monitor use this ste
 
 This will connect the raspi to wifi right after starting, No monitor is needed. you can do it right after flasing the os
 
-## <a name="Send_Sensor_data_to_cloud"></a>Send Sensor data to cloud
+
 ### <a name="libraries"></a>Required Libraries for the project
 
 Now, you need to install some packages with the integrated package installer of Pythonpip.
@@ -161,18 +160,22 @@ The Required packages are as follows:
 - Adafruit-DHT
 - adafruit-circuitpython-ccs811CO2
 - azure-iot-device
+- SCD30
 
-You can Install these packages by following this syntax below in the command terminal.
-```sh
-	For example:
-	python3 -m pip install <PackageName>	
-```
 Execute all these commands one by one each:
-```sh
-	python3 -m pip install RPi.GPIO
-	python3 -m pip install Adafruit-DHT
-	python3 -m pip install adafruit-circuitpython-ccs811
-	python3 -m pip install azure-iot-device
+```py
+# Packages to be Installed
+python3 -m pip install RPi.GPIO						 #For GPIO
+python3 -m pip install Adafruit-DHT					 #For DHT sensor
+python3 -m pip install adafruit-circuitpython-ccs811 #For CCS811 sensor
+python3 -m pip install azure-iot-device				 #For installing azure
+python3 -m pip install scd30_i2c					 #For SCD_30 sensor
+
+# Dependent Packages (Probably all should be pre-installed)
+pip install json
+pip install urllib3
+pip install DateTime 
+sudo apt-get install -y python-requests
 ```
 
 ### <a name="ssh"></a>Remote access via SSH
@@ -189,65 +192,66 @@ ping rpi-cdl.local
 With this IP address it is easy to access the Raspberry Pi with an SSH capable tool like
 putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP address of the Raspberry Pi, the Port 22 and the connection type SSH marked. These settings can be saved and used for later access. If the Raspberry Pi was connected over another LAN-connection, the IP address would have needed to be updated.
 
-### <a name="Deploy"></a>Deploy Code to single Raspberry
-_Description on auto_deploy_script :_
 
-To deploy the script (`IoTHubDevice.py` ) which sends data to cloud we use `auto_deploy_script.py` Please follow the procedure below: 
+### <a name="Deploy"></a>Code deployment for sending data to custom web server
+>1. Note: Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above_ [Required Libraries for the project](#libraries)
+>2. Cutom web server should already setup and url and content should be ready 
+
+To deploy the _Data Abstraction_ script which sends data to cloud we use `auto_deploy_script.py`  which does following process when trigered:
+1. Deploy the data abstraction script on each client device
+2. Start the data abstraction script to send the data
+
+Please follow the procedure below: 
+
+1. There will be file `devices_list.txt` created if not just create one. Enter the details of all devices as in the format given below. required deatils parameters are:         `Data_abstract_script, Ip address, User_id, Password, Device_id`
+
+```txt
+'IoTHubDevice.py', '140.78.42.100', 'pi1', 'cdl', 'Rasp01'
+'IoTHubDevice.py', '140.78.42.102', 'pi2', 'cdl', 'Rasp02'
+<add the as many devices with same syntax>
+```
+>Note: Inside the IoTHubDevice.py you can specify the endpoint details (i.e. server url and content format as mentioned below)
+```py
+# Details of custom web server 
+url="<your web-server url>"
+headers = {'<content-type>','Accept':'application/json'}
+```
+
+2.  After list is saved, automation script named `auto_deploy_script.py`. you can run it using python3 using command:
+```py
+# For deploying script to clients
+python3 auto_deploy_script.py 
+```
+	Note: This process will be asking password for each raspberry you can type in console consequtively.
+
+This will copy all required scripts from host server to the clients (raspberry) and trigers the script to start send the data web server.
+
+  
+### <a name="Deploy"></a>Code deployment for sending data to Azuer IoT-hub
 >_Note: Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above_ [Required Libraries for the project](#libraries)
 
 Steps to follow:
-1. Just edit the list in `device_list.txt` with requried details of ip address and much more.
-2. Inside `IoTHubDevice.py` set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub for example:
-```ruby
+1. Just edit the list in `device_list.txt` with requried details of ip address and much more. List all of the devices.
+
+3. Make your azure environemnt is already setup to make it ready for receiving our data. Here is tutorial on how to set up the azure environment is found here: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
+
+4. Inside `IoTHubDevice.py` set the connection string varibale to appropriate string accoding to [azure IoT-Hub readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). And it should be unique for each devices in IoT-Hub for example:
+```py
+# Connection string from IoT-Hub Devices list from Azure
 CONNECTION_STRING_CCS811 = "<specify the connection string>"
 CONNECTION_STRING_SCD_30 = "<specify the connection string>"
 ```
-6. This will get ready to script to send the data (Note: data is not yet sent to cloud). Refer [Sending data to IoT-Hub](#Sending) to start sending the data.
-3. run the auto_deploy_script with the syntax:
-```md
-python3 auto_deploy_script.py <filename_to_be_deployed>
-```
-8.  This will deploy the code and also trigger the code and runs it continuously without interuptions so the data is sent constantly.
-
-### <a name="DeployMultiDevice"></a>Deploy Code to multiple Raspberries
->All the raspberry should be connected to same network, if not this doesn't work
-1. We can use the Automation script for deploying code to multiple raspberries. the scipt can by found in same directory under [IndoorAirQuality_DigitalTwin_Exemplar/physical_twin/hardware_setup/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup)  as `auto_deploy_script.py`
-2. Place the script on same directory where your 'directory/file to be deployed' is present
-3. Then open the script and  ip_address, user_id, passcode, deviceid as list as shown in the code snippet below in the line 48 for the devices which you want to deploy
-```ruby
-rasp01 = ['IoTHubDevice.py', '140.78.42.111', 'pi1', 'cdl', 'Rasp01']
-
-# ADD MORE RASPBERRY HERE AS THE EXAMPLE SHOWN IN NEXT LINE
-rasp02 = ['IoTHubDevice.py', '192.168.0.136', 'pi2', 'cdl', 'Rasp02']
-```
-3. Run the script by the command to copy to each devices listed in the script. time taken for this based on size of the file/directory
-```ruby
-python auto_depoly_script.py
-```
-5. This will deploy the scripts to individual devices.
-
-7. Then you can start individual devices to sed the data by tringgering the file by ssh terminal, refer the topic [Remote access via SSH](#ssh) for futher information.
-
-###  <a name="Sending"></a>Sending data to IoT-hub
->
-Before Continuing please make sure that
->1. You completed the previous steps of this tutorial, and 
->2. You have all pysical connections (wirings, power suppy and all are working fine)
-2. Your azure environemnt is already setup to make it ready for receiving our data. The Tutorial on how to set up the azure environment is found here: [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/readme.md](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure)
-3. You sucessfully deployed the code in each of device that should be running
-
-In each device there will be a file named **IoTHubDevice.py**  which will be used to send the data from the sensor to the azure environment.
 
 > Note: in IoTHubDevice.py please make sure you have updated `connection_string` from your azure portal: under iot-hub/iot-devices for sending the data from raspberry. further notes can be found under Setup `IoT-Hub`  in [IndoorAirQuality_DigitalTwin_Exemplar/digital_twin/azure/](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/digital_twin/azure). 
 
-
-
-To start send the data to cloud run the `IoTHubDevice.py` by python3 by running the command in the cmd terminal for each devices. 
-You should do it for each individual devices to sed the data by tringgering the file by ssh terminal, refer the topic [Remote access via SSH](#ssh) for futher information.
-```ruby
-python3 IoTHubDevice.py
+3. This will get ready to script to send the data (Note: data is not yet sent to cloud). Refer [Sending data to IoT-Hub](#Sending) to start sending the data.
+4. run the auto_deploy_script with the syntax:
+```py
+# Deploy code to clients
+python3 auto_deploy_script.py
 ```
-Finally the script will start send the data to the cloud
+5.  This will deploy the code and also trigger the code and runs it continuously without interuptions so the data is sent constantly.
+
 
 ## <a name="Possilble_Frequent_Errors"></a>Possilble Frequent Errors
 ###### Error: `Script not running in raspberry`:

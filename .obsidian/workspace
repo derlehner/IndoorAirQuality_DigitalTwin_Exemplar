@@ -12,20 +12,35 @@
             "file": "physical_twin/hardware_setup/README.md",
             "mode": "source"
           }
-        },
-        "group": "8dcddea743c080da"
+        }
       },
       {
-        "id": "42e46a54979a09a8",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "physical_twin/hardware_setup/README.md",
-            "mode": "preview"
+        "id": "22ada6bfa07c6afc",
+        "type": "split",
+        "children": [
+          {
+            "id": "7a455c9a9af5257f",
+            "type": "leaf",
+            "dimension": 67.09613478691774,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "physical_twin/hardware_setup/README.md",
+                "mode": "preview"
+              }
+            }
+          },
+          {
+            "id": "5c87c5d2e405a897",
+            "type": "leaf",
+            "dimension": 32.90386521308226,
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
           }
-        },
-        "group": "8dcddea743c080da"
+        ],
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -65,7 +80,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "313628c4b6601f08",
@@ -99,11 +115,12 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "502c973d69faf515",
+  "active": "7a455c9a9af5257f",
   "lastOpenFiles": [
     "physical_twin/hardware_setup/README.md",
-    "digital_twin/azure/readme.md",
+    "physical_twin/hardware_setup/impl_python/notes_github.md",
     "README.md",
+    "digital_twin/azure/readme.md",
     "applications/machine_learning/README.md"
   ]
 }
