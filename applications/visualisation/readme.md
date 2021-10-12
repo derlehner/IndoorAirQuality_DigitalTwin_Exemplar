@@ -195,7 +195,7 @@ Generally, the co2 level in indoor environment should not exceed 1000 ppm. The s
 
 **Line Chart**
 
-The line chart  displays the co2 values obtained from Raspberry1 setup in room Lobby 100.
+The line chart  displays the co2 values obtained from three SCD-30 sensors setup in Room101, Room102 and Room103 respectively.
 
 **Axis**
 
