@@ -8,11 +8,11 @@ function overview({navigation}) {
       <View style={styles.cardRow}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Sensor Data');
+            navigation.navigate('Co2 in Room101');
           }}>
           <Card containerStyle={styles.cardStyle1}>
             <Text>
-              <Text style={styles.subHeading}>Lobby: 100 - Raspberry 1</Text>
+              <Text style={styles.subHeading}>Room: 101 - Raspberry 1</Text>
             </Text>
             <Text>
               <Text style={styles.subHeading}></Text>
@@ -22,43 +22,53 @@ function overview({navigation}) {
               source={require('./images/Room.jpg')}
             />
 
-            <Text style={styles.subHeading}>Co2 level: 689.60</Text>
+            <Text style={styles.subHeading}>Co2 level: 740.95</Text>
+
+            <Text style={styles.subHeading}>Risk: Medium</Text>
+          </Card>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Co2 in Room102');
+          }}>
+          <Card containerStyle={styles.cardStyle2}>
+            <Text>
+              <Text style={styles.subHeading}>Room: 102 - Raspberry 2</Text>
+            </Text>
+            <Text>
+              <Text style={styles.subHeading}></Text>
+            </Text>
+            <Card.Image
+              style={styles.image}
+              source={require('./images/Room.jpg')}
+            />
+
+            <Text style={styles.subHeading}>Co2 level: 1825.35</Text>
+
+            <Text style={styles.subHeading}>Risk: High</Text>
+          </Card>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Co2 in Room103');
+          }}>
+          <Card containerStyle={styles.cardStyle3}>
+            <Text>
+              <Text style={styles.subHeading}>Room: 103 - Raspberry 3</Text>
+            </Text>
+            <Text>
+              <Text style={styles.subHeading}></Text>
+            </Text>
+            <Card.Image
+              style={styles.image}
+              source={require('./images/Room.jpg')}
+            />
+
+            <Text style={styles.subHeading}>Co2 level: 731.76</Text>
 
             <Text style={styles.subHeading}>Risk: Low</Text>
           </Card>
         </TouchableOpacity>
-        <Card containerStyle={styles.cardStyle2}>
-          <Text>
-            <Text style={styles.subHeading}>Room: 101 - Raspberry 2</Text>
-          </Text>
-          <Text>
-            <Text style={styles.subHeading}></Text>
-          </Text>
-          <Card.Image
-            style={styles.image}
-            source={require('./images/Room.jpg')}
-          />
-
-          <Text style={styles.subHeading}>Co2 level: 2500.50</Text>
-
-          <Text style={styles.subHeading}>Risk: High</Text>
-        </Card>
-        <Card containerStyle={styles.cardStyle3}>
-          <Text>
-            <Text style={styles.subHeading}>Room: 102 - Raspberry 3</Text>
-          </Text>
-          <Text>
-            <Text style={styles.subHeading}></Text>
-          </Text>
-          <Card.Image
-            style={styles.image}
-            source={require('./images/Room.jpg')}
-          />
-
-          <Text style={styles.subHeading}>Co2 level: 1000.90</Text>
-
-          <Text style={styles.subHeading}>Risk: Medium</Text>
-        </Card>
       </View>
     </View>
   );
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
-    backgroundColor: '#83EE68',
+    backgroundColor: 'orange',
     padding: 10,
   },
   cardStyle2: {
@@ -111,7 +121,7 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 10,
     borderColor: 'lightgrey',
-    backgroundColor: 'orange',
+    backgroundColor: '#83EE68',
   },
   cardStyle4: {
     borderRadius: 20,

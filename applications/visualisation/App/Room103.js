@@ -13,9 +13,9 @@ import {
   createContainer,
 } from 'victory-native';
 import {NavigationContainer} from '@react-navigation/native';
-import * as co2data from './co2data.json';
+import * as co2data from './dataSet2.json';
 
-export default function charts({navigation}) {
+export default function chartRoom103({navigation}) {
   const VictoryZoomVoronoiContainer = createContainer('zoom', 'voronoi');
 
   const [selectedDomain, setSelectedDomain] = useState();
@@ -29,11 +29,14 @@ export default function charts({navigation}) {
   };
 
   const sensorData = co2data['default'];
+  const filteredDataSource = sensorData
+    .filter(item => item.Series == 'Raspi_05')
+    .map(({Series, Time, Value}) => ({Series, Time, Value}));
 
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.heading}>Room Lobby:100 - Raspberry1</Text>
+        <Text style={styles.heading}>Room: 103 - Raspberry 3</Text>
 
         <VictoryChart
           domain={{y: [0, 800]}}
@@ -47,7 +50,7 @@ export default function charts({navigation}) {
               zoomDimension="x"
               zoomDomain={zoomDomain}
               onZoomDomainChange={handleZoom}
-              labels={({datum}) => `co2:${datum.co2}`}
+              labels={({datum}) => `co2:${datum.Value}`}
             />
           }>
           <VictoryAxis
@@ -97,9 +100,9 @@ export default function charts({navigation}) {
               parent: {border: '1px solid #ccc'},
             }}
             interpolation="catmullRom"
-            data={sensorData}
+            data={filteredDataSource}
             x="Time"
-            y="co2"
+            y="Value"
           />
         </VictoryChart>
       </View>

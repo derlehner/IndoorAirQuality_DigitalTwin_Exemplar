@@ -4,8 +4,10 @@ import {Pressable, Button, View, Text, StyleSheet} from 'react-native';
 import {Header, Card} from 'react-native-elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import charts from './Chart';
 import overview from './OverviewCo2';
+import chartRoom101 from './Room101';
+import chartRoom102 from './Room102';
+import chartRoom103 from './Room103';
 
 const Stack = createStackNavigator();
 
@@ -24,7 +26,9 @@ export default function App() {
           name="Overview of Co2 levels in Building "
           component={overview}
         />
-        <Stack.Screen name="Sensor Data" component={charts} />
+        <Stack.Screen name="Co2 in Room101" component={chartRoom101} />
+        <Stack.Screen name="Co2 in Room102" component={chartRoom102} />
+        <Stack.Screen name="Co2 in Room103" component={chartRoom103} />
       </Stack.Navigator>
     </NavigationContainer>
   );

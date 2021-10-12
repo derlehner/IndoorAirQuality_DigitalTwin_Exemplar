@@ -24,7 +24,7 @@
 
 ### **1. Introduction**
 
-Measure the air quality in indoor environment by using the CCS811 sensor in rooms. The overview of the sensor data in each rooms can be visualized in a mobile app. The sensor data from rooms is collected in a [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.csv),parsed into required json format using the [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used as the dataset for visualization. 
+Measure the air quality in indoor environment by using the CCS811 sensor in rooms. The overview of the sensor data in each rooms can be visualized in a mobile app. The sensor data from rooms is collected in a [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/dataSet2.csv),parsed into required json format using the [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used as the dataset for visualization. 
 
 ### 2. Prerequisites:
 
@@ -147,15 +147,51 @@ Physical mobile device
 
 The initial screen of the app displays overview of current Co2 levels in different rooms with risk level indicators. The color  are used to indicate the risk level in each of the rooms. (Red-High, Orange-Medium and Green-Low).
 
-![Co2Overview_inRooms](./images/overview.jpg)
+![Co2Overview_inRooms](./images/co2Dashboard.jpg)
 
 **2. Chart View**
 
 By clicking on the room image from screen1 , you will be navigated to the sensor data of that room(in our sample, it is Lobby 100 and data is from Raspberry1). 
 
-**Dataset**
+**Datasets**
 
-The chart uses the [csv file](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.csv) with sensor data obtained from CCS811 sensor, setup in room Lobby 100.The csv file is parsed into the required [json format](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/co2data.json) using the  [python script](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation/csvReaderJsonWriter.py) and used in charts. The timespan of the dataset is seven day interval. The data was collected when almost two persons were working in room during daytime.
+The detailed description about the datasets can be viewed from the section [simulated hardware](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/simulated_hardware). we have used one of the dataSets(dataSet2.csv) and description is as follows:
+
+[1.dataSet2.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation)
+
+We have obtained the real-time sensor data with SCD-30 sensors setup in three rooms and data collection was made during the day time when people are working. The data collection set up is as follows :
+
+| Dataset      | Room                    | Sensor_Type | No_of_Sensors | Time_Span |
+| ------------ | ----------------------- | ----------- | ------------- | --------- |
+| dataSet2.csv | Room101,Room102,Room103 | SCD-30      | 3             | 5 hours   |
+
+**Dataset description:**
+
+**a) dataSet2**
+
+**1. Room 101**
+
+The dataSet2 from Room 101 was collected when there were maximum of two people working in room for most of the time and three more people were also present in room for few minutes. The window was opened in the room for every one hour. The maximum co2 value in Room 101 is **740.95** as shown below in screenshot. since the window was opened for every one hour, the co2 level is under control with low risk.
+
+![chartRoom101](./images/co2101.jpg)
+
+
+
+**2. Room 102**
+
+The dataSet2 from Room 102 was collected when there were maximum of two people working in room for most of the time and two more people were also present in room for few minutes. The windows were closed in the room. The maximum co2 value in Room 102 is **1825.35** as shown below in screenshot. since the window was not opened, the co2 level is very high compared to the  other rooms(Room101 , Room103) and risk is also high .
+
+![chartRoom102](./images/co2102.jpg)
+
+**3. Room 103**
+
+The dataSet2 from Room 103 was collected when there was only one person working in room. The window was opened in the room for about three hours. The maximum co2 value in Room 103 is **731.76** as shown below in screenshot. since the window was  opened and only one person is in the room, the co2 level is very low compared to the  other rooms(Room101 , Room102) and risk is very low .
+
+![chartRoom103](./images/co2103.jpg)
+
+
+
+Generally, the co2 level in indoor environment should not exceed 1000 ppm. The sensor data from the datasets  [dataSet2.csv](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/applications/visualisation) is parsed to get co2 measurements. The  measurements are then sent to Azure IoT devices. you can use the existing csv file for sample sensor data or replace with your own csv file with actual or mock up sensor values.
 
 **Line Chart**
 
@@ -166,22 +202,6 @@ The line chart  displays the co2 values obtained from Raspberry1 setup in room L
 The x- axis displays the datetime interval in year month date hour minutes and seconds format(yyyy-mm-dd hh:mm:ss).
 
 The y-axis displays the Co2 in ppm.
-
-**Optimum Level**
-
-The co2 level in indoor environment should not exceed 1000.
-
-The maximum co2 value in Lobby 100 is 722.23 as shown below in screenshot. 
-
-![MobileOverview](./images/chartView.jpg)
-
-**3.Detailed View of Charts**
-
-The chart provides option to pan and zoom to get detailed overview of the co2 levels between the timespan.
-
-![DetailedView_Charts](./images/detailView.jpg)
-
-
 
  **Application of MDE techniques**
 
