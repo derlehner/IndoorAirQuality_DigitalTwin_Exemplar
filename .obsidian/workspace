@@ -12,35 +12,20 @@
             "file": "physical_twin/hardware_setup/README.md",
             "mode": "source"
           }
-        }
+        },
+        "group": "c1ed67501ee4664c"
       },
       {
-        "id": "22ada6bfa07c6afc",
-        "type": "split",
-        "children": [
-          {
-            "id": "7a455c9a9af5257f",
-            "type": "leaf",
-            "dimension": 67.09613478691774,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "physical_twin/hardware_setup/README.md",
-                "mode": "preview"
-              }
-            }
-          },
-          {
-            "id": "5c87c5d2e405a897",
-            "type": "leaf",
-            "dimension": 32.90386521308226,
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
+        "id": "7a455c9a9af5257f",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "physical_twin/hardware_setup/README.md",
+            "mode": "preview"
           }
-        ],
-        "direction": "horizontal"
+        },
+        "group": "c1ed67501ee4664c"
       }
     ],
     "direction": "vertical"
@@ -80,8 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "313628c4b6601f08",
@@ -115,7 +99,7 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "7a455c9a9af5257f",
+  "active": "502c973d69faf515",
   "lastOpenFiles": [
     "physical_twin/hardware_setup/README.md",
     "physical_twin/hardware_setup/impl_python/notes_github.md",

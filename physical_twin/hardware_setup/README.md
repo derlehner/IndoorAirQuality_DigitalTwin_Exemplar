@@ -40,14 +40,16 @@
 - To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
 - There are datasheet and manual available at the homepage of joy-it. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
 - Wiring scheme:
+
  
-| sensor pin 	| Raspi pin  	|
-|------------	|------------	|
-| vdd        	| +5v        	|
-| gnd        	| Ground     	|
-| sda        	| data line  	|
-| scl        	| clock line 	|
-| Rst        	| Reset port 	|
+| sensor pin 	| property  	| Raspberry GPIO/pin  	|
+|------------	|------------	|------------	|
+| vdd        	| +5v        	|`pin2`				|
+| gnd        	| Ground     	|`pin6`|
+| sda        	| data line  	|`gpio2`|
+| scl        	| clock line 	|`gpio3`|
+| Rst        	| Reset port 	|`pin39`|
+<img align="center" src="https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png" width= 400/>
 
 ### <a name="scd30"></a>Sensor SCD30
 -  SCD30 - Sensor Module for HVAC and Indoor Air Quality Applications. it has Integrated temperature and humidity sensor
@@ -55,14 +57,15 @@
 -  works with Digital interface UART or I2C modules
 -  further documentation can be found under this [homepage](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/)
 
-| sensor pin 	| Raspi pin  	|
-|------------	|------------	|
-| vdd        	| +3v        	|
-| gnd        	| Ground     	|
-| sda        	| data line  	|
-| scl        	| clock line 	|
-| Rst        	| Reset port 	|
+| sensor pin 	| property  	| Raspberry GPIO/pin |
+|------------	|------------	|------------	|
+| vdd        	| +3v        	|`pin1`|
+| gnd        	| Ground     	|`pin6`|
+| sda        	| data line  	|`gpio2`|
+| scl        	| clock line 	|`gpio3`|
+| Rst        	| Reset port 	|`pin39`|
 
+<img align="center" src="https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png" width= 400/>
 
 ## <a name="Initial_Setup_of_Raspberry_OS"></a>Initial Setup of Raspberry OS 
 After having the new Raspberry or when Need to flash old raspberry to install new  Ubuntu.
