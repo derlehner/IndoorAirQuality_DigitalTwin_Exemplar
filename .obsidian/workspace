@@ -12,8 +12,7 @@
             "file": "physical_twin/hardware_setup/README.md",
             "mode": "source"
           }
-        },
-        "group": "c1ed67501ee4664c"
+        }
       },
       {
         "id": "7a455c9a9af5257f",
@@ -24,8 +23,7 @@
             "file": "physical_twin/hardware_setup/README.md",
             "mode": "preview"
           }
-        },
-        "group": "c1ed67501ee4664c"
+        }
       }
     ],
     "direction": "vertical"

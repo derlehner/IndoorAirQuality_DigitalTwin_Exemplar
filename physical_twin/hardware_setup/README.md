@@ -22,7 +22,8 @@
 
 ## <a name="Hardware_setup"></a>Hardware setup
 ### <a name="Raspberry"></a>Raspberry Pi
- We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured CO<sub>2</sub> values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
+ We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured CO<sub>2</sub> values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds.
+ 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
  An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). However in this project a Raspberry is used and for this following hardware for setting up the raspberry is needed:
@@ -49,6 +50,7 @@
 | sda        	| data line  	|`gpio2`|
 | scl        	| clock line 	|`gpio3`|
 | Rst        	| Reset port 	|`pin39`|
+
 <img align="center" src="https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png" width= 400/>
 
 ### <a name="scd30"></a>Sensor SCD30
@@ -168,11 +170,11 @@ The Required packages are as follows:
 Execute all these commands one by one each:
 ```py
 # Packages to be Installed
-python3 -m pip install RPi.GPIO						 #For GPIO
-python3 -m pip install Adafruit-DHT					 #For DHT sensor
-python3 -m pip install adafruit-circuitpython-ccs811 #For CCS811 sensor
-python3 -m pip install azure-iot-device				 #For installing azure
-python3 -m pip install scd30_i2c					 #For SCD_30 sensor
+python3 -m pip install RPi.GPIO		#For GPIO
+python3 -m pip install Adafruit-DHT		#For DHT sensor
+python3 -m pip install adafruit-circuitpython-ccs811	#For CCS811 sensor
+python3 -m pip install azure-iot-device		#For installing azure
+python3 -m pip install scd30_i2c	#For SCD_30 sensor
 
 # Dependent Packages (Probably all should be pre-installed)
 pip install json
@@ -184,7 +186,7 @@ sudo apt-get install -y python-requests
 ### <a name="ssh"></a>Remote access via SSH
 
 It is planned that the AirQuality module will be running continuously in a predefined position (e.g.: in the stairway below the TV), therefore it needs to be accessible remotely without any connected monitor and input device. To solve this requirement, the Raspberry Pi can be accessed via SSH which can be enabled insudo raspi-configas mentioned in subsection. The IP address of the Raspberry Pi can be set as static, to ensure the connection to it. It is also possible to get the IP address with apingcommand on the hostname of the Raspberry Pi from another computer. For Linux it is easy as entering the following command.
-```sh
+```py
 syntax:
 ping <pi_hostname>.local
 ```
@@ -197,6 +199,7 @@ putty. Figure 1.2 shows a screenshot of the applicationputtywith the local IP ad
 
 
 ### <a name="Deploy"></a>Code deployment for sending data to custom web server
+
 >1. Note: Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above_ [Required Libraries for the project](#libraries)
 >2. Cutom web server should already setup and url and content should be ready 
 
@@ -230,7 +233,7 @@ python3 auto_deploy_script.py
 This will copy all required scripts from host server to the clients (raspberry) and trigers the script to start send the data web server.
 
   
-### <a name="Deploy"></a>Code deployment for sending data to Azuer IoT-hub
+### <a name="Sending"></a>Code deployment for sending data to Azuer IoT-hub
 >_Note: Before continuing to procedures make sure you have all the packages installed in your deploying machine. To do so refer the topic above_ [Required Libraries for the project](#libraries)
 
 Steps to follow:
