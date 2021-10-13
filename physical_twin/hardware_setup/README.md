@@ -22,7 +22,7 @@
 
 ## <a name="Hardware_setup"></a>Hardware setup
 ### <a name="Raspberry"></a>Raspberry Pi
- We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured CO<sub>2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
+ We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured CO<sub>2</sub> values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
  An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). However in this project a Raspberry is used and for this following hardware for setting up the raspberry is needed:
@@ -36,7 +36,7 @@
 
 ### <a name="ccs811"></a>Sensor CCS811 
 - This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol
-- It has Measurement range: 400 ppm – 8192 ppm for CO<sub>2 values
+- It has Measurement range: 400 ppm – 8192 ppm for CO<sub>2</sub> values
 - To get valid data a initial burn-in of 48 hours and a warm-up time of 20 min is recommended.
 - There are datasheet and manual available at the homepage of joy-it. The manual also includes an example of how to access the sensor in code. A short summery is available in (subsection - 1.6.4) datasheet documentation and manual are located at the repository for further information.
 - Wiring scheme:
@@ -53,7 +53,7 @@
 
 ### <a name="scd30"></a>Sensor SCD30
 -  SCD30 - Sensor Module for HVAC and Indoor Air Quality Applications. it has Integrated temperature and humidity sensor
--  It has Measurement range: 400 ppm – 10.000 ppm for CO<sub>2 values
+-  It has Measurement range: 400 ppm – 10.000 ppm for CO<sub>2</sub> values
 -  works with Digital interface UART or I2C modules
 -  further documentation can be found under this [homepage](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/)
 
@@ -161,7 +161,7 @@ Now, you need to install some packages with the integrated package installer of 
 The Required packages are as follows:
 - RPi.GPIO
 - Adafruit-DHT
-- adafruit-circuitpython-ccs811CO<sub>2
+- adafruit-circuitpython-ccs811CO<sub>2</sub>
 - azure-iot-device
 - SCD30
 
@@ -273,7 +273,7 @@ This will show if the device is connected or not. Further detailed discription i
 ###### Error: `Try Reapplying the voltage`:
 Some wiring connection problem
 
-###### Error: `Constant CO<sub>2 value`:
+###### Error: `Constant CO<sub>2</sub> value`:
 Sensor is not sensing good or sensor calibration is needed.
 ###### Error: `Data not receieved on Azure`:
 Connection string is bad or no device is to receive the data from Azure side
