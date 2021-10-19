@@ -19,6 +19,7 @@
 
 ## <a name="Prerequisites"></a>Prerequisites
 - Raspberry and accessories
+- Arduino and accessories
 - CCS811 and DHT11 Sensors
 - Electronics like resistors, LED lights 
 - Bread board and connection wires
@@ -27,6 +28,8 @@
 ### <a name="Raspberry"></a>Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
+ 
+### <a name="Arduino"></a>Arduino Uno 
  
  An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). However in this project a Raspberry is used and for this following hardware for setting up the raspberry is needed:
 - (Fully Integrated) Raspberry Pi 4 - Board
