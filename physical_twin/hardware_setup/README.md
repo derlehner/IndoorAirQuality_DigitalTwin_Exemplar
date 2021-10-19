@@ -30,6 +30,13 @@
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
 ### <a name="Arduino"></a>Arduino Uno 
+ For coding in python on Arduino Uno, a protocoll needs to be uploaded on to the Arduino. 
+ 
+ The following accessories are needed for setting up an Arduino:
+ - Power adapter for Arduino Uno
+ - Arduino Ethernet Shield
+ - Laptop or some hardware to upload the code on to the Arduino
+ - Data cable
  
  An alternative would be NVIDIA's [Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit). However in this project a Raspberry is used and for this following hardware for setting up the raspberry is needed:
 - (Fully Integrated) Raspberry Pi 4 - Board
