@@ -4,9 +4,11 @@
 - [Prerequisites](#Prerequisites)
 - [Hardware setup](#Hardware_setup)
 	- [Raspberry Pi](#Raspberry)
+	- [ArduinoUno](#ArduinoUno)
 	- [Sensor CCS811](#ccs811)
 	- [Sensor SCD30](#scd30)
 - [Initial Setup of Raspberry OS](#Initial_Setup_of_Raspberry_OS)
+- [Initial Setup of Arduino Uno](#Initial_Setup_of_Arduino_Uno)
 - [Send Sensor data to cloud](#Send_Sensor_data_to_cloud)
 	- [Required Libraries for the project](#libraries)
 	- [Remote access via SSH](#ssh)
@@ -48,7 +50,7 @@
 | gnd        	| Ground     	|
 | sda        	| data line  	|
 | scl        	| clock line 	|
-| Rst        	| Reset port 	|
+| Rst        	| Reset port 	| 
 
 ### <a name="scd30"></a>Sensor SCD30
 -  SCD30 - Sensor Module for HVAC and Indoor Air Quality Applications. it has Integrated temperature and humidity sensor
