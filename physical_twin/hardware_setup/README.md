@@ -30,7 +30,7 @@
  <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
  
 ### <a name="Arduino"></a>Arduino Uno 
- For coding in python on Arduino Uno, a protocoll needs to be uploaded on to the Arduino. 
+ For coding in python on Arduino Uno, a protocoll needs to be uploaded on to the Arduino. For this
  
  The following accessories are needed for setting up an Arduino:
  - Power adapter for Arduino Uno
