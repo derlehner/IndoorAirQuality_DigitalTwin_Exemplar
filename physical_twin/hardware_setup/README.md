@@ -30,7 +30,7 @@
 
  
 ### <a name="Arduino"></a>Arduino Uno 
- We are using [Arduino Uno] (https://store.arduino.cc/products/arduino-uno-rev3) boards. An Arduino board is a microcontroller based on ATmega328P. However since we want to code in python on Arduino but Arduino is based on a simplified version of c++ language, we first need to upload a StandardFirmata protocoll on to the Arduino. For this it is also important to download the [Arduino IDE] (https://www.arduino.cc/en/software) regarding the   See picture below:   
+ We are using [Arduino Uno](https://store.arduino.cc/products/arduino-uno-rev3) boards. An Arduino board is a microcontroller based on ATmega328P. However since we want to code in python on Arduino but Arduino is based on a simplified version of c++ language, we first need to upload a StandardFirmata protocoll on to the Arduino. For this it is also important to download the [Arduino IDE](https://www.arduino.cc/en/software) regarding the   See picture below:   
  
  <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />'  
  
