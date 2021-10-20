@@ -27,14 +27,14 @@
 ## <a name="Hardware_setup"></a>Hardware setup
 ### <a name="Raspberry"></a>Raspberry Pi
  We ue [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) boards. Raspberry is a dedicated computer with all neccesary functions just like an ordinary pc.  The raspberry sends measured co2 values to the cloud and is also used to command the treshold triggers if the values reach above the limit by changing the color of the LED or by Beeping sounds. 
- <img src='https://cdn.idealo.com/folder/Product/6628/1/6628198/s2_produktbild_max/raspberry-pi-4-model-b.jpg'  width=400 />
+ <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />
  
 ### <a name="Arduino"></a>Arduino Uno 
  For coding in python on Arduino Uno, a protocoll needs to be uploaded on to the Arduino. For this
  
    <img src='physical_twin/hardware_setup/images/arduino_setup.jpeg'  width=400 />
  
-  <img src='physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />
+  <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/arduino_setup.jpeg'  width=400 />
  
  The following accessories are needed for setting up an Arduino:
  - Power adapter for Arduino Uno
