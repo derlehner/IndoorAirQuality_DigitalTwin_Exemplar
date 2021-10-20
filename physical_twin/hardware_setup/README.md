@@ -32,6 +32,10 @@
 ### <a name="Arduino"></a>Arduino Uno 
  For coding in python on Arduino Uno, a protocoll needs to be uploaded on to the Arduino. For this
  
+   <img src='physical_twin/hardware_setup/images/arduino_setup.jpeg'  width=400 />
+ 
+  <img src='physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />
+ 
  The following accessories are needed for setting up an Arduino:
  - Power adapter for Arduino Uno
  - Arduino Ethernet Shield
