@@ -32,7 +32,7 @@
 ### <a name="Arduino"></a>Arduino Uno 
  We are using [Arduino Uno] (https://store.arduino.cc/products/arduino-uno-rev3) boards. An Arduino board is a microcontroller based on ATmega328P
  
-   <img src=' <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />'  width=400 />
+ <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/screenshot_setting_arduino.PNG'  width=400 />'  width=400 />
  
   <img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/refactor-and-api/physical_twin/hardware_setup/images/arduino_setup.jpeg'  width=400 />
  
