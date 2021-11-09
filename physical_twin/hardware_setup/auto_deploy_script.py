@@ -36,7 +36,7 @@ def run_data_collection(ip_ad, username, password):
     ssh_conn(cmd= 'python3 {}'.format(sys.argv[1] + "/IoTHubDevice.py"), ip_ad=ip_ad, username=username, password=password) # to kill the bg process kill $(jobs -p)
     
 # Check the dir if already exist if yes deletes and copy the updated file
-def create_dir(source, ip_ad, username, password, device_name):
+def create_dir(source, ip_ad, username, password):
     available_files = ssh_conn(cmd='ls', ip_ad=ip_ad, username=username, password=password) # Getting list of files/dirs
     if source in available_files: 
         ssh_conn(cmd='rm -Rf {}'.format(source), ip_ad= ip_ad, username=username, password=password) # Remove the file if exist
@@ -45,13 +45,14 @@ def create_dir(source, ip_ad, username, password, device_name):
 # List of Raspberries that the Files to be transfered with its details
 # Args_Format:  <source file/path>, <ip_address>, <host_user_id>, <password>, <device_name>
 
-rasp01 = ['/impl_python', '140.78.42.104', 'pi', 'cdl', 'Raspi01']
+rasp01 = ['./Improved_Architecture', '140.78.42.124', 'pi', 'cdl', 'Raspi_01']
+rasp02 = ['./Improved_Architecture', '140.78.42.120', 'pi', 'cdl', 'Raspi_02']
 # arduiono1 = ['/impl_c++', '140.78.42.104', 'pi', 'cdl', 'Arduino01']
 
-all_raspberries =[rasp01] # dont forget to mention here all rasp## here as list
+all_raspberries =[rasp01,rasp02] # dont forget to mention here all rasp## here as list
 for each_raspberry in all_raspberries:
     source, ip_ad, username, password , device_name= each_raspberry
-    create_dir(source, ip_ad, username, password, device_name)
+    create_dir(source, ip_ad, username, password)
     copy_files(source, ip_ad, username, password, device_name)
-    run_data_collection(source, ip_ad, username, password)
+    #run_data_collection(source, ip_ad, username, password)
 # sys.exit()
