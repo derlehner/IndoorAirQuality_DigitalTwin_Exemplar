@@ -25,7 +25,7 @@ In this project the physical model is used for modelling the CO2 molecules in th
 
 From a scientific point of view physical modeling has the advantage of showing how the variable that is being analysed is behaving. This analysis includes both the structure (properties) and the functions of the variable. Therefore extracting a physical model from a digital twin can help understand the real model better and give a better overall overview of the model.
 
-An important information to note here because our project is open source is that the free version of the software of Abaqus can be downloaded as a student or academic institution but is not allowed to be used for commercial purposes.
+An important information to note here because our project is open source is that the free version of the software of Abaqus can be downloaded as a student or academic institution but is not allowed to be used for commercial purposes. Also what is important to note is that the version used for our modelling is the full version. The student version is limited to 1000 nodes which decreases the quality of the simulation. 
 
 ## Introduction to the Importance and Need of Physical Modeling
 
