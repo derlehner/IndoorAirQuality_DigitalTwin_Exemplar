@@ -1,4 +1,4 @@
-**##Deployment Script**
+# Deployment Script
 
 The deployment script have been set up for the following features:
 
