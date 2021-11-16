@@ -2,7 +2,7 @@
 
 The deployment script have been set up for the following features:
 
-1. **auto_deploy_script.py**
+1. **[auto_deploy_script.py](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/edit/main/physical_twin/hardware_setup/deployment_Scripts/auto_deploy_script.py)**
 
 In order to deploy the same version of code into multiple raspberries with single command, we have been using paramiko library(python). This library implements SSHv2 protocol, providing client-server functionality. The main advantage of using this library is that it helps to execute the remote shell commands and also for transferring files to raspberry. The detailed description of the library can be read using the link [paramiko](https://www.paramiko.org/)
 
