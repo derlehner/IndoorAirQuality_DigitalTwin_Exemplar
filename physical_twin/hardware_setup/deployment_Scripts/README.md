@@ -1,4 +1,4 @@
-**Deployment Script**
+**##Deployment Script**
 
 The deployment script have been set up for the following features:
 
@@ -14,9 +14,9 @@ Linux system has inbuilt system program Cron. It is used for scheduling program 
 **Setting up of crontab:**
 
 ~~~shell
-```console
+
 pi@raspberrypi:~$ crontab -e
-```
+
 ~~~
 
 As soon as the command is executed, you will be asked to choose the text editor of your choice. 
@@ -43,7 +43,7 @@ Day of week 0 – 7
 
 **Sample crontab:**
 
-![crontab](https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/tree/main/physical_twin/hardware_setup/deployment_Scripts/images/Crontab.JPG)
+![crontab](./images/Crontab.JPG)
 
 The above command runs the task during the working days(Monday to Friday) every minute from 6 am until 6pm.
 
