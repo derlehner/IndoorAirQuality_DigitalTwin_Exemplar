@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="banner">Sensordata Application</h1>
+        <div class="section editor">
+            <label for="id">ID
+                <input id="id" type="number" />
+            </label>
+            <br />
+            <label for="sensorname">Sensorname
+                <input id="sensorname" type="text" />
+            </label>
+            <br />
+            <label for="roomnumber">Room Number
+                <input id="roomnumber" type="text" />
+            </label>
+            <br />
+            <label for="co2">CO2
+                <input id="co2" type="text" />
+            </label>
+            <br />
+            <label for="temperature">Temperature
+                <input id="temperature" type="text" />
+            </label>
+            <label for="humidity">Humidity
+                <input id="humidity" type="text" />
+            </label>
+            <br />
+            <br />
+            <button id="create">Create</button>
+            <button id="update">Update</button>
+            <button id="delete">Delete</button>
+            <button id="reset">Reset</button>
+        </div>
+        <div class="entry">
+            <table>
+                <caption>Sensordata</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sensorname</th>
+                        <th>Room Number</th>
+                        <th>Time</th>
+                        <th>CO2</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="error">
+        </div>
+    </div>
+</body>
+<script src="static/js/home.js"></script>
+</html>

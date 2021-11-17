@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+  simplerest:
+    build: .
+    command: python server.py
+    ports:
+      - 8090:8080
+    depends_on:
+      - timeScaledb
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:6.5.0
+    ports:
+      - "3000:3000"
+
+  timeScaledb:
+    container_name: timeScaledb 
+    image: postgres:13.4-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/timescale/
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ramyapostgres
+      - POSTGRES_DB=cdl-mint
+
+volumes:
+  postgres_data:
