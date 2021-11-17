@@ -1,0 +1,152 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger ReST Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /sensordata:
+    get:
+      operationId: sensordata.read_all
+      tags:
+        - Sensordata
+      summary: Read the entire list of Sensordata
+      description: Read the list of Sensordata
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of Entries of Sensordata to get
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start getting Sensordata
+          required: false
+      responses:
+        200:
+          description: Successfully read Sensordata list operation
+          schema:
+            type: array
+            items:
+              properties:
+                container:
+                  type: string
+                instance:
+                  type: string
+                time:
+                  type: string
+                property:
+                  type: string
+                value:
+                  type: string
+
+    post:
+      operationId: sensordata.create
+      tags:
+        - Sensordata
+      summary: Create a new Entry for Sensordata and add it to the list
+      description: Create a new Entry for Sensordata and add it to the list
+      parameters:
+        - name: sensordata
+          in: body
+          description: Entry to create
+          required: True
+          schema:
+            type: object
+            properties:
+              container:
+                type: string
+              instance:
+                type: string
+              time:
+                type: string
+              property:
+                type: string
+              value:
+                type: string
+      responses:
+        201:
+          description: Successfully created Entry in list
+
+  /sensordata/{container}:
+    get:
+      operationId: sensordata.read_one
+      tags:
+        - Sensordata
+      summary: Read one entry from the  list
+      description: Read one entry from the list
+      parameters:
+        - name: container
+          in: path
+          description: id of the entry to get from the list
+          type: number
+          required: True
+      responses:
+        200:
+          description: Successfully read entry from the list operation
+          schema:
+            properties:
+              container:
+                type: string
+              instance:
+                type: string
+              time:
+                type: string
+              property:
+                type: string
+              value:
+                type: string
+    put:
+      operationId: sensordata.update
+      tags:
+        - Sensordata
+      summary: Update an entry in the  list
+      description: Update an entry in the  list
+      parameters:
+        - name: container
+          in: path
+          description: id of the entry to update in the list
+          type: number
+          required: True
+        - name: person
+          in: body
+          schema:
+            type: object
+            properties:
+              
+              container:
+                type: string
+              instance:
+                type: string
+              time:
+                type: string
+              property:
+                type: string
+              value:
+                type: string
+      responses:
+        200:
+          description: Successfully updated entry in the list
+
+    delete:
+      operationId: sensordata.delete
+      tags:
+        - Sensordata
+      summary: Delete an entry from the list
+      description: Delete an entry
+      parameters:
+        - name: container
+          in: path
+          type: number
+          required: True
+      responses:
+        200:
+          description: Successfully deleted an entry from people list

@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+  
+  simplerest:
+    build: .
+    command: python server.py
+    depends_on:
+       - db
+      
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:6.5.0
+    environment:
+      - GF_SERVER_DOMAIN=airquality.se.jku.at/
+      - GF_SERVER_ROOT_URL=https://airquality.se.jku.at/grafana/
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+      - GF_AUTH_GENERIC_OAUTH_ENABLED=true
+      - GF_AUTH_GENERIC_OAUTH_NAME=WIN-SE
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=airquality
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=$KEYCLOAK_CLIENT_SECRET
+      - GF_AUTH_GENERIC_OAUTH_SCOPES=profile
+      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=https://self.se.jku.at/auth/realms/se-mitarbeiter/protocol/openid-connect/auth
+      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=https://self.se.jku.at/auth/realms/se-mitarbeiter/protocol/openid-connect/token
+      - GF_AUTH_GENERIC_OAUTH_API_URL=https://self.se.jku.at/auth/realms/se-mitarbeiter/protocol/openid-connect/userinfo
+      - GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH=contains(roles[*], 'grafana_admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+    
+  db:
+   image: postgres:13.4-alpine
+   volumes:
+      - postgres_data:/var/lib/postgresql/data/
+   environment:
+      - PGDATA=/var/lib/postgresql/data/timescale/
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ramyapostgres
+      - POSTGRES_DB=cdl-mint
+   
+  ws:
+    image: nginx:1.21-alpine
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 5000:80
+    depends_on:
+      - simplerest
+      - grafana
+volumes:
+    postgres_data:    
