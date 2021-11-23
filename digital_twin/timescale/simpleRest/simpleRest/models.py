@@ -34,10 +34,8 @@ class Instances(db.Model):
                      nullable=False, primary_key=True)
     container = db.Column(db.String(32),
                           nullable=False, primary_key=True)
-    type_name = db.Column(db.String(32), db.ForeignKey(
-        'types.name'), nullable=False)
-    type_container = db.Column(db.String(32), db.ForeignKey(
-        'types.container'), nullable=False)
+    type_name = db.Column(db.String(32),  nullable=False)
+    type_container = db.Column(db.String(32),  nullable=False)
 
     __table_args__ = (
         db.UniqueConstraint('name', 'container'),
@@ -49,10 +47,8 @@ class Instances(db.Model):
 class ActualSensorData(db.Model):
     __tablename__ = 'actualsensordata'
 
-    container = db.Column(db.String(32), db.ForeignKey(
-        'instances.container'), nullable=False)
-    instance = db.Column(db.String(32), db.ForeignKey(
-        'instances.name'), nullable=False)
+    container = db.Column(db.String(32),  nullable=False)
+    instance = db.Column(db.String(32),  nullable=False)
     property = db.Column(db.String(32), primary_key=True)
     time = db.Column(db.DateTime, default=datetime.utcnow,
                      onupdate=datetime.utcnow, primary_key=True)
@@ -68,14 +64,10 @@ class Relationships(db.Model):
     __tablename__ = 'relationships'
 
     relation_Id = db.Column(db.BigInteger, primary_key=True)
-    source_name = db.Column(db.String(32), db.ForeignKey(
-        'types.name'), nullable=False)
-    source_container = db.Column(db.String(32), db.ForeignKey(
-        'types.container'), nullable=False)
-    target_name = db.Column(db.String(32), db.ForeignKey(
-        'types.name'), nullable=False)
-    target_container = db.Column(db.String(32), db.ForeignKey(
-        'types.container'), nullable=False)
+    source_name = db.Column(db.String(32),  nullable=False)
+    source_container = db.Column(db.String(32),  nullable=False)
+    target_name = db.Column(db.String(32),  nullable=False)
+    target_container = db.Column(db.String(32),  nullable=False)
     connection_Type = db.Column(db.String(32), nullable=False)
     __table_args__ = (
         db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container'],
@@ -87,16 +79,11 @@ class Links(db.Model):
     __tablename__ = 'links'
 
     link_Id = db.Column(db.BigInteger, primary_key=True)
-    source_name = db.Column(db.String(32), db.ForeignKey(
-        'instances.name'), nullable=False)
-    source_container = db.Column(db.String(32), db.ForeignKey(
-        'instances.container'), nullable=False)
-    target_name = db.Column(db.String(32), db.ForeignKey(
-        'instances.name'), nullable=False)
-    target_container = db.Column(db.String(32), db.ForeignKey(
-        'instances.container'), nullable=False)
-    relation_Id = db.Column(db.Integer, db.ForeignKey(
-        'relationships.relation_Id'), nullable=False)
+    source_name = db.Column(db.String(32),  nullable=False)
+    source_container = db.Column(db.String(32),  nullable=False)
+    target_name = db.Column(db.String(32),  nullable=False)
+    target_container = db.Column(db.String(32),  nullable=False)
+    relation_Id = db.Column(db.BigInteger,  nullable=False)
     __table_args__ = (
         db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container', 'relation_Id'],
                                 ['instances.name', 'instances.container', 'instances.name', 'instances.container', 'relationships.relation_Id']),
@@ -108,10 +95,8 @@ class Property(db.Model):
 
     property_Id = db.Column(db.BigInteger, primary_key=True)
     name = db.Column(db.String(32), primary_key=True)
-    type_name = db.Column(db.String(32), db.ForeignKey(
-        'types.name'), nullable=False)
-    type_container = db.Column(db.String(32), db.ForeignKey(
-        'types.container'), nullable=False)
+    type_name = db.Column(db.String(32),  nullable=False)
+    type_container = db.Column(db.String(32),  nullable=False)
     data_Type = db.Column(db.String(32), nullable=False)
     __table_args__ = (
         db.UniqueConstraint('property_Id', 'name'),
