@@ -41,9 +41,9 @@ paths:
                   type: string
                 instance:
                   type: string
-                time:
-                  type: string
                 property:
+                  type: string  
+                time:
                   type: string
                 value:
                   type: string
@@ -66,10 +66,8 @@ paths:
                 type: string
               instance:
                 type: string
-              time:
-                type: string
               property:
-                type: string
+                type: string  
               value:
                 type: string
       responses:
@@ -87,7 +85,7 @@ paths:
         - name: container
           in: path
           description: id of the entry to get from the list
-          type: number
+          type: string
           required: True
       responses:
         200:
@@ -98,9 +96,9 @@ paths:
                 type: string
               instance:
                 type: string
-              time:
-                type: string
               property:
+                type: string  
+              time:
                 type: string
               value:
                 type: string
@@ -114,19 +112,16 @@ paths:
         - name: container
           in: path
           description: id of the entry to update in the list
-          type: number
+          type: string
           required: True
         - name: person
           in: body
           schema:
             type: object
             properties:
-              
               container:
                 type: string
               instance:
-                type: string
-              time:
                 type: string
               property:
                 type: string
@@ -145,7 +140,7 @@ paths:
       parameters:
         - name: container
           in: path
-          type: number
+          type: string
           required: True
       responses:
         200:

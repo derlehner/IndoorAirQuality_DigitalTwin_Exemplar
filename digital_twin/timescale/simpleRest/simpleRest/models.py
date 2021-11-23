@@ -22,9 +22,9 @@ class Types(db.Model):
                      nullable=False, primary_key=True)
     container = db.Column(db.String(32), nullable=False, primary_key=True)
 
-
-__table_args__ = (
-    db.UniqueConstraint('name', 'container'),)
+    __table_args__ = (
+        db.UniqueConstraint('name', 'container'),
+    )
 
 
 class Instances(db.Model):
@@ -36,14 +36,14 @@ class Instances(db.Model):
                           nullable=False, primary_key=True)
     type_name = db.Column(db.String(32), db.ForeignKey(
         'types.name'), nullable=False)
-    type_container = db.Column(db.String(32), nullable=False)
-    _table_args_ = (
+    type_container = db.Column(db.String(32), db.ForeignKey(
+        'types.container'), nullable=False)
+
+    __table_args__ = (
         db.UniqueConstraint('name', 'container'),
-    ),
-    (
-        db.ForeignKeyConstraint([type_name, type_container],
-                                [Types.name, Types.container])
-    ),
+        db.ForeignKeyConstraint(['type_name', 'type_container'],
+                                ['types.name', 'types.container']),
+    )
 
 
 class ActualSensorData(db.Model):
@@ -57,13 +57,11 @@ class ActualSensorData(db.Model):
     time = db.Column(db.DateTime, default=datetime.utcnow,
                      onupdate=datetime.utcnow, primary_key=True)
     value = db.Column(db.String(32))
-    _table_args_ = (
+    __table_args__ = (
         db.UniqueConstraint('property', 'time'),
-    ),
-    (
-        db.ForeignKeyConstraint([container, instance],
-                                [Instances.container, Instances.name])
-    ),
+        db.ForeignKeyConstraint(['container', 'instance'],
+                                ['instances.container', 'instances.name']),
+    )
 
 
 class Relationships(db.Model):
@@ -72,15 +70,17 @@ class Relationships(db.Model):
     relation_Id = db.Column(db.BigInteger, primary_key=True)
     source_name = db.Column(db.String(32), db.ForeignKey(
         'types.name'), nullable=False)
-    source_container = db.Column(db.String(32), nullable=False)
+    source_container = db.Column(db.String(32), db.ForeignKey(
+        'types.container'), nullable=False)
     target_name = db.Column(db.String(32), db.ForeignKey(
         'types.name'), nullable=False)
-    target_container = db.Column(db.String(32), nullable=False)
+    target_container = db.Column(db.String(32), db.ForeignKey(
+        'types.container'), nullable=False)
     connection_Type = db.Column(db.String(32), nullable=False)
-    _table_args_ = (
-        db.ForeignKeyConstraint([source_name, source_container],
-                                [Types.name, Types.container], [target_name, target_container], [Types.name, Types.container])
-    ),
+    __table_args__ = (
+        db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container'],
+                                ['types.name', 'types.container', 'types.name', 'types.container']),
+    )
 
 
 class Links(db.Model):
@@ -89,16 +89,18 @@ class Links(db.Model):
     link_Id = db.Column(db.BigInteger, primary_key=True)
     source_name = db.Column(db.String(32), db.ForeignKey(
         'instances.name'), nullable=False)
-    source_container = db.Column(db.String(32), nullable=False)
+    source_container = db.Column(db.String(32), db.ForeignKey(
+        'instances.container'), nullable=False)
     target_name = db.Column(db.String(32), db.ForeignKey(
         'instances.name'), nullable=False)
-    target_container = db.Column(db.String(32), nullable=False)
+    target_container = db.Column(db.String(32), db.ForeignKey(
+        'instances.container'), nullable=False)
     relation_Id = db.Column(db.Integer, db.ForeignKey(
         'relationships.relation_Id'), nullable=False)
-    _table_args_ = (
-        db.ForeignKeyConstraint([source_name, source_container],
-                                [Instances.name, Instances.container], [target_name, target_container], [Instances.name, Instances.container], relation_Id, Relationships.relation_Id)
-    ),
+    __table_args__ = (
+        db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container', 'relation_Id'],
+                                ['instances.name', 'instances.container', 'instances.name', 'instances.container', 'relationships.relation_Id']),
+    )
 
 
 class Property(db.Model):
@@ -108,15 +110,14 @@ class Property(db.Model):
     name = db.Column(db.String(32), primary_key=True)
     type_name = db.Column(db.String(32), db.ForeignKey(
         'types.name'), nullable=False)
-    type_container = db.Column(db.String(32), nullable=False)
+    type_container = db.Column(db.String(32), db.ForeignKey(
+        'types.container'), nullable=False)
     data_Type = db.Column(db.String(32), nullable=False)
-    _table_args_ = (
+    __table_args__ = (
         db.UniqueConstraint('property_Id', 'name'),
-    ),
-    (
-        db.ForeignKeyConstraint([type_name, type_container],
-                                [Types.name, Types.container])
-    ),
+        db.ForeignKeyConstraint(['type_name', 'type_container'],
+                                ['types.name', 'types.container']),
+    )
 
 
 class TypesSchema(ma.SQLAlchemyAutoSchema):
