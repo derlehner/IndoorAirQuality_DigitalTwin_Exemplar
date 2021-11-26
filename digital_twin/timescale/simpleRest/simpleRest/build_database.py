@@ -2,10 +2,11 @@ import os
 from config import db
 # from models import Sensordata
 
-from models import Types,  Instances, ActualSensorData, Relationships, Links, Property
+#from models import Types,  Instances, ActualSensorData, Relationships,Links,  Property
+from models import ActualSensorData
 # Data to initialize database with
 
-TYPES = [
+""" TYPES = [
     {
         "name": "Room",
         "container": "null",
@@ -24,7 +25,6 @@ TYPES = [
         "container": "Controller",
     },
 ]
-
 INSTANCES = [
     {
 
@@ -98,7 +98,7 @@ INSTANCES = [
         "type_container": "null"
 
     },
-]
+] """
 ACTUALSENSORDATA = [
     {
 
@@ -129,7 +129,7 @@ ACTUALSENSORDATA = [
         "value": "False"
     },
 ]
-RELATIONSHIPS = [
+""" RELATIONSHIPS = [
     {
         "relation_Id": 1,
         "source_name": "Room",
@@ -154,8 +154,8 @@ RELATIONSHIPS = [
         "target_container": "Controller",
         "connection_Type": "Composition"
     },
-]
-LINKS = [
+] """
+""" LINKS = [
     {
         "link_Id": 1,
         "source_name": "S3_0076",
@@ -180,8 +180,8 @@ LINKS = [
         "target_container": "S3_0080",
         "relation_Id": 1
     },
-]
-PROPERTY = [
+] """
+""" PROPERTY = [
     {
         "property_Id": 1,
         "name": "co2",
@@ -214,8 +214,7 @@ PROPERTY = [
         "data_Type": "bool",
 
     },
-]
-
+] """
 # Delete database file if it exists currently
 if os.path.exists('actualsensordata.db'):
     os.remove('actualsensordata.db')
@@ -225,33 +224,34 @@ db.create_all()
 
 # Iterate over the PEOPLE structure and populate the database
 
-for types in TYPES:
+""" for types in TYPES:
     t = Types(name=types['name'], container=types['container'])
 
 for instance in INSTANCES:
     i = Instances(
-        name=instance['name'], container=instance['container'], type_name=instance['type_name'], type_container=instance['type_container'])
+        name=instance['name'], container=instance['container'], type_name=instance['type_name'], type_container=instance['type_container'])"""
 
 for actualsensordata in ACTUALSENSORDATA:
     s = ActualSensorData(container=actualsensordata['container'], instance=actualsensordata['instance'],
                          property=actualsensordata['property'], value=actualsensordata['value'])
 
-for relation in RELATIONSHIPS:
+""" for relation in RELATIONSHIPS:
     r = Relationships(relation_Id=relation['relation_Id'], source_name=relation['source_name'], source_container=relation['source_container'],
                       target_name=relation['target_name'], target_container=relation['target_container'], connection_Type=relation['connection_Type'])
+
 for link in LINKS:
     l = Links(link_Id=link['link_Id'], source_name=link['source_name'], source_container=link['source_container'],
               target_name=link['target_name'], target_container=link['target_container'],  relation_Id=link['relation_Id'])
-
+ 
 for properties in PROPERTY:
     p = Property(property_Id=properties['property_Id'], name=properties['name'], type_name=properties['type_name'], type_container=properties['type_container'],
-                 data_Type=properties['data_Type'])
+                 data_Type=properties['data_Type']) """
 
-db.session.add(t)
-db.session.add(i)
+""" db.session.add(t)
+db.session.add(i) """
 db.session.add(s)
-db.session.add(r)
+""" db.session.add(r)
 db.session.add(l)
-db.session.add(p)
+db.session.add(p) """
 
 db.session.commit()

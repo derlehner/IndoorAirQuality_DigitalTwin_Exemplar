@@ -15,7 +15,7 @@ from config import db, ma
      """
 
 
-class Types(db.Model):
+""" class Types(db.Model):
     __tablename__ = 'types'
 
     name = db.Column(db.String(32), unique=True,
@@ -25,9 +25,9 @@ class Types(db.Model):
     __table_args__ = (
         db.UniqueConstraint('name', 'container'),
     )
+ """
 
-
-class Instances(db.Model):
+""" class Instances(db.Model):
     __tablename__ = 'instances'
 
     name = db.Column(db.String(32), unique=True,
@@ -41,7 +41,7 @@ class Instances(db.Model):
         db.UniqueConstraint('name', 'container'),
         db.ForeignKeyConstraint(['type_name', 'type_container'],
                                 ['types.name', 'types.container']),
-    )
+    ) """
 
 
 class ActualSensorData(db.Model):
@@ -60,7 +60,7 @@ class ActualSensorData(db.Model):
     )
 
 
-class Relationships(db.Model):
+""" class Relationships(db.Model):
     __tablename__ = 'relationships'
 
     relation_Id = db.Column(db.BigInteger, primary_key=True)
@@ -72,10 +72,10 @@ class Relationships(db.Model):
     __table_args__ = (
         db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container'],
                                 ['types.name', 'types.container', 'types.name', 'types.container']),
-    )
+    ) """
 
 
-class Links(db.Model):
+""" class Links(db.Model):
     __tablename__ = 'links'
 
     link_Id = db.Column(db.BigInteger, primary_key=True)
@@ -87,10 +87,10 @@ class Links(db.Model):
     __table_args__ = (
         db.ForeignKeyConstraint(['source_name', 'source_container', 'target_name', 'target_container', 'relation_Id'],
                                 ['instances.name', 'instances.container', 'instances.name', 'instances.container', 'relationships.relation_Id']),
-    )
+    ) """
 
 
-class Property(db.Model):
+""" class Property(db.Model):
     __tablename__ = 'property'
 
     property_Id = db.Column(db.BigInteger, primary_key=True)
@@ -103,9 +103,9 @@ class Property(db.Model):
         db.ForeignKeyConstraint(['type_name', 'type_container'],
                                 ['types.name', 'types.container']),
     )
+ """
 
-
-class TypesSchema(ma.SQLAlchemyAutoSchema):
+""" class TypesSchema(ma.SQLAlchemyAutoSchema):
     class TypesTable:
         TypesModel = Types
         load_instance = True
@@ -114,7 +114,7 @@ class TypesSchema(ma.SQLAlchemyAutoSchema):
 class InstancesSchema(ma.SQLAlchemyAutoSchema):
     class InstancesTable:
         InstancesModel = Instances
-        load_instance = True
+        load_instance = True """
 
 
 class ActualSensorDataSchema(ma.SQLAlchemyAutoSchema):
@@ -123,19 +123,20 @@ class ActualSensorDataSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
 
 
-class RelationshipsSchema(ma.SQLAlchemyAutoSchema):
+""" class RelationshipsSchema(ma.SQLAlchemyAutoSchema):
     class RelationshipsTable:
         RelationshipsModel = Relationships
-        load_instance = True
+        load_instance = True """
 
 
-class LinksSchema(ma.SQLAlchemyAutoSchema):
+""" class LinksSchema(ma.SQLAlchemyAutoSchema):
     class LinksTable:
         LinksModel = Links
         load_instance = True
+ """
 
-
-class PropertySchema(ma.SQLAlchemyAutoSchema):
+""" class PropertySchema(ma.SQLAlchemyAutoSchema):
     class PropertyTable:
         PropertyModel = Property
         load_instance = True
+ """
