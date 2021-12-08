@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS Types (
+   name VARCHAR(32) UNIQUE NOT NULL PRIMARY KEY
+   );
+
+CREATE TABLE IF NOT EXISTS Properties (
+   name VARCHAR(32) UNIQUE NOT NULL,
+   type VARCHAR(32) NOT NULL,
+   PRIMARY KEY(name,type),
+   FOREIGN KEY (type)
+      REFERENCES Types (name)
+	); 
+  
+CREATE TABLE IF NOT EXISTS Instances (
+   name VARCHAR(32) UNIQUE NOT NULL PRIMARY KEY,
+   typename VARCHAR(32) NOT NULL,
+   FOREIGN KEY (typename)
+      REFERENCES Types (name)
+	);
+		
+CREATE TABLE IF NOT EXISTS Values (
+   propertyname VARCHAR(32) NOT NULL,
+   instancename VARCHAR(32) NOT NULL,
+   value VARCHAR(32) NOT NULL,
+   time timestamp without time zone default (now() at time zone 'utc'),
+    PRIMARY KEY(propertyname,instancename),
+	UNIQUE(propertyname,instancename),
+	FOREIGN KEY (propertyname)
+      REFERENCES Properties (name),
+	FOREIGN KEY (instancename)
+      REFERENCES Instances (name)
+	); 	
+	
+   
