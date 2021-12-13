@@ -5,8 +5,9 @@ asyncpg==0.25.0
 click==8.0.3
 colorama==0.4.4
 databases==0.5.3
+python-dotenv==0.19.2
 fastapi==0.70.0
-FastAPI-SQLAlchemy==0.2.1
+fastapi-sqlalchemy==0.2.1
 greenlet==1.1.2
 gunicorn==20.1.0
 h11==0.12.0

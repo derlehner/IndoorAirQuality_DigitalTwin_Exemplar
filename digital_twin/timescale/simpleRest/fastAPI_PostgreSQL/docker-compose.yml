@@ -2,12 +2,12 @@ version: "3.3"
 
 services:
   simplerest:
-    build: .
-    command: python main.py
-    ports:
+     build: .
+     command: python main.py
+     ports:
       - 8090:8080
-    depends_on:
-      - timeScaledb
+     depends_on:
+       - timeScaledb
 
   grafana:
     container_name: grafana
@@ -26,15 +26,15 @@ services:
       - POSTGRES_PASSWORD=cdlmint
       - POSTGRES_DB=cdl-mint
 
-  web:
-        build: .
-        command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
-        volumes:
-          - .:/code
-        ports:
-          - "8000:8000"
-        depends_on:
-          - timeScaledb
+  # web:
+  #       build: .
+  #       command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+  #       volumes:
+  #         - .:/code
+  #       ports:
+  #         - "8000:8000"
+  #       depends_on:
+  #         - timeScaledb
   
   pgadmin:
             container_name: pgadmin

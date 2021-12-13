@@ -1,12 +1,18 @@
 from typing import List
 import databases
-import sqlalchemy
 from fastapi import FastAPI, status
+from fastapi_sqlalchemy import DBSessionMiddleware
+from fastapi_sqlalchemy import db
 from fastapi.middleware.cors import CORSMiddleware
+from models import Types,Properties,Instances,Values
 from schema import TypesRequest,TypesResponse,PropertiesRequest,PropertiesResponse,InstancesRequest,InstancesResponse,ValuesRequest,ValuesResponse
-from datetime import datetime
 import os
 import urllib
+import uvicorn 
+from dotenv import load_dotenv
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 host_server = os.environ.get('host_server', 'localhost')
 db_server_port = urllib.parse.quote_plus(str(os.environ.get('db_server_port', '5432')))
@@ -25,7 +31,9 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    
 )   
+
 
 @app.on_event("startup")
 async def startup():
@@ -50,6 +58,9 @@ async def read_types(name: str):
 async def create_Types(TypesBody: TypesRequest):
      query = Types.insert().values(name=TypesBody.name)
      last_record_id =await database.execute(query)
+     """ db.session.add(query)
+     db.session.commit()
+     return query """
      return {**TypesBody.dict()}
 
 @app.get("/Properties/", response_model=List[PropertiesResponse], status_code = status.HTTP_200_OK)
@@ -105,4 +116,4 @@ async def create_Values(ValuesBody: ValuesRequest):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)   
+    uvicorn.run(app, host="0.0.0.0", port=8080)  
