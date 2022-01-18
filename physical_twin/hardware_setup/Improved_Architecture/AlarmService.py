@@ -18,9 +18,7 @@ class AlarmService:
 
     @app.post("set_alarm")
     def set_alarm(value: bool = Body(...)):
-        if () # Condition
-        GPIO.output(18, True) 
-        # For alarm: make series connectioin of beeper along with this  LED in the breadboard
-        else () # else condition
-        GPIO.output(18, False) 
-        pass
+        if value: # Condition
+            GPIO.output(18, True) # For alarm: make series connectioin of beeper along with this  LED in the breadboard
+        else: # else condition
+            GPIO.output(18, False)
