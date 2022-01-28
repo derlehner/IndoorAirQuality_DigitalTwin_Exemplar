@@ -5,7 +5,11 @@ from config import settings
 
 
 SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+# Create engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine.connect()
+# Create  Session with engine
+SessionLocal = sessionmaker(bind=engine)
 
-
-SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)
+#instantiation
+db_Session=SessionLocal()
