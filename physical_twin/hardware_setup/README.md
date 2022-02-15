@@ -4,6 +4,7 @@
 - [Prerequisites](#Prerequisites)
 - [Hardware setup](#Hardware_setup)
 	- [Raspberry Pi](#Raspberry)
+	- [Raspberry Pico](#RaspberryPico)
 	- [Sensor CCS811](#ccs811)
 	- [Sensor SCD30](#scd30)
 - [Initial Setup of Raspberry OS](#Initial_Setup_of_Raspberry_OS)
@@ -36,9 +37,10 @@
 - Micro-HDMI to HDMI cable (for initialization)
 
 
-#### <a name="Raspberry"></a>Raspberry Pico
+#### <a name="RaspberryPico"></a>Raspberry Pico
  Another alternative to the Raspberry Pi 4 would be using the Raspberry Pico which is slightly cheaper than the Raspberry Pico. 
-
+ 
+<img src='https://github.com/derlehner/IndoorAirQuality_DigitalTwin_Exemplar/blob/main/physical_twin/hardware_setup/images/pin_layout.jpg'>
 
 ### <a name="ccs811"></a>Sensor CCS811 
 - This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol
