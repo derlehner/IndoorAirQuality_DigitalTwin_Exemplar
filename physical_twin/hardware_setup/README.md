@@ -35,6 +35,11 @@
 - Keyboard (for initialization)
 - Micro-HDMI to HDMI cable (for initialization)
 
+
+#### <a name="Raspberry"></a>Raspberry Pico
+ Another alternative to the Raspberry Pi 4 would be using the Raspberry Pico which is slightly cheaper than the Raspberry Pico. 
+
+
 ### <a name="ccs811"></a>Sensor CCS811 
 - This [Adafruit CCS811](https://joy-it.net/en/products/SEN-CCS811V1) sensor is using the I2C protocol
 - It has Measurement range: 400 ppm – 8192 ppm for CO<sub>2</sub> values
